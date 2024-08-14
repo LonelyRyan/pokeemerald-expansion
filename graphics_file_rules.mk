@@ -219,6 +219,12 @@ $(TILESETGFXDIR)/secondary/battle_frontier_ranking_hall/tiles.4bpp: %.4bpp: %.pn
 $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 509 -Wnum_tiles
 
+$(FONTGFXDIR)/font0_chinese.latfont: $(FONTGFXDIR)/font0_chinese.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/font1_chinese.latfont: $(FONTGFXDIR)/font1_chinese.png
+	$(GFX) $< $@
+
 
 
 ### Fonts ###
