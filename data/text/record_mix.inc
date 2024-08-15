@@ -1,6 +1,5 @@
 Text_WouldYouLikeToMixRecords:
-	.string "Would you like to mix records with\n"
-	.string "other TRAINERS?$"
+    .string "你想和其他训练师\n混合记录吗？$"
 
 Text_WeHopeToSeeYouAgain:
-	.string "We hope to see you again!$"
+    .string "欢迎下次再来！$"
