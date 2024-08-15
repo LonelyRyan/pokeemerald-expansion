@@ -4,13 +4,13 @@ CableClub_Text_WelcomeWhichCableClubService:
 CableClub_Text_WhichService:
     .string "需要为您提供\n什么服务吗？$"
 
-CableClub_Text_TradeUsingLinkCable:
+CableClub_Text_TradeUsingLinkCable::
     .string "通过GBA通信线\n与其他玩家交换宝可梦。$"
 
-CableClub_Text_BattleUsingLinkCable:
+CableClub_Text_BattleUsingLinkCable::
     .string "通过GBA通信线\n与其他训练师战斗。$"
 
-CableClub_Text_RecordCornerUsingLinkCable:
+CableClub_Text_RecordCornerUsingLinkCable::
     .string "通过GBA通信线\n与其他人一起使用联机中心。$"
 
 @ Unused
@@ -26,16 +26,16 @@ CableClub_Text_NeedTwoMonsToTrade:
 CableClub_Text_CantTradeEnigmaBerry:
     .string "带有{STR_VAR_1}树果的\n宝可梦无法进行交换。$"
 
-gText_PleaseWaitForLink:
+gText_PleaseWaitForLink::
     .string "请稍候\n… … B键：取消$"
 
-gText_ConfirmLinkWhenPlayersReady:
+gText_ConfirmLinkWhenPlayersReady::
     .string "等待玩家准备…\nA键：确认\lB键：取消$"
 
-gText_ConfirmStartLinkWithXPlayers:
+gText_ConfirmStartLinkWithXPlayers::
     .string "与玩家{STR_VAR_1}开始连接。\nA键：确认\lB键：取消$"
 
-gText_AwaitingLinkup:
+gText_AwaitingLinkup::
     .string "等待连接…\n… … B键：取消$"
 
 @ Unused
@@ -137,23 +137,23 @@ CableClub_Text_Hello:
 CableClub_Text_PleaseWait:
     .string "请稍候。$"
 
-CableClub_Text_YouMayTradeHere:
+CableClub_Text_YouMayTradeHere::
     .string "在这里你可以与其他\n训练师交换宝可梦。$"
 
-CableClub_Text_YouMayBattleHere:
+CableClub_Text_YouMayBattleHere::
     .string "在这里你可以\n与朋友对战。$"
 
-CableClub_Text_CanMakeBerryPowder:
+CableClub_Text_CanMakeBerryPowder::
     .string "可以与2到5个训练师\n一起制作树果粉末。$"
 
-CableClub_Text_CanMixRecords:
+CableClub_Text_CanMixRecords::
     .string "这里可以将2到4个\n玩家的存档混合在一起。$"
 
 @ Unused
 CableClub_Text_GuideToVariousServices:
     .string "无线俱乐部的导游\n提供各种服务。$"
 
-CableClub_Text_CancelSelectedItem:
+CableClub_Text_CancelSelectedItem::
     .string "取消选定的菜单项目。$"
 
 @ Unused
