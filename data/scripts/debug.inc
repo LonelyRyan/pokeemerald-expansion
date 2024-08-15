@@ -75,8 +75,8 @@ Debug_FlagsNotSetOverworldConfigMessage::
 	goto Debug_MessageEnd
 
 Debug_FlagsNotSetOverworldConfigMessage_Text:
-	.string "Feature unavailable!\n"
-	.string "Please define a usable flag in:\l"
+	.string "功能不可用!\n"
+	.string "请在这里定义该标志:\l"
 	.string "'include/config/overworld.h'!$"
 
 Debug_FlagsNotSetBattleConfigMessage::
@@ -84,8 +84,8 @@ Debug_FlagsNotSetBattleConfigMessage::
 	goto Debug_MessageEnd
 
 Debug_FlagsNotSetBattleConfigMessage_Text:
-	.string "Feature unavailable!\n"
-	.string "Please define a usable flag in:\l"
+	.string "功能不可用!\n"
+	.string "请在这里定义一个可用标志:\l"
 	.string "'include/config/battle.h'!$"
 
 Debug_BoxFilledMessage::
@@ -182,20 +182,20 @@ Debug_CheckSaveBlock::
 	end
 
 Debug_SaveBlock1Size::
-	.string "SaveBlock1 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "SaveBlock1大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_SaveBlock2Size::
-	.string "SaveBlock2 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "SaveBlock2大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_SaveBlock3Size::
-	.string "SaveBlock3 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "SaveBlock3大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_PokemonStorageSize::
-	.string "{PKMN}Storage size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "{PKMN}Storage大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_CheckROMSpace::
 	callnative CheckROMSize
@@ -204,8 +204,8 @@ Debug_CheckROMSpace::
 	end
 
 Debug_ROMSize::
-	.string "ROM size: {STR_VAR_1}MB/32MB.\n"
-	.string "Free space: {STR_VAR_2}MB.$"
+	.string "ROM大小: {STR_VAR_1}MB/32MB.\n"
+	.string "剩余空间: {STR_VAR_2}MB.$"
 
 Debug_HatchAnEgg::
 	lockall
@@ -233,10 +233,10 @@ DebugScript_HatchAnEgg_CantForceHatch::
 	end
 
 DebugScript_Text_EmptyParty::
-	.string "You have no Pokémon nor Eggs.$"
+	.string "你既没有宝可梦也没有宝可梦的蛋。$"
 
 DebugScript_HatchAnEgg_Text_NotAnEgg::
-	.string "That's not a Pokémon Egg.$"
+	.string "那不是一个宝可梦的蛋。$"
 
 DebugScript_ZeroDaycareMons::
 	msgbox DebugText_DaycareNoPokemon, MSGBOX_DEFAULT
@@ -254,13 +254,13 @@ DebugScript_DaycareMonsNotCompatible::
 	end
 
 DebugText_DaycareNoPokemon:
-	.string "You have no Pokémon at Daycare.$"
+	.string "你没有在培育屋的宝可梦$"
 
 DebugText_DaycareOnePokemon:
-	.string "You have only one Pokémon at Daycare.$"
+	.string "你仅有一个在培育屋的宝可梦$"
 
 DebugText_DaycarePokemonNotCompatible:
-	.string "Your Pokémon at Daycare can't\nhave babies together!$"
+	.string "你在培育屋的宝可梦不能生育幼年宝可梦!$"
 
 Debug_ShowExpansionVersion::
 	callnative BufferExpansionVersion
@@ -277,8 +277,8 @@ Debug_BerryPestsDisabled::
 	end
 
 DebugText_BerryPestsDisabled:
-	.string "OW_BERRY_PESTS is disabled.\n"
-	.string "Unable to force pests onto berry trees.$"
+	.string "树果害虫已禁用。\n"
+	.string "无法强制害虫进入树果$"
 
 Debug_BerryWeedsDisabled::
 	msgbox DebugText_BerryWeedsDisabled, MSGBOX_DEFAULT
@@ -286,8 +286,8 @@ Debug_BerryWeedsDisabled::
 	end
 
 DebugText_BerryWeedsDisabled:
-	.string "OW_BERRY_WEEDS is disabled.\n"
-	.string "Unable to force weeds onto berry trees.$"
+	.string "杂草已被禁用了\n"
+	.string "无法使杂草侵入果树。"
 
 Debug_EventScript_InflictStatus1::
 	lockall
@@ -413,31 +413,31 @@ Debug_EventScript_InflictStatus1_Party_Frostbite:
 	end
 
 Debug_EventScript_InflictStatus1_Text_Single:
-	.string "Single$"
+    .string "单体$"
 
 Debug_EventScript_InflictStatus1_Text_PartyWide:
-	.string "Party-wide$"
+    .string "全队$"
 
 Debug_EventScript_InflictStatus1_Text_Close:
-	.string "Close$"
+    .string "近战$"
 
 Debug_EventScript_InflictStatus1_Text_Poison:
-	.string "Poison$"
+    .string "中毒$"
 
 Debug_EventScript_InflictStatus1_Text_Paralysis:
-	.string "Paralysis$"
+    .string "麻痹$"
 
 Debug_EventScript_InflictStatus1_Text_Sleep:
-	.string "Sleep$"
+    .string "睡眠$"
 
 Debug_EventScript_InflictStatus1_Text_Burn:
-	.string "Burn$"
+    .string "灼伤$"
 
 Debug_EventScript_InflictStatus1_Text_Freeze:
-	.string "Freeze$"
+    .string "冰冻$"
 
 Debug_EventScript_InflictStatus1_Text_Frostbite:
-	.string "Frostbite$"
+    .string "冻伤$"
 
 Debug_EventScript_EWRAMCounters::
 	callnative CheckEWRAMCounters
