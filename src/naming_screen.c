@@ -2053,15 +2053,11 @@ static void PrintKeyboardKeys(u8 window, u8 page)
 {
     u16 i;
 	u8 *buffer = gStringVar4;
-    int x_pozOFs = 1;
+    
     FillWindowPixelBuffer(window, 0);
     for (i = 0; i < KBROW_COUNT - 1; i++)
     {
-        if(page == KEYBOARD_SYMBOLS && i == 2)
-        {
-            x_pozOFs =2;
-        }
-        CopyStrClear(gText_NamingScreenKeyboard_Words[page][i], buffer, COLOUM_PAD + x_pozOFs);
+        CopyStrClear(gText_NamingScreenKeyboard_Words[page][i], buffer, COLOUM_PAD);
         AddTextPrinterParameterized3(window, 1, 0, i * ROW_HEIGHT, sKeyboardTextColors, 0, buffer);
     }
     PutWindowTilemap(window);
