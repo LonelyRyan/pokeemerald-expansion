@@ -1,38 +1,26 @@
 Route102_Text_CalvinIntro:
-	.string "If you have POKéMON with you, then\n"
-	.string "you're an official POKéMON TRAINER!\l"
-	.string "You can't say no to my challenge!$"
+    .string "如果你随身带着宝可梦，那么\n你就是个正式的宝可梦训练师！\l你不能拒绝我的挑战！$"
 
 Route102_Text_CalvinDefeated:
-	.string "Arrgh, I lost…\n"
-	.string "I should have trained mine more…$"
+    .string "呃啊，我败了…\n我还缺乏锻炼啊…$"
 
 Route102_Text_CalvinPostBattle:
-	.string "Listen, you. If you're strong,\n"
-	.string "you should have told me before!$"
+    .string "听着，你。如果你很强，\n那你应该先告诉我！$"
 
 Route102_Text_CalvinRegister:
-	.string "I've been working hard at this since\n"
-	.string "I saw you before.\p"
-	.string "I'd like to battle you again, so can\n"
-	.string "you register me in your POKéNAV?$"
+    .string "自从遇见你之后\n我就很努力的锻炼。\p我想再和你战一场，所以\n你能让我在口袋领航员里登记吧？$"
 
 Route102_Text_CalvinRegisterShort:
-	.string "I'd like to battle you again, so can\n"
-	.string "you register me in your POKéNAV?$"
+    .string "我想和你日后再战，那么\n我能在你的口袋领航员里登记么？$"
 
 Route102_Text_CalvinRematchIntro:
-	.string "Ever since I lost to you, I desperately\n"
-	.string "trained my POKéMON.\l"
-	.string "You can't say no to my challenge!$"
+    .string "自从我输给你之后，我玩命的\n特训我的宝可梦。\l你不能拒绝我的挑战！$"
 
 Route102_Text_CalvinRematchDefeated:
-	.string "Arrgh, I lost…\n"
-	.string "Is my training method not right?$"
+    .string "呃啊，我败了…\n难道是我的训练不对头？$"
 
 Route102_Text_CalvinRematchPostBattle:
-	.string "If you're going to get stronger,\n"
-	.string "I'll get stronger, too.$"
+    .string "如果你变强了，\n那我也会变强的。$"
 
 Route102_Text_AllenIntro:
 	.string "Did you just become a TRAINER?\n"
