@@ -3423,3 +3423,8 @@ Route134_Text_HudsonDefeat:
 
 Route134_Text_HudsonPostBattle:
     .string "我们的船漂到海里去了，\p我的搭档比较胆小，\n现在我很担心他。$"
+
+VSSeeker_Text_TrainersNotReady::
+	.string "其他训练家\n"
+	.string "似乎还没有准备好战斗。\p"
+	.string "让我们稍后再试。{PAUSE_UNTIL_PRESS}$"
