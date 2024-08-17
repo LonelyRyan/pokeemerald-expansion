@@ -9938,11 +9938,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .categoryName = _("影子"),
         .height = 14,
         .weight = 405,
-        .description = COMPOUND_STRING(
-            "Gengar's relationships are warped. It\n"
-            "tries to take the lives of anyone and\n"
-            "everyone. It will even try to curse the\n"
-            "Trainer who is its master!"),
+        .description = COMPOUND_STRING("耿鬼的性情扭曲，\n它会试图夺走任何人包括\n训练师的生命。它甚至还会\n试图诅咒它的训练家！"),
         .pokemonScale = 256,
         .pokemonOffset = 2,
         .trainerScale = 302,
