@@ -22,127 +22,67 @@
 
 // Shared Item Description entries
 
-static const u8 sFullHealDesc[]       = _("Heals all the\n"
-                                          "status problems of\n"
-                                          "one Pokémon.");
+static const u8 sFullHealDesc[] = _("能治愈1只宝可梦\n的所有异常状态。");
 
-static const u8 sPokeDollDesc[]       = _("Use to flee from\n"
-                                          "any battle with\n"
-                                          "a wild Pokémon.");
+static const u8 sPokeDollDesc[] = _("携带后与野生宝可\n梦的战斗中绝对可\n以逃走。.");
 
-static const u8 sMaxReviveDesc[]      = _("Revives a fainted\n"
-                                          "Pokémon with all\n"
-                                          "its HP.");
+static const u8 sMaxReviveDesc[] = _("能让1只濒死的宝\n可梦回复所有HP\n。");
 
-static const u8 sHealthFeatherDesc[]  = _("An item that raises\n"
-                                          "the base HP of\n"
-                                          "a Pokémon.");
+static const u8 sHealthFeatherDesc[] = _("能稍微提高宝可梦\n的HP的基础点数\n。");
 
-static const u8 sMuscleFeatherDesc[]  = _("An item that raises\n"
-                                          "the base Attack of\n"
-                                          "a Pokémon.");
+static const u8 sMuscleFeatherDesc[] = _("能稍微提高宝可梦\n的攻击的基础点数\n。");
 
-static const u8 sResistFeatherDesc[]  = _("An item that raises\n"
-                                          "the base Defense\n"
-                                          "of a Pokémon.");
+static const u8 sResistFeatherDesc[] = _("能稍微提高宝可梦\n的防御的基础点数\n。");
 
-static const u8 sGeniusFeatherDesc[]  = _("An item that raises\n"
-                                          "the base Sp. Atk.\n"
-                                          "of a Pokémon.");
+static const u8 sGeniusFeatherDesc[] = _("能稍微提高宝可梦\n的特攻的基础点数\n。");
 
-static const u8 sCleverFeatherDesc[]  = _("An item that raises\n"
-                                          "the base Sp. Def.\n"
-                                          "of a Pokémon.");
+static const u8 sCleverFeatherDesc[] = _("能稍微提高宝可梦\n的特防的基础点数\n。");
 
-static const u8 sSwiftFeatherDesc[]   = _("An item that raises\n"
-                                          "the base Speed of\n"
-                                          "a Pokémon.");
+static const u8 sSwiftFeatherDesc[] = _("能稍微提高宝可梦\n的速度的基础点数\n。");
 
-static const u8 sBigMushroomDesc[]    = _("A rare mushroom\n"
-                                          "that would sell at a\n"
-                                          "high price.");
+static const u8 sBigMushroomDesc[] = _("在一些爱好者中有\n着非常高的人气。");
 
-static const u8 sShardsDesc[]         = _("A shard from an\n"
-                                          "ancient item. Can\n"
-                                          "be sold cheaply.");
+static const u8 sShardsDesc[] = _("能够卖掉的古代物\n品。");
 
-static const u8 sRootFossilDesc[]     = _("A fossil of an\n"
-                                          "ancient, seafloor-\n"
-                                          "dwelling Pokémon.");
+static const u8 sRootFossilDesc[] = _("很久以前古代宝可\n梦的化石。好像是\n根的一部分。");
 
-static const u8 sFossilizedFishDesc[] = _("A fossil of an\n"
-                                          "ancient, sea-\n"
-                                          "dwelling Pokémon.");
+static const u8 sFossilizedFishDesc[] = _("远古时代宝可梦化\n石残片。本来面目\n仍是未解之谜。");
 
-static const u8 sBeadMailDesc[]       = _("Mail featuring a\n"
-                                          "sketch of the\n"
-                                          "holding Pokémon.");
+static const u8 sBeadMailDesc[] = _("一张能显示持有者\n的信纸，可以让宝\n可梦携带");
 
-static const u8 sEvolutionStoneDesc[] = _("Makes certain\n"
-                                          "species of Pokémon\n"
-                                          "evolve.");
+static const u8 sEvolutionStoneDesc[] = _("能让某些特定宝可\n梦进化的神奇石头\n。");
 
-static const u8 sNectarDesc[]         = _("Flower nectar that\n"
-                                          "changes the form\n"
-                                          "of certain Pokémon.");
+static const u8 sNectarDesc[] = _("可以改变特定宝可\n梦的样子的花蜜。");
 
-static const u8 sCharizarditeDesc[]   = _("This stone enables\n"
-                                          "Charizard to Mega\n"
-                                          "Evolve in battle.");
+static const u8 sCharizarditeDesc[] = _("让喷火龙携带后，\n在战斗时就能超级\n进化的超级石。");
 
-static const u8 sMewtwoniteDesc[]     = _("This stone enables\n"
-                                          "Mewtwo to Mega\n"
-                                          "Evolve in battle.");
+static const u8 sMewtwoniteDesc[] = _("让超梦携带后，在\n战斗时就能超级进\n化的超级石。");
 
-static const u8 sSeaIncenseDesc[]     = _("A hold item that\n"
-                                          "slightly boosts\n"
-                                          "Water-type moves.");
+static const u8 sSeaIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sOddIncenseDesc[]     = _("A hold item that\n"
-                                          "boosts Psychic-\n"
-                                          "type moves.");
+static const u8 sOddIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sRockIncenseDesc[]    = _("A hold item that\n"
-                                          "raises the power of\n"
-                                          "Rock-type moves.");
+static const u8 sRockIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sFullIncenseDesc[]    = _("A held item that\n"
-                                          "makes the holder\n"
-                                          "move slower.");
+static const u8 sFullIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sRoseIncenseDesc[]    = _("A hold item that\n"
-                                          "raises the power of\n"
-                                          "Grass-type moves.");
+static const u8 sRoseIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sLuckIncenseDesc[]    = _("Doubles money in\n"
-                                          "battle if the\n"
-                                          "holder takes part.");
+static const u8 sLuckIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sPureIncenseDesc[]    = _("A hold item that\n"
-                                          "helps repel wild\n"
-                                          "Pokémon.");
+static const u8 sPureIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sKingsRockDesc[]      = _("A hold item that\n"
-                                          "may cause flinching\n"
-                                          "when the foe is hit.");
+static const u8 sKingsRockDesc[] = _("在造成伤害时，有\n时会让对手畏缩。");
 
-static const u8 sFigyBerryDesc[]      = _("A hold item that\n"
-                                          "restores HP but\n"
-                                          "may confuse.");
+static const u8 sFigyBerryDesc[] = _("携带后危机时回复\nHP。若讨厌这味\n道会混乱。");
 
-static const u8 sQuestionMarksDesc[]  = _("?????");
+static const u8 sQuestionMarksDesc[] = _("?????");
 
-static const u8 sKeyToRoomDesc[]      = _("A key that opens a\n"
-                                          "door inside the\n"
-                                          "Abandoned Ship.");
+static const u8 sKeyToRoomDesc[] = _("进入弃船的房间时\n所需的钥匙。");
 
-static const u8 sTeraShardDesc[]      = _("These shards may\n"
-                                          "form when a Tera\n"
-                                          "Pokémon faints.");
+static const u8 sTeraShardDesc[] = _("破碎掉的太晶宝石\n有极低概率会结晶\n成此物。");
 
-static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
-                                          "is unsuitable for\n"
-                                          "local soil.");
+static const u8 sGenericMulchDesc[] = _("培育树果时的肥料\n。但完全不适合丰\n缘的土壤。");
 
 const struct Item gItemsInfo[] =
 {
@@ -1159,7 +1099,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PEWTER_CRUNCHIES] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("深灰米果", "Pewter Crunchies"),
+        .name = _("深灰米果"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("PewtrCrnches", "Pewter Crunchies"),
         .price = 250,
         .description = sFullHealDesc,
@@ -1175,7 +1115,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_RAGE_CANDY_BAR] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("愤怒馒头", "Rage Candy Bar"),
+        .name = _("愤怒馒头"),
         .price = (I_PRICE >= GEN_7) ? 350 : 300,
         .description = sFullHealDesc,
         .pocket = POCKET_ITEMS,
@@ -1239,7 +1179,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_LUMIOSE_GALETTE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("密阿雷格雷饼", "Lumiose Galette"),
+        .name = _("密阿雷格雷饼"),
         .price = (I_PRICE >= GEN_7) ? 350 : 200,
         .description = sFullHealDesc,
         .pocket = POCKET_ITEMS,
@@ -1254,7 +1194,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SHALOUR_SABLE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("娑罗沙布蕾", "Shalour Sable"),
+        .name = _("娑罗沙布蕾"),
         .price = (I_PRICE >= GEN_7) ? 350 : 200,
         .description = sFullHealDesc,
         .pocket = POCKET_ITEMS,
@@ -1425,7 +1365,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_HEALTH_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("体力之羽", "Health Feather"),
+        .name = _("体力之羽"),
         .price = (I_PRICE >= GEN_7) ? 300 : 3000,
         .description = sHealthFeatherDesc,
         .pocket = POCKET_ITEMS,
@@ -1439,7 +1379,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_MUSCLE_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("肌力之羽", "Muscle Feather"),
+        .name = _("肌力之羽"),
         .price = (I_PRICE >= GEN_7) ? 300 : 3000,
         .description = sMuscleFeatherDesc,
         .pocket = POCKET_ITEMS,
@@ -1453,7 +1393,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_RESIST_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("抵抗之羽", "Resist Feather"),
+        .name = _("抵抗之羽"),
         .price = (I_PRICE >= GEN_7) ? 300 : 3000,
         .description = sResistFeatherDesc,
         .pocket = POCKET_ITEMS,
@@ -1467,7 +1407,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GENIUS_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("智力之羽", "Genius Feather"),
+        .name = _("智力之羽"),
         .price = (I_PRICE >= GEN_7) ? 300 : 3000,
         .description = sGeniusFeatherDesc,
         .pocket = POCKET_ITEMS,
@@ -1481,7 +1421,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CLEVER_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("精神之羽", "Clever Feather"),
+        .name = _("精神之羽"),
         .price = (I_PRICE >= GEN_7) ? 300 : 3000,
         .description = sCleverFeatherDesc,
         .pocket = POCKET_ITEMS,
@@ -1495,7 +1435,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SWIFT_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("瞬发之羽", "Swift Feather"),
+        .name = _("瞬发之羽"),
         .price = (I_PRICE >= GEN_7) ? 300 : 3000,
         .description = sSwiftFeatherDesc,
         .pocket = POCKET_ITEMS,
@@ -1511,7 +1451,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ABILITY_CAPSULE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("特性胶囊", "Ability Capsule"),
+        .name = _("特性胶囊"),
         .price = (I_PRICE < GEN_7) ? 1000 : ((I_PRICE < GEN_9) ? 10000 : 100000),
         .holdEffectParam = 0,
         .description = COMPOUND_STRING(
@@ -1526,7 +1466,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ABILITY_PATCH] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("特性膏药", "Ability Patch"),
+        .name = _("特性膏药"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("AbilityPatches", "Ability Patches"),
         .price = (I_PRICE >= GEN_9) ? 250000 : 20,
         .holdEffectParam = 0,
@@ -1922,7 +1862,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_XS] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("经验糖果XS", "Exp. Candy XS"),
+        .name = _("经验糖果XS"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies XS", "Exp. Candies XS"),
         .price = 20,
         .holdEffectParam = EXP_100,
@@ -1941,7 +1881,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_S] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("经验糖果S", "Exp. Candy S"),
+        .name = _("经验糖果S"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies S", "Exp. Candies S"),
         .price = 240,
         .holdEffectParam = EXP_800,
@@ -1960,7 +1900,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_M] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("经验糖果M", "Exp. Candy M"),
+        .name = _("经验糖果M"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies M", "Exp. Candies M"),
         .price = 1000,
         .holdEffectParam = EXP_3000,
@@ -1979,7 +1919,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_L] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("经验糖果L", "Exp. Candy L"),
+        .name = _("经验糖果L"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies L", "Exp. Candies L"),
         .price = 3000,
         .holdEffectParam = EXP_10000,
@@ -1998,7 +1938,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_EXP_CANDY_XL] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("经验糖果XL", "Exp. Candy XL"),
+        .name = _("经验糖果XL"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Exp.Candies XL", "Exp. Candies XL"),
         .price = 10000,
         .holdEffectParam = EXP_30000,
@@ -2017,7 +1957,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_DYNAMAX_CANDY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("极巨糖果", "Dynamax Candy"),
+        .name = _("极巨糖果"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("DynamaxCandies", "Dynamax Candies"),
         .price = 0,
         .description = COMPOUND_STRING(
@@ -2486,7 +2426,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_MAX_MUSHROOMS] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("极巨菇菇", "Max Mushrooms"),
+        .name = _("极巨菇菇"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("MaxMushrooms", "Max Mushrooms"),
         .price = 8000,
         .description = COMPOUND_STRING(
@@ -2522,7 +2462,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GOLD_BOTTLE_CAP] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("金色王冠", "Gold Bottle Cap"),
+        .name = _("金色王冠"),
         .price = (I_PRICE >= GEN_9) ? 60000 : 10000,
         .description = COMPOUND_STRING(
             "A beautiful bottle\n"
@@ -2859,7 +2799,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PRETTY_FEATHER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("美丽之羽", "Pretty Feather"),
+        .name = _("美丽之羽"),
         .price = (I_PRICE >= GEN_7) ? 1000 * TREASURE_FACTOR: 200,
         .description = COMPOUND_STRING(
             "A beautiful yet\n"
@@ -2987,7 +2927,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_STRANGE_SOUVENIR] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("神秘摆设", "Strange Souvenir"),
+        .name = _("神秘摆设"),
         .price = (I_PRICE >= GEN_7) ? 3000 : 10,
         .description = COMPOUND_STRING(
             "An ornament that\n"
@@ -3205,7 +3145,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FOSSILIZED_BIRD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("化石鸟", "Fossilized Bird"),
+        .name = _("化石鸟"),
         .price = 5000,
         .description = COMPOUND_STRING(
             "A fossil of an\n"
@@ -3221,7 +3161,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FOSSILIZED_FISH] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("化石鱼", "Fossilized Fish"),
+        .name = _("化石鱼"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("FosslzedFishes", "Fossilized Fishes"),
         .price = 5000,
         .description = sFossilizedFishDesc,
@@ -3235,7 +3175,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FOSSILIZED_DRAKE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("化石龙", "Fossilized Drake"),
+        .name = _("化石龙"),
         .price = 5000,
         .description = COMPOUND_STRING(
             "A fossil of an\n"
@@ -3251,7 +3191,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FOSSILIZED_DINO] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("化石海兽", "Fossilized Dino"),
+        .name = _("化石海兽"),
         .price = 5000,
         .description = sFossilizedFishDesc,
         .pocket = POCKET_ITEMS,
@@ -3376,7 +3316,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SURPRISE_MULCH] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("吃惊肥", "Surprise Mulch"),
+        .name = _("吃惊肥"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("SurprseMulch", "Surprise Mulch"),
         .price = 200,
 #if OW_BERRY_MULCH_USAGE == TRUE
@@ -3474,7 +3414,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_YELLOW_APRICORN] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("黄球果", "Yellow Apricorn"),
+        .name = _("黄球果"),
         .price = (I_PRICE == GEN_4) ? 0 : ((I_PRICE >= GEN_5 && I_PRICE <= GEN_7) ? 20 : 200),
         .description = COMPOUND_STRING(
             "A yellow apricorn.\n"
@@ -3489,7 +3429,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GREEN_APRICORN] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("绿球果", "Green Apricorn"),
+        .name = _("绿球果"),
         .price = (I_PRICE == GEN_4) ? 0 : ((I_PRICE >= GEN_5 && I_PRICE <= GEN_7) ? 20 : 200),
         .description = COMPOUND_STRING(
             "A green apricorn.\n"
@@ -3519,7 +3459,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_WHITE_APRICORN] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("白球果", "White Apricorn"),
+        .name = _("白球果"),
         .price = (I_PRICE == GEN_4) ? 0 : ((I_PRICE >= GEN_5 && I_PRICE <= GEN_7) ? 20 : 200),
         .description = COMPOUND_STRING(
             "A white apricorn.\n"
@@ -3534,7 +3474,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BLACK_APRICORN] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("黑球果", "Black Apricorn"),
+        .name = _("黑球果"),
         .price = (I_PRICE == GEN_4) ? 0 : ((I_PRICE >= GEN_5 && I_PRICE <= GEN_7) ? 20 : 200),
         .description = COMPOUND_STRING(
             "A black apricorn.\n"
@@ -3549,7 +3489,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_WISHING_PIECE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("许愿星块", "Wishing Piece"),
+        .name = _("许愿星块"),
         .price = 20,
         .description = COMPOUND_STRING(
             "Throw into a\n"
@@ -3565,7 +3505,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GALARICA_TWIG] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("伽勒豆蔻枝", "Galarica Twig"),
+        .name = _("伽勒豆蔻枝"),
         .price = 20 * TREASURE_FACTOR,
         .description = COMPOUND_STRING(
             "A twig from a tree\n"
@@ -4025,7 +3965,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GALARICA_CUFF] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("伽勒豆蔻手环", "Galarica Cuff"),
+        .name = _("伽勒豆蔻手环"),
         .price = (I_PRICE >= GEN_9) ? 3000 : 6000,
         .description = COMPOUND_STRING(
             "A cuff from Galar\n"
@@ -4042,7 +3982,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GALARICA_WREATH] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("伽勒豆蔻花圈", "Galarica Wreath"),
+        .name = _("伽勒豆蔻花圈"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("GalrcaWreathes", "Galarica Wreathes"),
         .price = (I_PRICE >= GEN_9) ? 3000 : 6000,
         .description = COMPOUND_STRING(
@@ -4251,7 +4191,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_STRAWBERRY_SWEET] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("草莓糖饰", "Strawberry Sweet"),
+        .name = _("草莓糖饰"),
         .price = 500 * TREASURE_FACTOR,
         .description = COMPOUND_STRING(
             "Strawberry-shaped\n"
@@ -4879,7 +4819,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ELECTRIC_MEMORY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("电子存储碟", "Electric Memory"),
+        .name = _("电子存储碟"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("ElectrcMemories", "Electric Memories"),
         .price = 1000,
         .holdEffect = HOLD_EFFECT_MEMORY,
@@ -4939,7 +4879,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FIGHTING_MEMORY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("格斗存储碟", "Fighting Memory"),
+        .name = _("格斗存储碟"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("FightngMemories", "Fighting Memories"),
         .price = 1000,
         .holdEffect = HOLD_EFFECT_MEMORY,
@@ -5019,7 +4959,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PSYCHIC_MEMORY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("精神存储碟", "Psychic Memory"),
+        .name = _("精神存储碟"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("PsychicMemories", "Psychic Memories"),
         .price = 1000,
         .holdEffect = HOLD_EFFECT_MEMORY,
@@ -5179,7 +5119,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_RUSTED_SWORD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("腐朽的剑", "Rusted Sword"),
+        .name = _("腐朽的剑"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A rusty sword. A\n"
@@ -5194,7 +5134,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_RUSTED_SHIELD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("腐朽的盾", "Rusted Shield"),
+        .name = _("腐朽的盾"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A rusty shield. A\n"
@@ -5262,7 +5202,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CHARIZARDITE_X] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("喷火龙石X", "Charizardite X"),
+        .name = _("喷火龙石X"),
         .pluralName = _("Charizardites X"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
@@ -5277,7 +5217,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CHARIZARDITE_Y] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("喷火龙石Y", "Charizardite Y"),
+        .name = _("喷火龙石Y"),
         .pluralName = _("Charizardites Y"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
@@ -6942,7 +6882,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ULTRANECROZIUM_Z] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("究极奈克洛Z", "Ultranecrozium Z"),
+        .name = _("究极奈克洛Z"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
         .description = COMPOUND_STRING(
@@ -7066,7 +7006,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_DEEP_SEA_SCALE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("深海鳞片", "Deep Sea Scale"),
+        .name = _("深海鳞片"),
         .price = (I_PRICE >= GEN_7) ? 2000 : 200,
         .holdEffect = HOLD_EFFECT_DEEP_SEA_SCALE,
         .description = COMPOUND_STRING(
@@ -7084,7 +7024,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_DEEP_SEA_TOOTH] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("深海之牙", "Deep Sea Tooth"),
+        .name = _("深海之牙"),
         .pluralName = _("Deep Sea Teeth"),
         .price = (I_PRICE >= GEN_7) ? 2000 : 200,
         .holdEffect = HOLD_EFFECT_DEEP_SEA_TOOTH,
@@ -7631,7 +7571,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_NEVER_MELT_ICE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("不融冰", "Never-Melt Ice"),
+        .name = _("不融冰"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Never-MeltIce", "Never-Melt Ice"),
         .price = (I_PRICE >= GEN_9) ? 3000 : ((I_PRICE >= GEN_7) ? 1000 : 100),
         .holdEffect = HOLD_EFFECT_ICE_POWER,
@@ -8921,7 +8861,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_WEAKNESS_POLICY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("弱点保险", "Weakness Policy"),
+        .name = _("弱点保险"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("WeaknssPolicies", "Weakness Policies"),
         .price = (I_PRICE >= GEN_9) ? 50000 : 1000,
         .holdEffect = HOLD_EFFECT_WEAKNESS_POLICY,
@@ -8958,7 +8898,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SAFETY_GOGGLES] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("防尘护目镜", "Safety Goggles"),
+        .name = _("防尘护目镜"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("SafetyGoggles", "Safety Goggles"),
         .price = (I_PRICE >= GEN_9) ? 20000 : ((I_PRICE >= GEN_7) ? 4000 : 1000),
         .holdEffect = HOLD_EFFECT_SAFETY_GOGGLES,
@@ -8976,7 +8916,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ADRENALINE_ORB] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("胆怯球", "Adrenaline Orb"),
+        .name = _("胆怯球"),
         .price = (I_PRICE >= GEN_9) ? 5000 : ((I_PRICE >= GEN_8) ? 4000 : 300),
         .holdEffect = HOLD_EFFECT_ADRENALINE_ORB,
         .description = COMPOUND_STRING(
@@ -8993,7 +8933,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_TERRAIN_EXTENDER] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("大地膜", "Terrain Extender"),
+        .name = _("大地膜"),
         .price = (I_PRICE >= GEN_9) ? 15000 : 4000,
         .holdEffect = HOLD_EFFECT_TERRAIN_EXTENDER,
         .description = COMPOUND_STRING(
@@ -9010,7 +8950,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PROTECTIVE_PADS] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("部位护具", "Protective Pads"),
+        .name = _("部位护具"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("ProtectvePads", "Protective Pads"),
         .price = (I_PRICE >= GEN_9) ? 15000 : 4000,
         .holdEffect = HOLD_EFFECT_PROTECTIVE_PADS,
@@ -9062,7 +9002,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_HEAVY_DUTY_BOOTS] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("厚底靴", "Heavy-Duty Boots"),
+        .name = _("厚底靴"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("Heavy-DtyBts", "Heavy-Duty Boots"),
         .price = (I_PRICE >= GEN_9) ? 20000 : 4000,
         .holdEffect = HOLD_EFFECT_HEAVY_DUTY_BOOTS,
@@ -9080,7 +9020,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BLUNDER_POLICY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("打空保险", "Blunder Policy"),
+        .name = _("打空保险"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("BlundrPolicies", "Blunder Policies"),
         .price = (I_PRICE >= GEN_9) ? 30000 : 4000,
         .holdEffect = HOLD_EFFECT_BLUNDER_POLICY,
@@ -9115,7 +9055,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_UTILITY_UMBRELLA] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("万能伞", "Utility Umbrella"),
+        .name = _("万能伞"),
         .price = (I_PRICE >= GEN_9) ? 15000 : 4000,
         .holdEffect = HOLD_EFFECT_UTILITY_UMBRELLA,
         .description = COMPOUND_STRING(
@@ -11910,7 +11850,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CATCHING_CHARM] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("防晃护符", "Catching Charm"),
+        .name = _("防晃护符"),
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(
@@ -11944,7 +11884,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ROTOM_CATALOG] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("洛托姆型录", "Rotom Catalog"),
+        .name = _("洛托姆型录"),
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(
@@ -12074,7 +12014,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_REINS_OF_UNITY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("牵绊缰绳", "Reins of Unity"),
+        .name = _("牵绊缰绳"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("ReinsOfUnity", "Reins of Unity"),
         .price = 0,
         .importance = 1,
@@ -12243,7 +12183,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_DOWSING_MACHINE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("探宝机", "Dowsing Machine"),
+        .name = _("探宝机"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A device that\n"
@@ -12985,7 +12925,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ABILITY_SHIELD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("特性护具", "Ability Shield"),
+        .name = _("特性护具"),
         .price = 20000,
         .holdEffect = HOLD_EFFECT_ABILITY_SHIELD,
         .description = COMPOUND_STRING(
@@ -13021,7 +12961,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PUNCHING_GLOVE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("拳击手套", "Punching Glove"),
+        .name = _("拳击手套"),
         .price = 15000,
         .holdEffect = HOLD_EFFECT_PUNCHING_GLOVE,
         .description = COMPOUND_STRING(
@@ -13073,7 +13013,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_AUSPICIOUS_ARMOR] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("庆祝之铠", "Auspicious Armor"),
+        .name = _("庆祝之铠"),
         .price = 3000,
         .description = COMPOUND_STRING(
             "Armor inhabited by\n"
@@ -13090,7 +13030,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BOOSTER_ENERGY] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("驱劲能量", "Booster Energy"),
+        .name = _("驱劲能量"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("BoosterEnergies", "Booster Energies"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_BOOSTER_ENERGY,
@@ -13108,7 +13048,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BIG_BAMBOO_SHOOT] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("大竹笋", "Big Bamboo Shoot"),
+        .name = _("大竹笋"),
         .price = 3000,
         .description = COMPOUND_STRING(
             "A large and rare\n"
@@ -13124,7 +13064,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GIMMIGHOUL_COIN] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("索财灵的硬币", "Gimmighoul Coin"),
+        .name = _("索财灵的硬币"),
         .price = 400,
         .description = COMPOUND_STRING(
             "Gimmighoul hoard\n"
@@ -13139,7 +13079,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_LEADERS_CREST] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("头领凭证", "Leader's Crest"),
+        .name = _("头领凭证"),
         .price = 3000,
         .description = COMPOUND_STRING(
             "A shard of an old\n"
@@ -13154,7 +13094,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_MALICIOUS_ARMOR] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("咒术之铠", "Malicious Armor"),
+        .name = _("咒术之铠"),
         .price = 3000,
         .description = COMPOUND_STRING(
             "Armor inhabited by\n"
@@ -13188,7 +13128,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SCROLL_OF_DARKNESS] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("恶之挂轴", "Scroll of Darkness"),
+        .name = _("恶之挂轴"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("ScrllsOfDrknss", "Scrolls of Darkness"),
         .price = 0,
         .description = COMPOUND_STRING(
@@ -13206,7 +13146,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SCROLL_OF_WATERS] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("水之挂轴", "Scroll of Waters"),
+        .name = _("水之挂轴"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("ScrollsOfWatrs", "Scrolls of Waters"),
         .price = 0,
         .description = COMPOUND_STRING(
@@ -13240,7 +13180,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_TINY_BAMBOO_SHOOT] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("小竹笋", "Tiny Bamboo Shoot"),
+        .name = _("小竹笋"),
         .price = 750,
         .description = COMPOUND_STRING(
             "A small and rare\n"
@@ -13256,7 +13196,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BUG_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("虫太晶碎块", "Bug Tera Shard"),
+        .name = _("虫太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13268,7 +13208,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_DARK_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("恶太晶碎块", "Dark Tera Shard"),
+        .name = _("恶太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13280,7 +13220,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_DRAGON_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("龙太晶碎块", "Dragon Tera Shard"),
+        .name = _("龙太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13292,7 +13232,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ELECTRIC_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("电太晶碎块", "Electric Tera Shard"),
+        .name = _("电太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13304,7 +13244,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FAIRY_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("妖精太晶碎块", "Fairy Tera Shard"),
+        .name = _("妖精太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13316,7 +13256,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FIGHTING_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("格斗太晶碎块", "Fighting Tera Shard"),
+        .name = _("格斗太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13328,7 +13268,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FIRE_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("火太晶碎块", "Fire Tera Shard"),
+        .name = _("火太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13340,7 +13280,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FLYING_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("飞行太晶碎块", "Flying Tera Shard"),
+        .name = _("飞行太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13352,7 +13292,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GHOST_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("幽灵太晶碎块", "Ghost Tera Shard"),
+        .name = _("幽灵太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13364,7 +13304,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GRASS_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("草太晶碎块", "Grass Tera Shard"),
+        .name = _("草太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13376,7 +13316,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GROUND_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("地面太晶碎块", "Ground Tera Shard"),
+        .name = _("地面太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13388,7 +13328,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ICE_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("冰太晶碎块", "Ice Tera Shard"),
+        .name = _("冰太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13400,7 +13340,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_NORMAL_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("一般太晶碎块", "Normal Tera Shard"),
+        .name = _("一般太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13412,7 +13352,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_POISON_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("毒太晶碎块", "Poison Tera Shard"),
+        .name = _("毒太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13424,7 +13364,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PSYCHIC_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("超能太晶碎块", "Psychic Tera Shard"),
+        .name = _("超能太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13436,7 +13376,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ROCK_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("岩石太晶碎块", "Rock Tera Shard"),
+        .name = _("岩石太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13448,7 +13388,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_STEEL_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("钢太晶碎块", "Steel Tera Shard"),
+        .name = _("钢太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13460,7 +13400,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_WATER_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("水太晶碎块", "Water Tera Shard"),
+        .name = _("水太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13472,7 +13412,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ADAMANT_CRYSTAL] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("大金刚宝玉", "Adamant Crystal"),
+        .name = _("大金刚宝玉"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A large, glowing gem\n"
@@ -13504,7 +13444,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_LUSTROUS_GLOBE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("大白宝玉", "Lustrous Globe"),
+        .name = _("大白宝玉"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A large, glowing gem\n"
@@ -13520,7 +13460,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BLACK_AUGURITE] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("黑奇石", "Black Augurite"),
+        .name = _("黑奇石"),
         .price = 8000,
         .description = COMPOUND_STRING(
             "A black stone that\n"
@@ -13623,7 +13563,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_UNREMARKABLE_TEACUP] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("凡作茶碗", "Unremarkable Teacup"),
+        .name = _("凡作茶碗"),
         .price = 1600,
         .description = COMPOUND_STRING(
             "A cracked teacup\n"
@@ -13640,7 +13580,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_MASTERPIECE_TEACUP] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("杰作茶碗", "Masterpiece Teacup"),
+        .name = _("杰作茶碗"),
         .price = 38000,
         .description = COMPOUND_STRING(
             "A chipped teacup\n"
@@ -13657,7 +13597,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CORNERSTONE_MASK] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("础石面具", "Cornerstone Mask"),
+        .name = _("础石面具"),
         .price = 0,
         .description = COMPOUND_STRING(
             "Allows Ogerpon to\n"
@@ -13672,7 +13612,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_WELLSPRING_MASK] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("水井面具", "Wellspring Mask"),
+        .name = _("水井面具"),
         .price = 0,
         .description = COMPOUND_STRING(
             "Allows Ogerpon to\n"
@@ -13687,7 +13627,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_HEARTHFLAME_MASK] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("火灶面具", "Hearthflame Mask"),
+        .name = _("火灶面具"),
         .price = 0,
         .description = COMPOUND_STRING(
             "Allows Ogerpon to\n"
@@ -13792,7 +13732,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_FRESH_START_MOCHI] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("净空粘糕", "Fresh Start Mochi"),
+        .name = _("净空粘糕"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("FrshStrtMochi", "Fresh Start Mochi"),
         .price = 300,
         .description = COMPOUND_STRING(
@@ -13810,7 +13750,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_GLIMMERING_CHARM] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("晶耀护符", "Glimmering Charm"),
+        .name = _("晶耀护符"),
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(
@@ -13842,7 +13782,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_STELLAR_TERA_SHARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("星晶太晶碎块", "Stellar Tera Shard"),
+        .name = _("星晶太晶碎块"),
         .price = 0,
         .description = sTeraShardDesc,
         .pocket = POCKET_ITEMS,
@@ -13854,7 +13794,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_JUBILIFE_MUFFIN] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("祝庆玛芬", "Jubilife Muffin"),
+        .name = _("祝庆玛芬"),
         .price = 250,
         .description = sFullHealDesc,
         .pocket = POCKET_ITEMS,
@@ -13996,7 +13936,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_AUX_POWERGUARD] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("多重强化", "Aux Powerguard"),
+        .name = _("多重强化"),
         .price = 1200,
         .holdEffectParam = X_ITEM_STAGES,
         .description = COMPOUND_STRING(
@@ -14019,7 +13959,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CHOICE_DUMPLING] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("讲究粽", "Choice Dumpling"),
+        .name = _("讲究粽"),
         .price = 1200,
         .description = sQuestionMarksDesc,
         .pocket = POCKET_ITEMS,
@@ -14045,7 +13985,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_TWICE_SPICED_RADISH] =
     {
-        .name = HANDLE_EXPANDED_ITEM_NAME("双倍腌菜", "Twice-Spiced Radish"),
+        .name = _("双倍腌菜"),
         .price = 1600,
         .description = sQuestionMarksDesc,
         .pocket = POCKET_ITEMS,
