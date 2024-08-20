@@ -22,7 +22,7 @@ extern const u8 EventScript_FollowerLookUp[];
 static const u8 sHappyMsg00[] = _("{STR_VAR_1}开始戳你的肚子.");
 static const u8 sHappyMsg01[] = _("{STR_VAR_1}很高兴但有点害羞.");
 static const u8 sHappyMsg02[] = _("{STR_VAR_1}快乐地跟着你.");
-static const u8 sHappyMsg03[] = _("{STR_VAR_1}看起来很镇定.");
+static const u8 sHappyMsg03[] = _("{STR_VAR_1}看起来很开心.");
 static const u8 sHappyMsg04[] = _("{STR_VAR_1}似乎很高兴和你一起散步!");
 static const u8 sHappyMsg05[] = _("{STR_VAR_1}看起来非常健康.");
 static const u8 sHappyMsg06[] = _("{STR_VAR_1}看起来非常高兴.");
@@ -52,7 +52,7 @@ static const u8 sHappyMsg29[] = _("{STR_VAR_1}面朝这边，咧嘴笑了.");
 static const u8 sHappyMsg30[] = _("{STR_VAR_1}快乐地依偎着你!");
 // Conditional messages begin here, index 31
 static const u8 sHappyMsg31[] = _("你的宝可梦似乎对这美好的天气感到高兴.");
-static const u8 sHappyMsg32[] = _("{STR_VAR_1}非常镇定，充满自信!");
+static const u8 sHappyMsg32[] = _("{STR_VAR_1}非常冷静，充满自信!");
 
 const struct FollowerMsgInfo gFollowerHappyMessages[] = {
     {sHappyMsg00, EventScript_FollowerPokingPlayer},
