@@ -36,6 +36,6 @@ MysteryGift_Text_TheresATicketForYou::
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
 	.string "它看起来是在\n"
-	.string "莉莉豆市港口使用的.\p"
+	.string "水静市港口使用的.\p"
 	.string "为什么不试试看\n"
 	.string "了解它究竟是关于什么的?$"
