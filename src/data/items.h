@@ -10496,12 +10496,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_CUT] =
             {
-                .name = _("HM01"),
+                .name = _("秘传机器01"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Attacks the foe\n"
-                    "with sharp blades\n"
-                    "or claws."),
+                    "用爪子等尖锐物体\n砍对方."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10511,12 +10509,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_FLY] =
             {
-                .name = _("HM02"),
+                .name = _("秘传机器02"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Flies up on the\n"
-                    "first turn, then\n"
-                    "attacks next turn."),
+                    "这一回合飞上天\n下一回合攻击."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10526,12 +10522,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_SURF] =
             {
-                .name = _("HM03"),
+                .name = _("秘传机器03"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Creates a huge\n"
-                    "wave, then crashes\n"
-                    "it down on the foe."),
+                    "制造巨浪,\n以强劲的力量\n打击对方."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10541,12 +10535,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_STRENGTH] =
             {
-                .name = _("HM04"),
+                .name = _("秘传机器04"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Builds enormous\n"
-                    "power, then slams\n"
-                    "the foe."),
+                    "全身聚集惊人的\n力量来攻击对方."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10556,12 +10548,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_FLASH] =
             {
-                .name = _("HM05"),
+                .name = _("秘传机器05"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Looses a powerful\n"
-                    "blast of light that\n"
-                    "reduces accuracy."),
+                    "用强光使对方目眩\n降低其命中率."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10571,12 +10561,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_ROCK_SMASH] =
             {
-                .name = _("HM06"),
+                .name = _("秘传机器06"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "A rock-crushingly\n"
-                    "tough attack that\n"
-                    "may lower Defense."),
+                    "用击碎岩石的\n力量攻击,有时会\n降低防御"),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10586,12 +10574,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_WATERFALL] =
             {
-                .name = _("HM07"),
+                .name = _("秘传机器07"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Attacks the foe\n"
-                    "with enough power\n"
-                    "to climb waterfalls."),
+                    "用像瀑布而上\n的架势向对方\n突击撞击."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -10601,12 +10587,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_HM_DIVE] =
             {
-                .name = _("HM08"),
+                .name = _("秘传机器08"),
                 .price = 0,
                 .description = COMPOUND_STRING(
-                    "Dives underwater\n"
-                    "the 1st turn, then\n"
-                    "attacks next turn."),
+                    "这一回合潜入水中\n下一回合攻击."),
                 .importance = 1,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
