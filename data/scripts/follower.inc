@@ -1,14 +1,14 @@
 gText_FollowerLovesYou::
-	.string "{STR_VAR_1} is regarding you with\nadoration!$"
+    .string "{STR_VAR_1} 正带着钦佩之情看着你！$"
 
 gText_FollowerLostInThought::
-	.string "{STR_VAR_1} seems lost in thought.$"
+    .string "{STR_VAR_1} 似乎陷入了沉思。$"
 
 gText_FollowerDefault::
-	.string "ERROR 404: Script not found.$"
+    .string "错误404：未找到脚本。$"
 
 gText_WantsToFly::
-	.string "{STR_VAR_1} looks up at the\nsky restlessly.\pWould you like to use FLY?$"
+    .string "{STR_VAR_1} 焦躁不安地望着天空。\p你想使用飞翔技能吗？$"
 
 EventScript_Follower::
 	lock
