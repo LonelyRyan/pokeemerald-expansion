@@ -63,3 +63,4 @@ AbandonedShip_Rooms_1F_Text_DemetriusDefeat:
 
 AbandonedShip_Rooms_1F_Text_DemetriusPostBattle:
     .string "我惹我妈生气了，所以就跑了出来。\n可不要告诉别人我在这儿！$"
+
