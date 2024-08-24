@@ -128,14 +128,13 @@ static const u8 sText_TenDashes[] = _("----------");
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
 
-static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
-static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}Toggle   {DPAD_UPDOWN}Moves");
+static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}切换   {DPAD_UPDOWN}技能");
 static const u8 sText_Stats_HP[] = _("HP");
-static const u8 sText_Stats_Attack[] = _("ATK");
-static const u8 sText_Stats_Defense[] = _("DEF");
-static const u8 sText_Stats_Speed[] = _("SPE");
-static const u8 sText_Stats_SpAttack[] = _("SP.A");
-static const u8 sText_Stats_SpDefense[] = _("SP.D");
+static const u8 sText_Stats_Attack[] = _("物攻");
+static const u8 sText_Stats_Defense[] = _("物防");
+static const u8 sText_Stats_Speed[] = _("速度");
+static const u8 sText_Stats_SpAttack[] = _("特攻");
+static const u8 sText_Stats_SpDefense[] = _("特防");
 static const u8 sText_Stats_EV_Plus1[] = _("{UP_ARROW_2}");
 static const u8 sText_Stats_EV_Plus2[] = _("{UP_ARROW_2}{UP_ARROW_2}");
 static const u8 sText_Stats_EV_Plus3[] = _("{UP_ARROW_2}{UP_ARROW_2}{UP_ARROW_2}");
@@ -149,116 +148,111 @@ static const u8 sText_Stats_Gender_50[] = _("♀ 1/1 ♂");     //_("♀ 50 / 50
 static const u8 sText_Stats_Gender_75[] = _("♀ 3/1 ♂");     //_("♀ 75 / 25 ♂");
 static const u8 sText_Stats_Gender_87_5[] = _("♀ 7/1 ♂");
 static const u8 sText_Stats_Gender_100[] = _("♀");
-static const u8 sText_Stats_CatchRate[] = _("CATCH{0x5B}: ");
-static const u8 sText_Stats_CatchRate_Legend[] = _("LEGENDARY");
-static const u8 sText_Stats_CatchRate_VeryHard[] = _("VERY HARD");
-static const u8 sText_Stats_CatchRate_Difficult[] = _("DIFFICULT");
-static const u8 sText_Stats_CatchRate_Medium[] = _("MEDIUM");
-static const u8 sText_Stats_CatchRate_Relaxed[] = _("RELAXED");
-static const u8 sText_Stats_CatchRate_Easy[] = _("EASY");
-static const u8 sText_Stats_ExpYield[] = _("EXP YIELD: ");
-static const u8 sText_Stats_EggCycles[] = _("HATCH STEPS:");
+static const u8 sText_Stats_CatchRate[] = _("捕捉{0x5B}: ");
+static const u8 sText_Stats_CatchRate_Legend[] = _("传说");
+static const u8 sText_Stats_CatchRate_VeryHard[] = _("非常困难");
+static const u8 sText_Stats_CatchRate_Difficult[] = _("困难");
+static const u8 sText_Stats_CatchRate_Medium[] = _("一般");
+static const u8 sText_Stats_CatchRate_Relaxed[] = _("轻松");
+static const u8 sText_Stats_CatchRate_Easy[] = _("简单");
+static const u8 sText_Stats_ExpYield[] = _("经验量: ");
+static const u8 sText_Stats_EggCycles[] = _("孵蛋步数:");
 static const u8 sText_Stats_EggCycles_VeryFast[] = _("{EMOJI_BOLT}{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Fast[] = _("{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Normal[] = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Slow[] = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
-static const u8 sText_Stats_Growthrate[] = _("GROW: ");
-static const u8 sText_Stats_Friendship[] = _("FRIENDSHIP:");
+static const u8 sText_Stats_Growthrate[] = _("成长: ");
+static const u8 sText_Stats_Friendship[] = _("亲密度:");
 static const u8 sText_Stats_Friendship_BigAnger[] = _("{EMOJI_BIGANGER}");
 static const u8 sText_Stats_Friendship_Neutral[] = _("{EMOJI_NEUTRAL}");
 static const u8 sText_Stats_Friendship_Happy[] = _("{EMOJI_HAPPY}");
 static const u8 sText_Stats_Friendship_BigSmile[] = _("{EMOJI_BIGSMILE}");
-static const u8 sText_Stats_MEDIUM_FAST[] = _("MED. FAST");
-static const u8 sText_Stats_ERRATIC[] = _("ERRATIC");
-static const u8 sText_Stats_FLUCTUATING[] = _("FLUCTUATING");
-static const u8 sText_Stats_MEDIUM_SLOW[] = _("MED. SLOW");
-static const u8 sText_Stats_FAST[] = _("FAST");
-static const u8 sText_Stats_SLOW[] = _("SLOW");
+static const u8 sText_Stats_MEDIUM_FAST[] = _("1000000");
+static const u8 sText_Stats_ERRATIC[] = _("600000");
+static const u8 sText_Stats_FLUCTUATING[] = _("1640000");
+static const u8 sText_Stats_MEDIUM_SLOW[] = _("1059860");
+static const u8 sText_Stats_FAST[] = _("800000");
+static const u8 sText_Stats_SLOW[] = _("1250000");
 static const u8 sText_Stats_ContestHeart[] = _("H");
 static const u8 sText_Stats_Minus[] = _("-");
-static const u8 sText_Stats_eggGroup[] = _("EGG G1:");
 static const u8 sText_Stats_eggGroup_Groups[] = _("{STR_VAR_1}/{STR_VAR_2}");
-static const u8 sText_Stats_eggGroup_MONSTER[] = _("MONSTER");
-static const u8 sText_Stats_eggGroup_WATER_1[] = _("WATER {CIRCLE_1}");
-static const u8 sText_Stats_eggGroup_BUG[] = _("BUG");
-static const u8 sText_Stats_eggGroup_FLYING[] = _("FLYING");
-static const u8 sText_Stats_eggGroup_FIELD[] = _("FIELD");
-static const u8 sText_Stats_eggGroup_FAIRY[] = _("FAIRY");
-static const u8 sText_Stats_eggGroup_GRASS[] = _("GRASS");
-static const u8 sText_Stats_eggGroup_HUMAN_LIKE[] = _("HUMANE");
-static const u8 sText_Stats_eggGroup_WATER_3[] = _("WATER {CIRCLE_3}");
-static const u8 sText_Stats_eggGroup_MINERAL[] = _("MINERAL");
-static const u8 sText_Stats_eggGroup_AMORPHOUS[] = _("AMORPHOUS");
-static const u8 sText_Stats_eggGroup_WATER_2[] = _("WATER {CIRCLE_2}");
-static const u8 sText_Stats_eggGroup_DITTO[] = _("DITTO");
-static const u8 sText_Stats_eggGroup_DRAGON[] = _("DRAGON");
+static const u8 sText_Stats_eggGroup_MONSTER[] = _("怪兽组");
+static const u8 sText_Stats_eggGroup_WATER_1[] = _("水中{CIRCLE_1}组");
+static const u8 sText_Stats_eggGroup_BUG[] = _("虫组");
+static const u8 sText_Stats_eggGroup_FLYING[] = _("飞行组");
+static const u8 sText_Stats_eggGroup_FIELD[] = _("陆上组");
+static const u8 sText_Stats_eggGroup_FAIRY[] = _("妖精组");
+static const u8 sText_Stats_eggGroup_GRASS[] = _("植物组");
+static const u8 sText_Stats_eggGroup_HUMAN_LIKE[] = _("人形组");
+static const u8 sText_Stats_eggGroup_WATER_3[] = _("水中{CIRCLE_3}组");
+static const u8 sText_Stats_eggGroup_MINERAL[] = _("性别不明组");
+static const u8 sText_Stats_eggGroup_AMORPHOUS[] = _("无定形组");
+static const u8 sText_Stats_eggGroup_WATER_2[] = _("水中{CIRCLE_2}组");
+static const u8 sText_Stats_eggGroup_DITTO[] = _("百变怪组");
+static const u8 sText_Stats_eggGroup_DRAGON[] = _("龙组");
 static const u8 sText_Stats_eggGroup_NO_EGGS_DISCOVERED[] = _("---");
 static const u8 sText_Stats_eggGroup_UNKNOWN[] = _("???");
-static const u8 sText_Dex_SEEN[] = _("SEEN");
-static const u8 sText_Dex_OWN[] = _("OWN");
+static const u8 sText_Dex_SEEN[] = _("遇见");
+static const u8 sText_Dex_OWN[] = _("拥有");
 
-static const u8 sText_EVO_Buttons[] = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK");
-static const u8 sText_EVO_Buttons_Decapped[] = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check");
-static const u8 sText_EVO_Buttons_PE[] = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK  {START_BUTTON}FORMs");
-static const u8 sText_EVO_Buttons_Decapped_PE[] = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check  {START_BUTTON}Forms");
+static const u8 sText_EVO_Buttons[] = _("{DPAD_UPDOWN}进化  {A_BUTTON}查看");
+static const u8 sText_EVO_Buttons_PE[] = _("{DPAD_UPDOWN}进化  {A_BUTTON}查看  {START_BUTTON}形态");
 static const u8 sText_EVO_Name[] = _("{STR_VAR_3}:");
-static const u8 sText_EVO_PreEvo[] = _("{STR_VAR_1} evolves from {STR_VAR_2}");
-static const u8 sText_EVO_PreEvo_PE_Mega[] = _("{STR_VAR_1} Mega Evolves with {STR_VAR_2}");
-static const u8 sText_EVO_FRIENDSHIP[] = _("{LV}{UP_ARROW}, high friendship");
-static const u8 sText_EVO_FRIENDSHIP_DAY[] = _("{LV}{UP_ARROW}, high friendship, day");
-static const u8 sText_EVO_FRIENDSHIP_NIGHT[] = _("{LV}{UP_ARROW}, high friendship, night");
-static const u8 sText_EVO_FRIENDSHIP_MOVE_TYPE[] = _("{LV}{UP_ARROW}, high friendship, {STR_VAR_2} move");
-static const u8 sText_EVO_LEVEL[] = _("{LV}{UP_ARROW} to {STR_VAR_2}");
-static const u8 sText_EVO_TRADE[] = _("Trading");
-static const u8 sText_EVO_TRADE_ITEM[] = _("Trading, holding {STR_VAR_2}");
-static const u8 sText_EVO_ITEM[] = _("{STR_VAR_2} is used");
-static const u8 sText_EVO_LEVEL_ATK_GT_DEF[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Atk > Def");
-static const u8 sText_EVO_LEVEL_ATK_EQ_DEF[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Atk = Def");
-static const u8 sText_EVO_LEVEL_ATK_LT_DEF[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Atk < Def");
-static const u8 sText_EVO_LEVEL_SILCOON[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Silcoon persona");
-static const u8 sText_EVO_LEVEL_CASCOON[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Cascoon persona");
-static const u8 sText_EVO_LEVEL_NINJASK[] = _("{LV}{UP_ARROW} to {STR_VAR_2}");
-static const u8 sText_EVO_LEVEL_SHEDINJA[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, party<6, 1x POKéBALL");
-static const u8 sText_EVO_BEAUTY[] = _("{LV}{UP_ARROW}, high beauty");
-static const u8 sText_EVO_LEVEL_FEMALE[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, is female");
-static const u8 sText_EVO_LEVEL_MALE[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, is male");
-static const u8 sText_EVO_LEVEL_NIGHT[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, night");
-static const u8 sText_EVO_LEVEL_DAY[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, day");
-static const u8 sText_EVO_LEVEL_DUSK[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, dusk (5-6PM)");
-static const u8 sText_EVO_ITEM_HOLD_DAY[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}, day");
-static const u8 sText_EVO_ITEM_HOLD_NIGHT[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}, night");
-static const u8 sText_EVO_MOVE[] = _("{LV}{UP_ARROW}, knows {STR_VAR_2}");
-static const u8 sText_EVO_MAPSEC[] = _("{LV}{UP_ARROW} on {STR_VAR_2}");
-static const u8 sText_EVO_ITEM_MALE[] = _("{STR_VAR_2} used on male");
-static const u8 sText_EVO_ITEM_FEMALE[] = _("{STR_VAR_2} used on female");
-static const u8 sText_EVO_LEVEL_RAIN[] = _("{LV}{UP_ARROW} to {STR_VAR_2} while raining");
-static const u8 sText_EVO_SPECIFIC_MON_IN_PARTY[] = _("{LV}{UP_ARROW} with {STR_VAR_2} in party");
-static const u8 sText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[] = _("{LV}{UP_ARROW} with dark type in party");
-static const u8 sText_EVO_TRADE_SPECIFIC_MON[] = _("Traded for {STR_VAR_2}");
-static const u8 sText_EVO_SPECIFIC_MAP[] = _("{LV}{UP_ARROW} on {STR_VAR_2}");
-static const u8 sText_EVO_LEVEL_NATURE_AMPED[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Amped natures");
-static const u8 sText_EVO_LEVEL_NATURE_LOW_KEY[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Low Key natures");
-static const u8 sText_EVO_CRITICAL_HITS[] = _("Land {STR_VAR_2} critical hits in\nsingle battle");
-static const u8 sText_EVO_SCRIPT_TRIGGER_DMG[] = _("Takes at least {STR_VAR_2} HP in damage");
-static const u8 sText_EVO_DARK_SCROLL[] = _("ScrllOfDrknss is used");
-static const u8 sText_EVO_WATER_SCROLL[] = _("ScrollOfWatrs is used");
-static const u8 sText_EVO_ITEM_NIGHT[] = _("{STR_VAR_2} is used, night");
-static const u8 sText_EVO_ITEM_DAY[] = _("{STR_VAR_2} is used, day");
-static const u8 sText_EVO_ITEM_HOLD[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}");
-static const u8 sText_EVO_USE_MOVE_TWENTY_TIMES[] = _("{LV}{UP_ARROW} after 20x {STR_VAR_2}");
-static const u8 sText_EVO_RECOIL_DAMAGE_MALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, male");
-static const u8 sText_EVO_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, female");
-static const u8 sText_EVO_ITEM_COUNT_999[] = _("{LV}{UP_ARROW} with 999 {STR_VAR_2} in bag");
-static const u8 sText_EVO_DEFEAT_THREE_WITH_ITEM[] = _("{LV}{UP_ARROW} defeating 3 {STR_VAR_3} holding {STR_VAR_2}");
-static const u8 sText_EVO_OVERWORLD_STEPS[] = _("{LV}{UP_ARROW} after {STR_VAR_2} steps");
-static const u8 sText_EVO_UNKNOWN[] = _("Method unknown");
-static const u8 sText_EVO_NONE[] = _("{STR_VAR_1} has no evolution.");
+static const u8 sText_EVO_PreEvo[] = _("{STR_VAR_1}从{STR_VAR_2}进化而来");
+static const u8 sText_EVO_PreEvo_PE_Mega[] = _("携带{STR_VAR_2}Mega进化成{STR_VAR_1}");
+static const u8 sText_EVO_FRIENDSHIP[] = _("{LV}{UP_ARROW}，高亲密度");
+static const u8 sText_EVO_FRIENDSHIP_DAY[] = _("{LV}{UP_ARROW}，白天高亲密度");
+static const u8 sText_EVO_FRIENDSHIP_NIGHT[] = _("{LV}{UP_ARROW}，夜晚高亲密度");
+static const u8 sText_EVO_FRIENDSHIP_MOVE_TYPE[] = _("{LV}{UP_ARROW}，高亲密度，{STR_VAR_2}技能");
+static const u8 sText_EVO_LEVEL[] = _("{LV}{UP_ARROW}到{STR_VAR_2}");
+static const u8 sText_EVO_TRADE[] = _("通讯");
+static const u8 sText_EVO_TRADE_ITEM[] = _("携带{STR_VAR_2}通讯");
+static const u8 sText_EVO_ITEM[] = _("使用{STR_VAR_2}");
+static const u8 sText_EVO_LEVEL_ATK_GT_DEF[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，物攻大于物防");
+static const u8 sText_EVO_LEVEL_ATK_EQ_DEF[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，物攻等于物防");
+static const u8 sText_EVO_LEVEL_ATK_LT_DEF[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，物攻小于物防");
+static const u8 sText_EVO_LEVEL_SILCOON[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，性格值除10取余小于5");
+static const u8 sText_EVO_LEVEL_CASCOON[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，性格值除10取余大于等于5");
+static const u8 sText_EVO_LEVEL_NINJASK[] = _("{LV}{UP_ARROW}到{STR_VAR_2}");
+static const u8 sText_EVO_LEVEL_SHEDINJA[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，队伍未满，一个精灵球");
+static const u8 sText_EVO_BEAUTY[] = _("{LV}{UP_ARROW}，高美丽度");
+static const u8 sText_EVO_LEVEL_FEMALE[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，雌性");
+static const u8 sText_EVO_LEVEL_MALE[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，雄性");
+static const u8 sText_EVO_LEVEL_NIGHT[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，夜晚");
+static const u8 sText_EVO_LEVEL_DAY[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，白天");
+static const u8 sText_EVO_LEVEL_DUSK[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，黄昏");
+static const u8 sText_EVO_ITEM_HOLD_DAY[] = _("{LV}{UP_ARROW}，携带{STR_VAR_2}，白天");
+static const u8 sText_EVO_ITEM_HOLD_NIGHT[] = _("{LV}{UP_ARROW}，携带{STR_VAR_2}，夜晚");
+static const u8 sText_EVO_MOVE[] = _("{LV}{UP_ARROW}，学会{STR_VAR_2}");
+static const u8 sText_EVO_MAPSEC[] = _("在{STR_VAR_2}{LV}{UP_ARROW}");
+static const u8 sText_EVO_ITEM_MALE[] = _("雄性使用{STR_VAR_2}");
+static const u8 sText_EVO_ITEM_FEMALE[] = _("雌性使用{STR_VAR_2}");
+static const u8 sText_EVO_LEVEL_RAIN[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，雨天");
+static const u8 sText_EVO_SPECIFIC_MON_IN_PARTY[] = _("{LV}{UP_ARROW}，{STR_VAR_2}在队中");
+static const u8 sText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[] = _("{LV}{UP_ARROW}，队中有恶系宝可梦");
+static const u8 sText_EVO_TRADE_SPECIFIC_MON[] = _("与{STR_VAR_2}通讯交换");
+static const u8 sText_EVO_SPECIFIC_MAP[] = _("在{STR_VAR_2}{LV}{UP_ARROW}");
+static const u8 sText_EVO_LEVEL_NATURE_AMPED[] = _("{LV}{UP_ARROW}到{STR_VAR_2}，外向性格");
+static const u8 sText_EVO_LEVEL_NATURE_LOW_KEY[] = _("{LV}{UP_ARROW} to {STR_VAR_2}，内向性格");
+static const u8 sText_EVO_CRITICAL_HITS[] = _("在一场战斗中\n命中要害{STR_VAR_2}次");
+static const u8 sText_EVO_SCRIPT_TRIGGER_DMG[] = _("消耗至少{STR_VAR_2}HP");
+static const u8 sText_EVO_DARK_SCROLL[] = _("恶之挂轴");
+static const u8 sText_EVO_WATER_SCROLL[] = _("水之挂轴");
+static const u8 sText_EVO_ITEM_NIGHT[] = _("使用{STR_VAR_2}，晚上");
+static const u8 sText_EVO_ITEM_DAY[] = _("使用{STR_VAR_2}，白天");
+static const u8 sText_EVO_ITEM_HOLD[] = _("{LV}{UP_ARROW}，携带{STR_VAR_2}");
+static const u8 sText_EVO_USE_MOVE_TWENTY_TIMES[] = _("{LV}{UP_ARROW}，20次{STR_VAR_2}");
+static const u8 sText_EVO_RECOIL_DAMAGE_MALE[] = _("{LV}{UP_ARROW}累计受到{STR_VAR_2}次反伤，雄性");
+static const u8 sText_EVO_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW}累计受到{STR_VAR_2}次反伤，雌性");
+static const u8 sText_EVO_ITEM_COUNT_999[] = _("{LV}{UP_ARROW}，背包里有999个{STR_VAR_2}");
+static const u8 sText_EVO_DEFEAT_THREE_WITH_ITEM[] = _("{LV}{UP_ARROW}战胜3只{STR_VAR_3}，携带{STR_VAR_2}");
+static const u8 sText_EVO_OVERWORLD_STEPS[] = _("{LV}{UP_ARROW}，累计行走{STR_VAR_2}步");
+static const u8 sText_EVO_UNKNOWN[] = _("未知");
+static const u8 sText_EVO_NONE[] = _("{STR_VAR_1}无进化形态");
 
-static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}FORM MODE  {START_BUTTON}EVOs");
-static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{START_BUTTON}Evos");
-static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}FORMs {A_BUTTON}CHECK {START_BUTTON}EVOs");
-static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{START_BUTTON}Evos");
-static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1} has no alternate forms.");
+static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}改变形态  {START_BUTTON}进化");
+static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}形态 {A_BUTTON}检查 {START_BUTTON}进化");
+static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1}没有其他形态");
 static const u8 sText_PlusSymbol[] = _("+");
 
 // static .rodata graphics
@@ -272,14 +266,11 @@ static const u16 sPokedexPlusHGSS_National_dark_Pal[] = INCBIN_U16("graphics/pok
 static const u16 sPokedexPlusHGSS_MenuSearch_dark_Pal[] = INCBIN_U16("graphics/pokedex/hgss/palette_search_menu_dark.gbapal");
 static const u16 sPokedexPlusHGSS_SearchResults_dark_Pal[] = INCBIN_U16("graphics/pokedex/hgss/palette_search_results_dark.gbapal");
 static const u32 sPokedexPlusHGSS_MenuList_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu_list.4bpp.lz");
-static const u32 sPokedexPlusHGSS_MenuList_DECA_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu_list_DECA.4bpp.lz");
 static const u32 sPokedexPlusHGSS_Interface_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_interface.4bpp.lz");
-static const u32 sPokedexPlusHGSS_Interface_DECA_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_interface_DECA.4bpp.lz");
 static const u32 sPokedexPlusHGSS_Menu_1_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu1.4bpp.lz");
 static const u32 sPokedexPlusHGSS_Menu_2_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu2.4bpp.lz");
 static const u32 sPokedexPlusHGSS_Menu_3_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu3.4bpp.lz");
 static const u32 sPokedexPlusHGSS_MenuSearch_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu_search.4bpp.lz");
-static const u32 sPokedexPlusHGSS_MenuSearch_DECA_Gfx[] = INCBIN_U32("graphics/pokedex/hgss/tileset_menu_search_DECA.4bpp.lz");
 static const u32 sPokedexPlusHGSS_StartMenuMain_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/tilemap_start_menu.bin.lz");
 static const u32 sPokedexPlusHGSS_StartMenuSearchResults_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/tilemap_start_menu_search_results.bin.lz");
 static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/SelectBar.bin.lz");
@@ -297,7 +288,6 @@ static const u32 sPokedexPlusHGSS_ScreenSearchHoenn_Tilemap[] = INCBIN_U32("grap
 static const u32 sPokedexPlusHGSS_ScreenSearchNational_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/tilemap_search_screen_national.bin.lz");
 
 #define SCROLLING_MON_X 146
-#define HGSS_DECAPPED FALSE
 #define HGSS_DARK_MODE FALSE
 #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES FALSE
 
@@ -1183,7 +1173,6 @@ static const struct SpriteTemplate sDexListStartMenuCursorSpriteTemplate =
 static const struct CompressedSpriteSheet sInterfaceSpriteSheet[] =
 {
     {sPokedexPlusHGSS_Interface_Gfx, 0x2000, TAG_DEX_INTERFACE},
-    {sPokedexPlusHGSS_Interface_DECA_Gfx, 0x2000, TAG_DEX_INTERFACE},
     {0}
 };
 
@@ -2400,10 +2389,7 @@ static bool8 LoadPokedexListPage(u8 page)
         SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_MenuList_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_MenuList_DECA_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_MenuList_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(1, sPokedexPlusHGSS_ScreenList_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenListUnderlay_Tilemap, 0, 0);
         if (page == PAGE_MAIN)
@@ -2426,7 +2412,7 @@ static bool8 LoadPokedexListPage(u8 page)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[HGSS_DECAPPED]);
+        LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[0]);
         LoadSpritePalettes(sInterfaceSpritePalette);
         LoadSpritePalettes(sStatBarSpritePal);
         CreateInterfaceSprites(page);
@@ -4669,45 +4655,27 @@ static void LoadTilesetTilemapHGSS(u8 page)
     switch (page)
     {
     case INFO_SCREEN:
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenInfo_Tilemap, 0, 0);
         break;
     case STATS_SCREEN:
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenStats_Tilemap, 0, 0);
         break;
     case EVO_SCREEN:
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
-            CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenEvolution_Tilemap_PE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
+        CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenEvolution_Tilemap_PE, 0, 0);
         break;
     case FORMS_SCREEN:
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenForms_Tilemap, 0, 0);
         break;
     case CRY_SCREEN:
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_3_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_3_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_3_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenCry_Tilemap, 0, 0);
         break;
     case SIZE_SCREEN:
-        if (!HGSS_DECAPPED)
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_3_Gfx, 0x2000, 0, 0);
-        else
-            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_3_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_3_Gfx, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenSize_Tilemap, 0, 0);
         break;
     }
@@ -4742,10 +4710,7 @@ static void StatsPage_PrintNavigationButtons(void)
 {
     u8 x = 9;
     u8 y = 0;
-    if (!HGSS_DECAPPED)
-        AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_Stats_Buttons);
-    else
-        AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_Stats_Buttons_Decapped);
+    AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_Stats_Buttons);
 
     PutWindowTilemap(WIN_STATS_NAVIGATION_BUTTONS);
     CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, 3);
@@ -5920,26 +5885,17 @@ static void EvoFormsPage_PrintNavigationButtons(void)
 
         if (sPokedexView->selectedScreen == EVO_SCREEN)
         {
-            if (!HGSS_DECAPPED)
-                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, sText_EVO_Buttons_PE);
-            else
-                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, sText_EVO_Buttons_Decapped_PE);
+            AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, sText_EVO_Buttons_PE);
         }
         else if (sPokedexView->selectedScreen == FORMS_SCREEN)
         {
             if (sPokedexView->sFormScreenData.inSubmenu)
             {
-                if (!HGSS_DECAPPED)
-                    AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_FORMS_Buttons_Submenu_PE);
-                else
-                    AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_FORMS_Buttons_Submenu_Decapped_PE);
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_FORMS_Buttons_Submenu_PE);
             }
             else
             {
-                if (!HGSS_DECAPPED)
-                    AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_FORMS_Buttons_PE);
-                else
-                    AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_FORMS_Buttons_Decapped_PE);
+                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_FORMS_Buttons_PE);
             }
         }
 
@@ -5958,7 +5914,6 @@ static void ResetEvoScreenDataStruct(void)
         sPokedexView->sEvoScreenData.targetSpecies[i] = 0;
         sPokedexView->sEvoScreenData.seen[i] = 0;
     }
-
 }
 
 static void GetSeenFlagTargetSpecies(void)
@@ -7771,10 +7726,7 @@ static void Task_LoadSearchMenu(u8 taskId)
             InitWindows(sSearchMenu_WindowTemplate);
             DeactivateAllTextPrinters();
             PutWindowTilemap(0);
-            if (!HGSS_DECAPPED)
-                DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_MenuSearch_Gfx, 0x2000, 0, 0);
-            else
-                DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_MenuSearch_DECA_Gfx, 0x2000, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_MenuSearch_Gfx, 0x2000, 0, 0);
             if (!IsNationalPokedexEnabled())
                 CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenSearchHoenn_Tilemap, 0, 0);
             else
@@ -7787,7 +7739,7 @@ static void Task_LoadSearchMenu(u8 taskId)
         }
         break;
     case 1:
-        LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[HGSS_DECAPPED]);
+        LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[0]);
         LoadSpritePalettes(sInterfaceSpritePalette);
         LoadSpritePalettes(sStatBarSpritePal);
         CreateSearchParameterScrollArrows(taskId);
