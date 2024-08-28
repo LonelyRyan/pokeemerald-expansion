@@ -560,7 +560,7 @@ static const u8 sText_PkmnSwitchedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX}与
 static const u8 sText_PkmnSurroundedWithVeilOfWater[] = _("{B_ATK_NAME_WITH_PREFIX}身边围绕着\n一层水幕！");
 static const u8 sText_PkmnLevitatedOnElectromagnetism[] = _("{B_ATK_NAME_WITH_PREFIX}通过电磁力\n漂浮了起来！");
 static const u8 sText_PkmnTwistedDimensions[] = _("{B_ATK_NAME_WITH_PREFIX}扭曲了\n时空！");
-static const u8 sText_DimensionsWereTwisted[] = _("The dimensions were\ntwisted!");
+static const u8 sText_DimensionsWereTwisted[] = _("空间被扭曲了!");
 static const u8 sText_PointedStonesFloat[] = _("尖锐的岩石漂浮在了\n {B_DEF_TEAM2} 的队伍周围!");
 static const u8 sText_CloakedInMysticalMoonlight[] = _("被神秘的月光\n笼罩!");
 static const u8 sText_TrappedBySwirlingMagma[] = _("{B_DEF_NAME_WITH_PREFIX} 被\n旋转的岩浆困住了!");
@@ -604,7 +604,6 @@ static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}的
 static const u8 sText_TargetAbilityLoweredStat[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n降低了它的{B_BUFF1}！");
 static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n提高了它的{B_BUFF1}！");
 static const u8 sText_ScriptingAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n提高了它的{B_BUFF1}！");
-static const u8 sText_AuroraVeilEnds[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n消失了！");
 static const u8 sText_ElectricTerrainEnds[] = _("脚下的电光\n不见了.");
 static const u8 sText_MistyTerrainEnds[] = _("脚下的雾气\n不见了.");
 static const u8 sText_PsychicTerrainEnds[] = _("脚下奇妙的感觉\n不见了.");
@@ -623,7 +622,7 @@ static const u8 sText_AnticipationActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFI
 static const u8 sText_ForewarnActivates[] = _("{B_SCR_ACTIVE_ABILITY}的预知梦预知到了{B_SCR_ACTIVE_NAME_WITH_PREFIX}\n的{B_DEF_NAME_WITH_PREFIX}'s{B_BUFF1}！");
 static const u8 sText_IceBodyHpGain[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n回复了少量体力！");
 static const u8 sText_SnowWarningHail[] = _("开始下冰雹了！");
-static const u8 sText_SnowWarningSnow[] = _("It started to snow!");
+static const u8 sText_SnowWarningSnow[] = _("开始下雪了!");
 static const u8 sText_FriskActivates[] = _("{B_ATK_NAME_WITH_PREFIX}察觉到了{B_DEF_NAME_WITH_PREFIX}\n的{B_LAST_ITEM}！");
 static const u8 sText_UnnerveEnters[] = _("对手的队伍太紧张以致于\n无法吃下树果！");
 static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX}收获了\n它的{B_LAST_ITEM}！");
@@ -850,1410 +849,708 @@ static const u8 sText_TidyingUpComplete[] = _("Tidying up complete!");
 static const u8 sText_FickleBeamDoubled[] = _("{B_ATK_NAME_WITH_PREFIX} is going all\nout for this attack!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
-    {
-        [STRINGID_FICKLEBEAMDOUBLED - BATTLESTRINGS_TABLE_START] = sText_FickleBeamDoubled,
-        [STRINGID_PKMNTERASTALLIZEDINTO -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTerastallizedInto,
-        [STRINGID_TIDYINGUPCOMPLETE -
-            BATTLESTRINGS_TABLE_START] = sText_TidyingUpComplete,
-        [STRINGID_SUPERSWEETAROMAWAFTS -
-            BATTLESTRINGS_TABLE_START] = sText_SupersweetAromaWafts,
-        [STRINGID_SHEDITSTAIL -
-            BATTLESTRINGS_TABLE_START] = sText_ShedItsTail,
-        [STRINGID_ELECTROSHOTCHARGING -
-            BATTLESTRINGS_TABLE_START] = sText_ElectroShotCharging,
-        [STRINGID_HOSPITALITYRESTORATION -
-            BATTLESTRINGS_TABLE_START] = sText_HospitalityRestoration,
-        [STRINGID_THESWAMPDISAPPEARED -
-            BATTLESTRINGS_TABLE_START] = sText_TheSwampDisappeared,
-        [STRINGID_SWAMPENVELOPEDSIDE -
-            BATTLESTRINGS_TABLE_START] = sText_SwampEnvelopedSide,
-        [STRINGID_THESEAOFFIREDISAPPEARED -
-            BATTLESTRINGS_TABLE_START] = sText_TheSeaOfFireDisappeared,
-        [STRINGID_HURTBYTHESEAOFFIRE -
-            BATTLESTRINGS_TABLE_START] = sText_HurtByTheSeaOfFire,
-        [STRINGID_SEAOFFIREENVELOPEDSIDE -
-            BATTLESTRINGS_TABLE_START] = sText_SeaOfFireEnvelopedSide,
-        [STRINGID_WAITINGFORPARTNERSMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_WaitingForPartnersMove,
-        [STRINGID_THERAINBOWDISAPPEARED -
-            BATTLESTRINGS_TABLE_START] = sText_TheRainbowDisappeared,
-        [STRINGID_ARAINBOWAPPEAREDONSIDE -
-            BATTLESTRINGS_TABLE_START] = sText_ARainbowAppearedOnSide,
-        [STRINGID_THETWOMOVESBECOMEONE -
-            BATTLESTRINGS_TABLE_START] = sText_TheTwoMovesBecomeOne,
-        [STRINGID_ZEROTOHEROTRANSFORMATION -
-            BATTLESTRINGS_TABLE_START] = sText_ZeroToHeroTransformation,
-        [STRINGID_PKMNTELLCHILLINGRECEPTIONJOKE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTellChillingReceptionJoke,
-        [STRINGID_MOVEBLOCKEDBYDYNAMAX -
-            BATTLESTRINGS_TABLE_START] = sText_MoveBlockedByDynamax,
-        [STRINGID_TARGETISHURTBYSALTCURE -
-            BATTLESTRINGS_TABLE_START] = sText_TargetIsHurtBySaltCure,
-        [STRINGID_TARGETISBEINGSALTCURED -
-            BATTLESTRINGS_TABLE_START] = sText_TargetIsBeingSaltCured,
-        [STRINGID_CURRENTMOVECANTSELECT -
-            BATTLESTRINGS_TABLE_START] = sText_CurrentMoveCantSelect,
-        [STRINGID_PKMNITEMMELTED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnItemMelted,
-        [STRINGID_MIRRORHERBCOPIED -
-            BATTLESTRINGS_TABLE_START] = sText_MirrorHerbCopied,
-        [STRINGID_THUNDERCAGETRAPPED -
-            BATTLESTRINGS_TABLE_START] = sText_AtkTrappedDef,
-        [STRINGID_ITEMRESTOREDSPECIESHEALTH -
-            BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesHealth,
-        [STRINGID_ITEMCUREDSPECIESSTATUS -
-            BATTLESTRINGS_TABLE_START] = sText_ItemCuredSpeciesStatus,
-        [STRINGID_ITEMRESTOREDSPECIESPP -
-            BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesPP,
-        [STRINGID_PKMNREVIVEDREADYTOFIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRevivedReadyToFight,
-        [STRINGID_STOCKPILEDEFFECTWOREOFF -
-            BATTLESTRINGS_TABLE_START] = sText_StockpiledEffectWoreOff,
-        [STRINGID_COULDNTFULLYPROTECT -
-            BATTLESTRINGS_TABLE_START] = sText_CouldntFullyProtect,
-        [STRINGID_PKMNHURTBYROCKSTHROWN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByRocksThrown,
-        [STRINGID_TEAMSURROUNDEDBYROCKS -
-            BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByRocks,
-        [STRINGID_PKMNBURNINGUP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBurningUp,
-        [STRINGID_TEAMSURROUNDEDBYFIRE -
-            BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByFire,
-        [STRINGID_PKMNHURTBYVORTEX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVortex,
-        [STRINGID_TEAMCAUGHTINVORTEX -
-            BATTLESTRINGS_TABLE_START] = sText_TeamCaughtInVortex,
-        [STRINGID_PKMNHURTBYVINES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVines,
-        [STRINGID_TEAMTRAPPEDWITHVINES -
-            BATTLESTRINGS_TABLE_START] = sText_TeamTrappedWithVines,
-        [STRINGID_PKMNBLEWAWAYSHARPSTEEL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySharpSteel,
-        [STRINGID_SHARPSTEELDMG -
-            BATTLESTRINGS_TABLE_START] = sText_SharpSteelDmg,
-        [STRINGID_SHARPSTEELFLOATS -
-            BATTLESTRINGS_TABLE_START] = sText_SharpSteelFloats,
-        [STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerGainedStrengthFromTheFallen,
-        [STRINGID_ABILITYWEAKENEDSURROUNDINGMONSSTAT -
-            BATTLESTRINGS_TABLE_START] = sText_AbilityWeakenedSurroundingMonsStat,
-        [STRINGID_ELECTRICTERRAINACTIVATEDABILITY -
-            BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainActivatedAbility,
-        [STRINGID_STATWASHEIGHTENED -
-            BATTLESTRINGS_TABLE_START] = sText_StatWasHeightened,
-        [STRINGID_BOOSTERENERGYACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_BoosterEnergyActivates,
-        [STRINGID_SUNLIGHTACTIVATEDABILITY -
-            BATTLESTRINGS_TABLE_START] = sText_SunlightActivatedAbility,
-        [STRINGID_BEINGHITCHARGEDPKMNWITHPOWER -
-            BATTLESTRINGS_TABLE_START] = sText_BeingHitChargedPkmnWithPower,
-        [STRINGID_ATTACKERSWITCHEDSTATWITHTARGET -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerSwitchedStatWithTarget,
-        [STRINGID_TARGETTOUGHEDITOUT -
-            BATTLESTRINGS_TABLE_START] = sText_TargetToughedItOut,
-        [STRINGID_ATTACKERMELTEDTHEICE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerMeltedTheIce,
-        [STRINGID_ATTACKERHEALEDITSBURN -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsBurn,
-        [STRINGID_ATTACKERBROKETHROUGHPARALYSIS -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerBrokeThroughParalysis,
-        [STRINGID_ATTACKERSHOOKITSELFAWAKE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerShookItselfAwake,
-        [STRINGID_ATTACKEREXPELLEDTHEPOISON -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerExpelledThePoison,
-        [STRINGID_ZPOWERSURROUNDS -
-            BATTLESTRINGS_TABLE_START] = sText_ZPowerSurrounds,
-        [STRINGID_ZMOVEUNLEASHED -
-            BATTLESTRINGS_TABLE_START] = sText_ZPowerUnleashed,
-        [STRINGID_ZMOVERESETSSTATS -
-            BATTLESTRINGS_TABLE_START] = sText_ZMoveResetsStats,
-        [STRINGID_ZMOVEALLSTATSUP -
-            BATTLESTRINGS_TABLE_START] = sText_ZMoveAllStatsUp,
-        [STRINGID_ZMOVEZBOOSTCRIT -
-            BATTLESTRINGS_TABLE_START] = sText_ZMoveBoostCrit,
-        [STRINGID_ZMOVERESTOREHP -
-            BATTLESTRINGS_TABLE_START] = sText_ZMoveRestoreHp,
-        [STRINGID_ZMOVESTATUP -
-            BATTLESTRINGS_TABLE_START] = sText_ZMoveStatUp,
-        [STRINGID_ZMOVEHPTRAP -
-            BATTLESTRINGS_TABLE_START] = sText_ZMoveHpSwitchInTrap,
-        [STRINGID_PLAYERLOSTTOENEMYTRAINER -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerLostToEnemyTrainer,
-        [STRINGID_PLAYERPAIDPRIZEMONEY -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerPaidPrizeMoney,
-        [STRINGID_SHELLTRAPDIDNTWORK -
-            BATTLESTRINGS_TABLE_START] = sText_ShellTrapDidntWork,
-        [STRINGID_PREPARESHELLTRAP -
-            BATTLESTRINGS_TABLE_START] = sText_PrepareShellTrap,
-        [STRINGID_COURTCHANGE -
-            BATTLESTRINGS_TABLE_START] = sText_CourtChange,
-        [STRINGID_HEATUPBEAK -
-            BATTLESTRINGS_TABLE_START] = sText_HeatingUpBeak,
-        [STRINGID_METEORBEAMCHARGING -
-            BATTLESTRINGS_TABLE_START] = sText_MeteorBeamCharging,
-        [STRINGID_PKMNINSNAPTRAP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnInSnapTrap,
-        [STRINGID_NEUTRALIZINGGASOVER -
-            BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasOver,
-        [STRINGID_NEUTRALIZINGGASENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasEnters,
-        [STRINGID_BATTLERTYPECHANGEDTO -
-            BATTLESTRINGS_TABLE_START] = sText_BattlerTypeChangedTo,
-        [STRINGID_PASTELVEILENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_PastelVeilEnters,
-        [STRINGID_PASTELVEILPROTECTED -
-            BATTLESTRINGS_TABLE_START] = sText_PastelVeilProtected,
-        [STRINGID_SWAPPEDABILITIES -
-            BATTLESTRINGS_TABLE_START] = sText_SwappedAbilities,
-        [STRINGID_ABILITYALLOWSONLYMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_AbilityAllowsOnlyMove,
-        [STRINGID_BROKETHROUGHPROTECTION -
-            BATTLESTRINGS_TABLE_START] = sText_BrokeThroughProtection,
-        [STRINGID_BUTPOKEMONCANTUSETHEMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_ButPokemonCantUseTheMove,
-        [STRINGID_BUTHOOPACANTUSEIT -
-            BATTLESTRINGS_TABLE_START] = sText_ButHoopaCantUseIt,
-        [STRINGID_PKMNREVERTEDTOPRIMAL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRevertedToPrimal,
-        [STRINGID_STUFFCHEEKSCANTSELECT -
-            BATTLESTRINGS_TABLE_START] = sText_StuffCheeksCantSelect,
-        [STRINGID_ATTACKWEAKENEDBSTRONGWINDS -
-            BATTLESTRINGS_TABLE_START] = sText_AttackWeakenedByStrongWinds,
-        [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON -
-            BATTLESTRINGS_TABLE_START] = sText_MysteriousAirCurrentBlowsOn,
-        [STRINGID_STRONGWINDSDISSIPATED -
-            BATTLESTRINGS_TABLE_START] = sText_StrongWindsDissipated,
-        [STRINGID_MYSTERIOUSAIRCURRENT -
-            BATTLESTRINGS_TABLE_START] = sText_MysteriousAirCurrent,
-        [STRINGID_NORELIEFROMHEAVYRAIN -
-            BATTLESTRINGS_TABLE_START] = sText_NoReliefFromHeavyRain,
-        [STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN -
-            BATTLESTRINGS_TABLE_START] = sText_MoveFizzledOutInTheHeavyRain,
-        [STRINGID_HEAVYRAINLIFTED -
-            BATTLESTRINGS_TABLE_START] = sText_HeavyRainLifted,
-        [STRINGID_HEAVYRAIN -
-            BATTLESTRINGS_TABLE_START] = sText_HeavyRain,
-        [STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED -
-            BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlightWasNotLessened,
-        [STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_MoveEvaporatedInTheHarshSunlight,
-        [STRINGID_EXTREMESUNLIGHTFADED -
-            BATTLESTRINGS_TABLE_START] = sText_ExtremeSunlightFaded,
-        [STRINGID_EXTREMELYHARSHSUNLIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlight,
-        [STRINGID_ATTACKERBECAMEASHSPECIES -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerBecameAshSpecies,
-        [STRINGID_ATTACKERBECAMEFULLYCHARGED -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerBecameFullyCharged,
-        [STRINGID_HEALBLOCKEDNOMORE -
-            BATTLESTRINGS_TABLE_START] = sText_HealBlockedNoMore,
-        [STRINGID_TORMENTEDNOMORE -
-            BATTLESTRINGS_TABLE_START] = sText_TormentedNoMore,
-        [STRINGID_ATKGOTOVERINFATUATION -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerGotOverInfatuation,
-        [STRINGID_EJECTBUTTONACTIVATE -
-            BATTLESTRINGS_TABLE_START] = sText_EjectButtonActivate,
-        [STRINGID_REDCARDACTIVATE -
-            BATTLESTRINGS_TABLE_START] = sText_RedCardActivate,
-        [STRINGID_PKMNBURNHEALED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBurnHealed,
-        [STRINGID_STICKYBARBTRANSFER -
-            BATTLESTRINGS_TABLE_START] = sText_StickyBarbTransfer,
-        [STRINGID_ITEMCANNOTBEREMOVED -
-            BATTLESTRINGS_TABLE_START] = sText_ItemCannotBeRemoved,
-        [STRINGID_PKMNGOTOVERITSINFATUATION -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGotOverItsInfatuation,
-        [STRINGID_PKMNSHOOKOFFTHETAUNT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnShookOffTheTaunt,
-        [STRINGID_MICLEBERRYACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_MicleBerryActivates,
-        [STRINGID_CANACTFASTERTHANKSTO -
-            BATTLESTRINGS_TABLE_START] = sText_CanActFaster,
-        [STRINGID_CURIOUSMEDICINEENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_CuriousMedicineEnters,
-        [STRINGID_ASONEENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_AsOneEnters,
-        [STRINGID_PKMNMADESHELLGLEAM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMadeShellGleam,
-        [STRINGID_ABILITYRAISEDSTATDRASTICALLY -
-            BATTLESTRINGS_TABLE_START] = sText_AbilityRaisedStatDrastically,
-        [STRINGID_PKMNSWILLPERISHIN3TURNS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsWillPerishIn3Turns,
-        [STRINGID_ASANDSTORMKICKEDUP -
-            BATTLESTRINGS_TABLE_START] = sText_ASandstormKickedUp,
-        [STRINGID_BATTLERABILITYRAISEDSTAT -
-            BATTLESTRINGS_TABLE_START] = sText_BattlerAbilityRaisedStat,
-        [STRINGID_FETCHEDPOKEBALL -
-            BATTLESTRINGS_TABLE_START] = sText_FetchedPokeBall,
-        [STRINGID_CLEARAMULETWONTLOWERSTATS -
-            BATTLESTRINGS_TABLE_START] = sText_ClearAmuletWontLowerStats,
-        [STRINGID_CLOAKEDINAFREEZINGLIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_CloakedInAFreezingLight,
-        [STRINGID_DESTINYKNOTACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_DestinyKnotActivates,
-        [STRINGID_NOONEWILLBEABLETORUNAWAY -
-            BATTLESTRINGS_TABLE_START] = sText_NoOneWillBeAbleToRun,
-        [STRINGID_PKNMABSORBINGPOWER -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbingPower,
-        [STRINGID_RECEIVERABILITYTAKEOVER -
-            BATTLESTRINGS_TABLE_START] = sText_ReceiverAbilityTakeOver,
-        [STRINGID_SCRIPTINGABILITYSTATRAISE -
-            BATTLESTRINGS_TABLE_START] = sText_ScriptingAbilityRaisedStat,
-        [STRINGID_HEALERCURE -
-            BATTLESTRINGS_TABLE_START] = sText_HealerCure,
-        [STRINGID_ATTACKERLOSTFIRETYPE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerLostFireType,
-        [STRINGID_ATTACKERCUREDTARGETSTATUS -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerCuredTargetStatus,
-        [STRINGID_ILLUSIONWOREOFF -
-            BATTLESTRINGS_TABLE_START] = sText_IllusionWoreOff,
-        [STRINGID_BUGBITE -
-            BATTLESTRINGS_TABLE_START] = sText_BugBite,
-        [STRINGID_INCINERATEBURN -
-            BATTLESTRINGS_TABLE_START] = sText_IncinerateBurn,
-        [STRINGID_AIRBALLOONPOP -
-            BATTLESTRINGS_TABLE_START] = sText_AirBalloonPop,
-        [STRINGID_AIRBALLOONFLOAT -
-            BATTLESTRINGS_TABLE_START] = sText_AirBalloonFloat,
-        [STRINGID_TARGETATEITEM -
-            BATTLESTRINGS_TABLE_START] = sText_TargetAteItem,
-        [STRINGID_BERRYDMGREDUCES -
-            BATTLESTRINGS_TABLE_START] = sText_BerryDmgReducing,
-        [STRINGID_GEMACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_GemActivates,
-        [STRINGID_LASERFOCUS -
-            BATTLESTRINGS_TABLE_START] = sText_LaserFocusMessage,
-        [STRINGID_THROATCHOPENDS -
-            BATTLESTRINGS_TABLE_START] = sText_ThroatChopEnds,
-        [STRINGID_PKMNCANTUSEMOVETHROATCHOP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveThroatChop,
-        [STRINGID_USEDINSTRUCTEDMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_UsedInstructedMove,
-        [STRINGID_CELEBRATEMESSAGE -
-            BATTLESTRINGS_TABLE_START] = sText_CelebrateMessage,
-        [STRINGID_AROMAVEILPROTECTED -
-            BATTLESTRINGS_TABLE_START] = sText_AromaVeilProtected,
-        [STRINGID_SWEETVEILPROTECTED -
-            BATTLESTRINGS_TABLE_START] = sText_SweetVeilProtected,
-        [STRINGID_FLOWERVEILPROTECTED -
-            BATTLESTRINGS_TABLE_START] = sText_FlowerVeilProtected,
-        [STRINGID_SAFETYGOGGLESPROTECTED -
-            BATTLESTRINGS_TABLE_START] = sText_SafetyGogglesProtected,
-        [STRINGID_SPECTRALTHIEFSTEAL -
-            BATTLESTRINGS_TABLE_START] = sText_SpectralThiefSteal,
-        [STRINGID_BELCHCANTSELECT -
-            BATTLESTRINGS_TABLE_START] = sText_BelchCantUse,
-        [STRINGID_TRAINER1LOSETEXT -
-            BATTLESTRINGS_TABLE_START] = sText_Trainer1LoseText,
-        [STRINGID_PKMNGAINEDEXP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXP,
-        [STRINGID_PKMNGREWTOLV -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGrewToLv,
-        [STRINGID_PKMNLEARNEDMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLearnedMove,
-        [STRINGID_TRYTOLEARNMOVE1 -
-            BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove1,
-        [STRINGID_TRYTOLEARNMOVE2 -
-            BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove2,
-        [STRINGID_TRYTOLEARNMOVE3 -
-            BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove3,
-        [STRINGID_PKMNFORGOTMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnForgotMove,
-        [STRINGID_STOPLEARNINGMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_StopLearningMove,
-        [STRINGID_DIDNOTLEARNMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_DidNotLearnMove,
-        [STRINGID_PKMNLEARNEDMOVE2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLearnedMove2,
-        [STRINGID_ATTACKMISSED -
-            BATTLESTRINGS_TABLE_START] = sText_AttackMissed,
-        [STRINGID_PKMNPROTECTEDITSELF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself,
-        [STRINGID_STATSWONTINCREASE2 -
-            BATTLESTRINGS_TABLE_START] = sText_StatsWontIncrease2,
-        [STRINGID_AVOIDEDDAMAGE -
-            BATTLESTRINGS_TABLE_START] = sText_AvoidedDamage,
-        [STRINGID_ITDOESNTAFFECT -
-            BATTLESTRINGS_TABLE_START] = sText_ItDoesntAffect,
-        [STRINGID_ATTACKERFAINTED -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerFainted,
-        [STRINGID_TARGETFAINTED -
-            BATTLESTRINGS_TABLE_START] = sText_TargetFainted,
-        [STRINGID_PLAYERGOTMONEY -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerGotMoney,
-        [STRINGID_PLAYERWHITEOUT -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerWhiteout,
-        [STRINGID_PLAYERWHITEOUT2 -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerWhiteout2,
-        [STRINGID_PREVENTSESCAPE -
-            BATTLESTRINGS_TABLE_START] = sText_PreventsEscape,
-        [STRINGID_HITXTIMES -
-            BATTLESTRINGS_TABLE_START] = sText_HitXTimes,
-        [STRINGID_PKMNFELLASLEEP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFellAsleep,
-        [STRINGID_PKMNMADESLEEP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSleep,
-        [STRINGID_PKMNALREADYASLEEP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyAsleep,
-        [STRINGID_PKMNALREADYASLEEP2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyAsleep2,
-        [STRINGID_PKMNWASNTAFFECTED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasntAffected,
-        [STRINGID_PKMNWASPOISONED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasPoisoned,
-        [STRINGID_PKMNPOISONEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPoisonedBy,
-        [STRINGID_PKMNHURTBYPOISON -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByPoison,
-        [STRINGID_PKMNALREADYPOISONED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyPoisoned,
-        [STRINGID_PKMNBADLYPOISONED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBadlyPoisoned,
-        [STRINGID_PKMNENERGYDRAINED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnEnergyDrained,
-        [STRINGID_PKMNWASBURNED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasBurned,
-        [STRINGID_PKMNBURNEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBurnedBy,
-        [STRINGID_PKMNHURTBYBURN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByBurn,
-        [STRINGID_PKMNWASFROZEN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasFrozen,
-        [STRINGID_PKMNFROZENBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFrozenBy,
-        [STRINGID_PKMNISFROZEN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIsFrozen,
-        [STRINGID_PKMNWASDEFROSTED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrosted,
-        [STRINGID_PKMNWASDEFROSTED2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrosted2,
-        [STRINGID_PKMNWASDEFROSTEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrostedBy,
-        [STRINGID_PKMNWASPARALYZED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasParalyzed,
-        [STRINGID_PKMNWASPARALYZEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasParalyzedBy,
-        [STRINGID_PKMNISPARALYZED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIsParalyzed,
-        [STRINGID_PKMNISALREADYPARALYZED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIsAlreadyParalyzed,
-        [STRINGID_PKMNHEALEDPARALYSIS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHealedParalysis,
-        [STRINGID_PKMNDREAMEATEN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnDreamEaten,
-        [STRINGID_STATSWONTINCREASE -
-            BATTLESTRINGS_TABLE_START] = sText_StatsWontIncrease,
-        [STRINGID_STATSWONTDECREASE -
-            BATTLESTRINGS_TABLE_START] = sText_StatsWontDecrease,
-        [STRINGID_TEAMSTOPPEDWORKING -
-            BATTLESTRINGS_TABLE_START] = sText_TeamStoppedWorking,
-        [STRINGID_FOESTOPPEDWORKING -
-            BATTLESTRINGS_TABLE_START] = sText_FoeStoppedWorking,
-        [STRINGID_PKMNISCONFUSED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIsConfused,
-        [STRINGID_PKMNHEALEDCONFUSION -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHealedConfusion,
-        [STRINGID_PKMNWASCONFUSED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasConfused,
-        [STRINGID_PKMNALREADYCONFUSED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyConfused,
-        [STRINGID_PKMNFELLINLOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFellInLove,
-        [STRINGID_PKMNINLOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnInLove,
-        [STRINGID_PKMNIMMOBILIZEDBYLOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnImmobilizedByLove,
-        [STRINGID_PKMNBLOWNAWAY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBlownAway,
-        [STRINGID_PKMNCHANGEDTYPE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnChangedType,
-        [STRINGID_PKMNFLINCHED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFlinched,
-        [STRINGID_PKMNREGAINEDHEALTH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRegainedHealth,
-        [STRINGID_PKMNHPFULL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHPFull,
-        [STRINGID_PKMNRAISEDSPDEF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpDef,
-        [STRINGID_PKMNRAISEDDEF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedDef,
-        [STRINGID_PKMNCOVEREDBYVEIL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCoveredByVeil,
-        [STRINGID_PKMNUSEDSAFEGUARD -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnUsedSafeguard,
-        [STRINGID_PKMNSAFEGUARDEXPIRED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSafeguardExpired,
-        [STRINGID_PKMNWENTTOSLEEP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWentToSleep,
-        [STRINGID_PKMNSLEPTHEALTHY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSleptHealthy,
-        [STRINGID_PKMNWHIPPEDWHIRLWIND -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWhippedWhirlwind,
-        [STRINGID_PKMNTOOKSUNLIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTookSunlight,
-        [STRINGID_PKMNLOWEREDHEAD -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLoweredHead,
-        [STRINGID_PKMNISGLOWING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIsGlowing,
-        [STRINGID_PKMNFLEWHIGH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFlewHigh,
-        [STRINGID_PKMNDUGHOLE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnDugHole,
-        [STRINGID_PKMNSQUEEZEDBYBIND -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSqueezedByBind,
-        [STRINGID_PKMNTRAPPEDINVORTEX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedInVortex,
-        [STRINGID_PKMNWRAPPEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWrappedBy,
-        [STRINGID_PKMNCLAMPED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnClamped,
-        [STRINGID_PKMNHURTBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtBy,
-        [STRINGID_PKMNFREEDFROM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFreedFrom,
-        [STRINGID_PKMNCRASHED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCrashed,
-        [STRINGID_PKMNSHROUDEDINMIST -
-            BATTLESTRINGS_TABLE_START] = gText_PkmnShroudedInMist,
-        [STRINGID_PKMNPROTECTEDBYMIST -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedByMist,
-        [STRINGID_PKMNGETTINGPUMPED -
-            BATTLESTRINGS_TABLE_START] = gText_PkmnGettingPumped,
-        [STRINGID_PKMNHITWITHRECOIL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHitWithRecoil,
-        [STRINGID_PKMNPROTECTEDITSELF2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself2,
-        [STRINGID_PKMNBUFFETEDBYSANDSTORM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBuffetedBySandstorm,
-        [STRINGID_PKMNPELTEDBYHAIL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPeltedByHail,
-        [STRINGID_PKMNSEEDED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSeeded,
-        [STRINGID_PKMNEVADEDATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnEvadedAttack,
-        [STRINGID_PKMNSAPPEDBYLEECHSEED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSappedByLeechSeed,
-        [STRINGID_PKMNFASTASLEEP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFastAsleep,
-        [STRINGID_PKMNWOKEUP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWokeUp,
-        [STRINGID_PKMNUPROARKEPTAWAKE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnUproarKeptAwake,
-        [STRINGID_PKMNWOKEUPINUPROAR -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWokeUpInUproar,
-        [STRINGID_PKMNCAUSEDUPROAR -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCausedUproar,
-        [STRINGID_PKMNMAKINGUPROAR -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMakingUproar,
-        [STRINGID_PKMNCALMEDDOWN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCalmedDown,
-        [STRINGID_PKMNCANTSLEEPINUPROAR -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantSleepInUproar,
-        [STRINGID_PKMNSTOCKPILED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnStockpiled,
-        [STRINGID_PKMNCANTSTOCKPILE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantStockpile,
-        [STRINGID_PKMNCANTSLEEPINUPROAR2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantSleepInUproar2,
-        [STRINGID_UPROARKEPTPKMNAWAKE -
-            BATTLESTRINGS_TABLE_START] = sText_UproarKeptPkmnAwake,
-        [STRINGID_PKMNSTAYEDAWAKEUSING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnStayedAwakeUsing,
-        [STRINGID_PKMNSTORINGENERGY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnStoringEnergy,
-        [STRINGID_PKMNUNLEASHEDENERGY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnUnleashedEnergy,
-        [STRINGID_PKMNFATIGUECONFUSION -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFatigueConfusion,
-        [STRINGID_PLAYERPICKEDUPMONEY -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerPickedUpMoney,
-        [STRINGID_PKMNUNAFFECTED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnUnaffected,
-        [STRINGID_PKMNTRANSFORMEDINTO -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTransformedInto,
-        [STRINGID_PKMNMADESUBSTITUTE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSubstitute,
-        [STRINGID_PKMNHASSUBSTITUTE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHasSubstitute,
-        [STRINGID_SUBSTITUTEDAMAGED -
-            BATTLESTRINGS_TABLE_START] = sText_SubstituteDamaged,
-        [STRINGID_PKMNSUBSTITUTEFADED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSubstituteFaded,
-        [STRINGID_PKMNMUSTRECHARGE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMustRecharge,
-        [STRINGID_PKMNRAGEBUILDING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRageBuilding,
-        [STRINGID_PKMNMOVEWASDISABLED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMoveWasDisabled,
-        [STRINGID_PKMNMOVEISDISABLED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMoveIsDisabled,
-        [STRINGID_PKMNMOVEDISABLEDNOMORE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMoveDisabledNoMore,
-        [STRINGID_PKMNGOTENCORE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGotEncore,
-        [STRINGID_PKMNENCOREENDED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnEncoreEnded,
-        [STRINGID_PKMNTOOKAIM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTookAim,
-        [STRINGID_PKMNSKETCHEDMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSketchedMove,
-        [STRINGID_PKMNTRYINGTOTAKEFOE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTryingToTakeFoe,
-        [STRINGID_PKMNTOOKFOE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTookFoe,
-        [STRINGID_PKMNREDUCEDPP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnReducedPP,
-        [STRINGID_PKMNSTOLEITEM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnStoleItem,
-        [STRINGID_TARGETCANTESCAPENOW -
-            BATTLESTRINGS_TABLE_START] = sText_TargetCantEscapeNow,
-        [STRINGID_PKMNFELLINTONIGHTMARE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFellIntoNightmare,
-        [STRINGID_PKMNLOCKEDINNIGHTMARE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLockedInNightmare,
-        [STRINGID_PKMNLAIDCURSE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLaidCurse,
-        [STRINGID_PKMNAFFLICTEDBYCURSE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAfflictedByCurse,
-        [STRINGID_SPIKESSCATTERED -
-            BATTLESTRINGS_TABLE_START] = sText_SpikesScattered,
-        [STRINGID_PKMNHURTBYSPIKES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtBySpikes,
-        [STRINGID_PKMNIDENTIFIED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIdentified,
-        [STRINGID_PKMNPERISHCOUNTFELL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPerishCountFell,
-        [STRINGID_PKMNBRACEDITSELF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBracedItself,
-        [STRINGID_PKMNENDUREDHIT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnEnduredHit,
-        [STRINGID_MAGNITUDESTRENGTH -
-            BATTLESTRINGS_TABLE_START] = sText_MagnitudeStrength,
-        [STRINGID_PKMNCUTHPMAXEDATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCutHPMaxedAttack,
-        [STRINGID_PKMNCOPIEDSTATCHANGES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCopiedStatChanges,
-        [STRINGID_PKMNGOTFREE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGotFree,
-        [STRINGID_PKMNSHEDLEECHSEED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnShedLeechSeed,
-        [STRINGID_PKMNBLEWAWAYSPIKES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySpikes,
-        [STRINGID_PKMNFLEDFROMBATTLE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFledFromBattle,
-        [STRINGID_PKMNFORESAWATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnForesawAttack,
-        [STRINGID_PKMNTOOKATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTookAttack,
-        [STRINGID_PKMNATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAttack,
-        [STRINGID_PKMNCENTERATTENTION -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCenterAttention,
-        [STRINGID_PKMNCHARGINGPOWER -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnChargingPower,
-        [STRINGID_NATUREPOWERTURNEDINTO -
-            BATTLESTRINGS_TABLE_START] = sText_NaturePowerTurnedInto,
-        [STRINGID_PKMNSTATUSNORMAL -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnStatusNormal,
-        [STRINGID_PKMNHASNOMOVESLEFT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHasNoMovesLeft,
-        [STRINGID_PKMNSUBJECTEDTOTORMENT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSubjectedToTorment,
-        [STRINGID_PKMNCANTUSEMOVETORMENT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveTorment,
-        [STRINGID_PKMNTIGHTENINGFOCUS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTighteningFocus,
-        [STRINGID_PKMNFELLFORTAUNT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFellForTaunt,
-        [STRINGID_PKMNCANTUSEMOVETAUNT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveTaunt,
-        [STRINGID_PKMNREADYTOHELP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnReadyToHelp,
-        [STRINGID_PKMNSWITCHEDITEMS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedItems,
-        [STRINGID_PKMNCOPIEDFOE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCopiedFoe,
-        [STRINGID_PKMNMADEWISH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMadeWish,
-        [STRINGID_PKMNWISHCAMETRUE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWishCameTrue,
-        [STRINGID_PKMNPLANTEDROOTS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPlantedRoots,
-        [STRINGID_PKMNABSORBEDNUTRIENTS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbedNutrients,
-        [STRINGID_PKMNANCHOREDITSELF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAnchoredItself,
-        [STRINGID_PKMNWASMADEDROWSY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasMadeDrowsy,
-        [STRINGID_PKMNKNOCKEDOFF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnKnockedOff,
-        [STRINGID_PKMNSWAPPEDABILITIES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSwappedAbilities,
-        [STRINGID_PKMNSEALEDOPPONENTMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSealedOpponentMove,
-        [STRINGID_PKMNCANTUSEMOVESEALED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveSealed,
-        [STRINGID_PKMNWANTSGRUDGE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWantsGrudge,
-        [STRINGID_PKMNLOSTPPGRUDGE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLostPPGrudge,
-        [STRINGID_PKMNSHROUDEDITSELF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnShroudedItself,
-        [STRINGID_PKMNMOVEBOUNCED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBounced,
-        [STRINGID_PKMNWAITSFORTARGET -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWaitsForTarget,
-        [STRINGID_PKMNSNATCHEDMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSnatchedMove,
-        [STRINGID_PKMNMADEITRAIN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMadeItRain,
-        [STRINGID_PKMNRAISEDSPEED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpeed,
-        [STRINGID_PKMNPROTECTEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedBy,
-        [STRINGID_PKMNPREVENTSUSAGE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsUsage,
-        [STRINGID_PKMNRESTOREDHPUSING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRestoredHPUsing,
-        [STRINGID_PKMNCHANGEDTYPEWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnChangedTypeWith,
-        [STRINGID_PKMNPREVENTSPARALYSISWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsParalysisWith,
-        [STRINGID_PKMNPREVENTSROMANCEWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsRomanceWith,
-        [STRINGID_PKMNPREVENTSPOISONINGWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsPoisoningWith,
-        [STRINGID_PKMNPREVENTSCONFUSIONWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsConfusionWith,
-        [STRINGID_PKMNRAISEDFIREPOWERWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedFirePowerWith,
-        [STRINGID_PKMNANCHORSITSELFWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAnchorsItselfWith,
-        [STRINGID_PKMNCUTSATTACKWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCutsAttackWith,
-        [STRINGID_PKMNPREVENTSSTATLOSSWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsStatLossWith,
-        [STRINGID_PKMNHURTSWITH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtsWith,
-        [STRINGID_PKMNTRACED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTraced,
-        [STRINGID_STATSHARPLY -
-            BATTLESTRINGS_TABLE_START] = gText_StatSharply,
-        [STRINGID_STATROSE -
-            BATTLESTRINGS_TABLE_START] = gText_StatRose,
-        [STRINGID_STATHARSHLY -
-            BATTLESTRINGS_TABLE_START] = sText_StatHarshly,
-        [STRINGID_STATFELL -
-            BATTLESTRINGS_TABLE_START] = sText_StatFell,
-        [STRINGID_ATTACKERSSTATROSE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackersStatRose,
-        [STRINGID_DEFENDERSSTATROSE -
-            BATTLESTRINGS_TABLE_START] = gText_DefendersStatRose,
-        [STRINGID_ATTACKERSSTATFELL -
-            BATTLESTRINGS_TABLE_START] = sText_AttackersStatFell,
-        [STRINGID_DEFENDERSSTATFELL -
-            BATTLESTRINGS_TABLE_START] = sText_DefendersStatFell,
-        [STRINGID_CRITICALHIT -
-            BATTLESTRINGS_TABLE_START] = sText_CriticalHit,
-        [STRINGID_ONEHITKO -
-            BATTLESTRINGS_TABLE_START] = sText_OneHitKO,
-        [STRINGID_123POOF -
-            BATTLESTRINGS_TABLE_START] = sText_123Poof,
-        [STRINGID_ANDELLIPSIS -
-            BATTLESTRINGS_TABLE_START] = sText_AndEllipsis,
-        [STRINGID_NOTVERYEFFECTIVE -
-            BATTLESTRINGS_TABLE_START] = sText_NotVeryEffective,
-        [STRINGID_SUPEREFFECTIVE -
-            BATTLESTRINGS_TABLE_START] = sText_SuperEffective,
-        [STRINGID_GOTAWAYSAFELY -
-            BATTLESTRINGS_TABLE_START] = sText_GotAwaySafely,
-        [STRINGID_WILDPKMNFLED -
-            BATTLESTRINGS_TABLE_START] = sText_WildPkmnFled,
-        [STRINGID_NORUNNINGFROMTRAINERS -
-            BATTLESTRINGS_TABLE_START] = sText_NoRunningFromTrainers,
-        [STRINGID_CANTESCAPE -
-            BATTLESTRINGS_TABLE_START] = sText_CantEscape,
-        [STRINGID_DONTLEAVEBIRCH -
-            BATTLESTRINGS_TABLE_START] = sText_DontLeaveBirch,
-        [STRINGID_BUTNOTHINGHAPPENED -
-            BATTLESTRINGS_TABLE_START] = sText_ButNothingHappened,
-        [STRINGID_BUTITFAILED -
-            BATTLESTRINGS_TABLE_START] = sText_ButItFailed,
-        [STRINGID_ITHURTCONFUSION -
-            BATTLESTRINGS_TABLE_START] = sText_ItHurtConfusion,
-        [STRINGID_MIRRORMOVEFAILED -
-            BATTLESTRINGS_TABLE_START] = sText_MirrorMoveFailed,
-        [STRINGID_STARTEDTORAIN -
-            BATTLESTRINGS_TABLE_START] = sText_StartedToRain,
-        [STRINGID_DOWNPOURSTARTED -
-            BATTLESTRINGS_TABLE_START] = sText_DownpourStarted,
-        [STRINGID_RAINCONTINUES -
-            BATTLESTRINGS_TABLE_START] = sText_RainContinues,
-        [STRINGID_DOWNPOURCONTINUES -
-            BATTLESTRINGS_TABLE_START] = sText_DownpourContinues,
-        [STRINGID_RAINSTOPPED -
-            BATTLESTRINGS_TABLE_START] = sText_RainStopped,
-        [STRINGID_SANDSTORMBREWED -
-            BATTLESTRINGS_TABLE_START] = sText_SandstormBrewed,
-        [STRINGID_SANDSTORMRAGES -
-            BATTLESTRINGS_TABLE_START] = sText_SandstormRages,
-        [STRINGID_SANDSTORMSUBSIDED -
-            BATTLESTRINGS_TABLE_START] = sText_SandstormSubsided,
-        [STRINGID_SUNLIGHTGOTBRIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_SunlightGotBright,
-        [STRINGID_SUNLIGHTSTRONG -
-            BATTLESTRINGS_TABLE_START] = sText_SunlightStrong,
-        [STRINGID_SUNLIGHTFADED -
-            BATTLESTRINGS_TABLE_START] = sText_SunlightFaded,
-        [STRINGID_STARTEDHAIL -
-            BATTLESTRINGS_TABLE_START] = sText_StartedHail,
-        [STRINGID_HAILCONTINUES -
-            BATTLESTRINGS_TABLE_START] = sText_HailContinues,
-        [STRINGID_HAILSTOPPED -
-            BATTLESTRINGS_TABLE_START] = sText_HailStopped,
-        [STRINGID_STARTEDSNOW -
-            BATTLESTRINGS_TABLE_START] = sText_StartedSnow,
-        [STRINGID_SNOWCONTINUES -
-            BATTLESTRINGS_TABLE_START] = sText_SnowContinues,
-        [STRINGID_SNOWSTOPPED -
-            BATTLESTRINGS_TABLE_START] = sText_SnowStopped,
-        [STRINGID_FOGCREPTUP -
-            BATTLESTRINGS_TABLE_START] = sText_FogCreptUp,
-        [STRINGID_FOGISDEEP -
-            BATTLESTRINGS_TABLE_START] = sText_FogIsDeep,
-        [STRINGID_FOGLIFTED -
-            BATTLESTRINGS_TABLE_START] = sText_FogLifted,
-        [STRINGID_FAILEDTOSPITUP -
-            BATTLESTRINGS_TABLE_START] = sText_FailedToSpitUp,
-        [STRINGID_FAILEDTOSWALLOW -
-            BATTLESTRINGS_TABLE_START] = sText_FailedToSwallow,
-        [STRINGID_WINDBECAMEHEATWAVE -
-            BATTLESTRINGS_TABLE_START] = sText_WindBecameHeatWave,
-        [STRINGID_STATCHANGESGONE -
-            BATTLESTRINGS_TABLE_START] = sText_StatChangesGone,
-        [STRINGID_COINSSCATTERED -
-            BATTLESTRINGS_TABLE_START] = sText_CoinsScattered,
-        [STRINGID_TOOWEAKFORSUBSTITUTE -
-            BATTLESTRINGS_TABLE_START] = sText_TooWeakForSubstitute,
-        [STRINGID_SHAREDPAIN -
-            BATTLESTRINGS_TABLE_START] = sText_SharedPain,
-        [STRINGID_BELLCHIMED -
-            BATTLESTRINGS_TABLE_START] = sText_BellChimed,
-        [STRINGID_FAINTINTHREE -
-            BATTLESTRINGS_TABLE_START] = sText_FaintInThree,
-        [STRINGID_NOPPLEFT -
-            BATTLESTRINGS_TABLE_START] = sText_NoPPLeft,
-        [STRINGID_BUTNOPPLEFT -
-            BATTLESTRINGS_TABLE_START] = sText_ButNoPPLeft,
-        [STRINGID_PLAYERUSEDITEM -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerUsedItem,
-        [STRINGID_WALLYUSEDITEM -
-            BATTLESTRINGS_TABLE_START] = sText_WallyUsedItem,
-        [STRINGID_TRAINERBLOCKEDBALL -
-            BATTLESTRINGS_TABLE_START] = sText_TrainerBlockedBall,
-        [STRINGID_DONTBEATHIEF -
-            BATTLESTRINGS_TABLE_START] = sText_DontBeAThief,
-        [STRINGID_ITDODGEDBALL -
-            BATTLESTRINGS_TABLE_START] = sText_ItDodgedBall,
-        [STRINGID_YOUMISSEDPKMN -
-            BATTLESTRINGS_TABLE_START] = sText_YouMissedPkmn,
-        [STRINGID_PKMNBROKEFREE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBrokeFree,
-        [STRINGID_ITAPPEAREDCAUGHT -
-            BATTLESTRINGS_TABLE_START] = sText_ItAppearedCaught,
-        [STRINGID_AARGHALMOSTHADIT -
-            BATTLESTRINGS_TABLE_START] = sText_AarghAlmostHadIt,
-        [STRINGID_SHOOTSOCLOSE -
-            BATTLESTRINGS_TABLE_START] = sText_ShootSoClose,
-        [STRINGID_GOTCHAPKMNCAUGHTPLAYER -
-            BATTLESTRINGS_TABLE_START] = sText_GotchaPkmnCaughtPlayer,
-        [STRINGID_GOTCHAPKMNCAUGHTWALLY -
-            BATTLESTRINGS_TABLE_START] = sText_GotchaPkmnCaughtWally,
-        [STRINGID_GIVENICKNAMECAPTURED -
-            BATTLESTRINGS_TABLE_START] = sText_GiveNicknameCaptured,
-        [STRINGID_PKMNSENTTOPC -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSentToPC,
-        [STRINGID_PKMNDATAADDEDTODEX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnDataAddedToDex,
-        [STRINGID_ITISRAINING -
-            BATTLESTRINGS_TABLE_START] = sText_ItIsRaining,
-        [STRINGID_SANDSTORMISRAGING -
-            BATTLESTRINGS_TABLE_START] = sText_SandstormIsRaging,
-        [STRINGID_CANTESCAPE2 -
-            BATTLESTRINGS_TABLE_START] = sText_CantEscape2,
-        [STRINGID_PKMNIGNORESASLEEP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoresAsleep,
-        [STRINGID_PKMNIGNOREDORDERS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoredOrders,
-        [STRINGID_PKMNBEGANTONAP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBeganToNap,
-        [STRINGID_PKMNLOAFING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLoafing,
-        [STRINGID_PKMNWONTOBEY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWontObey,
-        [STRINGID_PKMNTURNEDAWAY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTurnedAway,
-        [STRINGID_PKMNPRETENDNOTNOTICE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPretendNotNotice,
-        [STRINGID_ENEMYABOUTTOSWITCHPKMN -
-            BATTLESTRINGS_TABLE_START] = sText_EnemyAboutToSwitchPkmn,
-        [STRINGID_CREPTCLOSER -
-            BATTLESTRINGS_TABLE_START] = sText_CreptCloser,
-        [STRINGID_CANTGETCLOSER -
-            BATTLESTRINGS_TABLE_START] = sText_CantGetCloser,
-        [STRINGID_PKMNWATCHINGCAREFULLY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWatchingCarefully,
-        [STRINGID_PKMNCURIOUSABOUTX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCuriousAboutX,
-        [STRINGID_PKMNENTHRALLEDBYX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnEnthralledByX,
-        [STRINGID_PKMNIGNOREDX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoredX,
-        [STRINGID_THREWPOKEBLOCKATPKMN -
-            BATTLESTRINGS_TABLE_START] = sText_ThrewPokeblockAtPkmn,
-        [STRINGID_OUTOFSAFARIBALLS -
-            BATTLESTRINGS_TABLE_START] = sText_OutOfSafariBalls,
-        [STRINGID_PKMNSITEMCUREDPARALYSIS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredParalysis,
-        [STRINGID_PKMNSITEMCUREDPOISON -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredPoison,
-        [STRINGID_PKMNSITEMHEALEDBURN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemHealedBurn,
-        [STRINGID_PKMNSITEMDEFROSTEDIT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemDefrostedIt,
-        [STRINGID_PKMNSITEMWOKEIT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemWokeIt,
-        [STRINGID_PKMNSITEMSNAPPEDOUT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemSnappedOut,
-        [STRINGID_PKMNSITEMCUREDPROBLEM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredProblem,
-        [STRINGID_PKMNSITEMRESTOREDHEALTH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredHealth,
-        [STRINGID_PKMNSITEMRESTOREDPP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredPP,
-        [STRINGID_PKMNSITEMRESTOREDSTATUS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredStatus,
-        [STRINGID_PKMNSITEMRESTOREDHPALITTLE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredHPALittle,
-        [STRINGID_ITEMALLOWSONLYYMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_ItemAllowsOnlyYMove,
-        [STRINGID_PKMNHUNGONWITHX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHungOnWithX,
-        [STRINGID_EMPTYSTRING3 -
-            BATTLESTRINGS_TABLE_START] = gText_EmptyString3,
-        [STRINGID_PKMNSXPREVENTSBURNS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsBurns,
-        [STRINGID_PKMNSXBLOCKSY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXBlocksY,
-        [STRINGID_PKMNSXRESTOREDHPALITTLE2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXRestoredHPALittle2,
-        [STRINGID_PKMNSXWHIPPEDUPSANDSTORM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXWhippedUpSandstorm,
-        [STRINGID_PKMNSXPREVENTSYLOSS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsYLoss,
-        [STRINGID_PKMNSXINFATUATEDY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXInfatuatedY,
-        [STRINGID_PKMNSXMADEYINEFFECTIVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYIneffective,
-        [STRINGID_PKMNSXCUREDYPROBLEM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXCuredYProblem,
-        [STRINGID_ITSUCKEDLIQUIDOOZE -
-            BATTLESTRINGS_TABLE_START] = sText_ItSuckedLiquidOoze,
-        [STRINGID_PKMNTRANSFORMED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTransformed,
-        [STRINGID_ELECTRICITYWEAKENED -
-            BATTLESTRINGS_TABLE_START] = sText_ElectricityWeakened,
-        [STRINGID_FIREWEAKENED -
-            BATTLESTRINGS_TABLE_START] = sText_FireWeakened,
-        [STRINGID_PKMNHIDUNDERWATER -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHidUnderwater,
-        [STRINGID_PKMNSPRANGUP -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSprangUp,
-        [STRINGID_HMMOVESCANTBEFORGOTTEN -
-            BATTLESTRINGS_TABLE_START] = sText_HMMovesCantBeForgotten,
-        [STRINGID_XFOUNDONEY -
-            BATTLESTRINGS_TABLE_START] = sText_XFoundOneY,
-        [STRINGID_PLAYERDEFEATEDTRAINER1 -
-            BATTLESTRINGS_TABLE_START] = sText_PlayerDefeatedLinkTrainerTrainer1,
-        [STRINGID_SOOTHINGAROMA -
-            BATTLESTRINGS_TABLE_START] = sText_SoothingAroma,
-        [STRINGID_ITEMSCANTBEUSEDNOW -
-            BATTLESTRINGS_TABLE_START] = sText_ItemsCantBeUsedNow,
-        [STRINGID_FORXCOMMAYZ -
-            BATTLESTRINGS_TABLE_START] = sText_ForXCommaYZ,
-        [STRINGID_USINGITEMSTATOFPKMNROSE -
-            BATTLESTRINGS_TABLE_START] = sText_UsingItemTheStatOfPkmnRose,
-        [STRINGID_PKMNUSEDXTOGETPUMPED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnUsedXToGetPumped,
-        [STRINGID_PKMNSXMADEYUSELESS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYUseless,
-        [STRINGID_PKMNTRAPPEDBYSANDTOMB -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedBySandTomb,
-        [STRINGID_EMPTYSTRING4 -
-            BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
-        [STRINGID_ABOOSTED -
-            BATTLESTRINGS_TABLE_START] = sText_ABoosted,
-        [STRINGID_PKMNSXINTENSIFIEDSUN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXIntensifiedSun,
-        [STRINGID_PKMNMAKESGROUNDMISS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMakesGroundMiss,
-        [STRINGID_YOUTHROWABALLNOWRIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_YouThrowABallNowRight,
-        [STRINGID_PKMNSXTOOKATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXTookAttack,
-        [STRINGID_PKMNCHOSEXASDESTINY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnChoseXAsDestiny,
-        [STRINGID_PKMNLOSTFOCUS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLostFocus,
-        [STRINGID_USENEXTPKMN -
-            BATTLESTRINGS_TABLE_START] = sText_UseNextPkmn,
-        [STRINGID_PKMNFLEDUSINGITS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFledUsingIts,
-        [STRINGID_PKMNFLEDUSING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFledUsing,
-        [STRINGID_PKMNWASDRAGGEDOUT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWasDraggedOut,
-        [STRINGID_PREVENTEDFROMWORKING -
-            BATTLESTRINGS_TABLE_START] = sText_PreventedFromWorking,
-        [STRINGID_PKMNSITEMNORMALIZEDSTATUS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemNormalizedStatus,
-        [STRINGID_TRAINER1USEDITEM -
-            BATTLESTRINGS_TABLE_START] = sText_Trainer1UsedItem,
-        [STRINGID_BOXISFULL -
-            BATTLESTRINGS_TABLE_START] = sText_BoxIsFull,
-        [STRINGID_PKMNAVOIDEDATTACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAvoidedAttack,
-        [STRINGID_PKMNSXMADEITINEFFECTIVE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeItIneffective,
-        [STRINGID_PKMNSXPREVENTSFLINCHING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsFlinching,
-        [STRINGID_PKMNALREADYHASBURN -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyHasBurn,
-        [STRINGID_STATSWONTDECREASE2 -
-            BATTLESTRINGS_TABLE_START] = sText_StatsWontDecrease2,
-        [STRINGID_PKMNSXBLOCKSY2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXBlocksY2,
-        [STRINGID_PKMNSXWOREOFF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXWoreOff,
-        [STRINGID_PKMNRAISEDDEFALITTLE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedDefALittle,
-        [STRINGID_PKMNRAISEDSPDEFALITTLE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpDefALittle,
-        [STRINGID_THEWALLSHATTERED -
-            BATTLESTRINGS_TABLE_START] = sText_TheWallShattered,
-        [STRINGID_PKMNSXPREVENTSYSZ -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsYsZ,
-        [STRINGID_PKMNSXCUREDITSYPROBLEM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXCuredItsYProblem,
-        [STRINGID_ATTACKERCANTESCAPE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerCantEscape,
-        [STRINGID_PKMNOBTAINEDX -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedX,
-        [STRINGID_PKMNOBTAINEDX2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedX2,
-        [STRINGID_PKMNOBTAINEDXYOBTAINEDZ -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedXYObtainedZ,
-        [STRINGID_BUTNOEFFECT -
-            BATTLESTRINGS_TABLE_START] = sText_ButNoEffect,
-        [STRINGID_PKMNSXHADNOEFFECTONY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsXHadNoEffectOnY,
-        [STRINGID_TWOENEMIESDEFEATED -
-            BATTLESTRINGS_TABLE_START] = sText_TwoInGameTrainersDefeated,
-        [STRINGID_TRAINER2LOSETEXT -
-            BATTLESTRINGS_TABLE_START] = sText_Trainer2LoseText,
-        [STRINGID_PKMNINCAPABLEOFPOWER -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIncapableOfPower,
-        [STRINGID_GLINTAPPEARSINEYE -
-            BATTLESTRINGS_TABLE_START] = sText_GlintAppearsInEye,
-        [STRINGID_PKMNGETTINGINTOPOSITION -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGettingIntoPosition,
-        [STRINGID_PKMNBEGANGROWLINGDEEPLY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBeganGrowlingDeeply,
-        [STRINGID_PKMNEAGERFORMORE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnEagerForMore,
-        [STRINGID_DEFEATEDOPPONENTBYREFEREE -
-            BATTLESTRINGS_TABLE_START] = sText_DefeatedOpponentByReferee,
-        [STRINGID_LOSTTOOPPONENTBYREFEREE -
-            BATTLESTRINGS_TABLE_START] = sText_LostToOpponentByReferee,
-        [STRINGID_TIEDOPPONENTBYREFEREE -
-            BATTLESTRINGS_TABLE_START] = sText_TiedOpponentByReferee,
-        [STRINGID_QUESTIONFORFEITMATCH -
-            BATTLESTRINGS_TABLE_START] = sText_QuestionForfeitMatch,
-        [STRINGID_FORFEITEDMATCH -
-            BATTLESTRINGS_TABLE_START] = sText_ForfeitedMatch,
-        [STRINGID_PKMNTRANSFERREDSOMEONESPC -
-            BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredSomeonesPC,
-        [STRINGID_PKMNTRANSFERREDLANETTESPC -
-            BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPC,
-        [STRINGID_PKMNBOXSOMEONESPCFULL -
-            BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredSomeonesPCBoxFull,
-        [STRINGID_PKMNBOXLANETTESPCFULL -
-            BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
-        [STRINGID_TRAINER1WINTEXT -
-            BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
-        [STRINGID_TRAINER2WINTEXT -
-            BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
-        [STRINGID_ENDUREDSTURDY -
-            BATTLESTRINGS_TABLE_START] = sText_EnduredViaSturdy,
-        [STRINGID_POWERHERB -
-            BATTLESTRINGS_TABLE_START] = sText_PowerHerbActivation,
-        [STRINGID_HURTBYITEM -
-            BATTLESTRINGS_TABLE_START] = sText_HurtByItem,
-        [STRINGID_PSNBYITEM -
-            BATTLESTRINGS_TABLE_START] = sText_BadlyPoisonedByItem,
-        [STRINGID_BRNBYITEM -
-            BATTLESTRINGS_TABLE_START] = sText_BurnedByItem,
-        [STRINGID_DEFABILITYIN -
-            BATTLESTRINGS_TABLE_START] = sText_TargetAbilityActivates,
-        [STRINGID_GRAVITYINTENSIFIED -
-            BATTLESTRINGS_TABLE_START] = sText_GravityIntensified,
-        [STRINGID_TARGETIDENTIFIED -
-            BATTLESTRINGS_TABLE_START] = sText_TargetIdentified,
-        [STRINGID_TARGETWOKEUP -
-            BATTLESTRINGS_TABLE_START] = sText_TargetWokeUp,
-        [STRINGID_PKMNSTOLEANDATEITEM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnStoleAndAteItem,
-        [STRINGID_TAILWINDBLEW -
-            BATTLESTRINGS_TABLE_START] = sText_TailWindBlew,
-        [STRINGID_PKMNWENTBACK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnWentBack,
-        [STRINGID_PKMNCANTUSEITEMSANYMORE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseItemsAnymore,
-        [STRINGID_PKMNFLUNG -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFlung,
-        [STRINGID_PKMNPREVENTEDFROMHEALING -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnPreventedFromHealing,
-        [STRINGID_PKMNSWITCHEDATKANDDEF -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedAtkAndDef,
-        [STRINGID_PKMNSABILITYSUPPRESSED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilitySuppressed,
-        [STRINGID_SHIELDEDFROMCRITICALHITS -
-            BATTLESTRINGS_TABLE_START] = sText_ShieldedFromCriticalHits,
-        [STRINGID_SWITCHEDATKANDSPATK -
-            BATTLESTRINGS_TABLE_START] = sText_SwitchedAtkAndSpAtk,
-        [STRINGID_SWITCHEDDEFANDSPDEF -
-            BATTLESTRINGS_TABLE_START] = sText_SwitchedDefAndSpDef,
-        [STRINGID_PKMNACQUIREDABILITY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredAbility,
-        [STRINGID_POISONSPIKESSCATTERED -
-            BATTLESTRINGS_TABLE_START] = sText_PoisonSpikesScattered,
-        [STRINGID_PKMNSWITCHEDSTATCHANGES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedStatChanges,
-        [STRINGID_PKMNSURROUNDEDWITHVEILOFWATER -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnSurroundedWithVeilOfWater,
-        [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnLevitatedOnElectromagnetism,
-        [STRINGID_PKMNTWISTEDDIMENSIONS -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTwistedDimensions,
-        [STRINGID_DIMENSIONSWERETWISTED -
-            BATTLESTRINGS_TABLE_START] = sText_DimensionsWereTwisted,
-        [STRINGID_POINTEDSTONESFLOAT -
-            BATTLESTRINGS_TABLE_START] = sText_PointedStonesFloat,
-        [STRINGID_CLOAKEDINMYSTICALMOONLIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_CloakedInMysticalMoonlight,
-        [STRINGID_TRAPPEDBYSWIRLINGMAGMA -
-            BATTLESTRINGS_TABLE_START] = sText_TrappedBySwirlingMagma,
-        [STRINGID_VANISHEDINSTANTLY -
-            BATTLESTRINGS_TABLE_START] = sText_VanishedInstantly,
-        [STRINGID_PROTECTEDTEAM -
-            BATTLESTRINGS_TABLE_START] = sText_ProtectedTeam,
-        [STRINGID_SHAREDITSGUARD -
-            BATTLESTRINGS_TABLE_START] = sText_SharedItsGuard,
-        [STRINGID_SHAREDITSPOWER -
-            BATTLESTRINGS_TABLE_START] = sText_SharedItsPower,
-        [STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON -
-            BATTLESTRINGS_TABLE_START] = sText_SwapsDefAndSpDefOfAllPkmn,
-        [STRINGID_BIZARREAREACREATED -
-            BATTLESTRINGS_TABLE_START] = sText_BizzareAreaCreated,
-        [STRINGID_BECAMENIMBLE -
-            BATTLESTRINGS_TABLE_START] = sText_BecameNimble,
-        [STRINGID_HURLEDINTOTHEAIR -
-            BATTLESTRINGS_TABLE_START] = sText_HurledIntoTheAir,
-        [STRINGID_HELDITEMSLOSEEFFECTS -
-            BATTLESTRINGS_TABLE_START] = sText_HeldItemsLoseEffects,
-        [STRINGID_BIZARREARENACREATED -
-            BATTLESTRINGS_TABLE_START] = sText_BizarreArenaCreated,
-        [STRINGID_FELLSTRAIGHTDOWN -
-            BATTLESTRINGS_TABLE_START] = sText_FellStraightDown,
-        [STRINGID_TARGETCHANGEDTYPE -
-            BATTLESTRINGS_TABLE_START] = sText_TargetChangedType,
-        [STRINGID_PKMNACQUIREDSIMPLE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredSimple,
-        [STRINGID_EMPTYSTRING5 -
-            BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
-        [STRINGID_KINDOFFER -
-            BATTLESTRINGS_TABLE_START] = sText_KindOffer,
-        [STRINGID_RESETSTARGETSSTATLEVELS -
-            BATTLESTRINGS_TABLE_START] = sText_ResetsTargetsStatLevels,
-        [STRINGID_EMPTYSTRING6 -
-            BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
-        [STRINGID_ALLYSWITCHPOSITION -
-            BATTLESTRINGS_TABLE_START] = sText_AllySwitchPosition,
-        [STRINGID_RESTORETARGETSHEALTH -
-            BATTLESTRINGS_TABLE_START] = sText_RestoreTargetsHealth,
-        [STRINGID_TOOKPJMNINTOTHESKY -
-            BATTLESTRINGS_TABLE_START] = sText_TookPkmnIntoTheSky,
-        [STRINGID_FREEDFROMSKYDROP -
-            BATTLESTRINGS_TABLE_START] = sText_FreedFromSkyDrop,
-        [STRINGID_POSTPONETARGETMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PostponeTargetMove,
-        [STRINGID_REFLECTTARGETSTYPE -
-            BATTLESTRINGS_TABLE_START] = sText_ReflectTargetsType,
-        [STRINGID_TRANSFERHELDITEM -
-            BATTLESTRINGS_TABLE_START] = sText_TransferHeldItem,
-        [STRINGID_EMBARGOENDS -
-            BATTLESTRINGS_TABLE_START] = sText_EmbargoEnds,
-        [STRINGID_ELECTROMAGNETISM -
-            BATTLESTRINGS_TABLE_START] = sText_Electromagnetism,
-        [STRINGID_BUFFERENDS -
-            BATTLESTRINGS_TABLE_START] = sText_BufferEnds,
-        [STRINGID_TELEKINESISENDS -
-            BATTLESTRINGS_TABLE_START] = sText_TelekinesisEnds,
-        [STRINGID_TAILWINDENDS -
-            BATTLESTRINGS_TABLE_START] = sText_TailwindEnds,
-        [STRINGID_LUCKYCHANTENDS -
-            BATTLESTRINGS_TABLE_START] = sText_LuckyChantEnds,
-        [STRINGID_TRICKROOMENDS -
-            BATTLESTRINGS_TABLE_START] = sText_TrickRoomEnds,
-        [STRINGID_WONDERROOMENDS -
-            BATTLESTRINGS_TABLE_START] = sText_WonderRoomEnds,
-        [STRINGID_MAGICROOMENDS -
-            BATTLESTRINGS_TABLE_START] = sText_MagicRoomEnds,
-        [STRINGID_MUDSPORTENDS -
-            BATTLESTRINGS_TABLE_START] = sText_MudSportEnds,
-        [STRINGID_WATERSPORTENDS -
-            BATTLESTRINGS_TABLE_START] = sText_WaterSportEnds,
-        [STRINGID_GRAVITYENDS -
-            BATTLESTRINGS_TABLE_START] = sText_GravityEnds,
-        [STRINGID_AQUARINGHEAL -
-            BATTLESTRINGS_TABLE_START] = sText_AquaRingHeal,
-        [STRINGID_AURORAVEILENDS -
-            BATTLESTRINGS_TABLE_START] = sText_AuroraVeilEnds,
-        [STRINGID_ELECTRICTERRAINENDS -
-            BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainEnds,
-        [STRINGID_MISTYTERRAINENDS -
-            BATTLESTRINGS_TABLE_START] = sText_MistyTerrainEnds,
-        [STRINGID_PSYCHICTERRAINENDS -
-            BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainEnds,
-        [STRINGID_GRASSYTERRAINENDS -
-            BATTLESTRINGS_TABLE_START] = sText_GrassyTerrainEnds,
-        [STRINGID_TARGETABILITYSTATRAISE -
-            BATTLESTRINGS_TABLE_START] = sText_TargetAbilityRaisedStat,
-        [STRINGID_TARGETSSTATWASMAXEDOUT -
-            BATTLESTRINGS_TABLE_START] = sText_TargetsStatWasMaxedOut,
-        [STRINGID_ATTACKERABILITYSTATRAISE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerAbilityRaisedStat,
-        [STRINGID_POISONHEALHPUP -
-            BATTLESTRINGS_TABLE_START] = sText_PoisonHealHpUp,
-        [STRINGID_BADDREAMSDMG -
-            BATTLESTRINGS_TABLE_START] = sText_BadDreamsDmg,
-        [STRINGID_MOLDBREAKERENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_MoldBreakerEnters,
-        [STRINGID_TERAVOLTENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_TeravoltEnters,
-        [STRINGID_TURBOBLAZEENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_TurboblazeEnters,
-        [STRINGID_SLOWSTARTENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_SlowStartEnters,
-        [STRINGID_SLOWSTARTEND -
-            BATTLESTRINGS_TABLE_START] = sText_SlowStartEnd,
-        [STRINGID_SOLARPOWERHPDROP -
-            BATTLESTRINGS_TABLE_START] = sText_SolarPowerHpDrop,
-        [STRINGID_AFTERMATHDMG -
-            BATTLESTRINGS_TABLE_START] = sText_AftermathDmg,
-        [STRINGID_ANTICIPATIONACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_AnticipationActivates,
-        [STRINGID_FOREWARNACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_ForewarnActivates,
-        [STRINGID_ICEBODYHPGAIN -
-            BATTLESTRINGS_TABLE_START] = sText_IceBodyHpGain,
-        [STRINGID_SNOWWARNINGHAIL -
-            BATTLESTRINGS_TABLE_START] = sText_SnowWarningHail,
-        [STRINGID_SNOWWARNINGSNOW -
-            BATTLESTRINGS_TABLE_START] = sText_SnowWarningSnow,
-        [STRINGID_FRISKACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_FriskActivates,
-        [STRINGID_UNNERVEENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_UnnerveEnters,
-        [STRINGID_HARVESTBERRY -
-            BATTLESTRINGS_TABLE_START] = sText_HarvestBerry,
-        [STRINGID_LASTABILITYRAISEDSTAT -
-            BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedBuff1,
-        [STRINGID_MAGICBOUNCEACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_MagicBounceActivates,
-        [STRINGID_PROTEANTYPECHANGE -
-            BATTLESTRINGS_TABLE_START] = sText_ProteanTypeChange,
-        [STRINGID_SYMBIOSISITEMPASS -
-            BATTLESTRINGS_TABLE_START] = sText_SymbiosisItemPass,
-        [STRINGID_STEALTHROCKDMG -
-            BATTLESTRINGS_TABLE_START] = sText_StealthRockDmg,
-        [STRINGID_TOXICSPIKESABSORBED -
-            BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesAbsorbed,
-        [STRINGID_TOXICSPIKESPOISONED -
-            BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesPoisoned,
-        [STRINGID_STICKYWEBSWITCHIN -
-            BATTLESTRINGS_TABLE_START] = sText_StickyWebSwitchIn,
-        [STRINGID_HEALINGWISHCAMETRUE -
-            BATTLESTRINGS_TABLE_START] = sText_HealingWishCameTrue,
-        [STRINGID_HEALINGWISHHEALED -
-            BATTLESTRINGS_TABLE_START] = sText_HealingWishHealed,
-        [STRINGID_LUNARDANCECAMETRUE -
-            BATTLESTRINGS_TABLE_START] = sText_LunarDanceCameTrue,
-        [STRINGID_CUSEDBODYDISABLED -
-            BATTLESTRINGS_TABLE_START] = sText_CursedBodyDisabled,
-        [STRINGID_ATTACKERACQUIREDABILITY -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerAquiredAbility,
-        [STRINGID_TARGETABILITYSTATLOWER -
-            BATTLESTRINGS_TABLE_START] = sText_TargetAbilityLoweredStat,
-        [STRINGID_TARGETSTATWONTGOHIGHER -
-            BATTLESTRINGS_TABLE_START] = sText_TargetStatWontGoHigher,
-        [STRINGID_PKMNMOVEBOUNCEDABILITY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBouncedViaAbility,
-        [STRINGID_IMPOSTERTRANSFORM -
-            BATTLESTRINGS_TABLE_START] = sText_ImposterTransform,
-        [STRINGID_ASSAULTVESTDOESNTALLOW -
-            BATTLESTRINGS_TABLE_START] = sText_AssaultVestDoesntAllow,
-        [STRINGID_GRAVITYPREVENTSUSAGE -
-            BATTLESTRINGS_TABLE_START] = sText_GravityPreventsUsage,
-        [STRINGID_HEALBLOCKPREVENTSUSAGE -
-            BATTLESTRINGS_TABLE_START] = sText_HealBlockPreventsUsage,
-        [STRINGID_NOTDONEYET -
-            BATTLESTRINGS_TABLE_START] = sText_NotDoneYet,
-        [STRINGID_STICKYWEBUSED -
-            BATTLESTRINGS_TABLE_START] = sText_StickyWebUsed,
-        [STRINGID_QUASHSUCCESS -
-            BATTLESTRINGS_TABLE_START] = sText_QuashSuccess,
-        [STRINGID_PKMNBLEWAWAYTOXICSPIKES -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayToxicSpikes,
-        [STRINGID_PKMNBLEWAWAYSTICKYWEB -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayStickyWeb,
-        [STRINGID_PKMNBLEWAWAYSTEALTHROCK -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayStealthRock,
-        [STRINGID_SPIKESDISAPPEAREDFROMTEAM -
-            BATTLESTRINGS_TABLE_START] = sText_SpikesDisappearedFromTeam,
-        [STRINGID_TOXICSPIKESDISAPPEAREDFROMTEAM -
-            BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesDisappearedFromTeam,
-        [STRINGID_STEALTHROCKDISAPPEAREDFROMTEAM -
-            BATTLESTRINGS_TABLE_START] = sText_StealthRockDisappearedFromTeam,
-        [STRINGID_STICKYWEBDISAPPEAREDFROMTEAM -
-            BATTLESTRINGS_TABLE_START] = sText_StickyWebDisappearedFromTeam,
-        [STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM -
-            BATTLESTRINGS_TABLE_START] = sText_SharpSteelDisappearedFromTeam,
-        [STRINGID_IONDELUGEON -
-            BATTLESTRINGS_TABLE_START] = sText_IonDelugeOn,
-        [STRINGID_TOPSYTURVYSWITCHEDSTATS -
-            BATTLESTRINGS_TABLE_START] = sText_TopsyTurvySwitchedStats,
-        [STRINGID_TERRAINBECOMESMISTY -
-            BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesMisty,
-        [STRINGID_TERRAINBECOMESGRASSY -
-            BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesGrassy,
-        [STRINGID_TERRAINBECOMESELECTRIC -
-            BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesElectric,
-        [STRINGID_TERRAINBECOMESPSYCHIC -
-            BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesPsychic,
-        [STRINGID_TARGETELECTRIFIED -
-            BATTLESTRINGS_TABLE_START] = sText_TargetElectrified,
-        [STRINGID_MEGAEVOREACTING -
-            BATTLESTRINGS_TABLE_START] = sText_MegaEvoReacting,
-        [STRINGID_FERVENTWISHREACHED -
-            BATTLESTRINGS_TABLE_START] = sText_FerventWishReached,
-        [STRINGID_MEGAEVOEVOLVED -
-            BATTLESTRINGS_TABLE_START] = sText_MegaEvoEvolved,
-        [STRINGID_DRASTICALLY -
-            BATTLESTRINGS_TABLE_START] = sText_drastically,
-        [STRINGID_SEVERELY -
-            BATTLESTRINGS_TABLE_START] = sText_severely,
-        [STRINGID_INFESTATION -
-            BATTLESTRINGS_TABLE_START] = sText_Infestation,
-        [STRINGID_NOEFFECTONTARGET -
-            BATTLESTRINGS_TABLE_START] = sText_NoEffectOnTarget,
-        [STRINGID_BURSTINGFLAMESHIT -
-            BATTLESTRINGS_TABLE_START] = sText_BurstingFlames,
-        [STRINGID_BESTOWITEMGIVING -
-            BATTLESTRINGS_TABLE_START] = sText_BestowItemGiving,
-        [STRINGID_THIRDTYPEADDED -
-            BATTLESTRINGS_TABLE_START] = sText_ThirdTypeAdded,
-        [STRINGID_FELLFORFEINT -
-            BATTLESTRINGS_TABLE_START] = sText_FellForFeint,
-        [STRINGID_POKEMONCANNOTUSEMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_PokemonCannotUseMove,
-        [STRINGID_COVEREDINPOWDER -
-            BATTLESTRINGS_TABLE_START] = sText_CoveredInPowder,
-        [STRINGID_POWDEREXPLODES -
-            BATTLESTRINGS_TABLE_START] = sText_PowderExplodes,
-        [STRINGID_GRAVITYGROUNDING -
-            BATTLESTRINGS_TABLE_START] = sText_GravityGrounding,
-        [STRINGID_MISTYTERRAINPREVENTS -
-            BATTLESTRINGS_TABLE_START] = sText_MistyTerrainPreventsStatus,
-        [STRINGID_GRASSYTERRAINHEALS -
-            BATTLESTRINGS_TABLE_START] = sText_GrassyTerrainHeals,
-        [STRINGID_ELECTRICTERRAINPREVENTS -
-            BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainPreventsSleep,
-        [STRINGID_PSYCHICTERRAINPREVENTS -
-            BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainPreventsPriority,
-        [STRINGID_AURAFLAREDTOLIFE -
-            BATTLESTRINGS_TABLE_START] = sText_AuraFlaredToLife,
-        [STRINGID_AIRLOCKACTIVATES -
-            BATTLESTRINGS_TABLE_START] = sText_AirLockActivates,
-        [STRINGID_PRESSUREENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_PressureActivates,
-        [STRINGID_DARKAURAENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_DarkAuraActivates,
-        [STRINGID_FAIRYAURAENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_FairyAuraActivates,
-        [STRINGID_AURABREAKENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_AuraBreakActivates,
-        [STRINGID_COMATOSEENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_ComatoseActivates,
-        [STRINGID_SCREENCLEANERENTERS -
-            BATTLESTRINGS_TABLE_START] = sText_ScreenCleanerActivates,
-        [STRINGID_BOTHCANNOLONGERESCAPE -
-            BATTLESTRINGS_TABLE_START] = sText_BothCanNoLongerEscape,
-        [STRINGID_CANTESCAPEDUETOUSEDMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_CantEscapeDueToUsedMove,
-        [STRINGID_PKMNBECAMEWEAKERTOFIRE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnBecameWeakerToFire,
-        [STRINGID_ABOUTTOUSEPOLTERGEIST -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnAboutToBeAttackedByItsItem,
-        [STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE -
-            BATTLESTRINGS_TABLE_START] = sText_CantEscapeBecauseOfCurrentMove,
-        [STRINGID_PKMNTOOKTARGETHIGH -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnTookTargetHigh,
-        [STRINGID_TARGETTOOHEAVY -
-            BATTLESTRINGS_TABLE_START] = sText_TargetTooHeavy,
-        [STRINGID_ATTACKERLOSTELECTRICTYPE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerLostElectricType,
-        [STRINGID_PKMNSABILITYPREVENTSABILITY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilityPreventsAbility,
-        [STRINGID_PKMNHURTBYFROSTBITE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByFrostbite,
-        [STRINGID_PKMNGOTFROSTBITE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnGotFrostbite,
-        [STRINGID_PKMNSITEMHEALEDFROSTBITE -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnsItemHealedFrostbite,
-        [STRINGID_ATTACKERHEALEDITSFROSTBITE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsFrostbite,
-        [STRINGID_PKMNFROSTBITEHEALED -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealed,
-        [STRINGID_PKMNFROSTBITEHEALED2 -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealed2,
-        [STRINGID_PKMNFROSTBITEHEALEDBY -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealedBy,
-        [STRINGID_ULTRABURSTREACTING -
-            BATTLESTRINGS_TABLE_START] = sText_UltraBurstReacting,
-        [STRINGID_ULTRABURSTCOMPLETED -
-            BATTLESTRINGS_TABLE_START] = sText_UltraBurstCompleted,
-        [STRINGID_TEAMGAINEDEXP -
-            BATTLESTRINGS_TABLE_START] = sText_TeamGainedEXP,
-        [STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP -
-            BATTLESTRINGS_TABLE_START] = sText_TargetCoveredInStickyCandySyrup,
-        [STRINGID_ITEMWASUSEDUP -
-            BATTLESTRINGS_TABLE_START] = sText_ItemWasUsedUp,
-        [STRINGID_ATTACKERLOSTITSTYPE -
-            BATTLESTRINGS_TABLE_START] = sText_AttackerLostItsType,
-        [STRINGID_CLOAKEDINAHARSHLIGHT -
-            BATTLESTRINGS_TABLE_START] = sText_PkmnIsCloakedInAHarshLight,
+{
+    [STRINGID_FICKLEBEAMDOUBLED - BATTLESTRINGS_TABLE_START] = sText_FickleBeamDoubled,
+    [STRINGID_PKMNTERASTALLIZEDINTO - BATTLESTRINGS_TABLE_START] = sText_PkmnTerastallizedInto,
+    [STRINGID_TIDYINGUPCOMPLETE - BATTLESTRINGS_TABLE_START] = sText_TidyingUpComplete,
+    [STRINGID_SUPERSWEETAROMAWAFTS - BATTLESTRINGS_TABLE_START] = sText_SupersweetAromaWafts,
+    [STRINGID_SHEDITSTAIL - BATTLESTRINGS_TABLE_START] = sText_ShedItsTail,
+    [STRINGID_ELECTROSHOTCHARGING - BATTLESTRINGS_TABLE_START] = sText_ElectroShotCharging,
+    [STRINGID_HOSPITALITYRESTORATION - BATTLESTRINGS_TABLE_START] = sText_HospitalityRestoration,
+    [STRINGID_THESWAMPDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheSwampDisappeared,
+    [STRINGID_SWAMPENVELOPEDSIDE - BATTLESTRINGS_TABLE_START] = sText_SwampEnvelopedSide,
+    [STRINGID_THESEAOFFIREDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheSeaOfFireDisappeared,
+    [STRINGID_HURTBYTHESEAOFFIRE - BATTLESTRINGS_TABLE_START] = sText_HurtByTheSeaOfFire,
+    [STRINGID_SEAOFFIREENVELOPEDSIDE - BATTLESTRINGS_TABLE_START] = sText_SeaOfFireEnvelopedSide,
+    [STRINGID_WAITINGFORPARTNERSMOVE - BATTLESTRINGS_TABLE_START] = sText_WaitingForPartnersMove,
+    [STRINGID_THERAINBOWDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheRainbowDisappeared,
+    [STRINGID_ARAINBOWAPPEAREDONSIDE - BATTLESTRINGS_TABLE_START] = sText_ARainbowAppearedOnSide,
+    [STRINGID_THETWOMOVESBECOMEONE - BATTLESTRINGS_TABLE_START] = sText_TheTwoMovesBecomeOne,
+    [STRINGID_ZEROTOHEROTRANSFORMATION - BATTLESTRINGS_TABLE_START] = sText_ZeroToHeroTransformation,
+    [STRINGID_PKMNTELLCHILLINGRECEPTIONJOKE - BATTLESTRINGS_TABLE_START] = sText_PkmnTellChillingReceptionJoke,
+    [STRINGID_MOVEBLOCKEDBYDYNAMAX - BATTLESTRINGS_TABLE_START] = sText_MoveBlockedByDynamax,
+    [STRINGID_TARGETISHURTBYSALTCURE - BATTLESTRINGS_TABLE_START] = sText_TargetIsHurtBySaltCure,
+    [STRINGID_TARGETISBEINGSALTCURED - BATTLESTRINGS_TABLE_START] = sText_TargetIsBeingSaltCured,
+    [STRINGID_CURRENTMOVECANTSELECT - BATTLESTRINGS_TABLE_START] = sText_CurrentMoveCantSelect,
+    [STRINGID_PKMNITEMMELTED - BATTLESTRINGS_TABLE_START] = sText_PkmnItemMelted,
+    [STRINGID_MIRRORHERBCOPIED - BATTLESTRINGS_TABLE_START] = sText_MirrorHerbCopied,
+    [STRINGID_THUNDERCAGETRAPPED - BATTLESTRINGS_TABLE_START] = sText_AtkTrappedDef,
+    [STRINGID_ITEMRESTOREDSPECIESHEALTH - BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesHealth,
+    [STRINGID_ITEMCUREDSPECIESSTATUS - BATTLESTRINGS_TABLE_START] = sText_ItemCuredSpeciesStatus,
+    [STRINGID_ITEMRESTOREDSPECIESPP - BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesPP,
+    [STRINGID_PKMNREVIVEDREADYTOFIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnRevivedReadyToFight,
+    [STRINGID_STOCKPILEDEFFECTWOREOFF - BATTLESTRINGS_TABLE_START] = sText_StockpiledEffectWoreOff,
+    [STRINGID_COULDNTFULLYPROTECT - BATTLESTRINGS_TABLE_START] = sText_CouldntFullyProtect,
+    [STRINGID_PKMNHURTBYROCKSTHROWN - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByRocksThrown,
+    [STRINGID_TEAMSURROUNDEDBYROCKS - BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByRocks,
+    [STRINGID_PKMNBURNINGUP - BATTLESTRINGS_TABLE_START] = sText_PkmnBurningUp,
+    [STRINGID_TEAMSURROUNDEDBYFIRE - BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByFire,
+    [STRINGID_PKMNHURTBYVORTEX - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVortex,
+    [STRINGID_TEAMCAUGHTINVORTEX - BATTLESTRINGS_TABLE_START] = sText_TeamCaughtInVortex,
+    [STRINGID_PKMNHURTBYVINES - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVines,
+    [STRINGID_TEAMTRAPPEDWITHVINES - BATTLESTRINGS_TABLE_START] = sText_TeamTrappedWithVines,
+    [STRINGID_PKMNBLEWAWAYSHARPSTEEL - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySharpSteel,
+    [STRINGID_SHARPSTEELDMG - BATTLESTRINGS_TABLE_START] = sText_SharpSteelDmg,
+    [STRINGID_SHARPSTEELFLOATS - BATTLESTRINGS_TABLE_START] = sText_SharpSteelFloats,
+    [STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN - BATTLESTRINGS_TABLE_START] = sText_AttackerGainedStrengthFromTheFallen,
+    [STRINGID_ABILITYWEAKENEDSURROUNDINGMONSSTAT - BATTLESTRINGS_TABLE_START] = sText_AbilityWeakenedSurroundingMonsStat,
+    [STRINGID_ELECTRICTERRAINACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainActivatedAbility,
+    [STRINGID_STATWASHEIGHTENED - BATTLESTRINGS_TABLE_START] = sText_StatWasHeightened,
+    [STRINGID_BOOSTERENERGYACTIVATES - BATTLESTRINGS_TABLE_START] = sText_BoosterEnergyActivates,
+    [STRINGID_SUNLIGHTACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_SunlightActivatedAbility,
+    [STRINGID_BEINGHITCHARGEDPKMNWITHPOWER - BATTLESTRINGS_TABLE_START] = sText_BeingHitChargedPkmnWithPower,
+    [STRINGID_ATTACKERSWITCHEDSTATWITHTARGET - BATTLESTRINGS_TABLE_START] = sText_AttackerSwitchedStatWithTarget,
+    [STRINGID_TARGETTOUGHEDITOUT - BATTLESTRINGS_TABLE_START] = sText_TargetToughedItOut,
+    [STRINGID_ATTACKERMELTEDTHEICE - BATTLESTRINGS_TABLE_START] = sText_AttackerMeltedTheIce,
+    [STRINGID_ATTACKERHEALEDITSBURN - BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsBurn,
+    [STRINGID_ATTACKERBROKETHROUGHPARALYSIS - BATTLESTRINGS_TABLE_START] = sText_AttackerBrokeThroughParalysis,
+    [STRINGID_ATTACKERSHOOKITSELFAWAKE - BATTLESTRINGS_TABLE_START] = sText_AttackerShookItselfAwake,
+    [STRINGID_ATTACKEREXPELLEDTHEPOISON - BATTLESTRINGS_TABLE_START] = sText_AttackerExpelledThePoison,
+    [STRINGID_ZPOWERSURROUNDS - BATTLESTRINGS_TABLE_START] = sText_ZPowerSurrounds,
+    [STRINGID_ZMOVEUNLEASHED - BATTLESTRINGS_TABLE_START] = sText_ZPowerUnleashed,
+    [STRINGID_ZMOVERESETSSTATS - BATTLESTRINGS_TABLE_START] = sText_ZMoveResetsStats,
+    [STRINGID_ZMOVEALLSTATSUP - BATTLESTRINGS_TABLE_START] = sText_ZMoveAllStatsUp,
+    [STRINGID_ZMOVEZBOOSTCRIT - BATTLESTRINGS_TABLE_START] = sText_ZMoveBoostCrit,
+    [STRINGID_ZMOVERESTOREHP - BATTLESTRINGS_TABLE_START] = sText_ZMoveRestoreHp,
+    [STRINGID_ZMOVESTATUP - BATTLESTRINGS_TABLE_START] = sText_ZMoveStatUp,
+    [STRINGID_ZMOVEHPTRAP - BATTLESTRINGS_TABLE_START] = sText_ZMoveHpSwitchInTrap,
+    [STRINGID_PLAYERLOSTTOENEMYTRAINER - BATTLESTRINGS_TABLE_START] = sText_PlayerLostToEnemyTrainer,
+    [STRINGID_PLAYERPAIDPRIZEMONEY - BATTLESTRINGS_TABLE_START] = sText_PlayerPaidPrizeMoney,
+    [STRINGID_SHELLTRAPDIDNTWORK - BATTLESTRINGS_TABLE_START] = sText_ShellTrapDidntWork,
+    [STRINGID_PREPARESHELLTRAP - BATTLESTRINGS_TABLE_START] = sText_PrepareShellTrap,
+    [STRINGID_COURTCHANGE - BATTLESTRINGS_TABLE_START] = sText_CourtChange,
+    [STRINGID_HEATUPBEAK - BATTLESTRINGS_TABLE_START] = sText_HeatingUpBeak,
+    [STRINGID_METEORBEAMCHARGING - BATTLESTRINGS_TABLE_START] = sText_MeteorBeamCharging,
+    [STRINGID_PKMNINSNAPTRAP - BATTLESTRINGS_TABLE_START] = sText_PkmnInSnapTrap,
+    [STRINGID_NEUTRALIZINGGASOVER - BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasOver,
+    [STRINGID_NEUTRALIZINGGASENTERS - BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasEnters,
+    [STRINGID_BATTLERTYPECHANGEDTO - BATTLESTRINGS_TABLE_START] = sText_BattlerTypeChangedTo,
+    [STRINGID_PASTELVEILENTERS - BATTLESTRINGS_TABLE_START] = sText_PastelVeilEnters,
+    [STRINGID_PASTELVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_PastelVeilProtected,
+    [STRINGID_SWAPPEDABILITIES - BATTLESTRINGS_TABLE_START] = sText_SwappedAbilities,
+    [STRINGID_ABILITYALLOWSONLYMOVE - BATTLESTRINGS_TABLE_START] = sText_AbilityAllowsOnlyMove,
+    [STRINGID_BROKETHROUGHPROTECTION - BATTLESTRINGS_TABLE_START] = sText_BrokeThroughProtection,
+    [STRINGID_BUTPOKEMONCANTUSETHEMOVE - BATTLESTRINGS_TABLE_START] = sText_ButPokemonCantUseTheMove,
+    [STRINGID_BUTHOOPACANTUSEIT - BATTLESTRINGS_TABLE_START] = sText_ButHoopaCantUseIt,
+    [STRINGID_PKMNREVERTEDTOPRIMAL - BATTLESTRINGS_TABLE_START] = sText_PkmnRevertedToPrimal,
+    [STRINGID_STUFFCHEEKSCANTSELECT - BATTLESTRINGS_TABLE_START] = sText_StuffCheeksCantSelect,
+    [STRINGID_ATTACKWEAKENEDBSTRONGWINDS - BATTLESTRINGS_TABLE_START] = sText_AttackWeakenedByStrongWinds,
+    [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON - BATTLESTRINGS_TABLE_START] = sText_MysteriousAirCurrentBlowsOn,
+    [STRINGID_STRONGWINDSDISSIPATED - BATTLESTRINGS_TABLE_START] = sText_StrongWindsDissipated,
+    [STRINGID_MYSTERIOUSAIRCURRENT - BATTLESTRINGS_TABLE_START] = sText_MysteriousAirCurrent,
+    [STRINGID_NORELIEFROMHEAVYRAIN - BATTLESTRINGS_TABLE_START] = sText_NoReliefFromHeavyRain,
+    [STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN - BATTLESTRINGS_TABLE_START] = sText_MoveFizzledOutInTheHeavyRain,
+    [STRINGID_HEAVYRAINLIFTED - BATTLESTRINGS_TABLE_START] = sText_HeavyRainLifted,
+    [STRINGID_HEAVYRAIN - BATTLESTRINGS_TABLE_START] = sText_HeavyRain,
+    [STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED - BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlightWasNotLessened,
+    [STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_MoveEvaporatedInTheHarshSunlight,
+    [STRINGID_EXTREMESUNLIGHTFADED - BATTLESTRINGS_TABLE_START] = sText_ExtremeSunlightFaded,
+    [STRINGID_EXTREMELYHARSHSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlight,
+    [STRINGID_ATTACKERBECAMEASHSPECIES - BATTLESTRINGS_TABLE_START] = sText_AttackerBecameAshSpecies,
+    [STRINGID_ATTACKERBECAMEFULLYCHARGED - BATTLESTRINGS_TABLE_START] = sText_AttackerBecameFullyCharged,
+    [STRINGID_HEALBLOCKEDNOMORE - BATTLESTRINGS_TABLE_START] = sText_HealBlockedNoMore,
+    [STRINGID_TORMENTEDNOMORE - BATTLESTRINGS_TABLE_START] = sText_TormentedNoMore,
+    [STRINGID_ATKGOTOVERINFATUATION - BATTLESTRINGS_TABLE_START] = sText_AttackerGotOverInfatuation,
+    [STRINGID_EJECTBUTTONACTIVATE - BATTLESTRINGS_TABLE_START] = sText_EjectButtonActivate,
+    [STRINGID_REDCARDACTIVATE - BATTLESTRINGS_TABLE_START] = sText_RedCardActivate,
+    [STRINGID_PKMNBURNHEALED - BATTLESTRINGS_TABLE_START] = sText_PkmnBurnHealed,
+    [STRINGID_STICKYBARBTRANSFER - BATTLESTRINGS_TABLE_START] = sText_StickyBarbTransfer,
+    [STRINGID_ITEMCANNOTBEREMOVED - BATTLESTRINGS_TABLE_START] = sText_ItemCannotBeRemoved,
+    [STRINGID_PKMNGOTOVERITSINFATUATION - BATTLESTRINGS_TABLE_START] = sText_PkmnGotOverItsInfatuation,
+    [STRINGID_PKMNSHOOKOFFTHETAUNT - BATTLESTRINGS_TABLE_START] = sText_PkmnShookOffTheTaunt,
+    [STRINGID_MICLEBERRYACTIVATES - BATTLESTRINGS_TABLE_START] = sText_MicleBerryActivates,
+    [STRINGID_CANACTFASTERTHANKSTO - BATTLESTRINGS_TABLE_START] = sText_CanActFaster,
+    [STRINGID_CURIOUSMEDICINEENTERS - BATTLESTRINGS_TABLE_START] = sText_CuriousMedicineEnters,
+    [STRINGID_ASONEENTERS - BATTLESTRINGS_TABLE_START] = sText_AsOneEnters,
+    [STRINGID_PKMNMADESHELLGLEAM - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeShellGleam,
+    [STRINGID_ABILITYRAISEDSTATDRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_AbilityRaisedStatDrastically,
+    [STRINGID_PKMNSWILLPERISHIN3TURNS - BATTLESTRINGS_TABLE_START] = sText_PkmnsWillPerishIn3Turns,
+    [STRINGID_ASANDSTORMKICKEDUP - BATTLESTRINGS_TABLE_START] = sText_ASandstormKickedUp,
+    [STRINGID_BATTLERABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_BattlerAbilityRaisedStat,
+    [STRINGID_FETCHEDPOKEBALL - BATTLESTRINGS_TABLE_START] = sText_FetchedPokeBall,
+    [STRINGID_CLEARAMULETWONTLOWERSTATS - BATTLESTRINGS_TABLE_START] = sText_ClearAmuletWontLowerStats,
+    [STRINGID_CLOAKEDINAFREEZINGLIGHT - BATTLESTRINGS_TABLE_START] = sText_CloakedInAFreezingLight,
+    [STRINGID_DESTINYKNOTACTIVATES - BATTLESTRINGS_TABLE_START] = sText_DestinyKnotActivates,
+    [STRINGID_NOONEWILLBEABLETORUNAWAY - BATTLESTRINGS_TABLE_START] = sText_NoOneWillBeAbleToRun,
+    [STRINGID_PKNMABSORBINGPOWER - BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbingPower,
+    [STRINGID_RECEIVERABILITYTAKEOVER - BATTLESTRINGS_TABLE_START] = sText_ReceiverAbilityTakeOver,
+    [STRINGID_SCRIPTINGABILITYSTATRAISE - BATTLESTRINGS_TABLE_START] = sText_ScriptingAbilityRaisedStat,
+    [STRINGID_HEALERCURE - BATTLESTRINGS_TABLE_START] = sText_HealerCure,
+    [STRINGID_ATTACKERLOSTFIRETYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostFireType,
+    [STRINGID_ATTACKERCUREDTARGETSTATUS - BATTLESTRINGS_TABLE_START] = sText_AttackerCuredTargetStatus,
+    [STRINGID_ILLUSIONWOREOFF - BATTLESTRINGS_TABLE_START] = sText_IllusionWoreOff,
+    [STRINGID_BUGBITE - BATTLESTRINGS_TABLE_START] = sText_BugBite,
+    [STRINGID_INCINERATEBURN - BATTLESTRINGS_TABLE_START] = sText_IncinerateBurn,
+    [STRINGID_AIRBALLOONPOP - BATTLESTRINGS_TABLE_START] = sText_AirBalloonPop,
+    [STRINGID_AIRBALLOONFLOAT - BATTLESTRINGS_TABLE_START] = sText_AirBalloonFloat,
+    [STRINGID_TARGETATEITEM - BATTLESTRINGS_TABLE_START] = sText_TargetAteItem,
+    [STRINGID_BERRYDMGREDUCES - BATTLESTRINGS_TABLE_START] = sText_BerryDmgReducing,
+    [STRINGID_GEMACTIVATES - BATTLESTRINGS_TABLE_START] = sText_GemActivates,
+    [STRINGID_LASERFOCUS - BATTLESTRINGS_TABLE_START] = sText_LaserFocusMessage,
+    [STRINGID_THROATCHOPENDS - BATTLESTRINGS_TABLE_START] = sText_ThroatChopEnds,
+    [STRINGID_PKMNCANTUSEMOVETHROATCHOP - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveThroatChop,
+    [STRINGID_USEDINSTRUCTEDMOVE - BATTLESTRINGS_TABLE_START] = sText_UsedInstructedMove,
+    [STRINGID_CELEBRATEMESSAGE - BATTLESTRINGS_TABLE_START] = sText_CelebrateMessage,
+    [STRINGID_AROMAVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_AromaVeilProtected,
+    [STRINGID_SWEETVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_SweetVeilProtected,
+    [STRINGID_FLOWERVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_FlowerVeilProtected,
+    [STRINGID_SAFETYGOGGLESPROTECTED - BATTLESTRINGS_TABLE_START] = sText_SafetyGogglesProtected,
+    [STRINGID_SPECTRALTHIEFSTEAL - BATTLESTRINGS_TABLE_START] = sText_SpectralThiefSteal,
+    [STRINGID_BELCHCANTSELECT - BATTLESTRINGS_TABLE_START] = sText_BelchCantUse,
+    [STRINGID_TRAINER1LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1LoseText,
+    [STRINGID_PKMNGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXP,
+    [STRINGID_PKMNGREWTOLV - BATTLESTRINGS_TABLE_START] = sText_PkmnGrewToLv,
+    [STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnLearnedMove,
+    [STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove1,
+    [STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove2,
+    [STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove3,
+    [STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnForgotMove,
+    [STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_TABLE_START] = sText_StopLearningMove,
+    [STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_TABLE_START] = sText_DidNotLearnMove,
+    [STRINGID_PKMNLEARNEDMOVE2 - BATTLESTRINGS_TABLE_START] = sText_PkmnLearnedMove2,
+    [STRINGID_ATTACKMISSED - BATTLESTRINGS_TABLE_START] = sText_AttackMissed,
+    [STRINGID_PKMNPROTECTEDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself,
+    [STRINGID_STATSWONTINCREASE2 - BATTLESTRINGS_TABLE_START] = sText_StatsWontIncrease2,
+    [STRINGID_AVOIDEDDAMAGE - BATTLESTRINGS_TABLE_START] = sText_AvoidedDamage,
+    [STRINGID_ITDOESNTAFFECT - BATTLESTRINGS_TABLE_START] = sText_ItDoesntAffect,
+    [STRINGID_ATTACKERFAINTED - BATTLESTRINGS_TABLE_START] = sText_AttackerFainted,
+    [STRINGID_TARGETFAINTED - BATTLESTRINGS_TABLE_START] = sText_TargetFainted,
+    [STRINGID_PLAYERGOTMONEY - BATTLESTRINGS_TABLE_START] = sText_PlayerGotMoney,
+    [STRINGID_PLAYERWHITEOUT - BATTLESTRINGS_TABLE_START] = sText_PlayerWhiteout,
+    [STRINGID_PLAYERWHITEOUT2 - BATTLESTRINGS_TABLE_START] = sText_PlayerWhiteout2,
+    [STRINGID_PREVENTSESCAPE - BATTLESTRINGS_TABLE_START] = sText_PreventsEscape,
+    [STRINGID_HITXTIMES - BATTLESTRINGS_TABLE_START] = sText_HitXTimes,
+    [STRINGID_PKMNFELLASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnFellAsleep,
+    [STRINGID_PKMNMADESLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSleep,
+    [STRINGID_PKMNALREADYASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyAsleep,
+    [STRINGID_PKMNALREADYASLEEP2 - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyAsleep2,
+    [STRINGID_PKMNWASNTAFFECTED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasntAffected,
+    [STRINGID_PKMNWASPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasPoisoned,
+    [STRINGID_PKMNPOISONEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnPoisonedBy,
+    [STRINGID_PKMNHURTBYPOISON - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByPoison,
+    [STRINGID_PKMNALREADYPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyPoisoned,
+    [STRINGID_PKMNBADLYPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnBadlyPoisoned,
+    [STRINGID_PKMNENERGYDRAINED - BATTLESTRINGS_TABLE_START] = sText_PkmnEnergyDrained,
+    [STRINGID_PKMNWASBURNED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasBurned,
+    [STRINGID_PKMNBURNEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnBurnedBy,
+    [STRINGID_PKMNHURTBYBURN - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByBurn,
+    [STRINGID_PKMNWASFROZEN - BATTLESTRINGS_TABLE_START] = sText_PkmnWasFrozen,
+    [STRINGID_PKMNFROZENBY - BATTLESTRINGS_TABLE_START] = sText_PkmnFrozenBy,
+    [STRINGID_PKMNISFROZEN - BATTLESTRINGS_TABLE_START] = sText_PkmnIsFrozen,
+    [STRINGID_PKMNWASDEFROSTED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrosted,
+    [STRINGID_PKMNWASDEFROSTED2 - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrosted2,
+    [STRINGID_PKMNWASDEFROSTEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrostedBy,
+    [STRINGID_PKMNWASPARALYZED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasParalyzed,
+    [STRINGID_PKMNWASPARALYZEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnWasParalyzedBy,
+    [STRINGID_PKMNISPARALYZED - BATTLESTRINGS_TABLE_START] = sText_PkmnIsParalyzed,
+    [STRINGID_PKMNISALREADYPARALYZED - BATTLESTRINGS_TABLE_START] = sText_PkmnIsAlreadyParalyzed,
+    [STRINGID_PKMNHEALEDPARALYSIS - BATTLESTRINGS_TABLE_START] = sText_PkmnHealedParalysis,
+    [STRINGID_PKMNDREAMEATEN - BATTLESTRINGS_TABLE_START] = sText_PkmnDreamEaten,
+    [STRINGID_STATSWONTINCREASE - BATTLESTRINGS_TABLE_START] = sText_StatsWontIncrease,
+    [STRINGID_STATSWONTDECREASE - BATTLESTRINGS_TABLE_START] = sText_StatsWontDecrease,
+    [STRINGID_TEAMSTOPPEDWORKING - BATTLESTRINGS_TABLE_START] = sText_TeamStoppedWorking,
+    [STRINGID_FOESTOPPEDWORKING - BATTLESTRINGS_TABLE_START] = sText_FoeStoppedWorking,
+    [STRINGID_PKMNISCONFUSED - BATTLESTRINGS_TABLE_START] = sText_PkmnIsConfused,
+    [STRINGID_PKMNHEALEDCONFUSION - BATTLESTRINGS_TABLE_START] = sText_PkmnHealedConfusion,
+    [STRINGID_PKMNWASCONFUSED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasConfused,
+    [STRINGID_PKMNALREADYCONFUSED - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyConfused,
+    [STRINGID_PKMNFELLINLOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnFellInLove,
+    [STRINGID_PKMNINLOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnInLove,
+    [STRINGID_PKMNIMMOBILIZEDBYLOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnImmobilizedByLove,
+    [STRINGID_PKMNBLOWNAWAY - BATTLESTRINGS_TABLE_START] = sText_PkmnBlownAway,
+    [STRINGID_PKMNCHANGEDTYPE - BATTLESTRINGS_TABLE_START] = sText_PkmnChangedType,
+    [STRINGID_PKMNFLINCHED - BATTLESTRINGS_TABLE_START] = sText_PkmnFlinched,
+    [STRINGID_PKMNREGAINEDHEALTH - BATTLESTRINGS_TABLE_START] = sText_PkmnRegainedHealth,
+    [STRINGID_PKMNHPFULL - BATTLESTRINGS_TABLE_START] = sText_PkmnHPFull,
+    [STRINGID_PKMNRAISEDSPDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpDef,
+    [STRINGID_PKMNRAISEDDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedDef,
+    [STRINGID_PKMNCOVEREDBYVEIL - BATTLESTRINGS_TABLE_START] = sText_PkmnCoveredByVeil,
+    [STRINGID_PKMNUSEDSAFEGUARD - BATTLESTRINGS_TABLE_START] = sText_PkmnUsedSafeguard,
+    [STRINGID_PKMNSAFEGUARDEXPIRED - BATTLESTRINGS_TABLE_START] = sText_PkmnSafeguardExpired,
+    [STRINGID_PKMNWENTTOSLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnWentToSleep,
+    [STRINGID_PKMNSLEPTHEALTHY - BATTLESTRINGS_TABLE_START] = sText_PkmnSleptHealthy,
+    [STRINGID_PKMNWHIPPEDWHIRLWIND - BATTLESTRINGS_TABLE_START] = sText_PkmnWhippedWhirlwind,
+    [STRINGID_PKMNTOOKSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnTookSunlight,
+    [STRINGID_PKMNLOWEREDHEAD - BATTLESTRINGS_TABLE_START] = sText_PkmnLoweredHead,
+    [STRINGID_PKMNISGLOWING - BATTLESTRINGS_TABLE_START] = sText_PkmnIsGlowing,
+    [STRINGID_PKMNFLEWHIGH - BATTLESTRINGS_TABLE_START] = sText_PkmnFlewHigh,
+    [STRINGID_PKMNDUGHOLE - BATTLESTRINGS_TABLE_START] = sText_PkmnDugHole,
+    [STRINGID_PKMNSQUEEZEDBYBIND - BATTLESTRINGS_TABLE_START] = sText_PkmnSqueezedByBind,
+    [STRINGID_PKMNTRAPPEDINVORTEX - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedInVortex,
+    [STRINGID_PKMNWRAPPEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnWrappedBy,
+    [STRINGID_PKMNCLAMPED - BATTLESTRINGS_TABLE_START] = sText_PkmnClamped,
+    [STRINGID_PKMNHURTBY - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtBy,
+    [STRINGID_PKMNFREEDFROM - BATTLESTRINGS_TABLE_START] = sText_PkmnFreedFrom,
+    [STRINGID_PKMNCRASHED - BATTLESTRINGS_TABLE_START] = sText_PkmnCrashed,
+    [STRINGID_PKMNSHROUDEDINMIST - BATTLESTRINGS_TABLE_START] = gText_PkmnShroudedInMist,
+    [STRINGID_PKMNPROTECTEDBYMIST - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedByMist,
+    [STRINGID_PKMNGETTINGPUMPED - BATTLESTRINGS_TABLE_START] = gText_PkmnGettingPumped,
+    [STRINGID_PKMNHITWITHRECOIL - BATTLESTRINGS_TABLE_START] = sText_PkmnHitWithRecoil,
+    [STRINGID_PKMNPROTECTEDITSELF2 - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself2,
+    [STRINGID_PKMNBUFFETEDBYSANDSTORM - BATTLESTRINGS_TABLE_START] = sText_PkmnBuffetedBySandstorm,
+    [STRINGID_PKMNPELTEDBYHAIL - BATTLESTRINGS_TABLE_START] = sText_PkmnPeltedByHail,
+    [STRINGID_PKMNSEEDED - BATTLESTRINGS_TABLE_START] = sText_PkmnSeeded,
+    [STRINGID_PKMNEVADEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnEvadedAttack,
+    [STRINGID_PKMNSAPPEDBYLEECHSEED - BATTLESTRINGS_TABLE_START] = sText_PkmnSappedByLeechSeed,
+    [STRINGID_PKMNFASTASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnFastAsleep,
+    [STRINGID_PKMNWOKEUP - BATTLESTRINGS_TABLE_START] = sText_PkmnWokeUp,
+    [STRINGID_PKMNUPROARKEPTAWAKE - BATTLESTRINGS_TABLE_START] = sText_PkmnUproarKeptAwake,
+    [STRINGID_PKMNWOKEUPINUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnWokeUpInUproar,
+    [STRINGID_PKMNCAUSEDUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnCausedUproar,
+    [STRINGID_PKMNMAKINGUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnMakingUproar,
+    [STRINGID_PKMNCALMEDDOWN - BATTLESTRINGS_TABLE_START] = sText_PkmnCalmedDown,
+    [STRINGID_PKMNCANTSLEEPINUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnCantSleepInUproar,
+    [STRINGID_PKMNSTOCKPILED - BATTLESTRINGS_TABLE_START] = sText_PkmnStockpiled,
+    [STRINGID_PKMNCANTSTOCKPILE - BATTLESTRINGS_TABLE_START] = sText_PkmnCantStockpile,
+    [STRINGID_PKMNCANTSLEEPINUPROAR2 - BATTLESTRINGS_TABLE_START] = sText_PkmnCantSleepInUproar2,
+    [STRINGID_UPROARKEPTPKMNAWAKE - BATTLESTRINGS_TABLE_START] = sText_UproarKeptPkmnAwake,
+    [STRINGID_PKMNSTAYEDAWAKEUSING - BATTLESTRINGS_TABLE_START] = sText_PkmnStayedAwakeUsing,
+    [STRINGID_PKMNSTORINGENERGY - BATTLESTRINGS_TABLE_START] = sText_PkmnStoringEnergy,
+    [STRINGID_PKMNUNLEASHEDENERGY - BATTLESTRINGS_TABLE_START] = sText_PkmnUnleashedEnergy,
+    [STRINGID_PKMNFATIGUECONFUSION - BATTLESTRINGS_TABLE_START] = sText_PkmnFatigueConfusion,
+    [STRINGID_PLAYERPICKEDUPMONEY - BATTLESTRINGS_TABLE_START] = sText_PlayerPickedUpMoney,
+    [STRINGID_PKMNUNAFFECTED - BATTLESTRINGS_TABLE_START] = sText_PkmnUnaffected,
+    [STRINGID_PKMNTRANSFORMEDINTO - BATTLESTRINGS_TABLE_START] = sText_PkmnTransformedInto,
+    [STRINGID_PKMNMADESUBSTITUTE - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSubstitute,
+    [STRINGID_PKMNHASSUBSTITUTE - BATTLESTRINGS_TABLE_START] = sText_PkmnHasSubstitute,
+    [STRINGID_SUBSTITUTEDAMAGED - BATTLESTRINGS_TABLE_START] = sText_SubstituteDamaged,
+    [STRINGID_PKMNSUBSTITUTEFADED - BATTLESTRINGS_TABLE_START] = sText_PkmnSubstituteFaded,
+    [STRINGID_PKMNMUSTRECHARGE - BATTLESTRINGS_TABLE_START] = sText_PkmnMustRecharge,
+    [STRINGID_PKMNRAGEBUILDING - BATTLESTRINGS_TABLE_START] = sText_PkmnRageBuilding,
+    [STRINGID_PKMNMOVEWASDISABLED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveWasDisabled,
+    [STRINGID_PKMNMOVEISDISABLED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveIsDisabled,
+    [STRINGID_PKMNMOVEDISABLEDNOMORE - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveDisabledNoMore,
+    [STRINGID_PKMNGOTENCORE - BATTLESTRINGS_TABLE_START] = sText_PkmnGotEncore,
+    [STRINGID_PKMNENCOREENDED - BATTLESTRINGS_TABLE_START] = sText_PkmnEncoreEnded,
+    [STRINGID_PKMNTOOKAIM - BATTLESTRINGS_TABLE_START] = sText_PkmnTookAim,
+    [STRINGID_PKMNSKETCHEDMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnSketchedMove,
+    [STRINGID_PKMNTRYINGTOTAKEFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTryingToTakeFoe,
+    [STRINGID_PKMNTOOKFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTookFoe,
+    [STRINGID_PKMNREDUCEDPP - BATTLESTRINGS_TABLE_START] = sText_PkmnReducedPP,
+    [STRINGID_PKMNSTOLEITEM - BATTLESTRINGS_TABLE_START] = sText_PkmnStoleItem,
+    [STRINGID_TARGETCANTESCAPENOW - BATTLESTRINGS_TABLE_START] = sText_TargetCantEscapeNow,
+    [STRINGID_PKMNFELLINTONIGHTMARE - BATTLESTRINGS_TABLE_START] = sText_PkmnFellIntoNightmare,
+    [STRINGID_PKMNLOCKEDINNIGHTMARE - BATTLESTRINGS_TABLE_START] = sText_PkmnLockedInNightmare,
+    [STRINGID_PKMNLAIDCURSE - BATTLESTRINGS_TABLE_START] = sText_PkmnLaidCurse,
+    [STRINGID_PKMNAFFLICTEDBYCURSE - BATTLESTRINGS_TABLE_START] = sText_PkmnAfflictedByCurse,
+    [STRINGID_SPIKESSCATTERED - BATTLESTRINGS_TABLE_START] = sText_SpikesScattered,
+    [STRINGID_PKMNHURTBYSPIKES - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtBySpikes,
+    [STRINGID_PKMNIDENTIFIED - BATTLESTRINGS_TABLE_START] = sText_PkmnIdentified,
+    [STRINGID_PKMNPERISHCOUNTFELL - BATTLESTRINGS_TABLE_START] = sText_PkmnPerishCountFell,
+    [STRINGID_PKMNBRACEDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnBracedItself,
+    [STRINGID_PKMNENDUREDHIT - BATTLESTRINGS_TABLE_START] = sText_PkmnEnduredHit,
+    [STRINGID_MAGNITUDESTRENGTH - BATTLESTRINGS_TABLE_START] = sText_MagnitudeStrength,
+    [STRINGID_PKMNCUTHPMAXEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnCutHPMaxedAttack,
+    [STRINGID_PKMNCOPIEDSTATCHANGES - BATTLESTRINGS_TABLE_START] = sText_PkmnCopiedStatChanges,
+    [STRINGID_PKMNGOTFREE - BATTLESTRINGS_TABLE_START] = sText_PkmnGotFree,
+    [STRINGID_PKMNSHEDLEECHSEED - BATTLESTRINGS_TABLE_START] = sText_PkmnShedLeechSeed,
+    [STRINGID_PKMNBLEWAWAYSPIKES - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySpikes,
+    [STRINGID_PKMNFLEDFROMBATTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnFledFromBattle,
+    [STRINGID_PKMNFORESAWATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnForesawAttack,
+    [STRINGID_PKMNTOOKATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnTookAttack,
+    [STRINGID_PKMNATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnAttack,
+    [STRINGID_PKMNCENTERATTENTION - BATTLESTRINGS_TABLE_START] = sText_PkmnCenterAttention,
+    [STRINGID_PKMNCHARGINGPOWER - BATTLESTRINGS_TABLE_START] = sText_PkmnChargingPower,
+    [STRINGID_NATUREPOWERTURNEDINTO - BATTLESTRINGS_TABLE_START] = sText_NaturePowerTurnedInto,
+    [STRINGID_PKMNSTATUSNORMAL - BATTLESTRINGS_TABLE_START] = sText_PkmnStatusNormal,
+    [STRINGID_PKMNHASNOMOVESLEFT - BATTLESTRINGS_TABLE_START] = sText_PkmnHasNoMovesLeft,
+    [STRINGID_PKMNSUBJECTEDTOTORMENT - BATTLESTRINGS_TABLE_START] = sText_PkmnSubjectedToTorment,
+    [STRINGID_PKMNCANTUSEMOVETORMENT - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveTorment,
+    [STRINGID_PKMNTIGHTENINGFOCUS - BATTLESTRINGS_TABLE_START] = sText_PkmnTighteningFocus,
+    [STRINGID_PKMNFELLFORTAUNT - BATTLESTRINGS_TABLE_START] = sText_PkmnFellForTaunt,
+    [STRINGID_PKMNCANTUSEMOVETAUNT - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveTaunt,
+    [STRINGID_PKMNREADYTOHELP - BATTLESTRINGS_TABLE_START] = sText_PkmnReadyToHelp,
+    [STRINGID_PKMNSWITCHEDITEMS - BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedItems,
+    [STRINGID_PKMNCOPIEDFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnCopiedFoe,
+    [STRINGID_PKMNMADEWISH - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeWish,
+    [STRINGID_PKMNWISHCAMETRUE - BATTLESTRINGS_TABLE_START] = sText_PkmnWishCameTrue,
+    [STRINGID_PKMNPLANTEDROOTS - BATTLESTRINGS_TABLE_START] = sText_PkmnPlantedRoots,
+    [STRINGID_PKMNABSORBEDNUTRIENTS - BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbedNutrients,
+    [STRINGID_PKMNANCHOREDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnAnchoredItself,
+    [STRINGID_PKMNWASMADEDROWSY - BATTLESTRINGS_TABLE_START] = sText_PkmnWasMadeDrowsy,
+    [STRINGID_PKMNKNOCKEDOFF - BATTLESTRINGS_TABLE_START] = sText_PkmnKnockedOff,
+    [STRINGID_PKMNSWAPPEDABILITIES - BATTLESTRINGS_TABLE_START] = sText_PkmnSwappedAbilities,
+    [STRINGID_PKMNSEALEDOPPONENTMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnSealedOpponentMove,
+    [STRINGID_PKMNCANTUSEMOVESEALED - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveSealed,
+    [STRINGID_PKMNWANTSGRUDGE - BATTLESTRINGS_TABLE_START] = sText_PkmnWantsGrudge,
+    [STRINGID_PKMNLOSTPPGRUDGE - BATTLESTRINGS_TABLE_START] = sText_PkmnLostPPGrudge,
+    [STRINGID_PKMNSHROUDEDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnShroudedItself,
+    [STRINGID_PKMNMOVEBOUNCED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBounced,
+    [STRINGID_PKMNWAITSFORTARGET - BATTLESTRINGS_TABLE_START] = sText_PkmnWaitsForTarget,
+    [STRINGID_PKMNSNATCHEDMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnSnatchedMove,
+    [STRINGID_PKMNMADEITRAIN - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeItRain,
+    [STRINGID_PKMNRAISEDSPEED - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpeed,
+    [STRINGID_PKMNPROTECTEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedBy,
+    [STRINGID_PKMNPREVENTSUSAGE - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsUsage,
+    [STRINGID_PKMNRESTOREDHPUSING - BATTLESTRINGS_TABLE_START] = sText_PkmnRestoredHPUsing,
+    [STRINGID_PKMNCHANGEDTYPEWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnChangedTypeWith,
+    [STRINGID_PKMNPREVENTSPARALYSISWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsParalysisWith,
+    [STRINGID_PKMNPREVENTSROMANCEWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsRomanceWith,
+    [STRINGID_PKMNPREVENTSPOISONINGWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsPoisoningWith,
+    [STRINGID_PKMNPREVENTSCONFUSIONWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsConfusionWith,
+    [STRINGID_PKMNRAISEDFIREPOWERWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedFirePowerWith,
+    [STRINGID_PKMNANCHORSITSELFWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnAnchorsItselfWith,
+    [STRINGID_PKMNCUTSATTACKWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsAttackWith,
+    [STRINGID_PKMNPREVENTSSTATLOSSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsStatLossWith,
+    [STRINGID_PKMNHURTSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtsWith,
+    [STRINGID_PKMNTRACED - BATTLESTRINGS_TABLE_START] = sText_PkmnTraced,
+    [STRINGID_STATSHARPLY - BATTLESTRINGS_TABLE_START] = gText_StatSharply,
+    [STRINGID_STATROSE - BATTLESTRINGS_TABLE_START] = gText_StatRose,
+    [STRINGID_STATHARSHLY - BATTLESTRINGS_TABLE_START] = sText_StatHarshly,
+    [STRINGID_STATFELL - BATTLESTRINGS_TABLE_START] = sText_StatFell,
+    [STRINGID_ATTACKERSSTATROSE - BATTLESTRINGS_TABLE_START] = sText_AttackersStatRose,
+    [STRINGID_DEFENDERSSTATROSE - BATTLESTRINGS_TABLE_START] = gText_DefendersStatRose,
+    [STRINGID_ATTACKERSSTATFELL - BATTLESTRINGS_TABLE_START] = sText_AttackersStatFell,
+    [STRINGID_DEFENDERSSTATFELL - BATTLESTRINGS_TABLE_START] = sText_DefendersStatFell,
+    [STRINGID_CRITICALHIT - BATTLESTRINGS_TABLE_START] = sText_CriticalHit,
+    [STRINGID_ONEHITKO - BATTLESTRINGS_TABLE_START] = sText_OneHitKO,
+    [STRINGID_123POOF - BATTLESTRINGS_TABLE_START] = sText_123Poof,
+    [STRINGID_ANDELLIPSIS - BATTLESTRINGS_TABLE_START] = sText_AndEllipsis,
+    [STRINGID_NOTVERYEFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_NotVeryEffective,
+    [STRINGID_SUPEREFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_SuperEffective,
+    [STRINGID_GOTAWAYSAFELY - BATTLESTRINGS_TABLE_START] = sText_GotAwaySafely,
+    [STRINGID_WILDPKMNFLED - BATTLESTRINGS_TABLE_START] = sText_WildPkmnFled,
+    [STRINGID_NORUNNINGFROMTRAINERS - BATTLESTRINGS_TABLE_START] = sText_NoRunningFromTrainers,
+    [STRINGID_CANTESCAPE - BATTLESTRINGS_TABLE_START] = sText_CantEscape,
+    [STRINGID_DONTLEAVEBIRCH - BATTLESTRINGS_TABLE_START] = sText_DontLeaveBirch,
+    [STRINGID_BUTNOTHINGHAPPENED - BATTLESTRINGS_TABLE_START] = sText_ButNothingHappened,
+    [STRINGID_BUTITFAILED - BATTLESTRINGS_TABLE_START] = sText_ButItFailed,
+    [STRINGID_ITHURTCONFUSION - BATTLESTRINGS_TABLE_START] = sText_ItHurtConfusion,
+    [STRINGID_MIRRORMOVEFAILED - BATTLESTRINGS_TABLE_START] = sText_MirrorMoveFailed,
+    [STRINGID_STARTEDTORAIN - BATTLESTRINGS_TABLE_START] = sText_StartedToRain,
+    [STRINGID_DOWNPOURSTARTED - BATTLESTRINGS_TABLE_START] = sText_DownpourStarted,
+    [STRINGID_RAINCONTINUES - BATTLESTRINGS_TABLE_START] = sText_RainContinues,
+    [STRINGID_DOWNPOURCONTINUES - BATTLESTRINGS_TABLE_START] = sText_DownpourContinues,
+    [STRINGID_RAINSTOPPED - BATTLESTRINGS_TABLE_START] = sText_RainStopped,
+    [STRINGID_SANDSTORMBREWED - BATTLESTRINGS_TABLE_START] = sText_SandstormBrewed,
+    [STRINGID_SANDSTORMRAGES - BATTLESTRINGS_TABLE_START] = sText_SandstormRages,
+    [STRINGID_SANDSTORMSUBSIDED - BATTLESTRINGS_TABLE_START] = sText_SandstormSubsided,
+    [STRINGID_SUNLIGHTGOTBRIGHT - BATTLESTRINGS_TABLE_START] = sText_SunlightGotBright,
+    [STRINGID_SUNLIGHTSTRONG - BATTLESTRINGS_TABLE_START] = sText_SunlightStrong,
+    [STRINGID_SUNLIGHTFADED - BATTLESTRINGS_TABLE_START] = sText_SunlightFaded,
+    [STRINGID_STARTEDHAIL - BATTLESTRINGS_TABLE_START] = sText_StartedHail,
+    [STRINGID_HAILCONTINUES - BATTLESTRINGS_TABLE_START] = sText_HailContinues,
+    [STRINGID_HAILSTOPPED - BATTLESTRINGS_TABLE_START] = sText_HailStopped,
+    [STRINGID_STARTEDSNOW - BATTLESTRINGS_TABLE_START] = sText_StartedSnow,
+    [STRINGID_SNOWCONTINUES -BATTLESTRINGS_TABLE_START] = sText_SnowContinues,
+    [STRINGID_SNOWSTOPPED - BATTLESTRINGS_TABLE_START] = sText_SnowStopped,
+    [STRINGID_FOGCREPTUP - BATTLESTRINGS_TABLE_START] = sText_FogCreptUp,
+    [STRINGID_FOGISDEEP - BATTLESTRINGS_TABLE_START] = sText_FogIsDeep,
+    [STRINGID_FOGLIFTED - BATTLESTRINGS_TABLE_START] = sText_FogLifted,
+    [STRINGID_FAILEDTOSPITUP - BATTLESTRINGS_TABLE_START] = sText_FailedToSpitUp,
+    [STRINGID_FAILEDTOSWALLOW - BATTLESTRINGS_TABLE_START] = sText_FailedToSwallow,
+    [STRINGID_WINDBECAMEHEATWAVE - BATTLESTRINGS_TABLE_START] = sText_WindBecameHeatWave,
+    [STRINGID_STATCHANGESGONE - BATTLESTRINGS_TABLE_START] = sText_StatChangesGone,
+    [STRINGID_COINSSCATTERED - BATTLESTRINGS_TABLE_START] = sText_CoinsScattered,
+    [STRINGID_TOOWEAKFORSUBSTITUTE - BATTLESTRINGS_TABLE_START] = sText_TooWeakForSubstitute,
+    [STRINGID_SHAREDPAIN - BATTLESTRINGS_TABLE_START] = sText_SharedPain,
+    [STRINGID_BELLCHIMED - BATTLESTRINGS_TABLE_START] = sText_BellChimed,
+    [STRINGID_FAINTINTHREE - BATTLESTRINGS_TABLE_START] = sText_FaintInThree,
+    [STRINGID_NOPPLEFT - BATTLESTRINGS_TABLE_START] = sText_NoPPLeft,
+    [STRINGID_BUTNOPPLEFT - BATTLESTRINGS_TABLE_START] = sText_ButNoPPLeft,
+    [STRINGID_PLAYERUSEDITEM - BATTLESTRINGS_TABLE_START] = sText_PlayerUsedItem,
+    [STRINGID_WALLYUSEDITEM - BATTLESTRINGS_TABLE_START] = sText_WallyUsedItem,
+    [STRINGID_TRAINERBLOCKEDBALL - BATTLESTRINGS_TABLE_START] = sText_TrainerBlockedBall,
+    [STRINGID_DONTBEATHIEF - BATTLESTRINGS_TABLE_START] = sText_DontBeAThief,
+    [STRINGID_ITDODGEDBALL - BATTLESTRINGS_TABLE_START] = sText_ItDodgedBall,
+    [STRINGID_YOUMISSEDPKMN - BATTLESTRINGS_TABLE_START] = sText_YouMissedPkmn,
+    [STRINGID_PKMNBROKEFREE - BATTLESTRINGS_TABLE_START] = sText_PkmnBrokeFree,
+    [STRINGID_ITAPPEAREDCAUGHT - BATTLESTRINGS_TABLE_START] = sText_ItAppearedCaught,
+    [STRINGID_AARGHALMOSTHADIT - BATTLESTRINGS_TABLE_START] = sText_AarghAlmostHadIt,
+    [STRINGID_SHOOTSOCLOSE - BATTLESTRINGS_TABLE_START] = sText_ShootSoClose,
+    [STRINGID_GOTCHAPKMNCAUGHTPLAYER - BATTLESTRINGS_TABLE_START] = sText_GotchaPkmnCaughtPlayer,
+    [STRINGID_GOTCHAPKMNCAUGHTWALLY - BATTLESTRINGS_TABLE_START] = sText_GotchaPkmnCaughtWally,
+    [STRINGID_GIVENICKNAMECAPTURED - BATTLESTRINGS_TABLE_START] = sText_GiveNicknameCaptured,
+    [STRINGID_PKMNSENTTOPC - BATTLESTRINGS_TABLE_START] = sText_PkmnSentToPC,
+    [STRINGID_PKMNDATAADDEDTODEX - BATTLESTRINGS_TABLE_START] = sText_PkmnDataAddedToDex,
+    [STRINGID_ITISRAINING - BATTLESTRINGS_TABLE_START] = sText_ItIsRaining,
+    [STRINGID_SANDSTORMISRAGING - BATTLESTRINGS_TABLE_START] = sText_SandstormIsRaging,
+    [STRINGID_CANTESCAPE2 - BATTLESTRINGS_TABLE_START] = sText_CantEscape2,
+    [STRINGID_PKMNIGNORESASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoresAsleep,
+    [STRINGID_PKMNIGNOREDORDERS - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoredOrders,
+    [STRINGID_PKMNBEGANTONAP - BATTLESTRINGS_TABLE_START] = sText_PkmnBeganToNap,
+    [STRINGID_PKMNLOAFING - BATTLESTRINGS_TABLE_START] = sText_PkmnLoafing,
+    [STRINGID_PKMNWONTOBEY - BATTLESTRINGS_TABLE_START] = sText_PkmnWontObey,
+    [STRINGID_PKMNTURNEDAWAY - BATTLESTRINGS_TABLE_START] = sText_PkmnTurnedAway,
+    [STRINGID_PKMNPRETENDNOTNOTICE - BATTLESTRINGS_TABLE_START] = sText_PkmnPretendNotNotice,
+    [STRINGID_ENEMYABOUTTOSWITCHPKMN - BATTLESTRINGS_TABLE_START] = sText_EnemyAboutToSwitchPkmn,
+    [STRINGID_CREPTCLOSER - BATTLESTRINGS_TABLE_START] = sText_CreptCloser,
+    [STRINGID_CANTGETCLOSER - BATTLESTRINGS_TABLE_START] = sText_CantGetCloser,
+    [STRINGID_PKMNWATCHINGCAREFULLY - BATTLESTRINGS_TABLE_START] = sText_PkmnWatchingCarefully,
+    [STRINGID_PKMNCURIOUSABOUTX - BATTLESTRINGS_TABLE_START] = sText_PkmnCuriousAboutX,
+    [STRINGID_PKMNENTHRALLEDBYX - BATTLESTRINGS_TABLE_START] = sText_PkmnEnthralledByX,
+    [STRINGID_PKMNIGNOREDX - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoredX,
+    [STRINGID_THREWPOKEBLOCKATPKMN - BATTLESTRINGS_TABLE_START] = sText_ThrewPokeblockAtPkmn,
+    [STRINGID_OUTOFSAFARIBALLS - BATTLESTRINGS_TABLE_START] = sText_OutOfSafariBalls,
+    [STRINGID_PKMNSITEMCUREDPARALYSIS - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredParalysis,
+    [STRINGID_PKMNSITEMCUREDPOISON - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredPoison,
+    [STRINGID_PKMNSITEMHEALEDBURN - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemHealedBurn,
+    [STRINGID_PKMNSITEMDEFROSTEDIT - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemDefrostedIt,
+    [STRINGID_PKMNSITEMWOKEIT - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemWokeIt,
+    [STRINGID_PKMNSITEMSNAPPEDOUT - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemSnappedOut,
+    [STRINGID_PKMNSITEMCUREDPROBLEM - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredProblem,
+    [STRINGID_PKMNSITEMRESTOREDHEALTH - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredHealth,
+    [STRINGID_PKMNSITEMRESTOREDPP - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredPP,
+    [STRINGID_PKMNSITEMRESTOREDSTATUS - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredStatus,
+    [STRINGID_PKMNSITEMRESTOREDHPALITTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredHPALittle,
+    [STRINGID_ITEMALLOWSONLYYMOVE - BATTLESTRINGS_TABLE_START] = sText_ItemAllowsOnlyYMove,
+    [STRINGID_PKMNHUNGONWITHX - BATTLESTRINGS_TABLE_START] = sText_PkmnHungOnWithX,
+    [STRINGID_EMPTYSTRING3 - BATTLESTRINGS_TABLE_START] = gText_EmptyString3,
+    [STRINGID_PKMNSXPREVENTSBURNS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsBurns,
+    [STRINGID_PKMNSXBLOCKSY - BATTLESTRINGS_TABLE_START] = sText_PkmnsXBlocksY,
+    [STRINGID_PKMNSXRESTOREDHPALITTLE2 - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRestoredHPALittle2,
+    [STRINGID_PKMNSXWHIPPEDUPSANDSTORM - BATTLESTRINGS_TABLE_START] = sText_PkmnsXWhippedUpSandstorm,
+    [STRINGID_PKMNSXPREVENTSYLOSS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsYLoss,
+    [STRINGID_PKMNSXINFATUATEDY - BATTLESTRINGS_TABLE_START] = sText_PkmnsXInfatuatedY,
+    [STRINGID_PKMNSXMADEYINEFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYIneffective,
+    [STRINGID_PKMNSXCUREDYPROBLEM - BATTLESTRINGS_TABLE_START] = sText_PkmnsXCuredYProblem,
+    [STRINGID_ITSUCKEDLIQUIDOOZE - BATTLESTRINGS_TABLE_START] = sText_ItSuckedLiquidOoze,
+    [STRINGID_PKMNTRANSFORMED - BATTLESTRINGS_TABLE_START] = sText_PkmnTransformed,
+    [STRINGID_ELECTRICITYWEAKENED - BATTLESTRINGS_TABLE_START] = sText_ElectricityWeakened,
+    [STRINGID_FIREWEAKENED - BATTLESTRINGS_TABLE_START] = sText_FireWeakened,
+    [STRINGID_PKMNHIDUNDERWATER - BATTLESTRINGS_TABLE_START] = sText_PkmnHidUnderwater,
+    [STRINGID_PKMNSPRANGUP - BATTLESTRINGS_TABLE_START] = sText_PkmnSprangUp,
+    [STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_TABLE_START] = sText_HMMovesCantBeForgotten,
+    [STRINGID_XFOUNDONEY - BATTLESTRINGS_TABLE_START] = sText_XFoundOneY,
+    [STRINGID_PLAYERDEFEATEDTRAINER1 - BATTLESTRINGS_TABLE_START] = sText_PlayerDefeatedLinkTrainerTrainer1,
+    [STRINGID_SOOTHINGAROMA - BATTLESTRINGS_TABLE_START] = sText_SoothingAroma,
+    [STRINGID_ITEMSCANTBEUSEDNOW - BATTLESTRINGS_TABLE_START] = sText_ItemsCantBeUsedNow,
+    [STRINGID_FORXCOMMAYZ - BATTLESTRINGS_TABLE_START] = sText_ForXCommaYZ,
+    [STRINGID_USINGITEMSTATOFPKMNROSE - BATTLESTRINGS_TABLE_START] = sText_UsingItemTheStatOfPkmnRose,
+    [STRINGID_PKMNUSEDXTOGETPUMPED - BATTLESTRINGS_TABLE_START] = sText_PkmnUsedXToGetPumped,
+    [STRINGID_PKMNSXMADEYUSELESS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYUseless,
+    [STRINGID_PKMNTRAPPEDBYSANDTOMB - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedBySandTomb,
+    [STRINGID_EMPTYSTRING4 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
+    [STRINGID_ABOOSTED - BATTLESTRINGS_TABLE_START] = sText_ABoosted,
+    [STRINGID_PKMNSXINTENSIFIEDSUN - BATTLESTRINGS_TABLE_START] = sText_PkmnsXIntensifiedSun,
+    [STRINGID_PKMNMAKESGROUNDMISS - BATTLESTRINGS_TABLE_START] = sText_PkmnMakesGroundMiss,
+    [STRINGID_YOUTHROWABALLNOWRIGHT - BATTLESTRINGS_TABLE_START] = sText_YouThrowABallNowRight,
+    [STRINGID_PKMNSXTOOKATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnsXTookAttack,
+    [STRINGID_PKMNCHOSEXASDESTINY - BATTLESTRINGS_TABLE_START] = sText_PkmnChoseXAsDestiny,
+    [STRINGID_PKMNLOSTFOCUS - BATTLESTRINGS_TABLE_START] = sText_PkmnLostFocus,
+    [STRINGID_USENEXTPKMN - BATTLESTRINGS_TABLE_START] = sText_UseNextPkmn,
+    [STRINGID_PKMNFLEDUSINGITS - BATTLESTRINGS_TABLE_START] = sText_PkmnFledUsingIts,
+    [STRINGID_PKMNFLEDUSING - BATTLESTRINGS_TABLE_START] = sText_PkmnFledUsing,
+    [STRINGID_PKMNWASDRAGGEDOUT - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDraggedOut,
+    [STRINGID_PREVENTEDFROMWORKING - BATTLESTRINGS_TABLE_START] = sText_PreventedFromWorking,
+    [STRINGID_PKMNSITEMNORMALIZEDSTATUS - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemNormalizedStatus,
+    [STRINGID_TRAINER1USEDITEM - BATTLESTRINGS_TABLE_START] = sText_Trainer1UsedItem,
+    [STRINGID_BOXISFULL - BATTLESTRINGS_TABLE_START] = sText_BoxIsFull,
+    [STRINGID_PKMNAVOIDEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnAvoidedAttack,
+    [STRINGID_PKMNSXMADEITINEFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeItIneffective,
+    [STRINGID_PKMNSXPREVENTSFLINCHING - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsFlinching,
+    [STRINGID_PKMNALREADYHASBURN - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyHasBurn,
+    [STRINGID_STATSWONTDECREASE2 - BATTLESTRINGS_TABLE_START] = sText_StatsWontDecrease2,
+    [STRINGID_PKMNSXBLOCKSY2 - BATTLESTRINGS_TABLE_START] = sText_PkmnsXBlocksY2,
+    [STRINGID_PKMNSXWOREOFF - BATTLESTRINGS_TABLE_START] = sText_PkmnsXWoreOff,
+    [STRINGID_PKMNRAISEDDEFALITTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedDefALittle,
+    [STRINGID_PKMNRAISEDSPDEFALITTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpDefALittle,
+    [STRINGID_THEWALLSHATTERED - BATTLESTRINGS_TABLE_START] = sText_TheWallShattered,
+    [STRINGID_PKMNSXPREVENTSYSZ - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsYsZ,
+    [STRINGID_PKMNSXCUREDITSYPROBLEM - BATTLESTRINGS_TABLE_START] = sText_PkmnsXCuredItsYProblem,
+    [STRINGID_ATTACKERCANTESCAPE - BATTLESTRINGS_TABLE_START] = sText_AttackerCantEscape,
+    [STRINGID_PKMNOBTAINEDX - BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedX,
+    [STRINGID_PKMNOBTAINEDX2 - BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedX2,
+    [STRINGID_PKMNOBTAINEDXYOBTAINEDZ - BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedXYObtainedZ,
+    [STRINGID_BUTNOEFFECT - BATTLESTRINGS_TABLE_START] = sText_ButNoEffect,
+    [STRINGID_PKMNSXHADNOEFFECTONY - BATTLESTRINGS_TABLE_START] = sText_PkmnsXHadNoEffectOnY,
+    [STRINGID_TWOENEMIESDEFEATED - BATTLESTRINGS_TABLE_START] = sText_TwoInGameTrainersDefeated,
+    [STRINGID_TRAINER2LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2LoseText,
+    [STRINGID_PKMNINCAPABLEOFPOWER - BATTLESTRINGS_TABLE_START] = sText_PkmnIncapableOfPower,
+    [STRINGID_GLINTAPPEARSINEYE - BATTLESTRINGS_TABLE_START] = sText_GlintAppearsInEye,
+    [STRINGID_PKMNGETTINGINTOPOSITION - BATTLESTRINGS_TABLE_START] = sText_PkmnGettingIntoPosition,
+    [STRINGID_PKMNBEGANGROWLINGDEEPLY - BATTLESTRINGS_TABLE_START] = sText_PkmnBeganGrowlingDeeply,
+    [STRINGID_PKMNEAGERFORMORE - BATTLESTRINGS_TABLE_START] = sText_PkmnEagerForMore,
+    [STRINGID_DEFEATEDOPPONENTBYREFEREE - BATTLESTRINGS_TABLE_START] = sText_DefeatedOpponentByReferee,
+    [STRINGID_LOSTTOOPPONENTBYREFEREE - BATTLESTRINGS_TABLE_START] = sText_LostToOpponentByReferee,
+    [STRINGID_TIEDOPPONENTBYREFEREE - BATTLESTRINGS_TABLE_START] = sText_TiedOpponentByReferee,
+    [STRINGID_QUESTIONFORFEITMATCH - BATTLESTRINGS_TABLE_START] = sText_QuestionForfeitMatch,
+    [STRINGID_FORFEITEDMATCH - BATTLESTRINGS_TABLE_START] = sText_ForfeitedMatch,
+    [STRINGID_PKMNTRANSFERREDSOMEONESPC - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredSomeonesPC,
+    [STRINGID_PKMNTRANSFERREDLANETTESPC - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPC,
+    [STRINGID_PKMNBOXSOMEONESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredSomeonesPCBoxFull,
+    [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
+    [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
+    [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
+    [STRINGID_ENDUREDSTURDY - BATTLESTRINGS_TABLE_START] = sText_EnduredViaSturdy,
+    [STRINGID_POWERHERB - BATTLESTRINGS_TABLE_START] = sText_PowerHerbActivation,
+    [STRINGID_HURTBYITEM - BATTLESTRINGS_TABLE_START] = sText_HurtByItem,
+    [STRINGID_PSNBYITEM - BATTLESTRINGS_TABLE_START] = sText_BadlyPoisonedByItem,
+    [STRINGID_BRNBYITEM - BATTLESTRINGS_TABLE_START] = sText_BurnedByItem,
+    [STRINGID_DEFABILITYIN - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityActivates,
+    [STRINGID_GRAVITYINTENSIFIED - BATTLESTRINGS_TABLE_START] = sText_GravityIntensified,
+    [STRINGID_TARGETIDENTIFIED - BATTLESTRINGS_TABLE_START] = sText_TargetIdentified,
+    [STRINGID_TARGETWOKEUP - BATTLESTRINGS_TABLE_START] = sText_TargetWokeUp,
+    [STRINGID_PKMNSTOLEANDATEITEM - BATTLESTRINGS_TABLE_START] = sText_PkmnStoleAndAteItem,
+    [STRINGID_TAILWINDBLEW - BATTLESTRINGS_TABLE_START] = sText_TailWindBlew,
+    [STRINGID_PKMNWENTBACK - BATTLESTRINGS_TABLE_START] = sText_PkmnWentBack,
+    [STRINGID_PKMNCANTUSEITEMSANYMORE - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseItemsAnymore,
+    [STRINGID_PKMNFLUNG - BATTLESTRINGS_TABLE_START] = sText_PkmnFlung,
+    [STRINGID_PKMNPREVENTEDFROMHEALING - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventedFromHealing,
+    [STRINGID_PKMNSWITCHEDATKANDDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedAtkAndDef,
+    [STRINGID_PKMNSABILITYSUPPRESSED - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilitySuppressed,
+    [STRINGID_SHIELDEDFROMCRITICALHITS - BATTLESTRINGS_TABLE_START] = sText_ShieldedFromCriticalHits,
+    [STRINGID_SWITCHEDATKANDSPATK - BATTLESTRINGS_TABLE_START] = sText_SwitchedAtkAndSpAtk,
+    [STRINGID_SWITCHEDDEFANDSPDEF - BATTLESTRINGS_TABLE_START] = sText_SwitchedDefAndSpDef,
+    [STRINGID_PKMNACQUIREDABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredAbility,
+    [STRINGID_POISONSPIKESSCATTERED - BATTLESTRINGS_TABLE_START] = sText_PoisonSpikesScattered,
+    [STRINGID_PKMNSWITCHEDSTATCHANGES - BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedStatChanges,
+    [STRINGID_PKMNSURROUNDEDWITHVEILOFWATER - BATTLESTRINGS_TABLE_START] = sText_PkmnSurroundedWithVeilOfWater,
+    [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_PkmnLevitatedOnElectromagnetism,
+    [STRINGID_PKMNTWISTEDDIMENSIONS - BATTLESTRINGS_TABLE_START] = sText_PkmnTwistedDimensions,
+    [STRINGID_DIMENSIONSWERETWISTED - BATTLESTRINGS_TABLE_START] = sText_DimensionsWereTwisted,
+    [STRINGID_POINTEDSTONESFLOAT - BATTLESTRINGS_TABLE_START] = sText_PointedStonesFloat,
+    [STRINGID_CLOAKEDINMYSTICALMOONLIGHT - BATTLESTRINGS_TABLE_START] = sText_CloakedInMysticalMoonlight,
+    [STRINGID_TRAPPEDBYSWIRLINGMAGMA - BATTLESTRINGS_TABLE_START] = sText_TrappedBySwirlingMagma,
+    [STRINGID_VANISHEDINSTANTLY - BATTLESTRINGS_TABLE_START] = sText_VanishedInstantly,
+    [STRINGID_PROTECTEDTEAM - BATTLESTRINGS_TABLE_START] = sText_ProtectedTeam,
+    [STRINGID_SHAREDITSGUARD - BATTLESTRINGS_TABLE_START] = sText_SharedItsGuard,
+    [STRINGID_SHAREDITSPOWER - BATTLESTRINGS_TABLE_START] = sText_SharedItsPower,
+    [STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON - BATTLESTRINGS_TABLE_START] = sText_SwapsDefAndSpDefOfAllPkmn,
+    [STRINGID_BIZARREAREACREATED - BATTLESTRINGS_TABLE_START] = sText_BizzareAreaCreated,
+    [STRINGID_BECAMENIMBLE - BATTLESTRINGS_TABLE_START] = sText_BecameNimble,
+    [STRINGID_HURLEDINTOTHEAIR - BATTLESTRINGS_TABLE_START] = sText_HurledIntoTheAir,
+    [STRINGID_HELDITEMSLOSEEFFECTS - BATTLESTRINGS_TABLE_START] = sText_HeldItemsLoseEffects,
+    [STRINGID_BIZARREARENACREATED - BATTLESTRINGS_TABLE_START] = sText_BizarreArenaCreated,
+    [STRINGID_FELLSTRAIGHTDOWN - BATTLESTRINGS_TABLE_START] = sText_FellStraightDown,
+    [STRINGID_TARGETCHANGEDTYPE  - BATTLESTRINGS_TABLE_START] = sText_TargetChangedType,
+    [STRINGID_PKMNACQUIREDSIMPLE - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredSimple,
+    [STRINGID_EMPTYSTRING5 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
+    [STRINGID_KINDOFFER - BATTLESTRINGS_TABLE_START] = sText_KindOffer,
+    [STRINGID_RESETSTARGETSSTATLEVELS - BATTLESTRINGS_TABLE_START] = sText_ResetsTargetsStatLevels,
+    [STRINGID_EMPTYSTRING6 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
+    [STRINGID_ALLYSWITCHPOSITION - BATTLESTRINGS_TABLE_START] = sText_AllySwitchPosition,
+    [STRINGID_RESTORETARGETSHEALTH - BATTLESTRINGS_TABLE_START] = sText_RestoreTargetsHealth,
+    [STRINGID_TOOKPJMNINTOTHESKY - BATTLESTRINGS_TABLE_START] = sText_TookPkmnIntoTheSky,
+    [STRINGID_FREEDFROMSKYDROP - BATTLESTRINGS_TABLE_START] = sText_FreedFromSkyDrop,
+    [STRINGID_POSTPONETARGETMOVE - BATTLESTRINGS_TABLE_START] = sText_PostponeTargetMove,
+    [STRINGID_REFLECTTARGETSTYPE - BATTLESTRINGS_TABLE_START] = sText_ReflectTargetsType,
+    [STRINGID_TRANSFERHELDITEM - BATTLESTRINGS_TABLE_START] = sText_TransferHeldItem,
+    [STRINGID_EMBARGOENDS - BATTLESTRINGS_TABLE_START] = sText_EmbargoEnds,
+    [STRINGID_ELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_Electromagnetism,
+    [STRINGID_BUFFERENDS - BATTLESTRINGS_TABLE_START] = sText_BufferEnds,
+    [STRINGID_TELEKINESISENDS - BATTLESTRINGS_TABLE_START] = sText_TelekinesisEnds,
+    [STRINGID_TAILWINDENDS - BATTLESTRINGS_TABLE_START] = sText_TailwindEnds,
+    [STRINGID_LUCKYCHANTENDS - BATTLESTRINGS_TABLE_START] = sText_LuckyChantEnds,
+    [STRINGID_TRICKROOMENDS - BATTLESTRINGS_TABLE_START] = sText_TrickRoomEnds,
+    [STRINGID_WONDERROOMENDS - BATTLESTRINGS_TABLE_START] = sText_WonderRoomEnds,
+    [STRINGID_MAGICROOMENDS - BATTLESTRINGS_TABLE_START] = sText_MagicRoomEnds,
+    [STRINGID_MUDSPORTENDS - BATTLESTRINGS_TABLE_START] = sText_MudSportEnds,
+    [STRINGID_WATERSPORTENDS - BATTLESTRINGS_TABLE_START] = sText_WaterSportEnds,
+    [STRINGID_GRAVITYENDS - BATTLESTRINGS_TABLE_START] = sText_GravityEnds,
+    [STRINGID_AQUARINGHEAL - BATTLESTRINGS_TABLE_START] = sText_AquaRingHeal,
+    [STRINGID_ELECTRICTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainEnds,
+    [STRINGID_MISTYTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_MistyTerrainEnds,
+    [STRINGID_PSYCHICTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainEnds,
+    [STRINGID_GRASSYTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_GrassyTerrainEnds,
+    [STRINGID_TARGETABILITYSTATRAISE - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityRaisedStat,
+    [STRINGID_TARGETSSTATWASMAXEDOUT - BATTLESTRINGS_TABLE_START] = sText_TargetsStatWasMaxedOut,
+    [STRINGID_ATTACKERABILITYSTATRAISE - BATTLESTRINGS_TABLE_START] = sText_AttackerAbilityRaisedStat,
+    [STRINGID_POISONHEALHPUP - BATTLESTRINGS_TABLE_START] = sText_PoisonHealHpUp,
+    [STRINGID_BADDREAMSDMG - BATTLESTRINGS_TABLE_START] = sText_BadDreamsDmg,
+    [STRINGID_MOLDBREAKERENTERS - BATTLESTRINGS_TABLE_START] = sText_MoldBreakerEnters,
+    [STRINGID_TERAVOLTENTERS - BATTLESTRINGS_TABLE_START] = sText_TeravoltEnters,
+    [STRINGID_TURBOBLAZEENTERS - BATTLESTRINGS_TABLE_START] = sText_TurboblazeEnters,
+    [STRINGID_SLOWSTARTENTERS - BATTLESTRINGS_TABLE_START] = sText_SlowStartEnters,
+    [STRINGID_SLOWSTARTEND - BATTLESTRINGS_TABLE_START] = sText_SlowStartEnd,
+    [STRINGID_SOLARPOWERHPDROP - BATTLESTRINGS_TABLE_START] = sText_SolarPowerHpDrop,
+    [STRINGID_AFTERMATHDMG - BATTLESTRINGS_TABLE_START] = sText_AftermathDmg,
+    [STRINGID_ANTICIPATIONACTIVATES - BATTLESTRINGS_TABLE_START] = sText_AnticipationActivates,
+    [STRINGID_FOREWARNACTIVATES - BATTLESTRINGS_TABLE_START] = sText_ForewarnActivates,
+    [STRINGID_ICEBODYHPGAIN - BATTLESTRINGS_TABLE_START] = sText_IceBodyHpGain,
+    [STRINGID_SNOWWARNINGHAIL - BATTLESTRINGS_TABLE_START] = sText_SnowWarningHail,
+    [STRINGID_SNOWWARNINGSNOW - BATTLESTRINGS_TABLE_START] = sText_SnowWarningSnow,
+    [STRINGID_FRISKACTIVATES - BATTLESTRINGS_TABLE_START] = sText_FriskActivates,
+    [STRINGID_UNNERVEENTERS - BATTLESTRINGS_TABLE_START] = sText_UnnerveEnters,
+    [STRINGID_HARVESTBERRY - BATTLESTRINGS_TABLE_START] = sText_HarvestBerry,
+    [STRINGID_LASTABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedBuff1,
+    [STRINGID_MAGICBOUNCEACTIVATES - BATTLESTRINGS_TABLE_START] = sText_MagicBounceActivates,
+    [STRINGID_PROTEANTYPECHANGE - BATTLESTRINGS_TABLE_START] = sText_ProteanTypeChange,
+    [STRINGID_SYMBIOSISITEMPASS - BATTLESTRINGS_TABLE_START] = sText_SymbiosisItemPass,
+    [STRINGID_STEALTHROCKDMG - BATTLESTRINGS_TABLE_START] = sText_StealthRockDmg,
+    [STRINGID_TOXICSPIKESABSORBED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesAbsorbed,
+    [STRINGID_TOXICSPIKESPOISONED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesPoisoned,
+    [STRINGID_STICKYWEBSWITCHIN - BATTLESTRINGS_TABLE_START] = sText_StickyWebSwitchIn,
+    [STRINGID_HEALINGWISHCAMETRUE - BATTLESTRINGS_TABLE_START] = sText_HealingWishCameTrue,
+    [STRINGID_HEALINGWISHHEALED - BATTLESTRINGS_TABLE_START] = sText_HealingWishHealed,
+    [STRINGID_LUNARDANCECAMETRUE - BATTLESTRINGS_TABLE_START] = sText_LunarDanceCameTrue,
+    [STRINGID_CUSEDBODYDISABLED - BATTLESTRINGS_TABLE_START] = sText_CursedBodyDisabled,
+    [STRINGID_ATTACKERACQUIREDABILITY - BATTLESTRINGS_TABLE_START] = sText_AttackerAquiredAbility,
+    [STRINGID_TARGETABILITYSTATLOWER - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityLoweredStat,
+    [STRINGID_TARGETSTATWONTGOHIGHER - BATTLESTRINGS_TABLE_START] = sText_TargetStatWontGoHigher,
+    [STRINGID_PKMNMOVEBOUNCEDABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBouncedViaAbility,
+    [STRINGID_IMPOSTERTRANSFORM - BATTLESTRINGS_TABLE_START] = sText_ImposterTransform,
+    [STRINGID_ASSAULTVESTDOESNTALLOW - BATTLESTRINGS_TABLE_START] = sText_AssaultVestDoesntAllow,
+    [STRINGID_GRAVITYPREVENTSUSAGE - BATTLESTRINGS_TABLE_START] = sText_GravityPreventsUsage,
+    [STRINGID_HEALBLOCKPREVENTSUSAGE - BATTLESTRINGS_TABLE_START] = sText_HealBlockPreventsUsage,
+    [STRINGID_NOTDONEYET - BATTLESTRINGS_TABLE_START] = sText_NotDoneYet,
+    [STRINGID_STICKYWEBUSED - BATTLESTRINGS_TABLE_START] = sText_StickyWebUsed,
+    [STRINGID_QUASHSUCCESS - BATTLESTRINGS_TABLE_START] = sText_QuashSuccess,
+    [STRINGID_PKMNBLEWAWAYTOXICSPIKES - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayToxicSpikes,
+    [STRINGID_PKMNBLEWAWAYSTICKYWEB - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayStickyWeb,
+    [STRINGID_PKMNBLEWAWAYSTEALTHROCK - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayStealthRock,
+    [STRINGID_SPIKESDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_SpikesDisappearedFromTeam,
+    [STRINGID_TOXICSPIKESDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesDisappearedFromTeam,
+    [STRINGID_STEALTHROCKDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_StealthRockDisappearedFromTeam,
+    [STRINGID_STICKYWEBDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_StickyWebDisappearedFromTeam,
+    [STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_SharpSteelDisappearedFromTeam,
+    [STRINGID_IONDELUGEON - BATTLESTRINGS_TABLE_START] = sText_IonDelugeOn,
+    [STRINGID_TOPSYTURVYSWITCHEDSTATS - BATTLESTRINGS_TABLE_START] = sText_TopsyTurvySwitchedStats,
+    [STRINGID_TERRAINBECOMESMISTY - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesMisty,
+    [STRINGID_TERRAINBECOMESGRASSY - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesGrassy,
+    [STRINGID_TERRAINBECOMESELECTRIC - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesElectric,
+    [STRINGID_TERRAINBECOMESPSYCHIC - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesPsychic,
+    [STRINGID_TARGETELECTRIFIED - BATTLESTRINGS_TABLE_START] = sText_TargetElectrified,
+    [STRINGID_MEGAEVOREACTING - BATTLESTRINGS_TABLE_START] = sText_MegaEvoReacting,
+    [STRINGID_FERVENTWISHREACHED - BATTLESTRINGS_TABLE_START] = sText_FerventWishReached,
+    [STRINGID_MEGAEVOEVOLVED - BATTLESTRINGS_TABLE_START] = sText_MegaEvoEvolved,
+    [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_drastically,
+    [STRINGID_SEVERELY - BATTLESTRINGS_TABLE_START] = sText_severely,
+    [STRINGID_INFESTATION - BATTLESTRINGS_TABLE_START] = sText_Infestation,
+    [STRINGID_NOEFFECTONTARGET - BATTLESTRINGS_TABLE_START] = sText_NoEffectOnTarget,
+    [STRINGID_BURSTINGFLAMESHIT - BATTLESTRINGS_TABLE_START] = sText_BurstingFlames,
+    [STRINGID_BESTOWITEMGIVING - BATTLESTRINGS_TABLE_START] = sText_BestowItemGiving,
+    [STRINGID_THIRDTYPEADDED - BATTLESTRINGS_TABLE_START] = sText_ThirdTypeAdded,
+    [STRINGID_FELLFORFEINT - BATTLESTRINGS_TABLE_START] = sText_FellForFeint,
+    [STRINGID_POKEMONCANNOTUSEMOVE - BATTLESTRINGS_TABLE_START] = sText_PokemonCannotUseMove,
+    [STRINGID_COVEREDINPOWDER - BATTLESTRINGS_TABLE_START] = sText_CoveredInPowder,
+    [STRINGID_POWDEREXPLODES - BATTLESTRINGS_TABLE_START] = sText_PowderExplodes,
+    [STRINGID_GRAVITYGROUNDING - BATTLESTRINGS_TABLE_START] = sText_GravityGrounding,
+    [STRINGID_MISTYTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_MistyTerrainPreventsStatus,
+    [STRINGID_GRASSYTERRAINHEALS - BATTLESTRINGS_TABLE_START] = sText_GrassyTerrainHeals,
+    [STRINGID_ELECTRICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainPreventsSleep,
+    [STRINGID_PSYCHICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainPreventsPriority,
+    [STRINGID_AURAFLAREDTOLIFE - BATTLESTRINGS_TABLE_START] = sText_AuraFlaredToLife,
+    [STRINGID_AIRLOCKACTIVATES - BATTLESTRINGS_TABLE_START] = sText_AirLockActivates,
+    [STRINGID_PRESSUREENTERS - BATTLESTRINGS_TABLE_START] = sText_PressureActivates,
+    [STRINGID_DARKAURAENTERS - BATTLESTRINGS_TABLE_START] = sText_DarkAuraActivates,
+    [STRINGID_FAIRYAURAENTERS - BATTLESTRINGS_TABLE_START] = sText_FairyAuraActivates,
+    [STRINGID_AURABREAKENTERS - BATTLESTRINGS_TABLE_START] = sText_AuraBreakActivates,
+    [STRINGID_COMATOSEENTERS - BATTLESTRINGS_TABLE_START] = sText_ComatoseActivates,
+    [STRINGID_SCREENCLEANERENTERS - BATTLESTRINGS_TABLE_START] = sText_ScreenCleanerActivates,
+    [STRINGID_BOTHCANNOLONGERESCAPE - BATTLESTRINGS_TABLE_START] = sText_BothCanNoLongerEscape,
+    [STRINGID_CANTESCAPEDUETOUSEDMOVE - BATTLESTRINGS_TABLE_START] = sText_CantEscapeDueToUsedMove,
+    [STRINGID_PKMNBECAMEWEAKERTOFIRE - BATTLESTRINGS_TABLE_START] = sText_PkmnBecameWeakerToFire,
+    [STRINGID_ABOUTTOUSEPOLTERGEIST - BATTLESTRINGS_TABLE_START] = sText_PkmnAboutToBeAttackedByItsItem,
+    [STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE - BATTLESTRINGS_TABLE_START] = sText_CantEscapeBecauseOfCurrentMove,
+    [STRINGID_PKMNTOOKTARGETHIGH - BATTLESTRINGS_TABLE_START] = sText_PkmnTookTargetHigh,
+    [STRINGID_TARGETTOOHEAVY - BATTLESTRINGS_TABLE_START] = sText_TargetTooHeavy,
+    [STRINGID_ATTACKERLOSTELECTRICTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostElectricType,
+    [STRINGID_PKMNSABILITYPREVENTSABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilityPreventsAbility,
+    [STRINGID_PKMNHURTBYFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByFrostbite,
+    [STRINGID_PKMNGOTFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_PkmnGotFrostbite,
+    [STRINGID_PKMNSITEMHEALEDFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemHealedFrostbite,
+    [STRINGID_ATTACKERHEALEDITSFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsFrostbite,
+    [STRINGID_PKMNFROSTBITEHEALED - BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealed,
+    [STRINGID_PKMNFROSTBITEHEALED2 - BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealed2,
+    [STRINGID_PKMNFROSTBITEHEALEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealedBy,
+    [STRINGID_ULTRABURSTREACTING - BATTLESTRINGS_TABLE_START] = sText_UltraBurstReacting,
+    [STRINGID_ULTRABURSTCOMPLETED - BATTLESTRINGS_TABLE_START] = sText_UltraBurstCompleted,
+    [STRINGID_TEAMGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_TeamGainedEXP,
+    [STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP - BATTLESTRINGS_TABLE_START] = sText_TargetCoveredInStickyCandySyrup,
+    [STRINGID_ITEMWASUSEDUP - BATTLESTRINGS_TABLE_START] = sText_ItemWasUsedUp,
+    [STRINGID_ATTACKERLOSTITSTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostItsType,
+    [STRINGID_CLOAKEDINAHARSHLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnIsCloakedInAHarshLight,
 };
 
 const u16 gTrainerUsedItemStringIds[] =
