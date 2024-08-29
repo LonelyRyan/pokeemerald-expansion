@@ -8386,6 +8386,30 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .contestComboMoves = {COMBO_STARTER_GROWTH},
             .battleAnimScript = Move_MAGICAL_LEAF,
         },
+    [MOVE_ICE_FANG] =
+    {
+        .name = COMPOUND_STRING("冰冻牙"),
+            .description = COMPOUND_STRING("用藏有冷气的牙齿咬住对手。\n"
+#if B_USE_FROSTBITE == TRUE
+                                           "有时会使对手冻伤。"),
+#else
+                                           "有时会使对手畏缩或冰冻。"),
+#endif
+        .effect = EFFECT_HIT,
+        .power = 65,
+        .type = TYPE_ICE,
+        .accuracy = 95,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
+            .chance = 10,
+        }),
+    },
 
         [MOVE_WATER_SPORT] = {
             .name = COMPOUND_STRING("玩水"),
@@ -10061,39 +10085,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .contestComboStarterId = COMBO_STARTER_THUNDER_FANG,
             .contestComboMoves = {COMBO_STARTER_CHARGE, COMBO_STARTER_FIRE_FANG, COMBO_STARTER_ICE_FANG},
             .battleAnimScript = Move_THUNDER_FANG,
-        },
-
-        [MOVE_ICE_FANG] = {
-            .name = COMPOUND_STRING("冰冻牙"),
-            .description = COMPOUND_STRING("用藏有冷气的牙齿咬住对手。\n"
-#if B_USE_FROSTBITE == TRUE
-                                           "有时会使对手冻伤。"),
-#else
-                                           "有时会使对手畏缩或冰冻。"),
-#endif
-            .effect = EFFECT_HIT,
-            .power = 65,
-            .type = TYPE_ICE,
-            .accuracy = 95,
-            .pp = 15,
-            .target = MOVE_TARGET_SELECTED,
-            .priority = 0,
-            .category = DAMAGE_CATEGORY_PHYSICAL,
-            .makesContact = TRUE,
-            .bitingMove = TRUE,
-            .additionalEffects = ADDITIONAL_EFFECTS({
-                                                        .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
-                                                        .chance = 10,
-                                                    },
-                                                    {
-                                                        .moveEffect = MOVE_EFFECT_FLINCH,
-                                                        .chance = 10,
-                                                    }),
-            .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
-            .contestCategory = CONTEST_CATEGORY_COOL,
-            .contestComboStarterId = COMBO_STARTER_ICE_FANG,
-            .contestComboMoves = {COMBO_STARTER_FIRE_FANG, COMBO_STARTER_THUNDER_FANG},
-            .battleAnimScript = Move_ICE_FANG,
         },
 
         [MOVE_FIRE_FANG] = {
@@ -20404,5 +20395,4 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .argument = MAX_EFFECT_BYPASS_PROTECT, // EFFECT TODO
             .battleAnimScript = Move_G_MAX_RAPID_FLOW,
         },
-
 };
