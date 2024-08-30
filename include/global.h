@@ -176,10 +176,22 @@ struct Time
 };
 
 
+struct SpecialAbility
+{
+    u8 AuraLevel; //波导之力
+    u8 ViridianLevel; //常磐之力
+    u8 PsychicLevel; //超能力
+    u8 JewelLevel; //超克之力
+    u8 DragonLevel; //御龙之力
+    u8 GodBless; //神之祝福(来自作者的力量)
+    u16 SpiritPower; //精神力强度，能为特殊能力提供加成
+};
+
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
+    struct SpecialAbility sp;
 #endif
 };
 
