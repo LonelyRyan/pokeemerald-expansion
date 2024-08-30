@@ -1,7 +1,7 @@
 # pokeemerald-expansion
 
 ### PLUS:
-汉化——懒得想名字，摆烂，kⅈꫛᧁ，东
+汉化——懒得想名字，摆烂，andy3366，丹砂，东
 RavePossum的九代战斗背景
 Zatsu的属性图标
 Kaixer的徽章图标
