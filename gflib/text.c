@@ -1602,6 +1602,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         }
         ++str;
     }
+    width = (s32)(width*1.3);
 
     if (lineWidth > width)
         return lineWidth;
