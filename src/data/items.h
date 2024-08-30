@@ -1377,7 +1377,7 @@ const struct Item gItemsInfo[] =
 
         [ITEM_ADAMANT_MINT] =
             {
-                .name = _("Adamant Mint"),
+                .name = _("固执薄荷"),
                 .price = (I_PRICE >= GEN_9) ? 20000 : 20,
                 .description = COMPOUND_STRING(
                     "宝可梦闻了后，攻\n击会易于提高，而\n特攻则难以提高。"),
