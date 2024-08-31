@@ -2,3 +2,8 @@
 #include "special_ability_ui.h"
 #include "main.h"
 
+void OpenSpecialAbilityUI(void)
+{
+    
+}
+

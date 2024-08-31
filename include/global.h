@@ -191,8 +191,8 @@ struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
-    struct SpecialAbility sp;
 #endif
+    struct SpecialAbility sp;
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

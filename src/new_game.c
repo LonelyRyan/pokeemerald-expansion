@@ -51,6 +51,7 @@ extern const u8 EventScript_ResetAllMapFlags[];
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
+static void InitSpecialAbilityData(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -85,6 +86,17 @@ static void InitPlayerTrainerId(void)
 {
     u32 trainerId = (Random() << 16) | GetGeneratedTrainerIdLower();
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
+}
+
+static void InitSpecialAbilityData(void)
+{
+    gSaveBlock3Ptr->sp.AuraLevel = 0;
+    gSaveBlock3Ptr->sp.ViridianLevel = 0;
+    gSaveBlock3Ptr->sp.PsychicLevel = 0;
+    gSaveBlock3Ptr->sp.JewelLevel = 0;
+    gSaveBlock3Ptr->sp.DragonLevel = 0;
+    gSaveBlock3Ptr->sp.GodBless = 0;
+    gSaveBlock3Ptr->sp.SpiritPower = 0;
 }
 
 // L=A isnt set here for some reason.
@@ -172,6 +184,7 @@ void NewGameInitData(void)
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     SetCoins(0);
+    InitSpecialAbilityData();
     ResetLinkContestBoolean();
     ResetGameStats();
     ClearAllContestWinnerPics();
