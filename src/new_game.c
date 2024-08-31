@@ -90,13 +90,16 @@ static void InitPlayerTrainerId(void)
 
 static void InitSpecialAbilityData(void)
 {
-    gSaveBlock3Ptr->sp.AuraLevel = 0;
-    gSaveBlock3Ptr->sp.ViridianLevel = 0;
-    gSaveBlock3Ptr->sp.PsychicLevel = 0;
-    gSaveBlock3Ptr->sp.JewelLevel = 0;
-    gSaveBlock3Ptr->sp.DragonLevel = 0;
-    gSaveBlock3Ptr->sp.GodBless = 0;
+    gSaveBlock3Ptr->sp.Aura = FALSE;
+    gSaveBlock3Ptr->sp.Viridian = FALSE;
+    gSaveBlock3Ptr->sp.Psychic = FALSE;
+    gSaveBlock3Ptr->sp.Jewel = FALSE;
+    gSaveBlock3Ptr->sp.Dragon = FALSE;
+    gSaveBlock3Ptr->sp.GodBless = FALSE;
     gSaveBlock3Ptr->sp.SpiritPower = 0;
+    //test
+    gSaveBlock3Ptr->sp.Viridian = TRUE;
+    gSaveBlock3Ptr->sp.SpiritPower = 10;
 }
 
 // L=A isnt set here for some reason.

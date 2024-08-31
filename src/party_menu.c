@@ -79,6 +79,7 @@
 enum {
     MENU_SUMMARY,
     MENU_SWITCH,
+    MENU_CURE,
     MENU_CANCEL1,
     MENU_ITEM,
     MENU_GIVE,
@@ -206,7 +207,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[9];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -247,6 +248,7 @@ static EWRAM_DATA u8 sFinalLevel = 0;
 // IWRAM common
 void (*gItemUseCB)(u8, TaskFunc);
 
+static void CursorCb_MenuCure(u8);
 static void ResetPartyMenu(void);
 static void CB2_InitPartyMenu(void);
 static void CB2_ReloadPartyMenu(void);
@@ -2789,12 +2791,42 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     }
 }
 
+extern EWRAM_DATA u16 BattleSpiritPower;
+
+static void CursorCb_MenuCure(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 restorehp;
+    u16 maxhp = GetMonData(mon, MON_DATA_MAX_HP);
+    u16 currenthp = GetMonData(mon, MON_DATA_HP);
+    u16 maxpower = gSaveBlock3Ptr->sp.SpiritPower;
+
+    if(BattleSpiritPower > maxpower)
+    {
+        BattleSpiritPower = maxpower;
+    }
+    if(BattleSpiritPower >= maxhp - currenthp)
+    {
+        restorehp = maxhp - currenthp;
+    }
+    else
+    {
+        restorehp = BattleSpiritPower;
+    }
+    BattleSpiritPower -= restorehp;
+    restorehp += currenthp;
+    SetMonData(mon, MON_DATA_HP, &restorehp);
+    UpdatePartyMonHPBar(sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId, mon);
+}
+
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
     u8 i, j;
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
+    if(gSaveBlock3Ptr->sp.Viridian == TRUE)
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CURE);
 
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; i++)

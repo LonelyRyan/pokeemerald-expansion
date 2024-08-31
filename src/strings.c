@@ -1834,3 +1834,4 @@ const u8 gText_Fertilize[] = _("施肥");
 const u8 gText_PlantBerry[] = _("种树果");
 const u8 gText_AM[] = _("AM");
 const u8 gText_PM[] = _("PM");
+const u8 gText_MenuCure[] = _("治疗");

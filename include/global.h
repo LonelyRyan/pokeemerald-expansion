@@ -178,12 +178,14 @@ struct Time
 
 struct SpecialAbility
 {
-    u8 AuraLevel; //波导之力
-    u8 ViridianLevel; //常磐之力
-    u8 PsychicLevel; //超能力
-    u8 JewelLevel; //超克之力
-    u8 DragonLevel; //御龙之力
-    u8 GodBless; //神之祝福(来自作者的力量)
+    u8 Aura:1; //波导之力
+    u8 Viridian:1; //常磐之力
+    u8 Psychic:1; //超能力
+    u8 Jewel:1; //超克之力
+    u8 Dragon:1; //御龙之力
+    u8 GodBless:1; //神之祝福(来自作者的力量)
+    u8 filler:2;
+    u8 filler2;
     u16 SpiritPower; //精神力强度，能为特殊能力提供加成
 };
 

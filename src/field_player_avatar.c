@@ -342,6 +342,9 @@ static u8 ObjectEventCB2_NoMovement2(void)
     return 0;
 }
 
+extern EWRAM_DATA u16 BattleSpiritPower;
+extern EWRAM_DATA bool8 NoFirstUseSpecialAbility;
+
 void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -361,6 +364,8 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
             }
         }
     }
+    BattleSpiritPower += 1;
+    NoFirstUseSpecialAbility = FALSE;
 }
 
 static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEvent, u8 direction)

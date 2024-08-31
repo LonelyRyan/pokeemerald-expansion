@@ -597,6 +597,9 @@ static void Cmd_unused(void);
 static void Cmd_tryworryseed(void);
 static void Cmd_callnative(void);
 
+EWRAM_DATA u16 BattleSpiritPower;
+EWRAM_DATA bool8 NoFirstUseSpecialAbility;
+
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
     Cmd_attackcanceler,                          //0x0
@@ -3954,6 +3957,19 @@ static void Cmd_tryfaintmon(void)
     CMD_ARGS(u8 battler, bool8 isSpikes, const u8 *instr);
     u32 battler, destinyBondBattler;
     const u8 *faintScript;
+    
+    if(gSaveBlock3Ptr->sp.Viridian == TRUE)
+    {
+        if(NoFirstUseSpecialAbility == FALSE)
+        {
+            BattleSpiritPower = gSaveBlock3Ptr->sp.SpiritPower;
+            NoFirstUseSpecialAbility = TRUE;
+        }
+    }
+    else
+    {
+        BattleSpiritPower = 0;
+    }
 
     battler = GetBattlerForBattleScript(cmd->battler);
     if (cmd->isSpikes != 0)
@@ -3970,6 +3986,28 @@ static void Cmd_tryfaintmon(void)
     }
     else
     {
+        if ((GetBattlerSide(battler) == B_SIDE_PLAYER) && (BattleSpiritPower > 0))
+        {
+            u16 maxhp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MAX_HP);
+            u16 currenthp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP);
+            u16 restorehp;
+            if(BattleSpiritPower >= maxhp - currenthp)
+            {
+                restorehp = maxhp - currenthp;
+            }
+            else
+            {
+                restorehp = BattleSpiritPower;
+            }
+            BattleSpiritPower -= restorehp;
+            gBattleMoveDamage = restorehp;
+            gBattleMoveDamage *= -1;
+            restorehp += currenthp;
+            gBattleMons[battler].hp = restorehp;
+            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP, &restorehp);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+            PrepareStringBattle(STRINGID_SPHPRESTORE, battler);
+        }
         if (cmd->battler == BS_ATTACKER)
         {
             destinyBondBattler = gBattlerTarget;

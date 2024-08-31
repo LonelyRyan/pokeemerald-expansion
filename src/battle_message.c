@@ -662,7 +662,7 @@ static const u8 sText_TargetElectrified[] = _("The {B_DEF_NAME_WITH_PREFIX}的�
 static const u8 sText_AssaultVestDoesntAllow[] = _("{B_LAST_ITEM} 的效果让这个\n招式无法被使用!\p");
 static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} 不能使用 {B_CURRENT_MOVE}\n由于重力的影响!\p");
 static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} 无法\n使用治愈招式!\p");
-static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的 {B_LAST_ITEM} 对 \n{B_ATK_TRAINER_NAME}'s 超级环有反应了!");
+static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的 {B_LAST_ITEM} 对 \n{B_ATK_TRAINER_NAME}的超级环有反应了!");
 static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}'热切的心意\n传达到了{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX} 超级进化为\n超级{B_BUFF1}!");
 static const u8 sText_drastically[] = _("巨幅提升 ");
@@ -847,6 +847,7 @@ static const u8 sText_PkmnTerastallizedInto[] = _("{B_ATK_NAME_WITH_PREFIX} 变�
 static const u8 sText_SupersweetAromaWafts[] = _("一股超甜的香气从\n覆盖着 {B_ATK_NAME_WITH_PREFIX} 的糖浆中飘散出来！");
 static const u8 sText_TidyingUpComplete[] = _("整理完毕！");
 static const u8 sText_FickleBeamDoubled[] = _("{B_ATK_NAME_WITH_PREFIX} 全力以赴\n进行这次攻击！");
+static const u8 sText_SpecialAbilityHPRestore[] = _("宝可梦的HP在常磐之力下得到恢复{PAUSE 16}");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1551,6 +1552,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ITEMWASUSEDUP - BATTLESTRINGS_TABLE_START] = sText_ItemWasUsedUp,
     [STRINGID_ATTACKERLOSTITSTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostItsType,
     [STRINGID_CLOAKEDINAHARSHLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnIsCloakedInAHarshLight,
+    [STRINGID_SPHPRESTORE - BATTLESTRINGS_TABLE_START] = sText_SpecialAbilityHPRestore,
 };
 
 const u16 gTrainerUsedItemStringIds[] =

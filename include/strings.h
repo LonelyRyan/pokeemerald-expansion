@@ -3046,4 +3046,6 @@ extern const u8 gText_PlantBerry[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+extern const u8 gText_MenuCure[];
+
 #endif // GUARD_STRINGS_H
