@@ -2816,7 +2816,7 @@ static void CursorCb_MenuCure(u8 taskId)
     BattleSpiritPower -= restorehp;
     restorehp += currenthp;
     SetMonData(mon, MON_DATA_HP, &restorehp);
-    UpdatePartyMonHPBar(sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId, mon);
+    UpdateMonDisplayInfoAfterRareCandy(sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId, mon);
 }
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
