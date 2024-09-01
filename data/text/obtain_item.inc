@@ -20,13 +20,13 @@ gText_ObtainedTheDecor::
     .string "得到了{STR_VAR_2}！$"
 
 gText_NoRoomLeftForAnother::
-    .string "糟糕！没有空间再放\n一个{STR_VAR_2}了…$"
+    .string "糟糕！没有空间再放\n{STR_VAR_2}了…$"
 
 gText_TheDecorWasTransferredToThePC::
     .string "{STR_VAR_2}传进了\n电脑里。$"
 
 gText_ObtainedTheItems::
-	.string "获得了 {STR_VAR_1} {STR_VAR_2}!$"
+	.string "获得了{STR_VAR_1}个{STR_VAR_2}!$"
 
 gText_PlayerFoundItems::
-	.string "{PLAYER}找到了{STR_VAR_1} {STR_VAR_2}!$"
+	.string "{PLAYER}找到了{STR_VAR_1}个{STR_VAR_2}!$"

@@ -24,7 +24,7 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-#define STARTER_MON_COUNT   3
+#define STARTER_MON_COUNT   27
 
 // Position of the sprite of the selected starter Pokémon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
@@ -101,6 +101,30 @@ static const u8 sPokeballCoords[STARTER_MON_COUNT][2] =
     {60, 64},
     {120, 88},
     {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
+    {60, 64},
+    {120, 88},
+    {180, 64},
 };
 
 static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
@@ -108,13 +132,61 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {0, 9},
     {16, 10},
     {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
+    {0, 9},
+    {16, 10},
+    {8, 4},
 };
 
 static const u16 sStarterMon[STARTER_MON_COUNT] =
 {
+    SPECIES_BULBASAUR,
+	SPECIES_CHARMANDER,
+	SPECIES_SQUIRTLE,
+	SPECIES_CHIKORITA,
+	SPECIES_CYNDAQUIL,
+	SPECIES_TOTODILE,
     SPECIES_TREECKO,
     SPECIES_TORCHIC,
     SPECIES_MUDKIP,
+    SPECIES_TURTWIG,
+    SPECIES_CHIMCHAR,
+    SPECIES_PIPLUP,
+    SPECIES_SNIVY,
+    SPECIES_TEPIG,
+    SPECIES_OSHAWOTT,
+    SPECIES_CHESPIN,
+    SPECIES_FENNEKIN,
+    SPECIES_FROAKIE,
+    SPECIES_ROWLET,
+    SPECIES_LITTEN,
+    SPECIES_POPPLIO,
+    SPECIES_GROOKEY,
+    SPECIES_SCORBUNNY,
+    SPECIES_SOBBLE,
+    SPECIES_SPRIGATITO,
+    SPECIES_FUECOCO,
+    SPECIES_QUAXLY,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -206,6 +278,30 @@ static const u8 sCursorCoords[][2] =
     {60, 32},
     {120, 56},
     {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
+    {60, 32},
+    {120, 56},
+    {180, 32},
 };
 
 static const union AnimCmd sAnim_Hand[] =
@@ -266,7 +362,14 @@ static const union AnimCmd * const sAnims_StarterCircle[] =
 
 static const union AffineAnimCmd sAffineAnim_StarterPokemon[] =
 {
-    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(8, 8, 0, 0),
+    AFFINEANIMCMD_FRAME(8, 8, 0, 15),
+    AFFINEANIMCMD_FRAME(-10, -10, -4, 16),
+    AFFINEANIMCMD_FRAME(-12, -12, -4, 16),
+    AFFINEANIMCMD_FRAME(-14, -14, -4, 16),
+    AFFINEANIMCMD_FRAME(-16, -16, -4, 16),
+    AFFINEANIMCMD_FRAME(16, 16, -16, 15),
+    AFFINEANIMCMD_FRAME(32, 32, 0, 15),
     AFFINEANIMCMD_FRAME(16, 16, 0, 15),
     AFFINEANIMCMD_END,
 };
@@ -647,7 +750,7 @@ static void SpriteCB_SelectionHand(struct Sprite *sprite)
 static void SpriteCB_Pokeball(struct Sprite *sprite)
 {
     // Animate Poké Ball if currently selected
-    if (gTasks[sprite->sTaskId].tStarterSelection == sprite->sBallId)
+    if (gTasks[sprite->sTaskId].tStarterSelection % 3 == sprite->sBallId)
         StartSpriteAnimIfDifferent(sprite, 1);
     else
         StartSpriteAnimIfDifferent(sprite, 0);
