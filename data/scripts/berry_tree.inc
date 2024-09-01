@@ -265,7 +265,7 @@ BerryTree_Text_PlantedOneBerry:
 
 BerryTree_Text_BerryGrowthStage1:
 .if OW_BERRY_SIX_STAGES == TRUE
-    .string "这就是你种下的{STR_VAR_1}的地方！$"
+    .string "这就是你种下{STR_VAR_1}的地方！$"
 .else
     .string "这里种下了一颗{STR_VAR_1}。$"
 .endif
@@ -281,7 +281,7 @@ BerryTree_Text_BerryGrowthStage3:
 .if OW_BERRY_SIX_STAGES == TRUE
     .string "树果{STR_VAR_1}的幼苗长得不错！$"
 .else
-    .string "这棵{STR_VAR_1}植物长得更高了。$"
+    .string "这棵{STR_VAR_1}长得更高了。$"
 .endif
 
 BerryTree_Text_BerryGrowthStageTrunk:
@@ -308,12 +308,12 @@ BerryTree_Text_CareAdverbGood:
     .string "漂亮地$"
 
 BerryTree_Text_WantToPick:
-    .string "你发现了{STR_VAR_2}的{STR_VAR_1}！\p"
+    .string "你发现了{STR_VAR_2}个{STR_VAR_1}！\p"
     .string "你想采摘\n"
     .string "{STR_VAR_1}吗？$"
 
 BerryTree_Text_PickedTheBerry:
-    .string "{PLAYER}采摘了{STR_VAR_2}的{STR_VAR_1}。$"
+    .string "{PLAYER}采摘了{STR_VAR_2}个{STR_VAR_1}。$"
 
 BerryTree_Text_PutAwayBerry:
     .string "{PLAYER}把{STR_VAR_1}\n"
@@ -376,7 +376,7 @@ BerryTree_EventScript_PickBerry_Mutation::
 	end
 
 BerryTree_Text_WantToPick_Mutation:
-    .string "你发现了{STR_VAR_2}的{STR_VAR_1}\n"
+    .string "你发现了{STR_VAR_2}个{STR_VAR_1}\n"
     .string "和1个{STR_VAR_3}！\p"
     .string "你想采摘它们吗？$"
 
@@ -390,7 +390,7 @@ BerryTree_Text_BerryPocketFull_Mutation:
     .string "{STR_VAR_3}无法被拿走。$"
 
 BerryTree_Text_PickedTheBerry_Mutation:
-    .string "{PLAYER}采摘了{STR_VAR_2}的{STR_VAR_1}\n"
+    .string "{PLAYER}采摘了{STR_VAR_2}个{STR_VAR_1}\n"
     .string "和{STR_VAR_3}。$"
 
 BerryTree_Text_PutAwayBerry_Mutation:

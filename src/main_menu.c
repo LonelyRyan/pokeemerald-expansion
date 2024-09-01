@@ -248,8 +248,8 @@ static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8
 // .rodata
 
 static const u16 sBirchSpeechBgPals[][16] = {
-    INCBIN_U16("graphics/birch_speech/bg0.gbapal"),
-    INCBIN_U16("graphics/birch_speech/bg1.gbapal")
+    INCBIN_U16("graphics/birch_speech/bg0.bin"),
+    INCBIN_U16("graphics/birch_speech/bg1.bin")
 };
 
 static const u32 sBirchSpeechShadowGfx[] = INCBIN_U32("graphics/birch_speech/shadow.4bpp.lz");
