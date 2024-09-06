@@ -51,7 +51,7 @@ struct BattleWindowText
 static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 
-static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] ={0};
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
@@ -478,7 +478,7 @@ const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 
 static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME}使用\n{B_LAST_ITEM}！");
 static const u8 sText_WallyUsedItem[] = _("满充使用了\n{B_LAST_ITEM}！");
-static const u8 sText_Trainer1UsedItem[] = _("{B_ATK_TRAINER_CLASS}{B_ATK_TRAINER_NAME}\n使用了 {B_LAST_ITEM}！");
+static const u8 sText_Trainer1UsedItem[] = _("{B_ATK_TRAINER_CLASS}{B_ATK_TRAINER_NAME}\n使用了{B_LAST_ITEM}！");
 static const u8 sText_TrainerBlockedBall[] = _("训练家挡下了精灵球！");
 static const u8 sText_DontBeAThief[] = _("不要做贼！");
 static const u8 sText_ItDodgedBall[] = _("它躲开了精灵球！\n这只宝可梦不能被收服！");
@@ -502,7 +502,7 @@ static const u8 sText_BerrySuffix[] = _("树果");
 static const u8 sText_PkmnsItemCuredParalysis[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了麻痹！");
 static const u8 sText_PkmnsItemCuredPoison[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了中毒！");
 static const u8 sText_PkmnsItemHealedBurn[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了灼烧！");
-static const u8 sText_PkmnsItemHealedFrostbite[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nhealed its frostbite!");
+static const u8 sText_PkmnsItemHealedFrostbite[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s{B_LAST_ITEM}\nhealed its frostbite!");
 static const u8 sText_PkmnsItemDefrostedIt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n解除了冰冻！");
 static const u8 sText_PkmnsItemWokeIt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n让它从睡眠中苏醒了！");
 static const u8 sText_PkmnsItemSnappedOut[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n使它解除了混乱！");
@@ -534,8 +534,8 @@ static const u8 sText_TwoInGameTrainersDefeated[];
 static const u8 sText_Trainer2LoseText[];
 
 // New battle strings.
-static const u8 sText_EnduredViaSturdy[] = _("{B_DEF_NAME_WITH_PREFIX}挺住了\n攻击 {B_DEF_ABILITY}!");
-static const u8 sText_PowerHerbActivation[] = _("{B_ATK_NAME_WITH_PREFIX}完全充能了\n因为它的 {B_LAST_ITEM}!");
+static const u8 sText_EnduredViaSturdy[] = _("{B_DEF_NAME_WITH_PREFIX}挺住了\n攻击{B_DEF_ABILITY}!");
+static const u8 sText_PowerHerbActivation[] = _("{B_ATK_NAME_WITH_PREFIX}完全充能了\n因为它的{B_LAST_ITEM}!");
 static const u8 sText_HurtByItem[] = _("{B_ATK_NAME_WITH_PREFIX}受伤了\n因为它的{B_LAST_ITEM}！");
 static const u8 sText_BadlyPoisonedByItem[] = _("{B_EFF_NAME_WITH_PREFIX}中剧毒了\n因为{B_LAST_ITEM}！");
 static const u8 sText_BurnedByItem[] = _("{B_EFF_NAME_WITH_PREFIX}烧伤了\n因为{B_LAST_ITEM}！");
@@ -555,13 +555,13 @@ static const u8 sText_ShieldedFromCriticalHits[] = _("{B_CURRENT_MOVE}保护{B_A
 static const u8 sText_SwitchedAtkAndSpAtk[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了\n攻击和\p和特攻！");
 static const u8 sText_SwitchedDefAndSpDef[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了\n防御和\p和特防！");
 static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX}获得了\n{B_DEF_ABILITY}！");
-static const u8 sText_PoisonSpikesScattered[] = _("毒菱散落在\n {B_DEF_TEAM2}队伍的脚下！");
+static const u8 sText_PoisonSpikesScattered[] = _("毒菱散落在\n{B_DEF_TEAM2}队伍的脚下！");
 static const u8 sText_PkmnSwitchedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了\n能力等级！");
 static const u8 sText_PkmnSurroundedWithVeilOfWater[] = _("{B_ATK_NAME_WITH_PREFIX}身边围绕着\n一层水幕！");
 static const u8 sText_PkmnLevitatedOnElectromagnetism[] = _("{B_ATK_NAME_WITH_PREFIX}通过电磁力\n漂浮了起来！");
 static const u8 sText_PkmnTwistedDimensions[] = _("{B_ATK_NAME_WITH_PREFIX}扭曲了\n时空！");
 static const u8 sText_DimensionsWereTwisted[] = _("空间被扭曲了!");
-static const u8 sText_PointedStonesFloat[] = _("尖锐的岩石漂浮在了\n {B_DEF_TEAM2}的队伍周围!");
+static const u8 sText_PointedStonesFloat[] = _("尖锐的岩石漂浮在了\n{B_DEF_TEAM2}的队伍周围!");
 static const u8 sText_CloakedInMysticalMoonlight[] = _("被神秘的月光\n笼罩!");
 static const u8 sText_TrappedBySwirlingMagma[] = _("{B_DEF_NAME_WITH_PREFIX}被\n旋转的岩浆困住了!");
 static const u8 sText_VanishedInstantly[] = _("{B_ATK_NAME_WITH_PREFIX}突然\n消失了!");
@@ -584,8 +584,8 @@ static const u8 sText_RestoreTargetsHealth[] = _("{B_DEF_NAME_WITH_PREFIX}的HP�
 static const u8 sText_TookPkmnIntoTheSky[] = _("{B_ATK_NAME_WITH_PREFIX}把\n{B_DEF_NAME_WITH_PREFIX}抓向天空!");
 static const u8 sText_FreedFromSkyDrop[] = _("{B_DEF_NAME_WITH_PREFIX}从自由落体状态\n逃脱了!");
 static const u8 sText_PostponeTargetMove[] = _("{B_DEF_NAME_WITH_PREFIX}的行动\n延后了!");
-static const u8 sText_ReflectTargetsType[] = _("{B_ATK_NAME_WITH_PREFIX}的属性\n变成了 {B_DEF_NAME_WITH_PREFIX}'s!");
-static const u8 sText_TransferHeldItem[] = _("{B_DEF_NAME_WITH_PREFIX}收到了 {B_LAST_ITEM}\n来自 {B_ATK_NAME_WITH_PREFIX}");
+static const u8 sText_ReflectTargetsType[] = _("{B_ATK_NAME_WITH_PREFIX}的属性\n变成了{B_DEF_NAME_WITH_PREFIX}'s!");
+static const u8 sText_TransferHeldItem[] = _("{B_DEF_NAME_WITH_PREFIX}收到了{B_LAST_ITEM}\n来自{B_ATK_NAME_WITH_PREFIX}");
 static const u8 sText_EmbargoEnds[] = _("{B_ATK_NAME_WITH_PREFIX}可以\n再次使用道具了！");
 static const u8 sText_Electromagnetism[] = _("电磁浮游");
 static const u8 sText_BufferEnds[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n解除了！");
@@ -631,7 +631,7 @@ static const u8 sText_MagicBounceActivates[] = _("{B_DEF_NAME_WITH_PREFIX}弹回
 static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}变身\n成了{B_BUFF1}属性！");
 static const u8 sText_SymbiosisItemPass[] = _("{B_ATK_NAME_WITH_PREFIX}通过{B_LAST_ABILITY}把它的{B_LAST_ITEM}\n传递给{B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
 static const u8 sText_StealthRockDmg[] = _("锋利的岩石扎进了对手的\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
-static const u8 sText_ToxicSpikesAbsorbed[] = _("毒菱从 {B_DEF_TEAM2}的队伍\n周围消失了！");
+static const u8 sText_ToxicSpikesAbsorbed[] = _("毒菱从{B_DEF_TEAM2}的队伍\n周围消失了！");
 static const u8 sText_ToxicSpikesPoisoned[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}中毒了！");
 static const u8 sText_StickyWebSwitchIn[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}陷入了\n粘网！");
 static const u8 sText_HealingWishCameTrue[] = _("治愈之愿降临\n在了{B_ATK_NAME_WITH_PREFIX}！");
@@ -658,22 +658,22 @@ static const u8 sText_TerrainBecomesMisty[] = _("脚下雾气缭绕！");
 static const u8 sText_TerrainBecomesGrassy[] = _("脚下绿草如茵！");
 static const u8 sText_TerrainBecomesElectric[] = _("脚下电光飞闪！");
 static const u8 sText_TerrainBecomesPsychic[] = _("脚下传来了奇妙的感觉！");
-static const u8 sText_TargetElectrified[] = _("The {B_DEF_NAME_WITH_PREFIX}的招式\n带电了!");
+static const u8 sText_TargetElectrified[] = _("The{B_DEF_NAME_WITH_PREFIX}的招式\n带电了!");
 static const u8 sText_AssaultVestDoesntAllow[] = _("{B_LAST_ITEM}的效果让这个\n招式无法被使用!\p");
-static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}不能使用 {B_CURRENT_MOVE}\n由于重力的影响!\p");
+static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}不能使用{B_CURRENT_MOVE}\n由于重力的影响!\p");
 static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n使用治愈招式!\p");
-static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的 {B_LAST_ITEM}对 \n{B_ATK_TRAINER_NAME}'s 超级环有反应了!");
+static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ITEM}对 \n{B_ATK_TRAINER_NAME}'s 超级环有反应了!");
 static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}热切的心意\n传达到了{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX}超级进化为\n超级{B_BUFF1}!");
 static const u8 sText_drastically[] = _("巨幅提升 ");
 static const u8 sText_severely[] = _("巨幅下降 ");
-static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX}遭受着\n {B_ATK_NAME_WITH_PREFIX}的死缠烂打!");
+static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX}遭受着\n{B_ATK_NAME_WITH_PREFIX}的死缠烂打!");
 static const u8 sText_NoEffectOnTarget[] = _("对{B_DEF_NAME_WITH_PREFIX}\n没有效果！");
-static const u8 sText_BurstingFlames[] = _("烈焰溅射到了\n {B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
-static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX}从{B_ATK_NAME_WITH_PREFIX}\n收到了 {B_LAST_ITEM}!");
+static const u8 sText_BurstingFlames[] = _("烈焰溅射到了\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
+static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX}从{B_ATK_NAME_WITH_PREFIX}\n收到了{B_LAST_ITEM}!");
 static const u8 sText_ThirdTypeAdded[] = _("{B_BUFF1}被附加到了\n{B_DEF_NAME_WITH_PREFIX}上");
 static const u8 sText_FellForFeint[] = _("{B_DEF_NAME_WITH_PREFIX}摔倒\n了!");
-static const u8 sText_PokemonCannotUseMove[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n使用 {B_CURRENT_MOVE}!");
+static const u8 sText_PokemonCannotUseMove[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n使用{B_CURRENT_MOVE}!");
 static const u8 sText_CoveredInPowder[] = _("{B_DEF_NAME_WITH_PREFIX}被粉尘覆盖！");
 static const u8 sText_PowderExplodes[] = _("宝可梦身上的粉尘被火焰碰到后爆炸了！");
 static const u8 sText_BelchCantUse[] = _("无法使用打嗝！");
@@ -687,7 +687,7 @@ static const u8 sText_SafetyGogglesProtected[] = _("多亏了它的{B_LAST_ITEM}
 static const u8 sText_FlowerVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}用花幕\n包裹了自己!");
 static const u8 sText_SweetVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}用甜幕\n包裹了自己!");
 static const u8 sText_AromaVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}被芳香幕\n保护了!");
-static const u8 sText_CelebrateMessage[] = _("祝贺, {B_PLAYER_NAME}!");
+static const u8 sText_CelebrateMessage[] = _("祝贺,{B_PLAYER_NAME}!");
 static const u8 sText_UsedInstructedMove[] = _("由于号令的{B_BUFF1}\n{B_ATK_NAME_WITH_PREFIX}使出了招式!");
 static const u8 sText_LaserFocusMessage[] = _("{B_ATK_NAME_WITH_PREFIX}\n高度集中!");
 static const u8 sText_GemActivates[] = _("{B_LAST_ITEM}增强了\n{B_ATK_NAME_WITH_PREFIX}的力量!");
@@ -701,12 +701,12 @@ static const u8 sText_IllusionWoreOff[] = _("{B_DEF_NAME_WITH_PREFIX}的幻象�
 static const u8 sText_AttackerCuredTargetStatus[] = _("{B_ATK_NAME_WITH_PREFIX}治愈了\n{B_DEF_NAME_WITH_PREFIX}的问题!");
 static const u8 sText_AttackerLostFireType[] = _("{B_ATK_NAME_WITH_PREFIX}燃尽了自己！");
 static const u8 sText_HealerCure[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ABILITY}\n治愈了{B_SCR_ACTIVE_NAME_WITH_PREFIX}的问题!");
-static const u8 sText_ReceiverAbilityTakeOver[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的 {B_SCR_ACTIVE_ABILITY}\n被继承了!");
+static const u8 sText_ReceiverAbilityTakeOver[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n被继承了!");
 static const u8 sText_PkmnAbsorbingPower[] = _("{B_ATK_NAME_WITH_PREFIX}正在吸收力量!");
 static const u8 sText_NoOneWillBeAbleToRun[] = _("在下一回合中\n没有宝可梦能够逃跑！");
-static const u8 sText_DestinyKnotActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}爱上了\n因为 {B_LAST_ITEM}!");
+static const u8 sText_DestinyKnotActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}爱上了\n因为{B_LAST_ITEM}!");
 static const u8 sText_CloakedInAFreezingLight[] = _("{B_ATK_NAME_WITH_PREFIX}被冷光\n包围了!");
-static const u8 sText_ClearAmuletWontLowerStats[] = _("{B_DEF_NAME_WITH_PREFIX}的 {B_LAST_ITEM}\n没有被降低!");
+static const u8 sText_ClearAmuletWontLowerStats[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n没有被降低!");
 static const u8 sText_AuraFlaredToLife[] = _("{B_DEF_NAME_WITH_PREFIX}灵光焕发!");
 static const u8 sText_AirLockActivates[] = _("天气带来的效果\n消失了。");
 static const u8 sText_PressureActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在施加\n压迫感！");
@@ -767,7 +767,7 @@ static const u8 sText_AbilityAllowsOnlyMove[] = _("{B_ATK_ABILITY}只允许\n用
 static const u8 sText_SwappedAbilities[] = _("{B_DEF_NAME_WITH_PREFIX}与选中的\n目标交换特性!");
 static const u8 sText_PastelVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}受到\n粉彩护幕的保护!");
 static const u8 sText_PastelVeilEnters[] = _("{B_DEF_NAME_WITH_PREFIX}的\n中毒已经治愈了!");
-static const u8 sText_BattlerTypeChangedTo[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的属性\n更改为 {B_BUFF1}!");
+static const u8 sText_BattlerTypeChangedTo[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的属性\n更改为{B_BUFF1}!");
 static const u8 sText_BothCanNoLongerEscape[] = _("没有宝可梦能逃跑!");
 static const u8 sText_CantEscapeDueToUsedMove[] = _("{B_ATK_NAME_WITH_PREFIX}不能逃跑\n因为他使用了{B_CURRENT_MOVE}!");
 static const u8 sText_PkmnBecameWeakerToFire[] = _("{B_DEF_NAME_WITH_PREFIX}的\n火属性技能减弱了!");
@@ -775,7 +775,7 @@ static const u8 sText_PkmnAboutToBeAttackedByItsItem[] = _("{B_DEF_NAME_WITH_PRE
 static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PREFIX}不能逃跑e\n因为{B_CURRENT_MOVE}!");
 static const u8 sText_NeutralizingGasEnters[] = _("化学变化气体填满了场地!");
 static const u8 sText_NeutralizingGasOver[] = _("化学变化气体\n逐渐消失了!");
-static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX}把 {B_DEF_NAME_WITH_PREFIX}\n带到了空中！");
+static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX}把{B_DEF_NAME_WITH_PREFIX}\n带到了空中！");
 static const u8 sText_TargetTooHeavy[] = _("但是目标\n太重了！");
 static const u8 sText_MeteorBeamCharging[] = _("{B_ATK_NAME_WITH_PREFIX}充满了\n空间能量！");
 static const u8 sText_HeatingUpBeak[] = _("{B_ATK_NAME_WITH_PREFIX}开始\n加热它的喙！");
@@ -818,33 +818,33 @@ static const u8 sText_ItemRestoredSpeciesHealth[] = _("{B_BUFF1}的\nHP恢复了
 static const u8 sText_ItemCuredSpeciesStatus[] = _("{B_BUFF1}的\n状态治愈了！");
 static const u8 sText_ItemRestoredSpeciesPP[] = _("{B_BUFF1}的\nPP恢复了！");
 static const u8 sText_AtkTrappedDef[] = _("{B_ATK_NAME_WITH_PREFIX}困住了\n{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_MirrorHerbCopied[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用它的 {B_LAST_ITEM}\n来镜像对手的属性变化！");
-static const u8 sText_PkmnItemMelted[] = _("{B_ATK_NAME_WITH_PREFIX}腐蚀了\n{B_DEF_NAME_WITH_PREFIX}的 {B_LAST_ITEM}！");
-static const u8 sText_UltraBurstReacting[] = _("明亮的光芒即将\n从 {B_ATK_NAME_WITH_PREFIX}爆发出来！");
+static const u8 sText_MirrorHerbCopied[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}\n来镜像对手的属性变化！");
+static const u8 sText_PkmnItemMelted[] = _("{B_ATK_NAME_WITH_PREFIX}腐蚀了\n{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}！");
+static const u8 sText_UltraBurstReacting[] = _("明亮的光芒即将\n从{B_ATK_NAME_WITH_PREFIX}爆发出来！");
 static const u8 sText_UltraBurstCompleted[] = _("{B_ATK_NAME_WITH_PREFIX}通过究极爆发\n恢复了其真正的力量！");
-static const u8 sText_TeamGainedEXP[] = _("你的队伍其他成员获得了EXP。\n点数多亏了 {B_LAST_ITEM}！\p");
+static const u8 sText_TeamGainedEXP[] = _("你的队伍其他成员获得了EXP。\n点数多亏了{B_LAST_ITEM}！\p");
 static const u8 sText_CurrentMoveCantSelect[] = _("{B_BUFF1}不能使用！\p");
 static const u8 sText_TargetIsBeingSaltCured[] = _("{B_DEF_NAME_WITH_PREFIX}正在被盐渍！");
-static const u8 sText_TargetIsHurtBySaltCure[] = _("{B_DEF_NAME_WITH_PREFIX}被 {B_BUFF1}伤害了！");
+static const u8 sText_TargetIsHurtBySaltCure[] = _("{B_DEF_NAME_WITH_PREFIX}被{B_BUFF1}伤害了！");
 static const u8 sText_TargetCoveredInStickyCandySyrup[] = _("{B_DEF_NAME_WITH_PREFIX}被\n粘稠的糖浆覆盖了！");
 static const u8 sText_PkmnTellChillingReceptionJoke[] = _("{B_ATK_NAME_WITH_PREFIX}正准备讲一个\n冷到极点的笑话！");
 static const u8 sText_ZeroToHeroTransformation[] = _("{B_ATK_NAME_WITH_PREFIX}经历了一次\n英勇的转变！");
 static const u8 sText_TheTwoMovesBecomeOne[] = _("两个招式合二为一！\n这是一个组合招式！{PAUSE 16}");
-static const u8 sText_ARainbowAppearedOnSide[] = _("一道彩虹出现在天空\n在 {B_ATK_TEAM2}队伍的一边！");
+static const u8 sText_ARainbowAppearedOnSide[] = _("一道彩虹出现在天空\n在{B_ATK_TEAM2}队伍的一边！");
 static const u8 sText_TheRainbowDisappeared[] = _("{B_ATK_TEAM2}一边的\n彩虹消失了！");
 static const u8 sText_WaitingForPartnersMove[] = _("{B_ATK_NAME_WITH_PREFIX}正在等待\n{B_ATK_PARTNER_NAME}的招式…{PAUSE 16}");
 static const u8 sText_SeaOfFireEnvelopedSide[] = _("一片火海包围了\n{B_DEF_TEAM2}队伍！");
 static const u8 sText_HurtByTheSeaOfFire[] = _("{B_ATK_TEAM1}{B_ATK_NAME_WITH_PREFIX}被\n火海伤害了！");
-static const u8 sText_TheSeaOfFireDisappeared[] = _("围绕 {B_ATK_TEAM2}队伍的\n火海消失了！");
+static const u8 sText_TheSeaOfFireDisappeared[] = _("围绕{B_ATK_TEAM2}队伍的\n火海消失了！");
 static const u8 sText_SwampEnvelopedSide[] = _("一片沼泽包围了\n{B_DEF_TEAM2}队伍！");
-static const u8 sText_TheSwampDisappeared[] = _("围绕 {B_ATK_TEAM2}队伍的\n沼泽消失了！");
+static const u8 sText_TheSwampDisappeared[] = _("围绕{B_ATK_TEAM2}队伍的\n沼泽消失了！");
 static const u8 sText_HospitalityRestoration[] = _("{B_ATK_PARTNER_NAME}喝下了\n{B_ATK_NAME_WITH_PREFIX}制作的所有抹茶！");
 static const u8 sText_ElectroShotCharging[] = _("{B_ATK_NAME_WITH_PREFIX}吸收了\n电力！");
 static const u8 sText_ItemWasUsedUp[] = _("{B_LAST_ITEM}\n用完了...");
-static const u8 sText_AttackerLostItsType[] = _("{B_ATK_NAME_WITH_PREFIX}失去了\n它的 {B_BUFF1}类型！");
+static const u8 sText_AttackerLostItsType[] = _("{B_ATK_NAME_WITH_PREFIX}失去了\n它的{B_BUFF1}类型！");
 static const u8 sText_ShedItsTail[] = _("{B_ATK_NAME_WITH_PREFIX}蜕下它的尾巴\n来制造一个诱饵！");
 static const u8 sText_PkmnTerastallizedInto[] = _("{B_ATK_NAME_WITH_PREFIX}变成了\n{B_BUFF1}类型！");
-static const u8 sText_SupersweetAromaWafts[] = _("一股超甜的香气从\n覆盖着 {B_ATK_NAME_WITH_PREFIX}的糖浆中飘散出来！");
+static const u8 sText_SupersweetAromaWafts[] = _("一股超甜的香气从\n覆盖着{B_ATK_NAME_WITH_PREFIX}的糖浆中飘散出来！");
 static const u8 sText_TidyingUpComplete[] = _("整理完毕！");
 static const u8 sText_FickleBeamDoubled[] = _("{B_ATK_NAME_WITH_PREFIX}全力以赴\n进行这次攻击！");
 
@@ -2101,10 +2101,10 @@ const u8 gText_Skill[] = _("技巧");
 const u8 gText_Body[] = _("身体");
 const u8 gText_Judgment[] = _("{B_BUFF1}{CLEAR 13}判定{CLEAR 13}{B_BUFF2}");
 static const u8 sText_TwoTrainersSentPkmn[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}派出了\n{B_OPPONENT_MON1_NAME}！\p{B_TRAINER2_CLASS}{B_TRAINER2_NAME}派出了\n{B_OPPONENT_MON2_NAME}！");
-static const u8 sText_Trainer2SentOutPkmn[] = _("{B_TRAINER2_CLASS} {B_TRAINER2_NAME}派出了\n{B_BUFF1}！");
-static const u8 sText_TwoTrainersWantToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}和\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\l想要对战！\p");
-static const u8 sText_InGamePartnerSentOutZGoN[] = _("{B_PARTNER_CLASS} {B_PARTNER_NAME}派出了\n{B_PLAYER_MON2_NAME}！\l去吧，{B_PLAYER_MON1_NAME}！");
-static const u8 sText_TwoInGameTrainersDefeated[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}和\n{B_TRAINER2_CLASS}{B_TRAINER2_NAME}\l被打败了！\p");
+static const u8 sText_Trainer2SentOutPkmn[] = _("{B_TRAINER2_CLASS}{B_TRAINER2_NAME}派出了\n{B_BUFF1}！");
+static const u8 sText_TwoTrainersWantToBattle[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}和\n{B_TRAINER2_CLASS}{B_TRAINER2_NAME}\l想要对战！\p");
+static const u8 sText_InGamePartnerSentOutZGoN[] = _("{B_PARTNER_CLASS}{B_PARTNER_NAME}派出了\n{B_PLAYER_MON2_NAME}！\l去吧，{B_PLAYER_MON1_NAME}！");
+static const u8 sText_TwoInGameTrainersDefeated[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}和\n{B_TRAINER2_CLASS}{B_TRAINER2_NAME}\l被打败了！\p");
 static const u8 sText_Trainer2LoseText[] = _("{B_TRAINER2_LOSE_TEXT}");
 static const u8 sText_PkmnIncapableOfPower[] = _("{B_ATK_NAME_WITH_PREFIX}似乎无法\n使出力量！");
 static const u8 sText_GlintAppearsInEye[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}眼中闪烁\n着亮光！");
@@ -2151,8 +2151,8 @@ static const u8 sText_ForfeitedMatch[] = _("{B_PLAYER_NAME}放弃了参赛资格
 static const u8 sText_Trainer1WinText[] = _("{B_TRAINER1_WIN_TEXT}");
 static const u8 sText_Trainer2WinText[] = _("{B_TRAINER2_WIN_TEXT}");
 static const u8 sText_Trainer1Fled[] = _("{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS}{B_TRAINER1_NAME}逃跑了！");
-static const u8 sText_PlayerLostAgainstTrainer1[] = _("你输给了\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}！");
-static const u8 sText_PlayerBattledToDrawTrainer1[] = _("你跟\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}打成了平手！");
+static const u8 sText_PlayerLostAgainstTrainer1[] = _("你输给了\n{B_TRAINER1_CLASS}{B_TRAINER1_NAME}！");
+static const u8 sText_PlayerBattledToDrawTrainer1[] = _("你跟\n{B_TRAINER1_CLASS}{B_TRAINER1_NAME}打成了平手！");
 const u8 gText_RecordBattleToPass[] = _("你想将这场对战记录\n在你的开拓区通行证上吗？");
 const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}的对战结果\n已经记录在开拓区通行证上了。");
 static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_LINK_OPPONENT1_NAME}\n想要对战！{PAUSE 49}");
@@ -2207,7 +2207,7 @@ static const u8 sText_EmptyStatus[] = _("$$$$$$$");
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
     {
-        [B_WIN_MSG] = {
+        [B_WIN_MSG] ={
             .fillValue = PIXEL_FILL(0xF),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2217,7 +2217,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 15,
             .shadowColor = 6,
         },
-        [B_WIN_ACTION_PROMPT] = {
+        [B_WIN_ACTION_PROMPT] ={
             .fillValue = PIXEL_FILL(0xF),
             .fontId = FONT_NORMAL,
             .x = 1,
@@ -2227,7 +2227,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 15,
             .shadowColor = 6,
         },
-        [B_WIN_ACTION_MENU] = {
+        [B_WIN_ACTION_MENU] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2237,7 +2237,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_1] = {
+        [B_WIN_MOVE_NAME_1] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2247,7 +2247,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_2] = {
+        [B_WIN_MOVE_NAME_2] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2257,7 +2257,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_3] = {
+        [B_WIN_MOVE_NAME_3] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2267,7 +2267,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_4] = {
+        [B_WIN_MOVE_NAME_4] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2277,7 +2277,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_PP] = {
+        [B_WIN_PP] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2287,7 +2287,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 11,
         },
-        [B_WIN_DUMMY] = {
+        [B_WIN_DUMMY] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2297,7 +2297,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_PP_REMAINING] = {
+        [B_WIN_PP_REMAINING] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 2,
@@ -2307,7 +2307,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 11,
         },
-        [B_WIN_MOVE_TYPE] = {
+        [B_WIN_MOVE_TYPE] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2317,7 +2317,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_SWITCH_PROMPT] = {
+        [B_WIN_SWITCH_PROMPT] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2327,7 +2327,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_YESNO] = {
+        [B_WIN_YESNO] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2337,7 +2337,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_LEVEL_UP_BOX] = {
+        [B_WIN_LEVEL_UP_BOX] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2347,7 +2347,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_LEVEL_UP_BANNER] = {
+        [B_WIN_LEVEL_UP_BANNER] ={
             .fillValue = PIXEL_FILL(0),
             .fontId = FONT_NORMAL,
             .x = 32,
@@ -2356,7 +2356,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .fgColor = 1,
             .shadowColor = 2,
         },
-        [B_WIN_VS_PLAYER] = {
+        [B_WIN_VS_PLAYER] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2366,7 +2366,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_VS_OPPONENT] = {
+        [B_WIN_VS_OPPONENT] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2376,7 +2376,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_VS_MULTI_PLAYER_1] = {
+        [B_WIN_VS_MULTI_PLAYER_1] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2386,7 +2386,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_VS_MULTI_PLAYER_2] = {
+        [B_WIN_VS_MULTI_PLAYER_2] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2396,7 +2396,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_VS_MULTI_PLAYER_3] = {
+        [B_WIN_VS_MULTI_PLAYER_3] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2406,7 +2406,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_VS_MULTI_PLAYER_4] = {
+        [B_WIN_VS_MULTI_PLAYER_4] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2416,7 +2416,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_VS_OUTCOME_DRAW] = {
+        [B_WIN_VS_OUTCOME_DRAW] ={
             .fillValue = PIXEL_FILL(0),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2425,7 +2425,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .fgColor = 1,
             .shadowColor = 6,
         },
-        [B_WIN_VS_OUTCOME_LEFT] = {
+        [B_WIN_VS_OUTCOME_LEFT] ={
             .fillValue = PIXEL_FILL(0),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2434,7 +2434,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .fgColor = 1,
             .shadowColor = 6,
         },
-        [B_WIN_VS_OUTCOME_RIGHT] = {
+        [B_WIN_VS_OUTCOME_RIGHT] ={
             .fillValue = PIXEL_FILL(0x0),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2443,7 +2443,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
             .fgColor = 1,
             .shadowColor = 6,
         },
-        [B_WIN_MOVE_DESCRIPTION] = {
+        [B_WIN_MOVE_DESCRIPTION] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2459,7 +2459,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
     {
-        [B_WIN_MSG] = {
+        [B_WIN_MSG] ={
             .fillValue = PIXEL_FILL(0xF),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2469,7 +2469,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 15,
             .shadowColor = 6,
         },
-        [B_WIN_ACTION_PROMPT] = {
+        [B_WIN_ACTION_PROMPT] ={
             .fillValue = PIXEL_FILL(0xF),
             .fontId = FONT_NORMAL,
             .x = 1,
@@ -2479,7 +2479,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 15,
             .shadowColor = 6,
         },
-        [B_WIN_ACTION_MENU] = {
+        [B_WIN_ACTION_MENU] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2489,7 +2489,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_1] = {
+        [B_WIN_MOVE_NAME_1] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2499,7 +2499,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_2] = {
+        [B_WIN_MOVE_NAME_2] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2509,7 +2509,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_3] = {
+        [B_WIN_MOVE_NAME_3] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2519,7 +2519,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_MOVE_NAME_4] = {
+        [B_WIN_MOVE_NAME_4] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2529,7 +2529,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_PP] = {
+        [B_WIN_PP] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2539,7 +2539,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 11,
         },
-        [B_WIN_DUMMY] = {
+        [B_WIN_DUMMY] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2549,7 +2549,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_PP_REMAINING] = {
+        [B_WIN_PP_REMAINING] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 2,
@@ -2559,7 +2559,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 11,
         },
-        [B_WIN_MOVE_TYPE] = {
+        [B_WIN_MOVE_TYPE] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2569,7 +2569,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_SWITCH_PROMPT] = {
+        [B_WIN_SWITCH_PROMPT] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2579,7 +2579,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_YESNO] = {
+        [B_WIN_YESNO] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2589,7 +2589,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_LEVEL_UP_BOX] = {
+        [B_WIN_LEVEL_UP_BOX] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2599,7 +2599,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [B_WIN_LEVEL_UP_BANNER] = {
+        [B_WIN_LEVEL_UP_BANNER] ={
             .fillValue = PIXEL_FILL(0),
             .fontId = FONT_NORMAL,
             .x = 32,
@@ -2608,7 +2608,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .fgColor = 1,
             .shadowColor = 2,
         },
-        [ARENA_WIN_PLAYER_NAME] = {
+        [ARENA_WIN_PLAYER_NAME] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2618,7 +2618,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_VS] = {
+        [ARENA_WIN_VS] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2628,7 +2628,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_OPPONENT_NAME] = {
+        [ARENA_WIN_OPPONENT_NAME] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2638,7 +2638,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_MIND] = {
+        [ARENA_WIN_MIND] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2648,7 +2648,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_SKILL] = {
+        [ARENA_WIN_SKILL] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2658,7 +2658,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_BODY] = {
+        [ARENA_WIN_BODY] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2668,7 +2668,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_JUDGMENT_TITLE] = {
+        [ARENA_WIN_JUDGMENT_TITLE] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NORMAL,
             .x = -1,
@@ -2678,7 +2678,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 14,
             .shadowColor = 15,
         },
-        [ARENA_WIN_JUDGMENT_TEXT] = {
+        [ARENA_WIN_JUDGMENT_TEXT] ={
             .fillValue = PIXEL_FILL(0x1),
             .fontId = FONT_NORMAL,
             .x = 0,
@@ -2688,7 +2688,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
             .bgColor = 1,
             .shadowColor = 3,
         },
-        [B_WIN_MOVE_DESCRIPTION] = {
+        [B_WIN_MOVE_DESCRIPTION] ={
             .fillValue = PIXEL_FILL(0xE),
             .fontId = FONT_NARROW,
             .x = 0,
@@ -2707,7 +2707,7 @@ static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
         [B_WIN_TYPE_NORMAL] = sTextOnWindowsInfo_Normal,
         [B_WIN_TYPE_ARENA] = sTextOnWindowsInfo_Arena};
 
-static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
+static const u8 sRecordedBattleTextSpeeds[] ={8, 4, 1, 0};
 
 void BufferStringBattle(u16 stringID, u32 battler)
 {
@@ -3067,8 +3067,8 @@ static void GetBattlerNick(u32 battler, u8 *dst)
             dst[dstID] = *toCpy;                    \
             dstID++;                                \
             toCpy++;                                \
-        }                                           \
-    }                                               \
+        }                                          \
+    }                                              \
     GetBattlerNick(battler, text);                  \
     toCpy = text;
 
