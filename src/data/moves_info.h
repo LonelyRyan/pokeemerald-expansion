@@ -8608,7 +8608,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .contestComboMoves = {COMBO_STARTER_CALM_MIND},
             .battleAnimScript = Move_PSYCHO_BOOST,
         },
-
         [MOVE_ROOST] = {
             .name = COMPOUND_STRING("羽栖"),
             .description = COMPOUND_STRING("降到地面，使身体休息。回\n复自己最大HP的一半。"),

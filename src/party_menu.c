@@ -4731,8 +4731,8 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 
 void Task_AbilityCapsule(u8 taskId)
 {
-    static const u8 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
-    static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    static const u8 askText[] = _("你想要改变{STR_VAR_1}的\n特性为{STR_VAR_2}?");
+    static const u8 doneText[] = _("{STR_VAR_1}的特性变成了\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
@@ -4819,8 +4819,8 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
 
 void Task_AbilityPatch(u8 taskId)
 {
-    static const u8 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
-    static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    static const u8 askText[] = _("你想要改变{STR_VAR_1}的\n特性为{STR_VAR_2}?");
+    static const u8 doneText[] = _("{STR_VAR_1}的特性变成了\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
@@ -4921,8 +4921,8 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 
 void Task_Mint(u8 taskId)
 {
-    static const u8 askText[] = _("It might affect {STR_VAR_1}'s stats.\nAre you sure you want to use it?");
-    static const u8 doneText[] = _("{STR_VAR_1}'s stats may have changed due\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    static const u8 askText[] = _("这可能会影响{STR_VAR_1}的能力值\n你确定要使用它吗?");
+    static const u8 doneText[] = _("{STR_VAR_1}的能力可能已\n因{STR_VAR_2}而改变!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
@@ -5855,7 +5855,7 @@ static void BufferMonStatsToTaskData(struct Pokemon *mon, s16 *data)
 
 void Task_DynamaxCandy(u8 taskId)
 {
-    static const u8 doneText[] = _("{STR_VAR_1}'s Dynamax Level\nincreased by 1!{PAUSE_UNTIL_PRESS}");
+    static const u8 doneText[] = _("{STR_VAR_1}的极巨等级\n提升了一级!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)

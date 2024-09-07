@@ -261,7 +261,7 @@ BerryTree_Text_WantToPlant:
     .string "想种一颗树果吗？$"
 
 BerryTree_Text_PlantedOneBerry:
-    .string "{PLAYER}在松软的壤土中种下了一颗{STR_VAR_1}。$"
+    .string "{PLAYER}在松软的壤土中\n种下了一颗{STR_VAR_1}。$"
 
 BerryTree_Text_BerryGrowthStage1:
 .if OW_BERRY_SIX_STAGES == TRUE
@@ -326,10 +326,10 @@ BerryTree_Text_BerryPocketFull:
     .string "无法拿走{STR_VAR_1}。$"
 
 BerryTree_Text_BerryLeftUnpicked:
-    .string "{PLAYER}留下了未采摘的{STR_VAR_1}。$"
+    .string "{PLAYER}留下了\n未采摘的{STR_VAR_1}。$"
 
 BerryTree_Text_WantToWater:
-    .string "你想用吼吼鲸水桶给{STR_VAR_1}浇水吗？$"
+    .string "你想用吼吼鲸水桶\n给{STR_VAR_1}浇水吗？$"
     .string "你想给{STR_VAR_1}浇水吗？$"
 
 BerryTree_Text_WateredTheBerry:
@@ -381,8 +381,7 @@ BerryTree_Text_WantToPick_Mutation:
     .string "你想采摘它们吗？$"
 
 BerryTree_Text_BerryLeftUnpicked_Mutation:
-    .string "{PLAYER}留下了未采摘的{STR_VAR_1}\n"
-    .string "和{STR_VAR_3}。$"
+    .string "{PLAYER}留下了未采摘的\n{STR_VAR_1}和{STR_VAR_3}。$"
 
 BerryTree_Text_BerryPocketFull_Mutation:
     .string "包里的树果口袋已满。\p"
@@ -413,7 +412,7 @@ BerryTree_Text_WantToMulch:
     .string "要施一些肥料吗？$"
 
 BerryTree_Text_ScatteredMulch:
-    .string "{PLAYER}在松软的壤土上撒了{STR_VAR_1}。$"
+    .string "{PLAYER}在松软的\n壤土上撒了{STR_VAR_1}。$"
 .endif
 
 .if OW_BERRY_WEEDS == TRUE
