@@ -427,7 +427,7 @@ void DrawMultichoiceMenuInternal(u8 left, u8 top, u8 multichoiceId, bool8 ignore
 
     for (i = 0; i < count; i++)
     {
-        width = DisplayTextAndGetWidth(actions[i].text, width);
+        width = DisplayTextAndGetWidth(actions[i].text, width)+1;
     }
 
     newWidth = ConvertPixelWidthToTileWidth(width);
