@@ -963,12 +963,12 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     u8 taskId;
     u8 spriteId;
 
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
+    /*if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
     {
         return FALSE;
     }
     else
-    {
+    {*/
         spriteId = CreateMonSprite_PicBox(species, x * 8 + 40, y * 8 + 40, 0);
         taskId = CreateTask(Task_PokemonPicWindow, 0x50);
         gTasks[taskId].tWindowId = CreateWindowFromRect(x, y, 8, 8);
@@ -980,17 +980,26 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
         SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
         ScheduleBgCopyTilemapToVram(0);
         return TRUE;
-    }
+    //}
 }
 
 bool8 (*ScriptMenu_HidePokemonPic(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
-
-    if (taskId == TASK_NONE)
+    
+    if((taskId == TASK_NONE) || (gTasks[taskId].tState < 0))
         return NULL;
-    gTasks[taskId].tState++;
-    return IsPicboxClosed;
+    else if(gTasks[taskId].tState <= 3)
+    {
+        if(gTasks[taskId].tState != 3)
+            FreeResourcesAndDestroySprite(&gSprites[gTasks[taskId].tMonSpriteId], gTasks[taskId].tMonSpriteId);
+        ClearWindowTilemap(gTasks[taskId].tWindowId);
+        ClearDialogWindowAndFrameToTransparent(gTasks[taskId].tWindowId, 1);
+        RemoveWindow(gTasks[taskId].tWindowId);
+        DestroyTask(taskId);
+        return IsPicboxClosed;
+    }
+    return NULL;
 }
 
 static bool8 IsPicboxClosed(void)
