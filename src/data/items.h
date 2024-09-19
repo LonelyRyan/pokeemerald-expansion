@@ -12183,7 +12183,9 @@ const struct Item gItemsInfo[] =
             {
                 .name = _("础石面具"),
                 .price = 0,
-                .description = COMPOUND_STRING(
+                .holdEffect = HOLD_EFFECT_OGERPON_MASK,
+        .holdEffectParam = 20,
+        .description = COMPOUND_STRING(
                     "厄诡椪携带后，就\n会用岩石属性覆盖\n全身进行战斗。"),
                 .pocket = POCKET_ITEMS,
                 .type = ITEM_USE_BAG_MENU,
@@ -12196,7 +12198,9 @@ const struct Item gItemsInfo[] =
             {
                 .name = _("水井面具"),
                 .price = 0,
-                .description = COMPOUND_STRING(
+                .holdEffect = HOLD_EFFECT_OGERPON_MASK,
+        .holdEffectParam = 20,
+        .description = COMPOUND_STRING(
                     "厄诡椪携带后，就\n会用水属性覆盖全\n身进行战斗。"),
                 .pocket = POCKET_ITEMS,
                 .type = ITEM_USE_BAG_MENU,
@@ -12209,7 +12213,9 @@ const struct Item gItemsInfo[] =
             {
                 .name = _("火灶面具"),
                 .price = 0,
-                .description = COMPOUND_STRING(
+                .holdEffect = HOLD_EFFECT_OGERPON_MASK,
+        .holdEffectParam = 20,
+        .description = COMPOUND_STRING(
                     "厄诡椪携带后，就\n会用火属性覆盖全\n身进行战斗。"),
                 .pocket = POCKET_ITEMS,
                 .type = ITEM_USE_BAG_MENU,
