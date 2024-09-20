@@ -2435,7 +2435,7 @@ static const u8 sText_HoldEffectCovertCloak[] = _("密探斗篷");
 static const u8 sText_HoldEffectLoadedDice[] = _("机变骰子");
 static const u8 sText_HoldEffectBoosterEnergy[] = _("驱劲能量");
 static const u8 sText_HoldEffectBerserkGene[] = _("破坏基因");
-static const u8 sText_HoldEffectOgerponMask[] = _("Ogerpon Mask");
+static const u8 sText_HoldEffectOgerponMask[] = _("厄诡椪面具");
 static const u8 *const sHoldEffectNames[] =
 {
     [HOLD_EFFECT_NONE] = sText_HoldEffectNone,

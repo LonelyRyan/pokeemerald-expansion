@@ -1911,8 +1911,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
                 .name = COMPOUND_STRING("生长"),
                 .description = COMPOUND_STRING(
                 #if B_GROWTH_STAT_RAISE >= GEN_5
-            "Forces the body to grow,\n"
-            "raising Attack and Sp. Atk."),
+            "让身体一下子长大，\n"
+                    "从而提高攻击和特攻。"),
         #else
             "让身体一下子长大，\n"
                     "从而提高攻击和特攻。"),
