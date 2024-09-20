@@ -1599,13 +1599,8 @@ bool8 ScrCmd_showmonpic(struct ScriptContext *ctx)
 
 bool8 ScrCmd_hidemonpic(struct ScriptContext *ctx)
 {
-    // The hide function returns a pointer to a function
-    // that returns true once the pic is hidden
-    bool8 (*func)(void) = ScriptMenu_HidePokemonPic();
+    ScriptMenu_HidePokemonPic();
 
-    if (func == NULL)
-        return FALSE;
-    SetupNativeScript(ctx, func);
     return TRUE;
 }
 
