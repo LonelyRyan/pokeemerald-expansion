@@ -24,6 +24,8 @@
 #include "constants/layouts.h"
 #include "constants/weather.h"
 
+#define FLAG_ENABLE_WILDMON_EVOLUTION TRUE
+
 extern const u8 EventScript_SprayWoreOff[];
 
 #define MAX_ENCOUNTER_RATE 2880
@@ -452,6 +454,24 @@ static void CreateWildMon(u16 species, u8 level)
     }
 
     CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    if (FLAG_ENABLE_WILDMON_EVOLUTION)
+    {
+        u16 targetSpecies = GetEvolutionTargetSpecies(&gEnemyParty[0], EVO_MODE_NORMAL, ITEM_NONE, NULL);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            if ((targetSpecies == SPECIES_SILCOON) && (Random() % 100) >= 50)
+                targetSpecies = SPECIES_CASCOON;
+            CreateMonWithNature(&gEnemyParty[0], targetSpecies, level, USE_RANDOM_IVS, PickWildMonNature());
+            if (FLAG_ENABLE_WILDMON_EVOLUTION)
+            {
+                u16 targetSpecies2 = GetEvolutionTargetSpecies(&gEnemyParty[0], EVO_MODE_NORMAL, ITEM_NONE, NULL);
+                if (targetSpecies2 != SPECIES_NONE)
+                {
+                    CreateMonWithNature(&gEnemyParty[0], targetSpecies, level, USE_RANDOM_IVS, PickWildMonNature());
+                }
+            }
+        }
+    }
 }
 #ifdef BUGFIX
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)
