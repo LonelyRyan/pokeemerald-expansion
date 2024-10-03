@@ -24,6 +24,7 @@
 #include "main.h"
 #include "trainer_hill.h"
 #include "test_runner.h"
+#include "encrypt.h"
 #include "constants/rgb.h"
 
 static void VBlankIntr(void);
@@ -126,6 +127,7 @@ void AgbMain()
 #endif
 #endif
     gAgbMainLoop_sp = __builtin_frame_address(0);
+    CalculateSha1();
     AgbMainLoop();
 }
 

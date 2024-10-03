@@ -508,6 +508,10 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) libagbsyscall
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
+	@echo "正在进行反二改加密"
+	./encrypt
+	rm pokeemerald.gba
+	mv out.gba pokeemerald.gba
 	@echo "如果使用此项目制作改版，请在发布时将README.md中PLUS栏的内容加上，谢谢配合"
 
 # Uncomment the next line, and then comment the 4 lines after it to reenable agbcc.
