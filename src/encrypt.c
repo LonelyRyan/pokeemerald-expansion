@@ -66,7 +66,7 @@ void CalculateSha1(void)
         }
         if(i != 14)
         {
-            length = (i + 1) * 8;
+            length = (i + 1) * 4 * 8;
             //补位
             tmp[i+1] = 0x80 << 24;
             i += 2;
@@ -101,7 +101,7 @@ void CalculateSha1(void)
     }
     for(i=0;i<5;i++)
     {
-        if(SpaceSHA1[i] == h[i])
+        if(SpaceSHA1[i] != h[i])
         {
             while(1);
         }
