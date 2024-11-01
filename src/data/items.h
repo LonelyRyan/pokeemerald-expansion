@@ -62,15 +62,15 @@ static const u8 sSeaIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
 static const u8 sOddIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sRockIncenseDesc[] = _("有着神奇香气的薰\n香。");
+static const u8 sRockIncenseDesc[] = _("带上后能增加\n岩石系技能威力。");
 
-static const u8 sFullIncenseDesc[] = _("有着神奇香气的薰\n香。");
+static const u8 sFullIncenseDesc[] = _("携带后，行动会比\n平时更加迟缓。");
 
 static const u8 sRoseIncenseDesc[] = _("有着神奇香气的薰\n香。");
 
-static const u8 sLuckIncenseDesc[] = _("有着神奇香气的薰\n香。");
+static const u8 sLuckIncenseDesc[] = _("带上这个的宝可梦\n出现在战斗中，所\n得金钱能加倍。");
 
-static const u8 sPureIncenseDesc[] = _("有着神奇香气的薰\n香。");
+static const u8 sPureIncenseDesc[] = _("带上这个道具能\n躲避野生宝可梦。");
 
 static const u8 sKingsRockDesc[] = _("在造成伤害时，有\n时会让对手畏缩。");
 
@@ -7508,7 +7508,7 @@ const struct Item gItemsInfo[] =
                 .holdEffect = HOLD_EFFECT_EXPERT_BELT,
                 .holdEffectParam = 20,
                 .description = COMPOUND_STRING(
-                    "用惯了的黑色带子\n。携带后，效果绝\n佳时的招式威力就\n会少量提高。"),
+                    "携带后，效果绝佳\n时的招式威力就会\n少量提高。"),
                 .pocket = POCKET_ITEMS,
                 .type = ITEM_USE_BAG_MENU,
                 .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7757,6 +7757,8 @@ const struct Item gItemsInfo[] =
                 .fieldUseFunc = EVO_HELD_ITEM_FIELD_FUNC,
                 .effect = gItemEffect_EvoItem,
                 .flingPower = 30,
+                .iconPic = gItemIcon_RazorFang,
+                .iconPalette = gItemIconPalette_RazorFang,
             },
 
         [ITEM_EVIOLITE] =
