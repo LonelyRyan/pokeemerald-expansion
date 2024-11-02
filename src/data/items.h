@@ -9141,9 +9141,8 @@ const struct Item gItemsInfo[] =
                 .name = _("TM01"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Powerful, but makes\n"
-                    "the user flinch if\n"
-                    "hit by the foe."),
+                    "强劲的拳击，但若受到对手攻击，\n"
+                    "攻击者可能会退缩。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9153,12 +9152,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_DRAGON_CLAW] =
             {
-                .name = _("TM02"),
+                .name = _("龙爪"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Hooks and slashes\n"
-                    "the foe with long,\n"
-                    "sharp claws."),
+                    "用锋利的龙爪钩住并撕裂对手。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9171,9 +9168,7 @@ const struct Item gItemsInfo[] =
                 .name = _("TM03"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Generates an\n"
-                    "ultrasonic wave\n"
-                    "that may confuse."),
+                    "发射超声波，可能使对手混乱。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9186,9 +9181,8 @@ const struct Item gItemsInfo[] =
                 .name = _("TM04"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Raises Sp. Atk and\n"
-                    "Sp. Def by focusing\n"
-                    "the mind."),
+                    "集中精神力，提高特殊攻击和\n"
+                    "特殊防御。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9201,9 +9195,8 @@ const struct Item gItemsInfo[] =
                 .name = _("TM05"),
                 .price = 1000,
                 .description = COMPOUND_STRING(
-                    "A savage roar that\n"
-                    "makes the foe flee \n"
-                    "to end the battle."),
+                    "发出震撼的咆哮，使对手畏缩，\n"
+                    "从而结束战斗。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
