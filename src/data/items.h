@@ -12524,7 +12524,8 @@ const struct Item gItemsInfo[] =
             {
                 .name = _("颠倒烧"),
                 .price = 1200,
-                .description = sQuestionMarksDesc,
+                .description = COMPOUND_STRING(
+                    "不可思议的食物。\n使用后可让宝可梦的\n进攻力和防守力暂时互换"),
                 .pocket = POCKET_ITEMS,
                 .type = ITEM_USE_BAG_MENU,
                 .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
