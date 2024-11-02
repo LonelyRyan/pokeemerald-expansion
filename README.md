@@ -1,7 +1,7 @@
 # pokeemerald-expansion
 
 ### PLUS:
-汉化——懒得想名字，摆烂，andy3366，丹砂，东
+汉化——懒得想名字，摆烂，andy3366，丹砂(pcbom)，东
 懒得想名字的多精灵选择及特效
 RavePossum的九代战斗背景
 Zatsu的属性图标
@@ -9,6 +9,12 @@ Kaixer的徽章图标
 PurrfectDoodle/Eva的混乱状态特效
 Leob0505的开门动画，地图块
 来自晨曦美化版的博士介绍背景
+
+测试人员:
+懒得想名字
+摆烂
+andy3366
+ㄚòひ
 
 ### Important: DO NOT use GitHub's "Download Zip" option. Using this option will not download the commit history required to update your expansion version or merge other feature branches. Instead, please read [this guide](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/The-Basics-of-GitHub) to learn how to fork the repository and clone locally from there.
 
