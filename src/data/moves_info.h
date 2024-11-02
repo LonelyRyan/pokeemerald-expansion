@@ -18,7 +18,7 @@
 #endif
 
 #if B_BINDING_TURNS >= GEN_5
-#define BINDING_TURNS "4 or 5"
+#define BINDING_TURNS "4或5"
 #else
 #define BINDING_TURNS "2 to 5"
 #endif
