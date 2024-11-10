@@ -258,7 +258,7 @@ static const u8 sText_PkmnSealedOpponentMove[] = _("{B_ATK_NAME_WITH_PREFIX}\n�
 static const u8 sText_PkmnWantsGrudge[] = _("{B_ATK_NAME_WITH_PREFIX}\n让对手背负怨恨！");
 static const u8 sText_PkmnLostPPGrudge[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n失去了所有的PP！");
 static const u8 sText_PkmnShroudedItself[] = _("{B_ATK_NAME_WITH_PREFIX}将\n自身笼罩在{B_CURRENT_MOVE}中！");
-static const u8 sText_PkmnMoveBounced[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}\n因为魔术外衣被反弹了！");
+static const u8 sText_PkmnMoveBounced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}\n因为魔术外衣被反弹了！");
 static const u8 sText_PkmnWaitsForTarget[] = _("{B_ATK_NAME_WITH_PREFIX}等待目标\n以便复制技能！");
 static const u8 sText_PkmnSnatchedMove[] = _("{B_DEF_NAME_WITH_PREFIX}抢夺了\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}的技能！");
 static const u8 sText_ElectricityWeakened[] = _("电的力量\n减弱了！");
@@ -638,7 +638,7 @@ static const u8 sText_HealingWishCameTrue[] = _("治愈之愿降临\n在了{B_AT
 static const u8 sText_HealingWishHealed[] = _("{B_ATK_NAME_WITH_PREFIX}恢复了健康！");
 static const u8 sText_LunarDanceCameTrue[] = _("{B_ATK_NAME_WITH_PREFIX}被神秘的月光\n笼罩！");
 static const u8 sText_CursedBodyDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}被{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}定住了！");
-static const u8 sText_AttackerAquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX}获得了{B_LAST_ABILITY}！");
+static const u8 sText_AttackerAcquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX}获得了{B_ATK_ABILITY}！");
 static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n不能变得更高了！");
 static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}被\n{B_DEF_NAME_WITH_PREFIX}的\l{B_DEF_ABILITY}弹回了！");
 static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX}变身成了\n{B_DEF_NAME_WITH_PREFIX}并发动了{B_LAST_ABILITY}！");
@@ -662,7 +662,7 @@ static const u8 sText_TargetElectrified[] = _("The{B_DEF_NAME_WITH_PREFIX}的招
 static const u8 sText_AssaultVestDoesntAllow[] = _("{B_LAST_ITEM}的效果让这个\n招式无法被使用!\p");
 static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}不能使用{B_CURRENT_MOVE}\n由于重力的影响!\p");
 static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n使用治愈招式!\p");
-static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ITEM}对 \n{B_ATK_TRAINER_NAME}'s 超级环有反应了!");
+static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ITEM}对\n{B_ATK_TRAINER_NAME}的超级环有反应了!");
 static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}热切的心意\n传达到了{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX}超级进化为\n超级{B_BUFF1}!");
 static const u8 sText_drastically[] = _("巨幅提升 ");
@@ -1476,7 +1476,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_HEALINGWISHHEALED - BATTLESTRINGS_TABLE_START] = sText_HealingWishHealed,
     [STRINGID_LUNARDANCECAMETRUE - BATTLESTRINGS_TABLE_START] = sText_LunarDanceCameTrue,
     [STRINGID_CUSEDBODYDISABLED - BATTLESTRINGS_TABLE_START] = sText_CursedBodyDisabled,
-    [STRINGID_ATTACKERACQUIREDABILITY - BATTLESTRINGS_TABLE_START] = sText_AttackerAquiredAbility,
+    [STRINGID_ATTACKERACQUIREDABILITY - BATTLESTRINGS_TABLE_START] = sText_AttackerAcquiredAbility,
     [STRINGID_TARGETABILITYSTATLOWER - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityLoweredStat,
     [STRINGID_TARGETSTATWONTGOHIGHER - BATTLESTRINGS_TABLE_START] = sText_TargetStatWontGoHigher,
     [STRINGID_PKMNMOVEBOUNCEDABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBouncedViaAbility,
@@ -1606,14 +1606,11 @@ const u16 gTerrainStringIds[B_MSG_TERRAIN_COUNT] =
 };
 
 const u16 gTerrainPreventsStringIds[] =
-    {
-        [B_MSG_TERRAINPREVENTS_MISTY] = STRINGID_MISTYTERRAINPREVENTS,
-        [B_MSG_TERRAINPREVENTS_ELECTRIC] = STRINGID_ELECTRICTERRAINPREVENTS,
-        [B_MSG_TERRAINPREVENTS_PSYCHIC] = STRINGID_PSYCHICTERRAINPREVENTS};
-
-const u16 gMagicCoatBounceStringIds[] =
-    {
-        STRINGID_PKMNMOVEBOUNCED, STRINGID_PKMNMOVEBOUNCEDABILITY};
+{
+    [B_MSG_TERRAINPREVENTS_MISTY]    = STRINGID_MISTYTERRAINPREVENTS,
+    [B_MSG_TERRAINPREVENTS_ELECTRIC] = STRINGID_ELECTRICTERRAINPREVENTS,
+    [B_MSG_TERRAINPREVENTS_PSYCHIC]  = STRINGID_PSYCHICTERRAINPREVENTS
+};
 
 const u16 gHealingWishStringIds[] =
     {

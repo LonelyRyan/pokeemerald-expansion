@@ -1044,7 +1044,7 @@ Route104_Text_MayWeShouldRegister:
     .string "小遥：呀，你好，{PLAYER}{KUN}！\p得文为你的口袋领航员加入了\n对战寻呼系统，是吧？\p我们登记一下各自的信息吧，\n这样就能随时联系了。$"
 
 Route104_Text_RegisteredMay:
-    .string "{PLAYER} registered MAY\nin the POKeNAV.$"
+    .string "{PLAYER}将小遥\n登记到领航员中.$"
 
 Route104_Text_MayHowsYourPokedex:
     .string "小遥：噢，对了，{PLAYER}{KUN}，\n你的宝可梦图鉴怎么样了？$"

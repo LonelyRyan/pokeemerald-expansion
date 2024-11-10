@@ -18,7 +18,7 @@
 #endif
 
 #if B_BINDING_TURNS >= GEN_5
-#define BINDING_TURNS "4 or 5"
+#define BINDING_TURNS "4或5"
 #else
 #define BINDING_TURNS "2 to 5"
 #endif
@@ -1910,9 +1910,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             {
                 .name = COMPOUND_STRING("生长"),
                 .description = COMPOUND_STRING(
-                    "让身体一下子长大，\n"
+                #if B_GROWTH_STAT_RAISE >= GEN_5
+            "让身体一下子长大，\n"
                     "从而提高攻击和特攻。"),
-                .effect = B_GROWTH_STAT_RAISE >= GEN_5 ? EFFECT_GROWTH : EFFECT_SPECIAL_ATTACK_UP,
+        #else
+            "让身体一下子长大，\n"
+                    "从而提高攻击和特攻。"),
+                #endif
+        .effect = B_GROWTH_STAT_RAISE >= GEN_5 ? EFFECT_GROWTH : EFFECT_SPECIAL_ATTACK_UP,
                 .power = 0,
                 .type = TYPE_NORMAL,
                 .accuracy = 0,
@@ -4448,7 +4453,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
                 .type = TYPE_NORMAL,
                 .accuracy = 0,
                 .pp = 30,
-                .target = MOVE_TARGET_USER,
+                .target = B_UPDATED_MOVE_DATA >= GEN_5 ? MOVE_TARGET_SELECTED : MOVE_TARGET_USER,
                 .priority = 0,
                 .category = DAMAGE_CATEGORY_STATUS,
                 .zMove = {.effect = Z_EFFECT_RECOVER_HP},
@@ -17474,7 +17479,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .type = TYPE_FAIRY,
             .accuracy = 80,
             .pp = 5,
-            .target = MOVE_TARGET_SELECTED,
+            .target = MOVE_TARGET_BOTH,
             .priority = 0,
             .category = DAMAGE_CATEGORY_SPECIAL,
             .windMove = TRUE,
@@ -18873,44 +18878,45 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .battleAnimScript = Move_IVY_CUDGEL,
         },
 
-        [MOVE_ELECTRO_SHOT] = {
-            .name = COMPOUND_STRING("电光束"),
-            .description = COMPOUND_STRING("第1回合提高特攻，第2回合\n发射电力。下雨时立刻发射。"),
-            .effect = EFFECT_TWO_TURNS_ATTACK,
-            .power = 130,
-            .type = TYPE_ELECTRIC,
-            .accuracy = 100,
-            .pp = 10,
-            .target = MOVE_TARGET_SELECTED,
-            .priority = 0,
-            .category = DAMAGE_CATEGORY_SPECIAL,
-            .argument = TWO_TURN_ARG(STRINGID_ELECTROSHOTCHARGING, B_WEATHER_RAIN),
-            .additionalEffects = ADDITIONAL_EFFECTS({
-                                                        .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
-                                                        .self = TRUE,
-                                                        .onChargeTurnOnly = TRUE,
-                                                    },
-                                                    SHEER_FORCE_HACK),
-            .battleAnimScript = Move_ELECTRO_SHOT,
-        },
+    [MOVE_ELECTRO_SHOT] =
+    {
+        .name = COMPOUND_STRING("电光束"),
+        .description = COMPOUND_STRING("第1回合提高特攻，第2回合发射电力。下雨时立刻发射。"),
+        .effect = EFFECT_TWO_TURNS_ATTACK,
+        .power = 130,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = TWO_TURN_ARG(STRINGID_ELECTROSHOTCHARGING, B_WEATHER_RAIN),
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
+            .self = TRUE,
+            .onChargeTurnOnly = TRUE,
+        }, SHEER_FORCE_HACK),
+        .battleAnimScript = Move_ELECTRO_SHOT,
+    },
 
-        [MOVE_TERA_STARSTORM] = {
-            .name = HANDLE_EXPANDED_MOVE_NAME("晶光星群"),
-            .description = COMPOUND_STRING("照射出结晶力量来驱逐敌人。\n星晶形态下能攻击所有对手。"),
-            .effect = EFFECT_TERA_STARSTORM,
-            .power = 120,
-            .type = TYPE_NORMAL,
-            .accuracy = 100,
-            .pp = 5,
-            .target = MOVE_TARGET_SELECTED,
-            .priority = 0,
-            .category = DAMAGE_CATEGORY_SPECIAL,
-            .assistBanned = TRUE,
-            .copycatBanned = TRUE,
-            .mimicBanned = TRUE,
-            .sketchBanned = (B_SKETCH_BANS >= GEN_9),
-            .battleAnimScript = Move_TERA_STARSTORM,
-        },
+    [MOVE_TERA_STARSTORM] =
+    {
+        .name = HANDLE_EXPANDED_MOVE_NAME("晶光星群", "晶光星群"),
+        .description = COMPOUND_STRING("照射出结晶力量来驱逐敌人。\n星晶形态下能攻击所有对手。"),
+        .effect = EFFECT_TERA_STARSTORM,
+        .power = 120,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .assistBanned = TRUE,
+        .copycatBanned = TRUE,
+        .mimicBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
+        .battleAnimScript = Move_TERA_STARSTORM,
+    },
 
         [MOVE_FICKLE_BEAM] = {
             .name = COMPOUND_STRING("随机光"),

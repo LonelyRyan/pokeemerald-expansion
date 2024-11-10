@@ -1,7 +1,7 @@
 # pokeemerald-expansion
 
 ### PLUS:
-汉化——懒得想名字，摆烂，andy3366，丹砂，东
+汉化——懒得想名字，摆烂，andy3366，丹砂(pcbom)，东,宴愧
 懒得想名字的多精灵选择及特效
 懒得想名字的特殊能力系统
 RavePossum的九代战斗背景
@@ -10,6 +10,13 @@ Kaixer的徽章图标
 PurrfectDoodle/Eva的混乱状态特效
 Leob0505的开门动画，地图块
 来自晨曦美化版的博士介绍背景
+
+测试人员:
+懒得想名字
+摆烂
+andy3366
+ㄚòひ
+子轩
 
 ### Important: DO NOT use GitHub's "Download Zip" option. Using this option will not download the commit history required to update your expansion version or merge other feature branches. Instead, please read [this guide](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/The-Basics-of-GitHub) to learn how to fork the repository and clone locally from there.
 
@@ -20,7 +27,7 @@ pokeemerald-expansion is a decomp hack base project based off pret's [pokeemeral
 If you use pokeemerald-expansion in your hack, please add RHH (Rom Hacking Hideout) to your credits list. Optionally, you can list the version used, so it can help players know what features to expect.
 You can phrase it as the following:
 ```
-Based off RHH's pokeemerald-expansion 1.9.1 https://github.com/rh-hideout/pokeemerald-expansion/
+Based off RHH's pokeemerald-expansion 1.9.3 https://github.com/rh-hideout/pokeemerald-expansion/
 ```
 
 ## What features are included?
@@ -130,11 +137,6 @@ Based off RHH's pokeemerald-expansion 1.9.1 https://github.com/rh-hideout/pokeem
     - ***Gen 6+ Exp. Share*** (configurable)
     - Berserk Gene
     - Most battle items from Gen 4+
-    - Existing item data but missing effects:
-        - Gimmighoul Coin
-        - Booster Energy
-        - Tera Shards
-        - Tera Orb
 - ***Feature branches incorporated (with permission):***
     - [RHH intro credits](https://github.com/Xhyzi/pokeemerald/tree/rhh-intro-credits) by @Xhyzi.
         - A small signature from all of us to show the collective effort in the project :)
@@ -189,7 +191,7 @@ With this, you'll get the latest version of pokeemerald-expansion, plus a couple
 - Check your current version.
     - You can check in the debug menu's `Utilities -> Expansion Version` option.
     - If the option is not available, you possibly have version 1.6.2 or older. In that case, please check the [changelogs](CHANGELOG.md) to determine your version based on the features available on your repository.
-- Once you have your remote set up, run the command `git pull RHH expansion/X.Y.Z`, replacing X, Y and Z with the digits of the respective version you want to update to (eg, to update to 1.8.4, use `git pull RHH expansion/1.8.4`).
+- Once you have your remote set up, run the command `git pull RHH expansion/X.Y.Z`, replacing X, Y and Z with the digits of the respective version you want to update to (eg, to update to 1.9.3, use `git pull RHH expansion/1.9.3`).
     - ***Important:*** If you are several versions behind, we recommend updating one minor version at a time, skipping directly to the latest patch version (eg, 1.5.3 -> 1.6.2 -> 1.7.4 and so on)
 - Alternatively, you can update to unreleased versions of the expansion.
     - ***master (stable):*** It contains unreleased **bugfixes** that will come in the next patch version. To merge, use `git pull RHH master`.

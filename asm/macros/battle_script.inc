@@ -507,9 +507,9 @@
 	.byte \battler
 	.endm
 
-	.macro trainerslidein battler:req
+	.macro trainerslidein position:req
 	.byte 0x53
-	.byte \battler
+	.byte \position
 	.endm
 
 	.macro playse song:req
@@ -1679,6 +1679,21 @@
 	.4byte \failInstr
 	.endm
 
+	.macro jumpifblockedbysoundproof battler:req, failInstr:req
+	callnative BS_JumpIfBlockedBySoundproof
+	.byte \battler
+	.4byte \failInstr
+	.endm
+
+	.macro tryhitswitchtarget failInstr:req
+	callnative BS_TryHitSwitchTarget
+	.4byte \failInstr
+	.endm
+
+	.macro setmagiccoattarget
+	callnative BS_SetMagicCoatTarget
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1687,10 +1702,6 @@
 	@ Stores Healing Wish effect.
 	.macro storehealingwish battler:req
 	various \battler, VARIOUS_STORE_HEALING_WISH
-	.endm
-
-	.macro setmagiccoattarget battler:req
-	various \battler, VARIOUS_SET_MAGIC_COAT_TARGET
 	.endm
 
 	.macro getifcantrunfrombattle battler:req
@@ -1908,11 +1919,6 @@
 
 	.macro setargtobattledamage
 	various BS_ATTACKER, VARIOUS_SET_ARG_TO_BATTLE_DAMAGE
-	.endm
-
-	.macro tryhitswitchtarget failInstr:req
-	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
-	.4byte \failInstr
 	.endm
 
 	.macro tryautotomize battler:req, failInstr:req
