@@ -1433,9 +1433,9 @@ static u32 (*GetFontWidthFunc(u8 fontId))(u16, bool32)
 
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
-    bool32 isJapanese;
+    bool8 isJapanese;
     int minGlyphWidth;
-    u32 (*func)(u16 fontId, bool32 isJapanese);
+    u32 (*func)(u16 glyphId, bool32 isJapanese);
     int localLetterSpacing;
     u32 lineWidth;
     const u8 *bufferPointer;
@@ -1470,17 +1470,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case PLACEHOLDER_BEGIN:
             switch (*++str)
             {
-            case PLACEHOLDER_ID_STRING_VAR_1:
-                bufferPointer = gStringVar1;
-                break;
-            case PLACEHOLDER_ID_STRING_VAR_2:
-                bufferPointer = gStringVar2;
-                break;
-            case PLACEHOLDER_ID_STRING_VAR_3:
-                bufferPointer = gStringVar3;
-                break;
-            default:
-                return 0;
+                case PLACEHOLDER_ID_STRING_VAR_1:
+                    bufferPointer = gStringVar1;
+                    break;
+                case PLACEHOLDER_ID_STRING_VAR_2:
+                    bufferPointer = gStringVar2;
+                    break;
+                case PLACEHOLDER_ID_STRING_VAR_3:
+                    bufferPointer = gStringVar3;
+                    break;
+                default:
+                    return 0;
             }
         case CHAR_DYNAMIC:
             if (bufferPointer == NULL)
@@ -1580,12 +1580,15 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case CHAR_PROMPT_CLEAR:
             break;
         default:
-        if(*str >= 0x1000 && (fontId == 0 || fontId == 8))
-                glyphWidth = 10;
-        else if(*str >= 0x1000 && (fontId == 1 || fontId == 2 || fontId == 7))
-                glyphWidth = 12;
-        else
-            glyphWidth = func(*str, isJapanese);
+            if (*str >= 1 && *str <= 0x1E)
+            {
+                ++str;
+                glyphWidth = 0xC;//zh
+            }
+            else
+            {
+                glyphWidth = func(*str, isJapanese);
+            }
             if (minGlyphWidth > 0)
             {
                 if (glyphWidth < minGlyphWidth)
@@ -1602,11 +1605,11 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         }
         ++str;
     }
-    width = (s32)(width*1.3);
 
     if (lineWidth > width)
         return lineWidth;
-    return width;
+    else
+        return width;
 }
 
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)

@@ -96,7 +96,7 @@
 #define RFU_CHILD_MAX                   4                  // Maximum number of slaves that can be connected to one parent device
 
 #define RFU_GAME_NAME_LENGTH            13                 // Possible length of game name set by rfu_REQB_configGameData
-#define RFU_USER_NAME_LENGTH            8                  // Possible length of user name set by rfu_REQB_configGameData
+#define RFU_USER_NAME_LENGTH            9                  // Possible length of user name set by rfu_REQB_configGameData
 
 #define RFU_H_DMA_MAX_CPU_CYCLE         42                 // Maximum number of CPU cycles for H-DMA or DMA that starts with V-Blank that can operate when using RFU
 
