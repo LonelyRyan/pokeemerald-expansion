@@ -5144,7 +5144,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .palette = gMonPalette_TapuFini,
         .shinyPalette = gMonShinyPalette_TapuFini,
         .iconSprite = gMonIcon_TapuFini,
-        .iconPalIndex = 0,
+        .iconPalIndex = 2,
         FOOTPRINT(TapuFini)
         OVERWORLD(
             sPicTable_TapuFini,
@@ -5327,7 +5327,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .palette = gMonPalette_Solgaleo,
         .shinyPalette = gMonShinyPalette_Solgaleo,
         .iconSprite = gMonIcon_Solgaleo,
-        .iconPalIndex = 0,
+        .iconPalIndex = 2,
         FOOTPRINT(Solgaleo)
         OVERWORLD(
             sPicTable_Solgaleo,
@@ -5447,7 +5447,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .palette = gMonPalette_Nihilego,
         .shinyPalette = gMonShinyPalette_Nihilego,
         .iconSprite = gMonIcon_Nihilego,
-        .iconPalIndex = 0,
+        .iconPalIndex = 2,
         FOOTPRINT(Nihilego)
         OVERWORLD(
             sPicTable_Nihilego,
@@ -5805,7 +5805,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .palette = gMonPalette_Guzzlord,
         .shinyPalette = gMonShinyPalette_Guzzlord,
         .iconSprite = gMonIcon_Guzzlord,
-        .iconPalIndex = 0,
+        .iconPalIndex = 2,
         FOOTPRINT(Guzzlord)
         OVERWORLD(
             sPicTable_Guzzlord,
@@ -5867,7 +5867,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .palette = gMonPalette_Necrozma,
         .shinyPalette = gMonShinyPalette_Necrozma,
         .iconSprite = gMonIcon_Necrozma,
-        .iconPalIndex = 0,
+        .iconPalIndex = 1,
         FOOTPRINT(Necrozma)
         OVERWORLD(
             sPicTable_Necrozma,
