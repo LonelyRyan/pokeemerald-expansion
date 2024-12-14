@@ -255,6 +255,9 @@ const u8 gText_TheBattle[] = _("战斗");
 const u8 gText_ThePokemonList[] = _("宝可梦列表");
 const u8 gText_TheShop[] = _("宝可梦商店");
 const u8 gText_ThePC[] = _("宝可梦中心");
+const u8 gText_PlayedPokeFluteCatchy[] = _("播放了宝可梦之笛。\n现在，那是一个朗朗上口的旋律！{PAUSE_UNTIL_PRESS}");
+const u8 gText_PlayedPokeFlute[] = _("播放了宝可梦之笛。");
+const u8 gText_PokeFluteAwakenedMon[] = _("宝可梦之笛唤醒了沉睡的\n宝可梦。{PAUSE_UNTIL_PRESS}");
 
 const u8 *const gBagMenu_ReturnToStrings[] =
 {
@@ -290,11 +293,11 @@ const u8 gText_KeyItemsPocket[] = _("重要道具");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
-    [ITEMS_POCKET] = gText_ItemsPocket,
-    [BALLS_POCKET] = gText_PokeBallsPocket,
-    [TMHM_POCKET]  = gText_TMHMPocket,
-    [BERRIES_POCKET] = gText_BerriesPocket,
-    [KEYITEMS_POCKET] = gText_KeyItemsPocket
+    [ITEMS_POCKET] =    COMPOUND_STRING("ITEMS"),
+    [BALLS_POCKET] =    COMPOUND_STRING("POKé BALLS"),
+    [TMHM_POCKET]  =    COMPOUND_STRING("TMs & HMs"),
+    [BERRIES_POCKET] =  COMPOUND_STRING("BERRIES"),
+    [KEYITEMS_POCKET] = COMPOUND_STRING("KEY ITEMS")
 };
 
 const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
@@ -1295,6 +1298,8 @@ const u8 gText_Sorry[] = _("抱歉");
 const u8 gText_YaySmileEmoji[] = _("哈！{EMOJI_BIGSMILE}");
 const u8 gText_ThankYou[] = _("谢谢");
 const u8 gText_ByeBye[] = _("拜拜！");
+const u8 gText_PlayerScurriedToCenter[] = _("{PLAYER} 匆忙赶到宝可梦中心，\n保护了疲惫和昏倒的宝可梦不受更多伤害…\n");
+const u8 gText_PlayerScurriedBackHome[] = _("{PLAYER} 匆忙赶回家，保护\n疲惫和昏倒的宝可梦不受更多伤害…\n");
 const u8 gText_MatchCallSteven_Strategy[] = _("攻击弱点！");
 const u8 gText_MatchCallSteven_Pokemon[] = _("终极的钢系宝可梦。");
 const u8 gText_MatchCallSteven_Intro1_BeforeMeteorFallsBattle[] = _("我甚至攀登了");
@@ -1834,3 +1839,5 @@ const u8 gText_Fertilize[] = _("施肥");
 const u8 gText_PlantBerry[] = _("种树果");
 const u8 gText_AM[] = _("AM");
 const u8 gText_PM[] = _("PM");
+const u8 gText_Relearn[] = _("{START_BUTTON} RELEARN"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
+const u8 gText_Rename[] = _("重命名");

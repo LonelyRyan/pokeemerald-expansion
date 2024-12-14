@@ -110,11 +110,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_COMPOUND_EYES] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("复眼"),
-    #else
-        .name = _("复眼"),
-    #endif
         .description = COMPOUND_STRING("招式的命中率会提高"),
         .aiRating = 7,
     },
@@ -244,11 +240,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_LIGHTNING_ROD] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("避雷针"),
-    #else
-        .name = _("避雷针"),
-    #endif
         .description = COMPOUND_STRING("吸引免疫电招式并提高特攻"),
         .aiRating = 7,
         .breakable = TRUE,
@@ -1328,11 +1320,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_STANCE_CHANGE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("战斗切换"),
-    #else
-        .name = _("战斗切换"),
-    #endif
         .description = COMPOUND_STRING("根据技能切换刀剑盾牌形态"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
@@ -1351,11 +1339,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_MEGA_LAUNCHER] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("超级发射器"),
-    #else
-        .name = _("超级发射器"),
-    #endif
         .description = COMPOUND_STRING("强化波动和波导类招式"),
         .aiRating = 7,
     },
@@ -1405,11 +1389,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_PARENTAL_BOND] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("亲子爱"),
-    #else
-        .name = _("亲子爱"),
-    #endif
         .description = COMPOUND_STRING("亲子俩可以合计攻击2次"),
         .aiRating = 10,
     },
@@ -1437,22 +1417,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_PRIMORDIAL_SEA] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("始源之海"),
-    #else
-        .name = _("始源之海"),
-    #endif
         .description = COMPOUND_STRING("变为不受火属性攻击的天气"),
         .aiRating = 10,
     },
 
     [ABILITY_DESOLATE_LAND] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("终结之地"),
-    #else
-        .name = _("终结之地"),
-    #endif
         .description = COMPOUND_STRING("变为不受水属性攻击的天气"),
         .aiRating = 10,
     },
@@ -1480,22 +1452,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_EMERGENCY_EXIT] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("危险回避"),
-    #else
-        .name = _("危险回避"),
-    #endif
         .description = COMPOUND_STRING("HP变为一半时会回避危险"),
         .aiRating = 3,
     },
 
     [ABILITY_WATER_COMPACTION] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("遇水凝固"),
-    #else
-        .name = _("遇水凝固"),
-    #endif
         .description = COMPOUND_STRING("受水招式攻击大幅提高防御"),
         .aiRating = 4,
     },
@@ -1629,11 +1593,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_POWER_CONSTRUCT] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("群聚变形"),
-    #else
-        .name = _("群聚变形"),
-    #endif
         .description = COMPOUND_STRING("HP一半时变成完全体形态"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
@@ -1664,11 +1624,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_QUEENLY_MAJESTY] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("女王的威严"),
-    #else
-        .name = _("女王的威严"),
-    #endif
         .description = COMPOUND_STRING("使对手无法使出先制招式"),
         .aiRating = 6,
         .breakable = TRUE,
@@ -1720,11 +1676,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_TANGLING_HAIR] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("卷发"),
-    #else
-        .name = _("卷发"),
-    #endif
         .description = COMPOUND_STRING("降低接触自己的对手的速度"),
         .aiRating = 5,
     },
@@ -1740,11 +1692,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_POWER_OF_ALCHEMY] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("化学之力"),
-    #else
-        .name = _("化学之力"),
-    #endif
         .description = COMPOUND_STRING("继承被打倒的同伴的特性"),
         .aiRating = 0,
         .cantBeCopied = TRUE,
@@ -1772,22 +1720,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ELECTRIC_SURGE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("电气制造者"),
-    #else
-        .name = _("电气制造者"),
-    #endif
         .description = COMPOUND_STRING("出场时，会布下电气场地"),
         .aiRating = 8,
     },
 
     [ABILITY_PSYCHIC_SURGE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("精神制造者"),
-    #else
-        .name = _("精神制造者"),
-    #endif
         .description = COMPOUND_STRING("出场时，会布下精神场地"),
         .aiRating = 8,
     },
@@ -1808,22 +1748,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_FULL_METAL_BODY] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("金属防护"),
-    #else
-        .name = _("金属防护"),
-    #endif
         .description = COMPOUND_STRING("不因对手招式特性降低能力"),
         .aiRating = 4,
     },
 
     [ABILITY_SHADOW_SHIELD] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("幻影防守"),
-    #else
-        .name = _("幻影防守"),
-    #endif
         .description = COMPOUND_STRING("HP全满时减少受到的伤害"),
         .aiRating = 8,
     },
@@ -1844,22 +1776,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_INTREPID_SWORD] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("不挠之剑"),
-    #else
-        .name = _("不挠之剑"),
-    #endif
         .description = COMPOUND_STRING("首次出场时，攻击会提高"),
         .aiRating = 3,
     },
 
     [ABILITY_DAUNTLESS_SHIELD] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("不屈之盾"),
-    #else
-        .name = _("不屈之盾"),
-    #endif
         .description = COMPOUND_STRING("首次出场时，防御会提高"),
         .aiRating = 3,
     },
@@ -1886,11 +1810,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_PROPELLER_TAIL] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("螺旋尾鳍"),
-    #else
-        .name = _("螺旋尾鳍"),
-    #endif
         .description = COMPOUND_STRING("招式不被对手特性招式吸引"),
         .aiRating = 2,
     },
@@ -1988,22 +1908,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SCREEN_CLEANER] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("除障"),
-    #else
-        .name = _("除障"),
-    #endif
         .description = COMPOUND_STRING("出场时，消除双方墙壁类效果"),
         .aiRating = 3,
     },
 
     [ABILITY_STEELY_SPIRIT] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("钢之意志"),
-    #else
-        .name = _("钢之意志"),
-    #endif
         .description = COMPOUND_STRING("我方钢属性攻击威力会提高"),
         .aiRating = 2,
     },
@@ -2017,33 +1929,21 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_WANDERING_SPIRIT] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("游魂"),
-    #else
-        .name = _("游魂"),
-    #endif
         .description = COMPOUND_STRING("与接触攻击的宝可梦换特性"),
         .aiRating = 2,
     },
 
     [ABILITY_GORILLA_TACTICS] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("一猩一意"),
-    #else
-        .name = _("一猩一意"),
-    #endif
         .description = COMPOUND_STRING("攻击提高但只能用最初招式"),
         .aiRating = 4,
     },
 
     [ABILITY_NEUTRALIZING_GAS] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("化学变化气体"),
-    #else
-        .name = _("化学变化气体"),
-    #endif
         .description = COMPOUND_STRING("在场时，全场特性消失或无效"),
         .aiRating = 5,
         .cantBeCopied = TRUE,
@@ -2062,11 +1962,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_HUNGER_SWITCH] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("饱了又饿"),
-    #else
-        .name = _("饱了又饿"),
-    #endif
         .description = COMPOUND_STRING("每回合结束时交替改变样子"),
         .aiRating = 2,
         .cantBeCopied = TRUE,
@@ -2091,11 +1987,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_CURIOUS_MEDICINE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("怪药"),
-    #else
-        .name = _("怪药"),
-    #endif
         .description = COMPOUND_STRING("出场时将我方能力变化复原"),
         .aiRating = 3,
     },
@@ -2116,12 +2008,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_CHILLING_NEIGH] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("苍白嘶鸣"),
-    #else
-        .name = _("苍白嘶鸣"),
-    #endif
-        .description = COMPOUND_STRING("打倒对手时会提高攻击"),
+        .description = COMPOUND_STRING("打倒对手时会提高攻击."),
         .aiRating = 7,
     },
 
@@ -2158,11 +2046,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_LINGERING_AROMA] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("甩不掉的气味"),
-    #else
-        .name = _("甩不掉的气味"),
-    #endif
         .description = COMPOUND_STRING("被接触会沾上甩不掉的气味"),
         .aiRating = 5,
     },
@@ -2176,11 +2060,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_THERMAL_EXCHANGE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("热交换"),
-    #else
-        .name = _("热交换"),
-    #endif
         .description = COMPOUND_STRING("受火攻击提高攻击，不会灼伤"),
         .aiRating = 4,
         .breakable = TRUE,
@@ -2195,11 +2075,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_PURIFYING_SALT] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("洁净之盐"),
-    #else
-        .name = _("洁净之盐"),
-    #endif
         .description = COMPOUND_STRING("不会陷入异常，减轻鬼系伤害"),
         .aiRating = 6,
         .breakable = TRUE,
@@ -2207,11 +2083,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_WELL_BAKED_BODY] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("焦香之躯"),
-    #else
-        .name = _("焦香之躯"),
-    #endif
         .description = COMPOUND_STRING("免疫火招式并大幅提升防御"),
         .aiRating = 5,
         .breakable = TRUE,
@@ -2235,11 +2107,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ROCKY_PAYLOAD] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("搬岩"),
-    #else
-        .name = _("搬岩"),
-    #endif
         .description = COMPOUND_STRING("岩石属性的招式威力会提高"),
         .aiRating = 6,
     },
@@ -2278,22 +2146,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ELECTROMORPHOSIS] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("电力转换"),
-    #else
-        .name = _("电力转换"),
-    #endif
         .description = COMPOUND_STRING("受到伤害时，会变为充电状态"),
         .aiRating = 5,
     },
 
     [ABILITY_PROTOSYNTHESIS] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("古代活性"),
-    #else
-        .name = _("古代活性"),
-    #endif
         .description = COMPOUND_STRING("晴天时提升最高能力"),
         .aiRating = 7,
         .cantBeCopied = TRUE,
@@ -2323,11 +2183,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_VESSEL_OF_RUIN] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("灾祸之鼎"),
-    #else
-        .name = _("灾祸之鼎"),
-    #endif
         .description = COMPOUND_STRING("降低其他的宝可梦的特攻"),
         .aiRating = 5,
         .breakable = TRUE,
@@ -2335,11 +2191,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SWORD_OF_RUIN] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("灾祸之剑"),
-    #else
-        .name = _("灾祸之剑"),
-    #endif
         .description = COMPOUND_STRING("降低其他的宝可梦的防御"),
         .aiRating = 5,
         .breakable = TRUE,
@@ -2347,11 +2199,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_TABLETS_OF_RUIN] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("灾祸之简"),
-    #else
-        .name = _("灾祸之简"),
-    #endif
         .description = COMPOUND_STRING("降低其他的宝可梦的攻击"),
         .aiRating = 5,
         .breakable = TRUE,
@@ -2359,11 +2207,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_BEADS_OF_RUIN] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("灾祸之玉"),
-    #else
-        .name = _("灾祸之玉"),
-    #endif
         .description = COMPOUND_STRING("降低其他的宝可梦的特防"),
         .aiRating = 5,
         .breakable = TRUE,
@@ -2371,22 +2215,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ORICHALCUM_PULSE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("绯红脉动"),
-    #else
-        .name = _("绯红脉动"),
-    #endif
         .description = COMPOUND_STRING("造成晴天，在晴天下提升物攻"),
         .aiRating = 8,
     },
 
     [ABILITY_HADRON_ENGINE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("强子引擎"),
-    #else
-        .name = _("强子引擎"),
-    #endif
         .description = COMPOUND_STRING("生成电场，在电场上提升特攻"),
         .aiRating = 8,
     },
@@ -2414,11 +2250,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SUPREME_OVERLORD] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("大将"),
-    #else
-        .name = _("大将"),
-    #endif
         .description = COMPOUND_STRING("按被打倒数提升攻击特攻"),
         .aiRating = 6,
     },
@@ -2455,12 +2287,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_MYCELIUM_MIGHT] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("菌丝之力"),
-    #else
-        .name = _("菌丝之力"),
-    #endif
-        .description = COMPOUND_STRING("变化招式变慢，但无视特性"),
+        .description = COMPOUND_STRING("变化招式变慢，但无视特性."),
         .aiRating = 2,
     },
 
@@ -2481,11 +2309,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_EMBODY_ASPECT_TEAL_MASK] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("面影辉映"),
-    #else
-        .name = _("面影辉映"),
-    #endif
         .description = COMPOUND_STRING("将回忆铭记，提高自己的速度"),
         .aiRating = 6,
         .cantBeCopied = TRUE,
@@ -2496,11 +2320,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("面影辉映"),
-    #else
-        .name = _("面影辉映"),
-    #endif
         .description = COMPOUND_STRING("将回忆铭记，提高自己的攻击"),
         .aiRating = 6,
         .cantBeCopied = TRUE,
@@ -2511,11 +2331,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_EMBODY_ASPECT_WELLSPRING_MASK] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("面影辉映"),
-    #else
-        .name = _("面影辉映"),
-    #endif
         .description = COMPOUND_STRING("将回忆铭记，提高自己的特防"),
         .aiRating = 6,
         .cantBeCopied = TRUE,
@@ -2526,11 +2342,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("面影辉映"),
-    #else
-        .name = _("面影辉映"),
-    #endif
         .description = COMPOUND_STRING("将回忆铭记，提高自己的防御"),
         .aiRating = 6,
         .cantBeCopied = TRUE,
@@ -2548,11 +2360,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SUPERSWEET_SYRUP] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("甘露之蜜"),
-    #else
-        .name = _("甘露之蜜"),
-    #endif
         .description = COMPOUND_STRING("首次出场时降低对手闪避率"),
         .aiRating = 5,
     },
@@ -2583,11 +2391,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_TERAFORM_ZERO] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("归零化境"),
-    #else
-        .name = _("归零化境"),
-    #endif
         .description = COMPOUND_STRING("会将天气场地影响全部归零"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
@@ -2597,11 +2401,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_POISON_PUPPETEER] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("毒傀儡"),
-    #else
-        .name = _("毒傀儡"),
-    #endif
         .description = COMPOUND_STRING("因其招式而中毒时会混乱"),
         .aiRating = 8,
         .cantBeCopied = TRUE,

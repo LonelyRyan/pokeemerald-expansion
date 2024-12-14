@@ -22,6 +22,7 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "window.h"
+#include "line_break.h"
 #include "constants/abilities.h"
 #include "constants/battle_dome.h"
 #include "constants/battle_string_ids.h"
@@ -51,402 +52,83 @@ struct BattleWindowText
 static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *dst);
 
-static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] ={0};
+#if TESTING
+EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+#else
+static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+#endif
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
 
-static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
-static const u8 sText_PkmnGainedEXP[] = _("{B_BUFF1}获得了{B_BUFF2}\n{B_BUFF3}点经验值！\p");
 static const u8 sText_EmptyString4[] = _("");
-static const u8 sText_ABoosted[] = _("提升");
-static const u8 sText_PkmnGrewToLv[] = _("{B_BUFF1}\n升到了{B_BUFF2}级！{WAIT_SE}\p");
-static const u8 sText_PkmnLearnedMove[] = _("{B_BUFF1}习得\n技能{B_BUFF2}！{WAIT_SE}\p");
-static const u8 sText_TryToLearnMove1[] = _("{B_BUFF1}想要习得\n技能{B_BUFF2}。\p");
-static const u8 sText_TryToLearnMove2[] = _("但是，{B_BUFF1}已经不能\n习得更多的技能。\p");
-static const u8 sText_TryToLearnMove3[] = _("删除一个技能给\n{B_BUFF2}留下空间？");
-static const u8 sText_PkmnForgotMove[] = _("{B_BUFF1}忘记了\n{B_BUFF2}。\p");
-static const u8 sText_StopLearningMove[] = _("{PAUSE 32}放弃习得\n技能{B_BUFF2}？");
-static const u8 sText_DidNotLearnMove[] = _("{B_BUFF1}没有习得\n技能{B_BUFF2}。\p");
-static const u8 sText_UseNextPkmn[] = _("要更换宝可梦吗？");
-static const u8 sText_AttackMissed[] = _("{B_ATK_NAME_WITH_PREFIX}的\n攻击没有命中！");
-static const u8 sText_PkmnProtectedItself[] = _("{B_DEF_NAME_WITH_PREFIX}\n保护了自己！");
-static const u8 sText_AvoidedDamage[] = _("{B_DEF_NAME_WITH_PREFIX}因{B_DEF_ABILITY}\n避免了伤害！");
-static const u8 sText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX}因{B_DEF_ABILITY}\n抵御了地上系技能！");
-static const u8 sText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX}抵御了攻击！");
-static const u8 sText_ItDoesntAffect[] = _("对{B_DEF_NAME_WITH_PREFIX}\n没有效果……");
-static const u8 sText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\n倒下了！\p");
-static const u8 sText_TargetFainted[] = _("{B_DEF_NAME_WITH_PREFIX}\n倒下了！\p");
-static const u8 sText_PlayerGotMoney[] = _("{B_PLAYER_NAME}收到了\n{B_BUFF1}元作为奖励！\p");
-static const u8 sText_PlayerLostToEnemyTrainer[] = _("{B_PLAYER_NAME}已经没有可用的宝可梦了!\p玩家失去战斗能力\n{B_TRAINER1_CLASS}{B_TRAINER1_NAME}!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_PlayerPaidPrizeMoney[] = _("{B_PLAYER_NAME}失去了{B_BUFF1}元…\p… … … …\p{B_PLAYER_NAME}眼前一片漆黑!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_PlayerWhiteout[] = _("{B_PLAYER_NAME}\n已经没有可用的宝可梦了！\p");
-#if B_WHITEOUT_MONEY >= GEN_4
-static const u8 sText_PlayerWhiteout2[] = _("{B_PLAYER_NAME}战败并失去{B_BUFF1}元…\p… … … …\p{B_PLAYER_NAME}眼前一片漆黑!{PAUSE_UNTIL_PRESS}");
-#else
-static const u8 sText_PlayerWhiteout2[] = _("{B_PLAYER_NAME}被击败了！{PAUSE_UNTIL_PRESS}");
-#endif
-static const u8 sText_PreventsEscape[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}用{B_SCR_ACTIVE_ABILITY}\n阻止逃跑！\p");
-static const u8 sText_CantEscape2[] = _("不能逃跑！\p");
-static const u8 sText_AttackerCantEscape[] = _("{B_ATK_NAME_WITH_PREFIX}不能逃跑！");
-static const u8 sText_HitXTimes[] = _("连续命中{B_BUFF1}次！");
-static const u8 sText_PkmnFellAsleep[] = _("{B_EFF_NAME_WITH_PREFIX}\n睡着了！");
-static const u8 sText_PkmnMadeSleep[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n使{B_EFF_NAME_WITH_PREFIX}睡着了！");
-static const u8 sText_PkmnAlreadyAsleep[] = _("{B_DEF_NAME_WITH_PREFIX}\n已经睡着了！");
-static const u8 sText_PkmnAlreadyAsleep2[] = _("{B_ATK_NAME_WITH_PREFIX}\n已经睡着了！");
-static const u8 sText_PkmnWasntAffected[] = _("{B_DEF_NAME_WITH_PREFIX}\n没有受到影响！");
-static const u8 sText_PkmnWasPoisoned[] = _("{B_EFF_NAME_WITH_PREFIX}\n中毒了！");
-static const u8 sText_PkmnPoisonedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_BUFF1}\n使{B_EFF_NAME_WITH_PREFIX}中毒了！");
-static const u8 sText_PkmnHurtByPoison[] = _("{B_ATK_NAME_WITH_PREFIX}因中毒\n受到了伤害！");
-static const u8 sText_PkmnAlreadyPoisoned[] = _("{B_DEF_NAME_WITH_PREFIX}\n中毒了。");
-static const u8 sText_PkmnBadlyPoisoned[] = _("{B_EFF_NAME_WITH_PREFIX}\n中了剧毒！");
-static const u8 sText_PkmnEnergyDrained[] = _("{B_DEF_NAME_WITH_PREFIX}\n被吸取了能量！");
-static const u8 sText_PkmnWasBurned[] = _("{B_EFF_NAME_WITH_PREFIX}烧伤了！");
-static const u8 sText_PkmnGotFrostbite[] = _("{B_EFF_NAME_WITH_PREFIX}被冻伤!");
-static const u8 sText_PkmnBurnedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_BUFF1}\n使{B_EFF_NAME_WITH_PREFIX}烧伤了！");
-static const u8 sText_PkmnHurtByBurn[] = _("{B_ATK_NAME_WITH_PREFIX}\n因烧伤受到了伤害！");
-static const u8 sText_PkmnHurtByFrostbite[] = _("{B_ATK_NAME_WITH_PREFIX}\n因冻伤受到伤害!");
-static const u8 sText_PkmnAlreadyHasBurn[] = _("{B_DEF_NAME_WITH_PREFIX}已经烧伤了");
-static const u8 sText_PkmnWasFrozen[] = _("{B_EFF_NAME_WITH_PREFIX}被冰冻了!");
-static const u8 sText_PkmnFrozenBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_BUFF1}\n使{B_EFF_NAME_WITH_PREFIX}被冰冻!");
-static const u8 sText_PkmnIsFrozen[] = _("{B_ATK_NAME_WITH_PREFIX}被冰冻了!");
-static const u8 sText_PkmnWasDefrosted[] = _("{B_DEF_NAME_WITH_PREFIX}解冻了!");
-static const u8 sText_PkmnWasDefrosted2[] = _("{B_ATK_NAME_WITH_PREFIX}解冻了!");
-static const u8 sText_PkmnWasDefrostedBy[] = _("{B_ATK_NAME_WITH_PREFIX}\n被{B_CURRENT_MOVE}解冻!");
-static const u8 sText_PkmnFrostbiteHealed[] = _("{B_DEF_NAME_WITH_PREFIX}的\n冻伤被治疗了!");
-static const u8 sText_PkmnFrostbiteHealed2[] = _("{B_ATK_NAME_WITH_PREFIX}的\n冻伤被治疗了!");
-static const u8 sText_PkmnFrostbiteHealedBy[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}\n治疗了冻伤!");
-static const u8 sText_PkmnWasParalyzed[] = _("{B_EFF_NAME_WITH_PREFIX}麻痹了！\n可能无法行动！");
-static const u8 sText_PkmnWasParalyzedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_BUFF1}\n使{B_EFF_NAME_WITH_PREFIX}麻痹了！\l可能无法行动！");
-static const u8 sText_PkmnIsParalyzed[] = _("{B_ATK_NAME_WITH_PREFIX}麻痹了！\n无法行动！");
-static const u8 sText_PkmnIsAlreadyParalyzed[] = _("{B_DEF_NAME_WITH_PREFIX}\n已经麻痹了！");
-static const u8 sText_PkmnHealedParalysis[] = _("{B_DEF_NAME_WITH_PREFIX}的身体\n不再麻痹了！");
-static const u8 sText_PkmnDreamEaten[] = _("{B_DEF_NAME_WITH_PREFIX}的梦\n被吃了！");
-static const u8 sText_StatsWontIncrease[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n已经无法上升了！");
-static const u8 sText_StatsWontDecrease[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n已经无法下降了！");
-static const u8 sText_TeamStoppedWorking[] = _("我方的{B_BUFF1}\n失去了作用！");
-static const u8 sText_FoeStoppedWorking[] = _("对手的{B_BUFF1}\n失去了作用！");
-static const u8 sText_PkmnIsConfused[] = _("{B_ATK_NAME_WITH_PREFIX}\n混乱了！");
-static const u8 sText_PkmnHealedConfusion[] = _("{B_ATK_NAME_WITH_PREFIX}\n解除了混乱！");
-static const u8 sText_PkmnWasConfused[] = _("{B_EFF_NAME_WITH_PREFIX}\n开始混乱了！");
-static const u8 sText_PkmnAlreadyConfused[] = _("{B_DEF_NAME_WITH_PREFIX}\n已经混乱了！");
-static const u8 sText_PkmnFellInLove[] = _("{B_DEF_NAME_WITH_PREFIX}\n被迷倒了！");
-static const u8 sText_PkmnInLove[] = _("{B_ATK_NAME_WITH_PREFIX}因\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}迷倒了！");
-static const u8 sText_PkmnImmobilizedByLove[] = _("{B_ATK_NAME_WITH_PREFIX}因\n迷倒无法行动！");
-static const u8 sText_PkmnBlownAway[] = _("{B_DEF_NAME_WITH_PREFIX}被\n吹飞了！");
-static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX}变成了\n{B_BUFF1}系！");
-static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX}动弹不得！");
-static const u8 sText_PkmnRegainedHealth[] = _("{B_DEF_NAME_WITH_PREFIX}\n恢复了健康！");
-static const u8 sText_PkmnHPFull[] = _("{B_DEF_NAME_WITH_PREFIX}的\nHP满了！");
-static const u8 sText_PkmnRaisedSpDef[] = _("{B_ATK_PREFIX2}的{B_CURRENT_MOVE}\n提升了特防！");
-static const u8 sText_PkmnRaisedSpDefALittle[] = _("{B_ATK_PREFIX2}的{B_CURRENT_MOVE}\n稍微提升了特防！");
-static const u8 sText_PkmnRaisedDef[] = _("{B_ATK_PREFIX2}的{B_CURRENT_MOVE}\n提升了防御！");
-static const u8 sText_PkmnRaisedDefALittle[] = _("{B_ATK_PREFIX2}的{B_CURRENT_MOVE}\n稍微提升了防御！");
-static const u8 sText_PkmnCoveredByVeil[] = _("{B_ATK_PREFIX2}的一方\n被罩子包裹了！");
-static const u8 sText_PkmnUsedSafeguard[] = _("{B_DEF_NAME_WITH_PREFIX}的一方被\n神秘护身保护了！");
-static const u8 sText_PkmnSafeguardExpired[] = _("{B_ATK_PREFIX3}的一方\n不再受神秘护身保护了！");
-static const u8 sText_PkmnWentToSleep[] = _("{B_ATK_NAME_WITH_PREFIX}\n睡着了！");
-static const u8 sText_PkmnSleptHealthy[] = _("{B_ATK_NAME_WITH_PREFIX}睡着了\n并且恢复了体力！");
-static const u8 sText_PkmnWhippedWhirlwind[] = _("{B_ATK_NAME_WITH_PREFIX}\n使出了旋风！");
-static const u8 sText_PkmnTookSunlight[] = _("{B_ATK_NAME_WITH_PREFIX}\n吸收了阳光！");
-static const u8 sText_PkmnLoweredHead[] = _("{B_ATK_NAME_WITH_PREFIX}的头\n往后缩了下！");
-static const u8 sText_PkmnIsGlowing[] = _("{B_ATK_NAME_WITH_PREFIX}正在发光！");
-static const u8 sText_PkmnIsCloakedInAHarshLight[] = _("{B_ATK_NAME_WITH_PREFIX}隐藏在耀眼的\n光线中!");
-static const u8 sText_PkmnFlewHigh[] = _("{B_ATK_NAME_WITH_PREFIX}\n飞向了高空！");
-static const u8 sText_PkmnDugHole[] = _("{B_ATK_NAME_WITH_PREFIX}挖向了地下！");
-static const u8 sText_PkmnHidUnderwater[] = _("{B_ATK_NAME_WITH_PREFIX}潜入水中！");
-static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX}跳了起来！");
-static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX}因\n{B_ATK_NAME_WITH_PREFIX}的绑紧被绑住了！");
-static const u8 sText_PkmnInSnapTrap[] = _("{B_DEF_NAME_WITH_PREFIX}被困于\n捕兽夹中!");
-static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX}被困于\n漩涡中！");
-static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX}被困于\n流沙地狱中！");
-static const u8 sText_PkmnWrappedBy[] = _("{B_DEF_NAME_WITH_PREFIX}被\n{B_ATK_NAME_WITH_PREFIX}捆绑了！");
-static const u8 sText_PkmnClamped[] = _("{B_ATK_NAME_WITH_PREFIX}的壳夹着\n{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_PkmnHurtBy[] = _("{B_ATK_NAME_WITH_PREFIX}因\n{B_BUFF1}受到伤害！");
-static const u8 sText_PkmnFreedFrom[] = _("{B_ATK_NAME_WITH_PREFIX}不受\n{B_BUFF1}的影响了！");
-static const u8 sText_PkmnCrashed[] = _("强力的冲击使{B_ATK_NAME_WITH_PREFIX}\n摔倒了!！");
-const u8 gText_PkmnShroudedInMist[] = _("{B_ATK_PREFIX2}\n被白雾笼罩了！");
-static const u8 sText_PkmnProtectedByMist[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}\n被白雾保护了！");
-const u8 gText_PkmnGettingPumped[] = _("{B_ATK_NAME_WITH_PREFIX}\n变得兴奋了！");
-static const u8 sText_PkmnHitWithRecoil[] = _("{B_ATK_NAME_WITH_PREFIX}\n受到了反馈伤害！");
-static const u8 sText_PkmnProtectedItself2[] = _("{B_ATK_NAME_WITH_PREFIX}\n保护了自己！");
-static const u8 sText_PkmnBuffetedBySandstorm[] = _("{B_ATK_NAME_WITH_PREFIX}因\n沙暴受到了伤害！");
-static const u8 sText_PkmnPeltedByHail[] = _("{B_ATK_NAME_WITH_PREFIX}因\n冰雹受到了伤害！");
-static const u8 sText_PkmnsXWoreOff[] = _("{B_ATK_PREFIX1}的{B_BUFF1}\n消失了！");
-static const u8 sText_PkmnSeeded[] = _("{B_DEF_NAME_WITH_PREFIX}被种了种子！");
-static const u8 sText_PkmnEvadedAttack[] = _("{B_DEF_NAME_WITH_PREFIX}\n回避了攻击！");
-static const u8 sText_PkmnSappedByLeechSeed[] = _("{B_ATK_NAME_WITH_PREFIX}的HP\n因寄生种子减少了！");
-static const u8 sText_PkmnFastAsleep[] = _("{B_ATK_NAME_WITH_PREFIX}熟睡了。");
-static const u8 sText_PkmnWokeUp[] = _("{B_ATK_NAME_WITH_PREFIX}醒来了！");
-static const u8 sText_PkmnUproarKeptAwake[] = _("但是，{B_SCR_ACTIVE_NAME_WITH_PREFIX}的吵闹\n让它保持了清醒！");
-static const u8 sText_PkmnWokeUpInUproar[] = _("{B_ATK_NAME_WITH_PREFIX}在\n吵闹中睡着了！");
-static const u8 sText_PkmnCausedUproar[] = _("{B_ATK_NAME_WITH_PREFIX}\n引起了吵闹！");
-static const u8 sText_PkmnMakingUproar[] = _("{B_ATK_NAME_WITH_PREFIX}\n在制造吵闹！");
-static const u8 sText_PkmnCalmedDown[] = _("{B_ATK_NAME_WITH_PREFIX}平静了下来。");
-static const u8 sText_PkmnCantSleepInUproar[] = _("但是，{B_DEF_NAME_WITH_PREFIX}无法在\n吵闹中睡眠！");
-static const u8 sText_PkmnStockpiled[] = _("{B_ATK_NAME_WITH_PREFIX}储存了\n{B_BUFF1}！");
-static const u8 sText_PkmnCantStockpile[] = _("{B_ATK_NAME_WITH_PREFIX}\n不能再储存了！");
-static const u8 sText_PkmnCantSleepInUproar2[] = _("但是，{B_DEF_NAME_WITH_PREFIX}在\n吵闹中不会睡着！");
-static const u8 sText_UproarKeptPkmnAwake[] = _("但是，吵闹使得\n{B_DEF_NAME_WITH_PREFIX}保持清醒！");
-static const u8 sText_PkmnStayedAwakeUsing[] = _("{B_DEF_NAME_WITH_PREFIX}在清醒中\n使用它的{B_DEF_ABILITY}！");
-static const u8 sText_PkmnStoringEnergy[] = _("{B_ATK_NAME_WITH_PREFIX}\n积蓄了能量！");
-static const u8 sText_PkmnUnleashedEnergy[] = _("{B_ATK_NAME_WITH_PREFIX}\n释放了能量！");
-static const u8 sText_PkmnFatigueConfusion[] = _("{B_ATK_NAME_WITH_PREFIX}由于\n疲劳变得混乱！");
-static const u8 sText_PlayerPickedUpMoney[] = _("{B_PLAYER_NAME}捡到了\n{B_BUFF1}元！\p");
-static const u8 sText_PkmnUnaffected[] = _("{B_DEF_NAME_WITH_PREFIX}\n没受到影响！");
-static const u8 sText_PkmnTransformedInto[] = _("{B_ATK_NAME_WITH_PREFIX}变身为\n{B_BUFF1}！");
-static const u8 sText_PkmnMadeSubstitute[] = _("{B_ATK_NAME_WITH_PREFIX}\n制造了一个替身！");
-static const u8 sText_PkmnHasSubstitute[] = _("{B_ATK_NAME_WITH_PREFIX}已经\n有一个替身了！");
-static const u8 sText_SubstituteDamaged[] = _("替身为\n{B_DEF_NAME_WITH_PREFIX}承受了伤害！\p");
-static const u8 sText_PkmnSubstituteFaded[] = _("{B_DEF_NAME_WITH_PREFIX}的\n替身消失了！\p");
-static const u8 sText_PkmnMustRecharge[] = _("{B_ATK_NAME_WITH_PREFIX}\n必须恢复能量！");
-static const u8 sText_PkmnRageBuilding[] = _("{B_DEF_NAME_WITH_PREFIX}\n已经愤怒了！");
-static const u8 sText_PkmnMoveWasDisabled[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n无法起作用！");
-static const u8 sText_PkmnMoveDisabledNoMore[] = _("{B_ATK_NAME_WITH_PREFIX}\n不再起作用！");
-static const u8 sText_PkmnGotEncore[] = _("{B_DEF_NAME_WITH_PREFIX}\n中了再来一次！");
-static const u8 sText_PkmnEncoreEnded[] = _("{B_ATK_NAME_WITH_PREFIX}对\n再来一次免疫！");
-static const u8 sText_PkmnTookAim[] = _("{B_ATK_NAME_WITH_PREFIX}\n瞄准了{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_PkmnSketchedMove[] = _("{B_ATK_NAME_WITH_PREFIX}对\n{B_BUFF1}做素描！");
-static const u8 sText_PkmnTryingToTakeFoe[] = _("{B_ATK_NAME_WITH_PREFIX}试图\n与对手同归于尽！");
-static const u8 sText_PkmnTookFoe[] = _("{B_DEF_NAME_WITH_PREFIX}与\n{B_ATK_NAME_WITH_PREFIX}同归于尽！");
-static const u8 sText_PkmnReducedPP[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}减少了\n{B_BUFF2}点！");
-static const u8 sText_PkmnStoleItem[] = _("{B_ATK_NAME_WITH_PREFIX}偷窃了\n{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}！");
-static const u8 sText_TargetCantEscapeNow[] = _("{B_DEF_NAME_WITH_PREFIX}暂时\n不能逃跑！");
-static const u8 sText_PkmnFellIntoNightmare[] = _("{B_DEF_NAME_WITH_PREFIX}\n堕入了恶梦之中！");
-static const u8 sText_PkmnLockedInNightmare[] = _("{B_ATK_NAME_WITH_PREFIX}\n被困于恶梦之中！");
-static const u8 sText_PkmnLaidCurse[] = _("{B_ATK_NAME_WITH_PREFIX}减半了自身的HP，\n并给{B_DEF_NAME_WITH_PREFIX}施加了诅咒！");
-static const u8 sText_PkmnAfflictedByCurse[] = _("{B_ATK_NAME_WITH_PREFIX}受到了\n诅咒造成的伤害！");
-static const u8 sText_SpikesScattered[] = _("铁菱已经遍布\n对手的周围！");
-static const u8 sText_PkmnHurtBySpikes[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}受到\n铁菱的伤害！");
-static const u8 sText_PkmnIdentified[] = _("{B_ATK_NAME_WITH_PREFIX}鉴别了\n{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_PkmnPerishCountFell[] = _("{B_ATK_NAME_WITH_PREFIX}的灭亡回合\n只剩下{B_BUFF1}回合！");
-static const u8 sText_PkmnBracedItself[] = _("{B_ATK_NAME_WITH_PREFIX}挺住了！");
-static const u8 sText_PkmnEnduredHit[] = _("{B_DEF_NAME_WITH_PREFIX}忍耐了攻击！");
-static const u8 sText_MagnitudeStrength[] = _("震级{B_BUFF1}！");
-static const u8 sText_PkmnCutHPMaxedAttack[] = _("{B_ATK_NAME_WITH_PREFIX}的HP减少了，\n并且攻击上升至最高！");
-static const u8 sText_PkmnCopiedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX}复制了\n{B_DEF_NAME_WITH_PREFIX}的能力等级！");
-static const u8 sText_PkmnGotFree[] = _("{B_ATK_NAME_WITH_PREFIX}解脱了\n{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}！");
-static const u8 sText_PkmnShedLeechSeed[] = _("{B_ATK_NAME_WITH_PREFIX}\n摆脱了寄生种子！");
-static const u8 sText_PkmnBlewAwaySpikes[] = _("{B_ATK_NAME_WITH_PREFIX}\n清除了铁菱！");
-static const u8 sText_PkmnFledFromBattle[] = _("{B_ATK_NAME_WITH_PREFIX}从对战中\n逃脱了！");
-static const u8 sText_PkmnForesawAttack[] = _("{B_ATK_NAME_WITH_PREFIX}\n预知了攻击！");
-static const u8 sText_PkmnTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX}挡下了\n{B_BUFF1}的攻击！");
-static const u8 sText_PkmnChoseXAsDestiny[] = _("{B_ATK_NAME_WITH_PREFIX}准备和\n{B_CURRENT_MOVE}一同倒下！");
-static const u8 sText_PkmnAttack[] = _("{B_BUFF1}的攻击！");
-static const u8 sText_PkmnCenterAttention[] = _("{B_ATK_NAME_WITH_PREFIX}将\n焦点集中在自身！");
-static const u8 sText_PkmnChargingPower[] = _("{B_ATK_NAME_WITH_PREFIX}\n开始积蓄能量！");
-static const u8 sText_NaturePowerTurnedInto[] = _("自然能力变成了\n{B_CURRENT_MOVE}！");
-static const u8 sText_PkmnStatusNormal[] = _("{B_ATK_NAME_WITH_PREFIX}的状态\n恢复了正常！");
-static const u8 sText_PkmnSubjectedToTorment[] = _("{B_DEF_NAME_WITH_PREFIX}\n受到了无理取闹的影响！");
-static const u8 sText_PkmnTighteningFocus[] = _("{B_ATK_NAME_WITH_PREFIX}\n集中了力量！");
-static const u8 sText_PkmnFellForTaunt[] = _("{B_DEF_NAME_WITH_PREFIX}\n受到了挑衅！");
-static const u8 sText_PkmnReadyToHelp[] = _("{B_ATK_NAME_WITH_PREFIX}\n准备帮助{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_PkmnSwitchedItems[] = _("{B_ATK_NAME_WITH_PREFIX}与对手\n交换了携带道具！");
-static const u8 sText_PkmnObtainedX[] = _("{B_ATK_NAME_WITH_PREFIX}获得了\n{B_BUFF1}。");
-static const u8 sText_PkmnObtainedX2[] = _("{B_DEF_NAME_WITH_PREFIX}获得了\n{B_BUFF2}。");
-static const u8 sText_PkmnObtainedXYObtainedZ[] = _("{B_ATK_NAME_WITH_PREFIX}获得了\n{B_BUFF1}。\p{B_DEF_NAME_WITH_PREFIX}获得了\n{B_BUFF2}。");
-static const u8 sText_PkmnCopiedFoe[] = _("{B_ATK_NAME_WITH_PREFIX}模仿了\n{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}！");
-static const u8 sText_PkmnMadeWish[] = _("{B_ATK_NAME_WITH_PREFIX}许了一个愿！");
-static const u8 sText_PkmnWishCameTrue[] = _("{B_BUFF1}的许愿\n实现了！");
-static const u8 sText_PkmnPlantedRoots[] = _("{B_ATK_NAME_WITH_PREFIX}扎下了根！");
-static const u8 sText_PkmnAbsorbedNutrients[] = _("{B_ATK_NAME_WITH_PREFIX}\n汲取了根茎的养分！");
-static const u8 sText_PkmnAnchoredItself[] = _("{B_DEF_NAME_WITH_PREFIX}把自身\n用根茎紧紧固定住了！");
-static const u8 sText_PkmnWasMadeDrowsy[] = _("{B_ATK_NAME_WITH_PREFIX}使得\n{B_DEF_NAME_WITH_PREFIX}昏昏欲睡！");
-static const u8 sText_PkmnKnockedOff[] = _("{B_ATK_NAME_WITH_PREFIX}打破了\n{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}！");
-static const u8 sText_PkmnSwappedAbilities[] = _("{B_ATK_NAME_WITH_PREFIX}\n与对手互换了特性！");
-static const u8 sText_PkmnSealedOpponentMove[] = _("{B_ATK_NAME_WITH_PREFIX}\n封印了对手的技能！");
-static const u8 sText_PkmnWantsGrudge[] = _("{B_ATK_NAME_WITH_PREFIX}\n让对手背负怨恨！");
-static const u8 sText_PkmnLostPPGrudge[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n失去了所有的PP！");
-static const u8 sText_PkmnShroudedItself[] = _("{B_ATK_NAME_WITH_PREFIX}将\n自身笼罩在{B_CURRENT_MOVE}中！");
-static const u8 sText_PkmnMoveBounced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}\n因为魔术外衣被反弹了！");
-static const u8 sText_PkmnWaitsForTarget[] = _("{B_ATK_NAME_WITH_PREFIX}等待目标\n以便复制技能！");
-static const u8 sText_PkmnSnatchedMove[] = _("{B_DEF_NAME_WITH_PREFIX}抢夺了\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}的技能！");
-static const u8 sText_ElectricityWeakened[] = _("电的力量\n减弱了！");
-static const u8 sText_FireWeakened[] = _("炎的力量\n减弱了！");
-static const u8 sText_XFoundOneY[] = _("{B_ATK_NAME_WITH_PREFIX}发现了\n一个{B_LAST_ITEM}！");
-static const u8 sText_SoothingAroma[] = _("一股沁心的香气\n弥漫了开来！");
-static const u8 sText_ItemsCantBeUsedNow[] = _("道具暂不起作用。{PAUSE 64}");
-static const u8 sText_ForXCommaYZ[] = _("对于{B_SCR_ACTIVE_NAME_WITH_PREFIX}，\n{B_LAST_ITEM}{B_BUFF1}。");
-static const u8 sText_PkmnUsedXToGetPumped[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用\n{B_LAST_ITEM}来变得兴奋！");
-static const u8 sText_PkmnLostFocus[] = _("{B_ATK_NAME_WITH_PREFIX}失去了焦点\n不能出招！");
-static const u8 sText_PkmnWasDraggedOut[] = _("{B_DEF_NAME_WITH_PREFIX}被\n拖入了战斗！\p");
-static const u8 sText_TheWallShattered[] = _("墙壁粉碎了！");
-static const u8 sText_ButNoEffect[] = _("但是不起任何作用！");
-static const u8 sText_PkmnHasNoMovesLeft[] = _("{B_ATK_NAME_WITH_PREFIX}\n已经没有技能了！\p");
-static const u8 sText_PkmnMoveIsDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}\n不起作用！\p");
-static const u8 sText_PkmnCantUseMoveTorment[] = _("{B_ATK_NAME_WITH_PREFIX}不能\n使用相同的技能！\p");
-static const u8 sText_PkmnCantUseMoveTaunt[] = _("{B_ATK_NAME_WITH_PREFIX}受到假指控后，\n无法使用{B_CURRENT_MOVE}！\p");
-static const u8 sText_PkmnCantUseMoveSealed[] = _("{B_ATK_NAME_WITH_PREFIX}不能使用\n被封印的{B_CURRENT_MOVE}！\p");
-static const u8 sText_PkmnCantUseMoveThroatChop[] = _("{B_ATK_NAME_WITH_PREFIX}无法使用\n{B_CURRENT_MOVE}失声!\p");
-static const u8 sText_PkmnMadeItRain[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n使天空下起雨！");
-static const u8 sText_PkmnRaisedSpeed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n提升了速度！");
-static const u8 sText_PkmnProtectedBy[] = _("{B_DEF_NAME_WITH_PREFIX}受到了\n{B_DEF_ABILITY}的保护！");
-static const u8 sText_PkmnPreventsUsage[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n防止了{B_ATK_NAME_WITH_PREFIX}\l使用{B_CURRENT_MOVE}！");
-static const u8 sText_PkmnRestoredHPUsing[] = _("{B_DEF_NAME_WITH_PREFIX}因{B_DEF_ABILITY}\n恢复了HP！");
-static const u8 sText_PkmnsXMadeYUseless[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n使{B_CURRENT_MOVE}不起作用！");
-static const u8 sText_PkmnChangedTypeWith[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n使它变成{B_BUFF1}！");
-static const u8 sText_PkmnPreventsParalysisWith[] = _("{B_EFF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n抵御了麻痹！");
-static const u8 sText_PkmnPreventsRomanceWith[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n抵御了迷人！");
-static const u8 sText_PkmnPreventsPoisoningWith[] = _("{B_EFF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n抵御了中毒！");
-static const u8 sText_PkmnPreventsConfusionWith[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n抵御了混乱！");
-static const u8 sText_PkmnRaisedFirePowerWith[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n提升了炎系技能的威力！");
-static const u8 sText_PkmnAnchorsItselfWith[] = _("{B_DEF_NAME_WITH_PREFIX}因\n{B_DEF_ABILITY}固定住了自身！");
-static const u8 sText_PkmnCutsAttackWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n降低了{B_DEF_NAME_WITH_PREFIX}的攻击！");
-static const u8 sText_PkmnPreventsStatLossWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n防止了能力等级下降！");
-static const u8 sText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n对{B_ATK_NAME_WITH_PREFIX}造成了伤害！");
-static const u8 sText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}追踪了\n{B_BUFF1}的{B_BUFF2}！");
-static const u8 sText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}的{B_EFF_ABILITY}\n防止了烧伤！");
-static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n阻止了{B_CURRENT_MOVE}！");
-static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n阻止了{B_CURRENT_MOVE}！");
-static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n使HP稍微恢复了！");
-static const u8 sText_PkmnsXWhippedUpSandstorm[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n在场上扬起了沙暴！");
-static const u8 sText_PkmnsXIntensifiedSun[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n使阳光更加强烈！");
-static const u8 sText_PkmnsXPreventsYLoss[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n防止了{B_BUFF1}下降！");
-static const u8 sText_PkmnsXInfatuatedY[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n迷倒了{B_ATK_NAME_WITH_PREFIX}！");
-static const u8 sText_PkmnsXMadeYIneffective[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n使{B_CURRENT_MOVE}无效化了！");
-static const u8 sText_PkmnsXCuredYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n治愈了{B_BUFF1}！");
-static const u8 sText_ItSuckedLiquidOoze[] = _("吸收了黏液！");
-static const u8 sText_PkmnTransformed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}变身了！");
-static const u8 sText_PkmnsXTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n承受了攻击！");
-const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}的{B_LAST_ABILITY}\n防止了替换！\p");
-static const u8 sText_PreventedFromWorking[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n防止了{B_SCR_ACTIVE_NAME_WITH_PREFIX}的\l{B_BUFF1}起作用！");
-static const u8 sText_PkmnsXMadeItIneffective[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n使它无效化了！");
-static const u8 sText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}的{B_EFF_ABILITY}\n防止了害怕！");
-static const u8 sText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n防止了{B_DEF_NAME_WITH_PREFIX}的\l{B_DEF_ABILITY}起作用！");
-static const u8 sText_PkmnsAbilityPreventsAbility[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n防止了{B_DEF_NAME_WITH_PREFIX}的\l{B_DEF_ABILITY}起作用！");
-static const u8 sText_PkmnsXCuredItsYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n治愈了它的{B_BUFF1}！");
-static const u8 sText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n对{B_EFF_NAME_WITH_PREFIX}不起作用！");
-const u8 gText_StatSharply[] = _("急剧");
-const u8 gText_StatRose[] = _("提升！");
-static const u8 sText_StatHarshly[] = _("大幅");
-static const u8 sText_StatFell[] = _("下降！");
-static const u8 sText_AttackersStatRose[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n{B_BUFF2}");
-const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_UsingItemTheStatOfPkmnRose[] = _("使用了{B_LAST_ITEM}，{B_BUFF1}\n的{B_SCR_ACTIVE_NAME_WITH_PREFIX}{B_BUFF2}");
-static const u8 sText_AttackersStatFell[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_DefendersStatFell[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_StatsWontIncrease2[] = _("{B_ATK_NAME_WITH_PREFIX}的能力\n不能再提升了！");
-static const u8 sText_StatsWontDecrease2[] = _("{B_DEF_NAME_WITH_PREFIX}的能力\n不能再降低了！");
-static const u8 sText_CriticalHit[] = _("命中要害！");
-static const u8 sText_OneHitKO[] = _("一击必杀！");
-static const u8 sText_123Poof[] = _("{PAUSE 32}1，{PAUSE 15}2，然后{PAUSE 15}…{PAUSE 15}…{PAUSE 15}…{PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}叮咚！\p");
-static const u8 sText_AndEllipsis[] = _("那…\p");
-static const u8 sText_HMMovesCantBeForgotten[] = _("暂时无法忘记秘传技能。\p");
-static const u8 sText_NotVeryEffective[] = _("收效甚微…");
-static const u8 sText_SuperEffective[] = _("效果拔群！");
-static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_FLEE}成功逃走了！\p");
-static const u8 sText_PkmnFledUsingIts[] = _("{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX}\n使用了{B_LAST_ITEM}后逃走了！\p");
-static const u8 sText_PkmnFledUsing[] = _("{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX}\n使用了{B_ATK_ABILITY}后逃走了！\p");
-static const u8 sText_WildPkmnFled[] = _("{PLAY_SE SE_FLEE}野生{B_BUFF1}逃走了！");
-static const u8 sText_PlayerDefeatedLinkTrainer[] = _("你打败了\n{B_LINK_OPPONENT1_NAME}！");
-static const u8 sText_TwoLinkTrainersDefeated[] = _("你打败了{B_LINK_OPPONENT1_NAME}\n和{B_LINK_OPPONENT2_NAME}！");
-static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("你输给了\n{B_LINK_OPPONENT1_NAME}！");
-static const u8 sText_PlayerLostToTwo[] = _("你输给了{B_LINK_OPPONENT1_NAME}\n和{B_LINK_OPPONENT2_NAME}！");
-static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("你与\n{B_LINK_OPPONENT1_NAME}打成了平手！");
-static const u8 sText_PlayerBattledToDrawVsTwo[] = _("你与{B_LINK_OPPONENT1_NAME}\n和{B_LINK_OPPONENT2_NAME}打成了平手！");
-static const u8 sText_WildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME}逃了！");
-static const u8 sText_TwoWildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME}和\n{B_LINK_OPPONENT2_NAME}逃走了！");
-static const u8 sText_NoRunningFromTrainers[] = _("不可以！训练家要堂堂正正地\n面对战斗！\p");
-static const u8 sText_CantEscape[] = _("不能逃跑！\p");
-static const u8 sText_DontLeaveBirch[] = _("小田卷博士：不要像那样不管我！\p");
-static const u8 sText_ButNothingHappened[] = _("但是什么都没发生！");
-static const u8 sText_ButItFailed[] = _("但是它失败了！");
-static const u8 sText_ItHurtConfusion[] = _("因混乱对自己\n造成了伤害！");
-static const u8 sText_MirrorMoveFailed[] = _("鹦鹉学舌失败了！");
-static const u8 sText_StartedToRain[] = _("下起了雨！");
-static const u8 sText_DownpourStarted[] = _("下起了大雨！"); // corresponds to DownpourText in pokegold and pokecrystal and is used by Rain Dance in GSC
-static const u8 sText_RainContinues[] = _("雨一直在下。");
-static const u8 sText_DownpourContinues[] = _("大雨一直在下。"); // unused
-static const u8 sText_RainStopped[] = _("雨不再下了。");
-static const u8 sText_SandstormBrewed[] = _("扬起了沙暴！");
-static const u8 sText_SandstormRages[] = _("飞沙走石。");
-static const u8 sText_SandstormSubsided[] = _("沙暴停止了。");
-static const u8 sText_SunlightGotBright[] = _("阳光变猛烈了！");
-static const u8 sText_SunlightStrong[] = _("阳光很猛烈。");
-static const u8 sText_SunlightFaded[] = _("阳光不再猛烈。");
-static const u8 sText_StartedHail[] = _("下起了冰雹！");
-static const u8 sText_HailContinues[] = _("冰雹还在持续。");
-static const u8 sText_HailStopped[] = _("冰雹停止了。");
-static const u8 sText_StartedSnow[] = _("下起了雪!");
-static const u8 sText_SnowContinues[] = _("还在持续下雪。");
-static const u8 sText_SnowStopped[] = _("停止下雪了。");
-static const u8 sText_FogCreptUp[] = _("雾像汤一样浓!");
-static const u8 sText_FogIsDeep[] = _("雾很深…");
-static const u8 sText_FogLifted[] = _("雾消散了");
-static const u8 sText_FailedToSpitUp[] = _("无法使出喷出！");
-static const u8 sText_FailedToSwallow[] = _("无法使出吞下！");
-static const u8 sText_WindBecameHeatWave[] = _("风变成\n热风了！");
-static const u8 sText_StatChangesGone[] = _("能力等级\n都还原成初始状态了！");
-static const u8 sText_CoinsScattered[] = _("钱币散落一地！");
-static const u8 sText_TooWeakForSubstitute[] = _("HP太低了，\n以致无法制造替身！");
-static const u8 sText_SharedPain[] = _("平分了双方的HP！");
-static const u8 sText_BellChimed[] = _("铃铛响了起来！");
-static const u8 sText_FaintInThree[] = _("受到影响的宝可梦\n将在3回合内倒下！");
-static const u8 sText_NoPPLeft[] = _("该技能没有PP，\n无法使用！\p");
-static const u8 sText_ButNoPPLeft[] = _("但是该技能没有PP！");
-static const u8 sText_PkmnIgnoresAsleep[] = _("{B_ATK_NAME_WITH_PREFIX}在睡眠时\n无法听从命令！");
-static const u8 sText_PkmnIgnoredOrders[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n听从命令！");
-static const u8 sText_PkmnBeganToNap[] = _("{B_ATK_NAME_WITH_PREFIX}开始打盹了！");
-static const u8 sText_PkmnLoafing[] = _("{B_ATK_NAME_WITH_PREFIX}在\n周围闲逛！");
-static const u8 sText_PkmnWontObey[] = _("{B_ATK_NAME_WITH_PREFIX}不\n听从命令！");
-static const u8 sText_PkmnTurnedAway[] = _("{B_ATK_NAME_WITH_PREFIX}转身离开！");
-static const u8 sText_PkmnPretendNotNotice[] = _("{B_ATK_NAME_WITH_PREFIX}假装\n没有注意到！");
-static const u8 sText_EnemyAboutToSwitchPkmn[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}\n就要换上{B_BUFF2}了。\p{B_PLAYER_NAME}要替换\n宝可梦吗？");
-static const u8 sText_PkmnLearnedMove2[] = _("{B_ATK_NAME_WITH_PREFIX}习得了\n{B_BUFF1}！");
-static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("你打败了\n{B_TRAINER1_CLASS}{B_TRAINER1_NAME}！\p");
-static const u8 sText_CreptCloser[] = _("{B_PLAYER_NAME}悄悄靠近了\n{B_OPPONENT_MON1_NAME}！");
-static const u8 sText_CantGetCloser[] = _("{B_PLAYER_NAME}不能再靠近了！");
-static const u8 sText_PkmnWatchingCarefully[] = _("{B_OPPONENT_MON1_NAME}小心地\n注视着！");
-static const u8 sText_PkmnCuriousAboutX[] = _("{B_OPPONENT_MON1_NAME}对\n{B_BUFF1}感到好奇！");
-static const u8 sText_PkmnEnthralledByX[] = _("{B_OPPONENT_MON1_NAME}被\n{B_BUFF1}迷倒了！");
-static const u8 sText_PkmnIgnoredX[] = _("{B_OPPONENT_MON1_NAME}完全忽视了\n{B_BUFF1}！");
-static const u8 sText_ThrewPokeblockAtPkmn[] = _("{B_PLAYER_NAME}朝{B_OPPONENT_MON1_NAME}投掷了\n{POKEBLOCK}！");
-static const u8 sText_OutOfSafariBalls[] = _("{PLAY_SE SE_DING_DONG}提示：\n你用完了原野球！游戏结束！\p");
-static const u8 sText_OpponentMon1Appeared[] = _("{B_OPPONENT_MON1_NAME}出现了！\p");
-static const u8 sText_WildPkmnAppeared[] = _("野生的{B_OPPONENT_MON1_NAME}跳了出来！\p");
-static const u8 sText_LegendaryPkmnAppeared[] = _("野生的{B_OPPONENT_MON1_NAME}跳了出来！\p");
-static const u8 sText_WildPkmnAppearedPause[] = _("野生的{B_OPPONENT_MON1_NAME}跳了出来！{PAUSE 127}");
-static const u8 sText_TwoWildPkmnAppeared[] = _("野生的{B_OPPONENT_MON1_NAME}和\n{B_OPPONENT_MON2_NAME}跳了出来！\p");
-static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}\n想要来场对战！\p");
-static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME}\n想要对战！");
-static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME}和{B_LINK_OPPONENT2_NAME}\n想要对战！");
-static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}\n派出了{B_OPPONENT_MON1_NAME}！");
-static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}\n派出了{B_OPPONENT_MON1_NAME}和{B_OPPONENT_MON2_NAME}！");
-static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}\n派出了{B_BUFF1}！");
-static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME}派出了\n{B_OPPONENT_MON1_NAME}！");
-static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME}派出了\n{B_OPPONENT_MON1_NAME}和{B_OPPONENT_MON2_NAME}！");
-static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME}派出了{B_LINK_OPPONENT_MON1_NAME}！\n{B_LINK_OPPONENT2_NAME}派出了{B_LINK_OPPONENT_MON2_NAME}！");
-static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME}派出了\n{B_BUFF1}！");
-static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME}派出了\n{B_BUFF1}！");
-static const u8 sText_GoPkmn[] = _("就决定是你了！{B_PLAYER_MON1_NAME}！");
-static const u8 sText_GoTwoPkmn[] = _("就决定是你们了！\n{B_PLAYER_MON1_NAME}、{B_PLAYER_MON2_NAME}！");
-static const u8 sText_GoPkmn2[] = _("就决定是你了！{B_BUFF1}！");
-static const u8 sText_DoItPkmn[] = _("拜托了！{B_BUFF1}！");
-static const u8 sText_GoForItPkmn[] = _("好好加油吧，{B_BUFF1}！");
-static const u8 sText_YourFoesWeakGetEmPkmn[] = _("对手很虚弱！\n机会来了，{B_BUFF1}！");
-static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME}派出了{B_LINK_PLAYER_MON2_NAME}！\n去吧！{B_LINK_PLAYER_MON1_NAME}！");
-static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}，辛苦你了！\n回来吧！");
-static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}，回来吧！");
-static const u8 sText_PkmnOkComeBack[] = _("{B_BUFF1}\n干得好！回来吧！");
-static const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}\n做得漂亮！回来吧！");
-static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}\n收回了{B_BUFF1}！");
-static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME}收回了\n{B_BUFF1}！");
-static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME}收回了\n{B_BUFF1}！");
-static const u8 sText_WildPkmnPrefix[] = _("野生的");
-static const u8 sText_FoePkmnPrefix[] = _("对方的");
+
+const u8 gText_PkmnShroudedInMist[] = _("{B_ATK_TEAM1} 队伍被雾气笼罩了!");
+const u8 gText_PkmnGettingPumped[] = _("{B_DEF_NAME_WITH_PREFIX} 正在变得充满力量!");
+const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1} 依靠其 {B_LAST_ABILITY} 特性阻止了交换!\p");
+const u8 gText_StatSharply[] = _("急剧 ");
+const u8 gText_StatRose[] = _("上升了!");
+const u8 gText_StatFell[] = _("下降了!");
+const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX} 的 {B_BUFF1} {B_BUFF2}");
+static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_FLEE}你安全地逃脱了!\p");
+static const u8 sText_PlayerDefeatedLinkTrainer[] = _("你击败了 {B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_TwoLinkTrainersDefeated[] = _("你击败了 {B_LINK_OPPONENT1_NAME} 和 {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("你输给了 {B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_PlayerLostToTwo[] = _("你输给了 {B_LINK_OPPONENT1_NAME} 和 {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("你与 {B_LINK_OPPONENT1_NAME} 战成了平局!");
+static const u8 sText_PlayerBattledToDrawVsTwo[] = _("你与 {B_LINK_OPPONENT1_NAME} 和 {B_LINK_OPPONENT2_NAME} 战成了平局!");
+static const u8 sText_WildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} 逃跑了!"); //不在第五世代及以后版本中，被比赛被放弃的文本替换
+static const u8 sText_TwoWildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} 和 {B_LINK_OPPONENT2_NAME} 逃跑了!"); //不在第五世代及以后版本中，被比赛被放弃的文本替换
+static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("你击败了{B_TRAINER1_NAME_WITH_CLASS}!\p");
+static const u8 sText_OpponentMon1Appeared[] = _("{B_OPPONENT_MON1_NAME}出现了!\p");
+static const u8 sText_WildPkmnAppeared[] = _("你遇到了野生的{B_OPPONENT_MON1_NAME}!\p");
+static const u8 sText_LegendaryPkmnAppeared[] = _("你遇到了传说中的{B_OPPONENT_MON1_NAME}!\p");
+static const u8 sText_WildPkmnAppearedPause[] = _("你遇到了野生的{B_OPPONENT_MON1_NAME}!{PAUSE 127}");
+static const u8 sText_TwoWildPkmnAppeared[] = _("哦!野生的{B_OPPONENT_MON1_NAME}和{B_OPPONENT_MON2_NAME}出现了!\p");
+static const u8 sText_Trainer1WantsToBattle[] = _("你被{B_TRAINER1_NAME_WITH_CLASS}挑战了!\p");
+static const u8 sText_LinkTrainerWantsToBattle[] = _("你被{B_LINK_OPPONENT1_NAME}挑战了!");
+static const u8 sText_TwoLinkTrainersWantToBattle[] = _("你被{B_LINK_OPPONENT1_NAME}和{B_LINK_OPPONENT2_NAME}挑战了!");
+static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_NAME_WITH_CLASS}放出了{B_OPPONENT_MON1_NAME}!");
+static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_NAME_WITH_CLASS}放出了{B_OPPONENT_MON1_NAME}和{B_OPPONENT_MON2_NAME}!");
+static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_NAME_WITH_CLASS}放出了{B_BUFF1}!");
+static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME}放出了{B_OPPONENT_MON1_NAME}!");
+static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME}放出了{B_OPPONENT_MON1_NAME}和{B_OPPONENT_MON2_NAME}!");
+static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME}放出了{B_LINK_OPPONENT_MON1_NAME}!{B_LINK_OPPONENT2_NAME}放出了{B_LINK_OPPONENT_MON2_NAME}!");
+static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME}放出了{B_BUFF1}!");
+static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME}放出了{B_BUFF1}!");
+static const u8 sText_GoPkmn[] = _("去吧!{B_PLAYER_MON1_NAME}!");
+static const u8 sText_GoTwoPkmn[] = _("去吧!{B_PLAYER_MON1_NAME}和{B_PLAYER_MON2_NAME}!");
+static const u8 sText_GoPkmn2[] = _("去吧!{B_BUFF1}!");
+static const u8 sText_DoItPkmn[] = _("交给你了，{B_BUFF1}!");
+static const u8 sText_GoForItPkmn[] = _("加油，{B_BUFF1}!");
+static const u8 sText_JustALittleMorePkmn[] = _("再坚持一下!{B_BUFF1}!"); //目前未使用，需要代码更改
+static const u8 sText_YourFoesWeakGetEmPkmn[] = _("对手很弱!上吧，{B_BUFF1}!");
+static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME}放出了{B_LINK_PLAYER_MON2_NAME}!去吧!{B_LINK_PLAYER_MON1_NAME}!");
+static const u8 sText_PkmnSwitchOut[] = _("{B_BUFF1}，换下来!回来吧!"); //目前未使用，我认为这是在轮换模式下切换宝可梦时使用的
+static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}，够了!回来吧!");
+static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}，回来吧!");
+static const u8 sText_PkmnOkComeBack[] = _("好的，{B_BUFF1}!回来吧!");
+static const u8 sText_PkmnGoodComeBack[] = _("干得好，{B_BUFF1}!回来吧!");
+static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_NAME_WITH_CLASS}收回了{B_BUFF1}!");
+static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME}收回了{B_BUFF1}!");
+static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME}收回了{B_BUFF1}!");
+static const u8 sText_WildPkmnPrefix[] = _("野生的 ");
+static const u8 sText_FoePkmnPrefix[] = _("对手的 ");
+static const u8 sText_WildPkmnPrefixLower[] = _("野生的 ");
+static const u8 sText_FoePkmnPrefixLower[] = _("对手的 ");
 static const u8 sText_EmptyString8[] = _("");
-static const u8 sText_FoePkmnPrefix2[] = _("对方");
-static const u8 sText_AllyPkmnPrefix[] = _("我方");
-static const u8 sText_FoePkmnPrefix3[] = _("对方");
-static const u8 sText_AllyPkmnPrefix2[] = _("我方");
-static const u8 sText_FoePkmnPrefix4[] = _("对方");
-static const u8 sText_AllyPkmnPrefix3[] = _("我方");
-static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX}使用\n{B_BUFF3}！");
-static const u8 sText_ExclamationMark[] = _("！");
-static const u8 sText_ExclamationMark2[] = _("！");
-static const u8 sText_ExclamationMark3[] = _("！");
-static const u8 sText_ExclamationMark4[] = _("！");
-static const u8 sText_ExclamationMark5[] = _("！");
+static const u8 sText_FoePkmnPrefix2[] = _("对手");
+static const u8 sText_AllyPkmnPrefix[] = _("同伴");
+static const u8 sText_FoePkmnPrefix3[] = _("对手");
+static const u8 sText_AllyPkmnPrefix2[] = _("同伴");
+static const u8 sText_FoePkmnPrefix4[] = _("对手");
+static const u8 sText_AllyPkmnPrefix3[] = _("同伴");
+static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX}使用了{B_BUFF3}!");
+static const u8 sText_ExclamationMark[] = _("!");
+static const u8 sText_ExclamationMark2[] = _("!");
+static const u8 sText_ExclamationMark3[] = _("!");
+static const u8 sText_ExclamationMark4[] = _("!");
+static const u8 sText_ExclamationMark5[] = _("!");
 static const u8 sText_HP[] = _("HP");
 static const u8 sText_Attack[] = _("攻击");
 static const u8 sText_Defense[] = _("防御");
@@ -457,1150 +139,803 @@ static const u8 sText_Accuracy[] = _("命中率");
 static const u8 sText_Evasiveness[] = _("回避率");
 
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
-    {
-        sText_HP, sText_Attack, sText_Defense,
-        sText_Speed, sText_SpAttack, sText_SpDefense,
-        sText_Accuracy, sText_Evasiveness};
-
-static const u8 sText_PokeblockWasTooSpicy[] = _("太辣！");
-static const u8 sText_PokeblockWasTooDry[] = _("太涩！");
-static const u8 sText_PokeblockWasTooSweet[] = _("太甜！");
-static const u8 sText_PokeblockWasTooBitter[] = _("太苦！");
-static const u8 sText_PokeblockWasTooSour[] = _("太酸！");
-
+{
+    sText_HP, sText_Attack, sText_Defense,
+    sText_Speed, sText_SpAttack, sText_SpDefense,
+    sText_Accuracy, sText_Evasiveness
+};
 const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
-    {
-        [FLAVOR_SPICY] = sText_PokeblockWasTooSpicy,
-        [FLAVOR_DRY] = sText_PokeblockWasTooDry,
-        [FLAVOR_SWEET] = sText_PokeblockWasTooSweet,
-        [FLAVOR_BITTER] = sText_PokeblockWasTooBitter,
-        [FLAVOR_SOUR] = sText_PokeblockWasTooSour};
+{
+    [FLAVOR_SPICY]  = COMPOUND_STRING("太辣了!"),
+    [FLAVOR_DRY]    = COMPOUND_STRING("太干了!"),
+    [FLAVOR_SWEET]  = COMPOUND_STRING("太甜了!"),
+    [FLAVOR_BITTER] = COMPOUND_STRING("太苦了!"),
+    [FLAVOR_SOUR]   = COMPOUND_STRING("太酸了!"),
+};
 
-static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME}使用\n{B_LAST_ITEM}！");
-static const u8 sText_WallyUsedItem[] = _("满充使用了\n{B_LAST_ITEM}！");
-static const u8 sText_Trainer1UsedItem[] = _("{B_ATK_TRAINER_CLASS}{B_ATK_TRAINER_NAME}\n使用了{B_LAST_ITEM}！");
-static const u8 sText_TrainerBlockedBall[] = _("训练家挡下了精灵球！");
-static const u8 sText_DontBeAThief[] = _("不要做贼！");
-static const u8 sText_ItDodgedBall[] = _("它躲开了精灵球！\n这只宝可梦不能被收服！");
-static const u8 sText_YouMissedPkmn[] = _("你错过了这只宝可梦！");
-static const u8 sText_PkmnBrokeFree[] = _("哦，不！\n宝可梦逃走了！");
-static const u8 sText_ItAppearedCaught[] = _("啊！\n似乎要被抓住了！");
-static const u8 sText_AarghAlmostHadIt[] = _("哎呀！\n再加把劲！");
-static const u8 sText_ShootSoClose[] = _("可恶！\n就差一点点了！");
-static const u8 sText_GotchaPkmnCaughtPlayer[] = _("搞定！\n{B_DEF_NAME}被收服了！{WAIT_SE}{PLAY_BGM MUS_CAUGHT}\p");
-static const u8 sText_GotchaPkmnCaughtWally[] = _("搞定！\n{B_DEF_NAME}被收服了！{WAIT_SE}{PLAY_BGM MUS_CAUGHT}{PAUSE 127}");
-static const u8 sText_GiveNicknameCaptured[] = _("要给{B_DEF_NAME}取一个昵称么？");
-static const u8 sText_PkmnSentToPC[] = _("{B_DEF_NAME}被送到了\n{B_PC_CREATOR_NAME}电脑。");
 static const u8 sText_Someones[] = _("某人的");
-static const u8 sText_Lanettes[] = _("真弓的");
-static const u8 sText_PkmnDataAddedToDex[] = _("{B_DEF_NAME}的数据\n登记到了宝可梦图鉴。\p");
-static const u8 sText_ItIsRaining[] = _("现在在下雨。");
-static const u8 sText_SandstormIsRaging[] = _("沙暴很猛烈。");
-static const u8 sText_BoxIsFull[] = _("盒子已经满了！\n不能再收服更多了！\p");
-static const u8 sText_EnigmaBerry[] = _("谜之果");
-static const u8 sText_BerrySuffix[] = _("树果");
-static const u8 sText_PkmnsItemCuredParalysis[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了麻痹！");
-static const u8 sText_PkmnsItemCuredPoison[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了中毒！");
-static const u8 sText_PkmnsItemHealedBurn[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了灼烧！");
-static const u8 sText_PkmnsItemHealedFrostbite[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s{B_LAST_ITEM}\nhealed its frostbite!");
-static const u8 sText_PkmnsItemDefrostedIt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n解除了冰冻！");
-static const u8 sText_PkmnsItemWokeIt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n让它从睡眠中苏醒了！");
-static const u8 sText_PkmnsItemSnappedOut[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n使它解除了混乱！");
-static const u8 sText_PkmnsItemCuredProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了它的{B_BUFF1}状态！");
-static const u8 sText_PkmnsItemNormalizedStatus[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了异常状态！");
-static const u8 sText_PkmnsItemRestoredHealth[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n恢复了HP！");
-static const u8 sText_PkmnsItemRestoredPP[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n恢复了{B_BUFF1}的PP！");
-static const u8 sText_PkmnsItemRestoredStatus[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n治愈了异常状态！");
-static const u8 sText_PkmnsItemRestoredHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n稍微恢复了HP！");
-static const u8 sText_ItemAllowsOnlyYMove[] = _("{B_LAST_ITEM}只允许\n使用{B_CURRENT_MOVE}！\p");
-static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX}靠它的\n{B_LAST_ITEM}顶住了！");
+static const u8 sText_Lanettes[] = _("拉奈特的"); //直到到处都是小写之前，这里不使用小写
+static const u8 sText_EnigmaBerry[] = _("谜之树果"); //直到到处都是小写之前，这里不使用小写
+static const u8 sText_BerrySuffix[] = _(" 树果"); //直到到处都是小写之前，这里不使用小写
 const u8 gText_EmptyString3[] = _("");
-static const u8 sText_YouThrowABallNowRight[] = _("现在要扔出精灵球了是吧？\n我…我会全力以赴！");
 
-// early declaration of strings
-static const u8 sText_PkmnIncapableOfPower[];
-static const u8 sText_GlintAppearsInEye[];
-static const u8 sText_PkmnGettingIntoPosition[];
-static const u8 sText_PkmnBeganGrowlingDeeply[];
-static const u8 sText_PkmnEagerForMore[];
-static const u8 sText_DefeatedOpponentByReferee[];
-static const u8 sText_LostToOpponentByReferee[];
-static const u8 sText_TiedOpponentByReferee[];
-static const u8 sText_QuestionForfeitMatch[];
-static const u8 sText_ForfeitedMatch[];
-static const u8 sText_Trainer1WinText[];
-static const u8 sText_Trainer2WinText[];
-static const u8 sText_TwoInGameTrainersDefeated[];
-static const u8 sText_Trainer2LoseText[];
+static const u8 sText_TwoInGameTrainersDefeated[] = _("你击败了{B_TRAINER1_NAME_WITH_CLASS}和{B_TRAINER2_NAME_WITH_CLASS}!\p");
 
-// New battle strings.
-static const u8 sText_EnduredViaSturdy[] = _("{B_DEF_NAME_WITH_PREFIX}挺住了\n攻击{B_DEF_ABILITY}!");
-static const u8 sText_PowerHerbActivation[] = _("{B_ATK_NAME_WITH_PREFIX}完全充能了\n因为它的{B_LAST_ITEM}!");
-static const u8 sText_HurtByItem[] = _("{B_ATK_NAME_WITH_PREFIX}受伤了\n因为它的{B_LAST_ITEM}！");
-static const u8 sText_BadlyPoisonedByItem[] = _("{B_EFF_NAME_WITH_PREFIX}中剧毒了\n因为{B_LAST_ITEM}！");
-static const u8 sText_BurnedByItem[] = _("{B_EFF_NAME_WITH_PREFIX}烧伤了\n因为{B_LAST_ITEM}！");
-static const u8 sText_TargetAbilityActivates[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}发动了！");
-static const u8 sText_GravityIntensified[] = _("重力加强了！");
-static const u8 sText_TargetIdentified[] = _("{B_DEF_NAME_WITH_PREFIX}被\n识破了！");
-static const u8 sText_TargetWokeUp[] = _("{B_DEF_NAME_WITH_PREFIX}醒了！");
-static const u8 sText_PkmnStoleAndAteItem[] = _("{B_ATK_NAME_WITH_PREFIX}偷到并\n吃掉了{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}！");
-static const u8 sText_TailWindBlew[] = _("{B_ATK_TEAM2}的身后\n吹起了顺风！");
-static const u8 sText_PkmnWentBack[] = _("{B_ATK_NAME_WITH_PREFIX}回\n到{B_ATK_TRAINER_CLASS}{B_ATK_TRAINER_NAME}");
-static const u8 sText_PkmnCantUseItemsAnymore[] = _("{B_DEF_NAME_WITH_PREFIX}不能使用\n道具了！");
-static const u8 sText_PkmnFlung[] = _("{B_ATK_NAME_WITH_PREFIX}扔掉了\n{B_LAST_ITEM}！");
-static const u8 sText_PkmnPreventedFromHealing[] = _("{B_DEF_NAME_WITH_PREFIX}被阻止\n回复！");
-static const u8 sText_PkmnSwitchedAtkAndDef[] = _("{B_ATK_NAME_WITH_PREFIX}交换了它的\n攻击和防御！");
-static const u8 sText_PkmnsAbilitySuppressed[] = _("{B_DEF_NAME_WITH_PREFIX}的特性\n被压制了！");
-static const u8 sText_ShieldedFromCriticalHits[] = _("{B_CURRENT_MOVE}保护{B_ATK_TEAM2}\n的队伍不被击中要害！");
-static const u8 sText_SwitchedAtkAndSpAtk[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了\n攻击和\p和特攻！");
-static const u8 sText_SwitchedDefAndSpDef[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了\n防御和\p和特防！");
-static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX}获得了\n{B_DEF_ABILITY}！");
-static const u8 sText_PoisonSpikesScattered[] = _("毒菱散落在\n{B_DEF_TEAM2}队伍的脚下！");
-static const u8 sText_PkmnSwitchedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了\n能力等级！");
-static const u8 sText_PkmnSurroundedWithVeilOfWater[] = _("{B_ATK_NAME_WITH_PREFIX}身边围绕着\n一层水幕！");
-static const u8 sText_PkmnLevitatedOnElectromagnetism[] = _("{B_ATK_NAME_WITH_PREFIX}通过电磁力\n漂浮了起来！");
-static const u8 sText_PkmnTwistedDimensions[] = _("{B_ATK_NAME_WITH_PREFIX}扭曲了\n时空！");
-static const u8 sText_DimensionsWereTwisted[] = _("空间被扭曲了!");
-static const u8 sText_PointedStonesFloat[] = _("尖锐的岩石漂浮在了\n{B_DEF_TEAM2}的队伍周围!");
-static const u8 sText_CloakedInMysticalMoonlight[] = _("被神秘的月光\n笼罩!");
-static const u8 sText_TrappedBySwirlingMagma[] = _("{B_DEF_NAME_WITH_PREFIX}被\n旋转的岩浆困住了!");
-static const u8 sText_VanishedInstantly[] = _("{B_ATK_NAME_WITH_PREFIX}突然\n消失了!");
-static const u8 sText_ProtectedTeam[] = _("{B_CURRENT_MOVE}保护了\n{B_ATK_TEAM2}的队伍!");
-static const u8 sText_SharedItsGuard[] = _("{B_ATK_NAME_WITH_PREFIX}与目标\n平分了防御!");
-static const u8 sText_SharedItsPower[] = _("{B_ATK_NAME_WITH_PREFIX}与目标\n平分了攻击!");
-static const u8 sText_SwapsDefAndSpDefOfAllPkmn[] = _("制造出了\n防御与特防能力值互换的奇妙空间!");
-static const u8 sText_BizzareAreaCreated[] = _("创建了一个奇怪的空间,\n其中防御和特防能力值\n互换了！");
-static const u8 sText_BecameNimble[] = _("{B_ATK_NAME_WITH_PREFIX}变得灵活了!");
-static const u8 sText_HurledIntoTheAir[] = _("{B_DEF_NAME_WITH_PREFIX}被投向了\n空中!");
-static const u8 sText_HeldItemsLoseEffects[] = _("制造出了\n道具无效的魔法空间!");
-static const u8 sText_BizarreArenaCreated[] = _("创建了奇怪的区域！\n携带道具失去了效果!");
-static const u8 sText_FellStraightDown[] = _("{B_DEF_NAME_WITH_PREFIX}被\n击落!");
-static const u8 sText_TargetChangedType[] = _("{B_DEF_NAME_WITH_PREFIX}转变为\n{B_BUFF1}属性!");
-static const u8 sText_PkmnAcquiredSimple[] = _("{B_DEF_NAME_WITH_PREFIX}获得了\n单纯!");
-static const u8 sText_KindOffer[] = _("{B_DEF_NAME_WITH_PREFIX}\n接受了好意!");
-static const u8 sText_ResetsTargetsStatLevels[] = _("{B_DEF_NAME_WITH_PREFIX}的能力\n被清除了!");
-static const u8 sText_AllySwitchPosition[] = _("{B_ATK_NAME_WITH_PREFIX}和\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}交换了位置!");
-static const u8 sText_RestoreTargetsHealth[] = _("{B_DEF_NAME_WITH_PREFIX}的HP回复了!");
-static const u8 sText_TookPkmnIntoTheSky[] = _("{B_ATK_NAME_WITH_PREFIX}把\n{B_DEF_NAME_WITH_PREFIX}抓向天空!");
-static const u8 sText_FreedFromSkyDrop[] = _("{B_DEF_NAME_WITH_PREFIX}从自由落体状态\n逃脱了!");
-static const u8 sText_PostponeTargetMove[] = _("{B_DEF_NAME_WITH_PREFIX}的行动\n延后了!");
-static const u8 sText_ReflectTargetsType[] = _("{B_ATK_NAME_WITH_PREFIX}的属性\n变成了{B_DEF_NAME_WITH_PREFIX}'s!");
-static const u8 sText_TransferHeldItem[] = _("{B_DEF_NAME_WITH_PREFIX}收到了{B_LAST_ITEM}\n来自{B_ATK_NAME_WITH_PREFIX}");
-static const u8 sText_EmbargoEnds[] = _("{B_ATK_NAME_WITH_PREFIX}可以\n再次使用道具了！");
-static const u8 sText_Electromagnetism[] = _("电磁浮游");
-static const u8 sText_BufferEnds[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}\n解除了！");
-static const u8 sText_ThroatChopEnds[] = _("{B_ATK_NAME_WITH_PREFIX}能再次使用\n声音类招式了！");
-static const u8 sText_TelekinesisEnds[] = _("{B_ATK_NAME_WITH_PREFIX}从意念移物\n状态中逃脱了！");
-static const u8 sText_TailwindEnds[] = _("{B_ATK_TEAM1}队伍的顺风\n停止了！");
-static const u8 sText_LuckyChantEnds[] = _("{B_ATK_TEAM1}队伍的幸运咒语\n结束了！");
-static const u8 sText_TrickRoomEnds[] = _("扭曲的空间\n复原了！");
-static const u8 sText_WonderRoomEnds[] = _("奇妙空间结束了,防御\n与特防能力值恢复了正常！");
-static const u8 sText_MagicRoomEnds[] = _("魔法空间结束了,道具\n效果恢复了正常！");
-static const u8 sText_MudSportEnds[] = _("玩泥巴的效果消失了.");
-static const u8 sText_WaterSportEnds[] = _("玩水的效果消失了.");
-static const u8 sText_GravityEnds[] = _("重力恢复了正常！");
-static const u8 sText_AquaRingHeal[] = _("水流环回复了\n{B_ATK_NAME_WITH_PREFIX}'的HP！");
-static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n提高了它的{B_BUFF1}！");
-static const u8 sText_TargetAbilityLoweredStat[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}\n降低了它的{B_BUFF1}！");
-static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n提高了它的{B_BUFF1}！");
-static const u8 sText_ScriptingAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n提高了它的{B_BUFF1}！");
-static const u8 sText_ElectricTerrainEnds[] = _("脚下的电光\n不见了.");
-static const u8 sText_MistyTerrainEnds[] = _("脚下的雾气\n不见了.");
-static const u8 sText_PsychicTerrainEnds[] = _("脚下奇妙的感觉\n不见了.");
-static const u8 sText_GrassyTerrainEnds[] = _("脚下的青草\n不见了.");
-static const u8 sText_TargetsStatWasMaxedOut[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}最大化了\n它的{B_BUFF1}！");
-static const u8 sText_PoisonHealHpUp[] = _("毒素回复了{B_ATK_NAME_WITH_PREFIX}\n的少量体力！");
-static const u8 sText_BadDreamsDmg[] = _("{B_DEF_NAME_WITH_PREFIX}正在被\n折磨\n{B_ATK_ABILITY}！");
-static const u8 sText_MoldBreakerEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}打破了常规！");
-static const u8 sText_TeravoltEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在释放\n溅射气场！");
-static const u8 sText_TurboblazeEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在释放\n炽热气场！");
-static const u8 sText_SlowStartEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}错失先机！");
-static const u8 sText_SlowStartEnd[] = _("{B_ATK_NAME_WITH_PREFIX}最终聚集了\n它所有的力量！");
-static const u8 sText_SolarPowerHpDrop[] = _("The{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n受到了伤害！");
-static const u8 sText_AftermathDmg[] = _("{B_ATK_NAME_WITH_PREFIX}受伤了！");
-static const u8 sText_AnticipationActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}发抖了！");
-static const u8 sText_ForewarnActivates[] = _("{B_SCR_ACTIVE_ABILITY}的预知梦预知到了{B_SCR_ACTIVE_NAME_WITH_PREFIX}\n的{B_DEF_NAME_WITH_PREFIX}'s{B_BUFF1}！");
-static const u8 sText_IceBodyHpGain[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n回复了少量体力！");
-static const u8 sText_SnowWarningHail[] = _("开始下冰雹了！");
-static const u8 sText_SnowWarningSnow[] = _("开始下雪了!");
-static const u8 sText_FriskActivates[] = _("{B_ATK_NAME_WITH_PREFIX}察觉到了{B_DEF_NAME_WITH_PREFIX}\n的{B_LAST_ITEM}！");
-static const u8 sText_UnnerveEnters[] = _("对手的队伍太紧张以致于\n无法吃下树果！");
-static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX}收获了\n它的{B_LAST_ITEM}！");
-static const u8 sText_LastAbilityRaisedBuff1[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ABILITY}\n提高了它的{B_BUFF1}！");
-static const u8 sText_MagicBounceActivates[] = _("{B_DEF_NAME_WITH_PREFIX}弹回了\n{B_ATK_NAME_WITH_PREFIX}！");
-static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}变身\n成了{B_BUFF1}属性！");
-static const u8 sText_SymbiosisItemPass[] = _("{B_ATK_NAME_WITH_PREFIX}通过{B_LAST_ABILITY}把它的{B_LAST_ITEM}\n传递给{B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
-static const u8 sText_StealthRockDmg[] = _("锋利的岩石扎进了对手的\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
-static const u8 sText_ToxicSpikesAbsorbed[] = _("毒菱从{B_DEF_TEAM2}的队伍\n周围消失了！");
-static const u8 sText_ToxicSpikesPoisoned[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}中毒了！");
-static const u8 sText_StickyWebSwitchIn[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}陷入了\n粘网！");
-static const u8 sText_HealingWishCameTrue[] = _("治愈之愿降临\n在了{B_ATK_NAME_WITH_PREFIX}！");
-static const u8 sText_HealingWishHealed[] = _("{B_ATK_NAME_WITH_PREFIX}恢复了健康！");
-static const u8 sText_LunarDanceCameTrue[] = _("{B_ATK_NAME_WITH_PREFIX}被神秘的月光\n笼罩！");
-static const u8 sText_CursedBodyDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}被{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}定住了！");
-static const u8 sText_AttackerAcquiredAbility[] = _("{B_ATK_NAME_WITH_PREFIX}获得了{B_ATK_ABILITY}！");
-static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}\n不能变得更高了！");
-static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}被\n{B_DEF_NAME_WITH_PREFIX}的\l{B_DEF_ABILITY}弹回了！");
-static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX}变身成了\n{B_DEF_NAME_WITH_PREFIX}并发动了{B_LAST_ABILITY}！");
-static const u8 sText_NotDoneYet[] = _("这个招式的效果还没做完！\p");
-static const u8 sText_PkmnBlewAwayToxicSpikes[] = _("{B_ATK_NAME_WITH_PREFIX}清除了\n毒菱！");
-static const u8 sText_PkmnBlewAwayStickyWeb[] = _("{B_ATK_NAME_WITH_PREFIX}清除了\n黏黏网！");
-static const u8 sText_PkmnBlewAwayStealthRock[] = _("{B_ATK_NAME_WITH_PREFIX}清除了\n隐形岩！");
-static const u8 sText_SpikesDisappearedFromTeam[] = _("{B_ATK_TEAM2}周围的铁菱消失了!");
-static const u8 sText_ToxicSpikesDisappearedFromTeam[] = _("{B_ATK_TEAM2}周围的毒菱消失了!");
-static const u8 sText_StealthRockDisappearedFromTeam[] = _("{B_ATK_TEAM2}周围的隐形岩消失了!");
-static const u8 sText_StickyWebDisappearedFromTeam[] = _("{B_ATK_TEAM2}周围的粘粘网消失了!");
-static const u8 sText_StickyWebUsed[] = _("一张黏黏网展开在了{B_DEF_TEAM2}队伍的周围！");
-static const u8 sText_QuashSuccess[] = _("对方{B_DEF_NAME_WITH_PREFIX}的行动延后了！");
-static const u8 sText_IonDelugeOn[] = _("离子风暴正在\n肆虐！");
-static const u8 sText_TopsyTurvySwitchedStats[] = _("{B_DEF_NAME_WITH_PREFIX}的能力被\n清除了！");
-static const u8 sText_TerrainBecomesMisty[] = _("脚下雾气缭绕！");
-static const u8 sText_TerrainBecomesGrassy[] = _("脚下绿草如茵！");
-static const u8 sText_TerrainBecomesElectric[] = _("脚下电光飞闪！");
-static const u8 sText_TerrainBecomesPsychic[] = _("脚下传来了奇妙的感觉！");
-static const u8 sText_TargetElectrified[] = _("The{B_DEF_NAME_WITH_PREFIX}的招式\n带电了!");
-static const u8 sText_AssaultVestDoesntAllow[] = _("{B_LAST_ITEM}的效果让这个\n招式无法被使用!\p");
-static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}不能使用{B_CURRENT_MOVE}\n由于重力的影响!\p");
-static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n使用治愈招式!\p");
-static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ITEM}对\n{B_ATK_TRAINER_NAME}的超级环有反应了!");
-static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}热切的心意\n传达到了{B_ATK_NAME_WITH_PREFIX}!");
-static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX}超级进化为\n超级{B_BUFF1}!");
-static const u8 sText_drastically[] = _("巨幅提升 ");
-static const u8 sText_severely[] = _("巨幅下降 ");
-static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX}遭受着\n{B_ATK_NAME_WITH_PREFIX}的死缠烂打!");
-static const u8 sText_NoEffectOnTarget[] = _("对{B_DEF_NAME_WITH_PREFIX}\n没有效果！");
-static const u8 sText_BurstingFlames[] = _("烈焰溅射到了\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}！");
-static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX}从{B_ATK_NAME_WITH_PREFIX}\n收到了{B_LAST_ITEM}!");
-static const u8 sText_ThirdTypeAdded[] = _("{B_BUFF1}被附加到了\n{B_DEF_NAME_WITH_PREFIX}上");
-static const u8 sText_FellForFeint[] = _("{B_DEF_NAME_WITH_PREFIX}摔倒\n了!");
-static const u8 sText_PokemonCannotUseMove[] = _("{B_ATK_NAME_WITH_PREFIX}无法\n使用{B_CURRENT_MOVE}!");
-static const u8 sText_CoveredInPowder[] = _("{B_DEF_NAME_WITH_PREFIX}被粉尘覆盖！");
-static const u8 sText_PowderExplodes[] = _("宝可梦身上的粉尘被火焰碰到后爆炸了！");
-static const u8 sText_BelchCantUse[] = _("无法使用打嗝！");
-static const u8 sText_SpectralThiefSteal[] = _("{B_ATK_NAME_WITH_PREFIX}偷取了目标\n提升的能力!");
-static const u8 sText_GravityGrounding[] = _("{B_DEF_NAME_WITH_PREFIX}因为重力\n不能停留空中!");
-static const u8 sText_MistyTerrainPreventsStatus[] = _("{B_DEF_NAME_WITH_PREFIX}的脚下\n雾气缭绕!");
-static const u8 sText_GrassyTerrainHeals[] = _("{B_ATK_NAME_WITH_PREFIX}因为青草场地\n恢复了少量HP!");
-static const u8 sText_ElectricTerrainPreventsSleep[] = _("{B_DEF_NAME_WITH_PREFIX}的脚下\n电光飞闪!");
-static const u8 sText_PsychicTerrainPreventsPriority[] = _("{B_DEF_NAME_WITH_PREFIX}的脚下\n传来了奇妙的感觉!");
-static const u8 sText_SafetyGogglesProtected[] = _("多亏了它的{B_LAST_ITEM}\n{B_DEF_NAME_WITH_PREFIX}没有起效果!");
-static const u8 sText_FlowerVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}用花幕\n包裹了自己!");
-static const u8 sText_SweetVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}用甜幕\n包裹了自己!");
-static const u8 sText_AromaVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}被芳香幕\n保护了!");
-static const u8 sText_CelebrateMessage[] = _("祝贺,{B_PLAYER_NAME}!");
-static const u8 sText_UsedInstructedMove[] = _("由于号令的{B_BUFF1}\n{B_ATK_NAME_WITH_PREFIX}使出了招式!");
-static const u8 sText_LaserFocusMessage[] = _("{B_ATK_NAME_WITH_PREFIX}\n高度集中!");
-static const u8 sText_GemActivates[] = _("{B_LAST_ITEM}增强了\n{B_ATK_NAME_WITH_PREFIX}的力量!");
-static const u8 sText_BerryDmgReducing[] = _("{B_LAST_ITEM}为{B_DEF_NAME_WITH_PREFIX}\n减少了伤害!");
-static const u8 sText_TargetAteItem[] = _("{B_DEF_NAME_WITH_PREFIX}吃掉了它的{B_LAST_ITEM}!");
-static const u8 sText_AirBalloonFloat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}用它的{B_LAST_ITEM}\n飘在了空中!");
-static const u8 sText_AirBalloonPop[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}破了!");
-static const u8 sText_IncinerateBurn[] = _("{B_EFF_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n被烧掉了!");
-static const u8 sText_BugBite[] = _("{B_ATK_NAME_WITH_PREFIX}偷走并吃掉了\n{B_EFF_NAME_WITH_PREFIX}的{B_LAST_ITEM}!");
-static const u8 sText_IllusionWoreOff[] = _("{B_DEF_NAME_WITH_PREFIX}的幻象被识破了!");
-static const u8 sText_AttackerCuredTargetStatus[] = _("{B_ATK_NAME_WITH_PREFIX}治愈了\n{B_DEF_NAME_WITH_PREFIX}的问题!");
-static const u8 sText_AttackerLostFireType[] = _("{B_ATK_NAME_WITH_PREFIX}燃尽了自己！");
-static const u8 sText_HealerCure[] = _("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ABILITY}\n治愈了{B_SCR_ACTIVE_NAME_WITH_PREFIX}的问题!");
-static const u8 sText_ReceiverAbilityTakeOver[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n被继承了!");
-static const u8 sText_PkmnAbsorbingPower[] = _("{B_ATK_NAME_WITH_PREFIX}正在吸收力量!");
-static const u8 sText_NoOneWillBeAbleToRun[] = _("在下一回合中\n没有宝可梦能够逃跑！");
-static const u8 sText_DestinyKnotActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}爱上了\n因为{B_LAST_ITEM}!");
-static const u8 sText_CloakedInAFreezingLight[] = _("{B_ATK_NAME_WITH_PREFIX}被冷光\n包围了!");
-static const u8 sText_ClearAmuletWontLowerStats[] = _("{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}\n没有被降低!");
-static const u8 sText_AuraFlaredToLife[] = _("{B_DEF_NAME_WITH_PREFIX}灵光焕发!");
-static const u8 sText_AirLockActivates[] = _("天气带来的效果\n消失了。");
-static const u8 sText_PressureActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在施加\n压迫感！");
-static const u8 sText_DarkAuraActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在释放\n暗黑气场！");
-static const u8 sText_FairyAuraActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在释放\n妖精气场！");
-static const u8 sText_AuraBreakActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}反转了所有\n其它宝可梦的气场！");
-static const u8 sText_ComatoseActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}正在打瞌睡！");
-static const u8 sText_ScreenCleanerActivates[] = _("所有的墙都被\n清除了！");
-static const u8 sText_FetchedPokeBall[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}回收了\n一个{B_LAST_ITEM}！");
-static const u8 sText_BattlerAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n提高了它的{B_BUFF1}！");
-static const u8 sText_ASandstormKickedUp[] = _("刮起了沙暴！");
-static const u8 sText_PkmnsWillPerishIn3Turns[] = _("所有宝可梦都会在\n三回合后倒下！");
-static const u8 sText_AbilityRaisedStatDrastically[] = _("{B_DEF_ABILITY}巨幅提升了{B_DEF_NAME_WITH_PREFIX}的\n{B_BUFF1}！");
-static const u8 sText_AsOneEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}同时具备两种特性！");
-static const u8 sText_PkmnMadeShellGleam[] = _("{B_DEF_NAME_WITH_PREFIX}made its shell gleam!\nIt's distorting type matchups!");
-static const u8 sText_CuriousMedicineEnters[] = _("{B_EFF_NAME_WITH_PREFIX}的\n能力变化还原了！");
-static const u8 sText_CanActFaster[] = _("多亏了{B_BUFF1}，\n{B_ATK_NAME_WITH_PREFIX}能更快地行动！");
-static const u8 sText_MicleBerryActivates[] = _("通过使用{B_LAST_ITEM}\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}提高了它的命中率！");
-static const u8 sText_PkmnShookOffTheTaunt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}从挑衅状态中\n解除了！");
-static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}不再迷恋\n对方了！");
-static const u8 sText_ZPowerSurrounds[] = _("{B_ATK_NAME_WITH_PREFIX}的Z力量环绕着它!");
-static const u8 sText_ZPowerUnleashed[] = _("{B_ATK_NAME_WITH_PREFIX}释放了它的Z技能!");
-static const u8 sText_ZMoveResetsStats[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用Z力量\n恢复了被降低的属性!");
-static const u8 sText_ZMoveAllStatsUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用Z力量\n提升了所有属性!");
-static const u8 sText_ZMoveBoostCrit[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用Z力量\n提升了命中要害率!");
-static const u8 sText_ZMoveRestoreHp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用Z力量\n恢复了HP!");
-static const u8 sText_ZMoveStatUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用Z力量\n提升了属性!");
-static const u8 sText_ZMoveHpSwitchInTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的HP被Z力量恢复!");
-static const u8 sText_TerrainReturnedToNormal[] = _("场地恢复如初了!");
-static const u8 sText_ItemCannotBeRemoved[] = _("{B_ATK_NAME_WITH_PREFIX}的道具不能移除!");
-static const u8 sText_StickyBarbTransfer[] = _("{B_ATK_NAME_WITH_PREFIX}携带了\n{B_LAST_ITEM}\n!");
-static const u8 sText_PkmnBurnHealed[] = _("{B_DEF_NAME_WITH_PREFIX}的\n烧伤治愈了。");
-static const u8 sText_RedCardActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}举起了{B_LAST_ITEM}\n反对{B_ATK_NAME_WITH_PREFIX}!");
-static const u8 sText_EjectButtonActivate[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}与{B_LAST_ITEM}\n一起关闭!");
-static const u8 sText_AttackerGotOverInfatuation[] = _("{B_ATK_NAME_WITH_PREFIX}克服了迷人!");
-static const u8 sText_TormentedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX}不再\n受到折磨!");
-static const u8 sText_HealBlockedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX}解除了\n它的回复封锁!");
-static const u8 sText_AttackerBecameFullyCharged[] = _("{B_ATK_NAME_WITH_PREFIX}因为训练家\n已经充满了!\p");
-static const u8 sText_AttackerBecameAshSpecies[] = _("{B_ATK_NAME_WITH_PREFIX}变成了\n小智版{B_BUFF1}!\p");
-static const u8 sText_ExtremelyHarshSunlight[] = _("阳光变得\n非常刺眼!");
-static const u8 sText_ExtremeSunlightFaded[] = _("强烈的阳光消退了。{PAUSE 64}");
-static const u8 sText_MoveEvaporatedInTheHarshSunlight[] = _("水属性攻击\n在强烈的阳光下蒸发了!");
-static const u8 sText_ExtremelyHarshSunlightWasNotLessened[] = _("强烈的阳光\n丝毫没有变弱!");
-static const u8 sText_HeavyRain[] = _("倾盆大雨开始下了!");
-static const u8 sText_HeavyRainLifted[] = _("大雨消退了!{PAUSE 64}");
-static const u8 sText_MoveFizzledOutInTheHeavyRain[] = _("火属性攻击\n在大雨中没有效果!");
-static const u8 sText_NoReliefFromHeavyRain[] = _("这场大雨并没有\n丝毫减缓!");
-static const u8 sText_MysteriousAirCurrent[] = _("一股神秘的大风保护\n着飞行属性宝可梦!");
-static const u8 sText_StrongWindsDissipated[] = _("神秘的大风\n停下了!{PAUSE 64}");
-static const u8 sText_MysteriousAirCurrentBlowsOn[] = _("神秘的大风正在\n不顾一切的吹!");
-static const u8 sText_AttackWeakenedByStrongWinds[] = _("神秘的大风正在\n消弱了攻击招式!");
-static const u8 sText_StuffCheeksCantSelect[] = _("您的背包没有树果\n无法使用大快朵颐!\p");
-static const u8 sText_PkmnRevertedToPrimal[] = _("{B_ATK_NAME_WITH_PREFIX}回归原始形态了!");
-static const u8 sText_ButPokemonCantUseTheMove[] = _("但是{B_ATK_NAME_WITH_PREFIX}\n无法使用技能!");
-static const u8 sText_ButHoopaCantUseIt[] = _("但是胡帕\n现在无法使用它!");
-static const u8 sText_BrokeThroughProtection[] = _("它破解了\n{B_DEF_NAME_WITH_PREFIX}的守住!");
-static const u8 sText_AbilityAllowsOnlyMove[] = _("{B_ATK_ABILITY}只允许\n用于{B_CURRENT_MOVE}!\p");
-static const u8 sText_SwappedAbilities[] = _("{B_DEF_NAME_WITH_PREFIX}与选中的\n目标交换特性!");
-static const u8 sText_PastelVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX}受到\n粉彩护幕的保护!");
-static const u8 sText_PastelVeilEnters[] = _("{B_DEF_NAME_WITH_PREFIX}的\n中毒已经治愈了!");
-static const u8 sText_BattlerTypeChangedTo[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的属性\n更改为{B_BUFF1}!");
-static const u8 sText_BothCanNoLongerEscape[] = _("没有宝可梦能逃跑!");
-static const u8 sText_CantEscapeDueToUsedMove[] = _("{B_ATK_NAME_WITH_PREFIX}不能逃跑\n因为他使用了{B_CURRENT_MOVE}!");
-static const u8 sText_PkmnBecameWeakerToFire[] = _("{B_DEF_NAME_WITH_PREFIX}的\n火属性技能减弱了!");
-static const u8 sText_PkmnAboutToBeAttackedByItsItem[] = _("{B_DEF_NAME_WITH_PREFIX}将受到\n{B_BUFF1}的伤害!");
-static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PREFIX}不能逃跑e\n因为{B_CURRENT_MOVE}!");
-static const u8 sText_NeutralizingGasEnters[] = _("化学变化气体填满了场地!");
-static const u8 sText_NeutralizingGasOver[] = _("化学变化气体\n逐渐消失了!");
-static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX}把{B_DEF_NAME_WITH_PREFIX}\n带到了空中！");
-static const u8 sText_TargetTooHeavy[] = _("但是目标\n太重了！");
-static const u8 sText_MeteorBeamCharging[] = _("{B_ATK_NAME_WITH_PREFIX}充满了\n空间能量！");
-static const u8 sText_HeatingUpBeak[] = _("{B_ATK_NAME_WITH_PREFIX}开始\n加热它的喙！");
-static const u8 sText_CourtChange[] = _("{B_ATK_NAME_WITH_PREFIX}交换了对战\n双方的影响效果！");
-static const u8 sText_AttackerExpelledThePoison[] = _("{B_ATK_NAME_WITH_PREFIX}努力\n排出了毒素！");
-static const u8 sText_AttackerShookItselfAwake[] = _("{B_ATK_NAME_WITH_PREFIX}摇醒自己了！");
-static const u8 sText_AttackerBrokeThroughParalysis[] = _("{B_ATK_NAME_WITH_PREFIX}集中所有力量\n克服了麻痹状态！");
-static const u8 sText_AttackerHealedItsBurn[] = _("{B_ATK_NAME_WITH_PREFIX}凭借坚定的意志\n治愈了自己的烧伤！");
-static const u8 sText_AttackerHealedItsFrostbite[] = _("{B_ATK_NAME_WITH_PREFIX}凭借坚定的意志\n治愈了自己的冻伤！"); // 不使用，PLA中使用"融化了冰"
-static const u8 sText_AttackerMeltedTheIce[] = _("{B_ATK_NAME_WITH_PREFIX}凭借火热的意志\n融化了冰！");
-static const u8 sText_TargetToughedItOut[] = _("{B_DEF_NAME_WITH_PREFIX}坚持了下来\n向你展示了它最好的一面！");
-static const u8 sText_AttackerLostElectricType[] = _("{B_ATK_NAME_WITH_PREFIX}用尽了\n所有的电力！");
-static const u8 sText_AttackerSwitchedStatWithTarget[] = _("{B_ATK_NAME_WITH_PREFIX}与目标交换了{B_BUFF1}\n！");
-static const u8 sText_BeingHitChargedPkmnWithPower[] = _("被{B_CURRENT_MOVE}击中\n为{B_DEF_NAME_WITH_PREFIX}充能了力量！");
-static const u8 sText_SunlightActivatedAbility[] = _("强烈的阳光激活了\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ABILITY}！");
-static const u8 sText_StatWasHeightened[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_BUFF1}\n得到了提升！");
-static const u8 sText_BoosterEnergyActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用它的\n{B_LAST_ITEM}激活了{B_SCR_ACTIVE_ABILITY}！");
-static const u8 sText_ElectricTerrainActivatedAbility[] = _("电气场地激活了\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_LAST_ABILITY}！");
-static const u8 sText_AbilityWeakenedSurroundingMonsStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}\n减弱了周围所有宝可梦的{B_BUFF1}！\p");
-static const u8 sText_AttackerGainedStrengthFromTheFallen[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}从倒下的对手那里\n获得了力量！");
-static const u8 sText_PrepareShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX}布置了一个贝壳陷阱！");
-static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}的贝壳陷阱没有起作用！");
-static const u8 sText_SharpSteelFloats[] = _("尖锐的钢铁片\n围绕在{B_DEF_TEAM2}队伍周围！");
-static const u8 sText_SharpSteelDmg[] = _("尖锐的钢铁刺入了{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_PkmnBlewAwaySharpSteel[] = _("{B_ATK_NAME_WITH_PREFIX}吹散了\n尖锐的钢铁！");
-static const u8 sText_SharpSteelDisappearedFromTeam[] = _("尖锐的钢铁从\n{B_ATK_TEAM2}队伍周围的地面消失了！");
-static const u8 sText_TeamTrappedWithVines[] = _("{B_DEF_TEAM1}队伍被\n藤蔓困住了！");
-static const u8 sText_PkmnHurtByVines[] = _("{B_ATK_NAME_WITH_PREFIX}被\n极巨藤蔓乱击的猛烈打击所伤害！");
-static const u8 sText_TeamCaughtInVortex[] = _("{B_DEF_TEAM1}队伍被\n卷入了漩涡中！");
-static const u8 sText_PkmnHurtByVortex[] = _("{B_ATK_NAME_WITH_PREFIX}被\n极巨炮的漩涡所伤害！");
-static const u8 sText_TeamSurroundedByFire[] = _("{B_DEF_TEAM1}队伍被\n火焰包围了！");
-static const u8 sText_PkmnBurningUp[] = _("{B_ATK_NAME_WITH_PREFIX}在\n极巨狂野大火的火焰中燃烧起来了！");
-static const u8 sText_TeamSurroundedByRocks[] = _("{B_DEF_TEAM1}队伍被\n岩石包围了！");
-static const u8 sText_PkmnHurtByRocksThrown[] = _("{B_ATK_NAME_WITH_PREFIX}被\n极巨岩石的岩石投掷所伤害！");
-static const u8 sText_CouldntFullyProtect[] = _("{B_DEF_NAME_WITH_PREFIX}未能完全\n保护自己，受到了伤害！");
-static const u8 sText_StockpiledEffectWoreOff[] = _("{B_ATK_NAME_WITH_PREFIX}积累的\n效果消失了！");
-static const u8 sText_MoveBlockedByDynamax[] = _("这一招被\n极巨化的力量阻挡了！");
-static const u8 sText_PkmnRevivedReadyToFight[] = _("{B_BUFF1}被复活了，\n准备再次战斗！");
-static const u8 sText_ItemRestoredSpeciesHealth[] = _("{B_BUFF1}的\nHP恢复了！");
-static const u8 sText_ItemCuredSpeciesStatus[] = _("{B_BUFF1}的\n状态治愈了！");
-static const u8 sText_ItemRestoredSpeciesPP[] = _("{B_BUFF1}的\nPP恢复了！");
-static const u8 sText_AtkTrappedDef[] = _("{B_ATK_NAME_WITH_PREFIX}困住了\n{B_DEF_NAME_WITH_PREFIX}！");
-static const u8 sText_MirrorHerbCopied[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}\n来镜像对手的属性变化！");
-static const u8 sText_PkmnItemMelted[] = _("{B_ATK_NAME_WITH_PREFIX}腐蚀了\n{B_DEF_NAME_WITH_PREFIX}的{B_LAST_ITEM}！");
-static const u8 sText_UltraBurstReacting[] = _("明亮的光芒即将\n从{B_ATK_NAME_WITH_PREFIX}爆发出来！");
-static const u8 sText_UltraBurstCompleted[] = _("{B_ATK_NAME_WITH_PREFIX}通过究极爆发\n恢复了其真正的力量！");
-static const u8 sText_TeamGainedEXP[] = _("你的队伍其他成员获得了EXP。\n点数多亏了{B_LAST_ITEM}！\p");
-static const u8 sText_CurrentMoveCantSelect[] = _("{B_BUFF1}不能使用！\p");
-static const u8 sText_TargetIsBeingSaltCured[] = _("{B_DEF_NAME_WITH_PREFIX}正在被盐渍！");
-static const u8 sText_TargetIsHurtBySaltCure[] = _("{B_DEF_NAME_WITH_PREFIX}被{B_BUFF1}伤害了！");
-static const u8 sText_TargetCoveredInStickyCandySyrup[] = _("{B_DEF_NAME_WITH_PREFIX}被\n粘稠的糖浆覆盖了！");
-static const u8 sText_PkmnTellChillingReceptionJoke[] = _("{B_ATK_NAME_WITH_PREFIX}正准备讲一个\n冷到极点的笑话！");
-static const u8 sText_ZeroToHeroTransformation[] = _("{B_ATK_NAME_WITH_PREFIX}经历了一次\n英勇的转变！");
-static const u8 sText_TheTwoMovesBecomeOne[] = _("两个招式合二为一！\n这是一个组合招式！{PAUSE 16}");
-static const u8 sText_ARainbowAppearedOnSide[] = _("一道彩虹出现在天空\n在{B_ATK_TEAM2}队伍的一边！");
-static const u8 sText_TheRainbowDisappeared[] = _("{B_ATK_TEAM2}一边的\n彩虹消失了！");
-static const u8 sText_WaitingForPartnersMove[] = _("{B_ATK_NAME_WITH_PREFIX}正在等待\n{B_ATK_PARTNER_NAME}的招式…{PAUSE 16}");
-static const u8 sText_SeaOfFireEnvelopedSide[] = _("一片火海包围了\n{B_DEF_TEAM2}队伍！");
-static const u8 sText_HurtByTheSeaOfFire[] = _("{B_ATK_TEAM1}{B_ATK_NAME_WITH_PREFIX}被\n火海伤害了！");
-static const u8 sText_TheSeaOfFireDisappeared[] = _("围绕{B_ATK_TEAM2}队伍的\n火海消失了！");
-static const u8 sText_SwampEnvelopedSide[] = _("一片沼泽包围了\n{B_DEF_TEAM2}队伍！");
-static const u8 sText_TheSwampDisappeared[] = _("围绕{B_ATK_TEAM2}队伍的\n沼泽消失了！");
-static const u8 sText_HospitalityRestoration[] = _("{B_ATK_PARTNER_NAME}喝下了\n{B_ATK_NAME_WITH_PREFIX}制作的所有抹茶！");
-static const u8 sText_ElectroShotCharging[] = _("{B_ATK_NAME_WITH_PREFIX}吸收了\n电力！");
-static const u8 sText_ItemWasUsedUp[] = _("{B_LAST_ITEM}\n用完了...");
-static const u8 sText_AttackerLostItsType[] = _("{B_ATK_NAME_WITH_PREFIX}失去了\n它的{B_BUFF1}类型！");
-static const u8 sText_ShedItsTail[] = _("{B_ATK_NAME_WITH_PREFIX}蜕下它的尾巴\n来制造一个诱饵！");
-static const u8 sText_PkmnTerastallizedInto[] = _("{B_ATK_NAME_WITH_PREFIX}变成了\n{B_BUFF1}类型！");
-static const u8 sText_SupersweetAromaWafts[] = _("一股超甜的香气从\n覆盖着{B_ATK_NAME_WITH_PREFIX}的糖浆中飘散出来！");
-static const u8 sText_TidyingUpComplete[] = _("整理完毕！");
-static const u8 sText_FickleBeamDoubled[] = _("{B_ATK_NAME_WITH_PREFIX}全力以赴\n进行这次攻击！");
+// 新的战斗字符串。
+const u8 gText_drastically[] = _("急剧地 ");
+const u8 gText_severely[] = _("严重地 ");
+static const u8 sText_TerrainReturnedToNormal[] = _("地形恢复了正常!"); // 未使用
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
-    [STRINGID_FICKLEBEAMDOUBLED - BATTLESTRINGS_TABLE_START] = sText_FickleBeamDoubled,
-    [STRINGID_PKMNTERASTALLIZEDINTO - BATTLESTRINGS_TABLE_START] = sText_PkmnTerastallizedInto,
-    [STRINGID_TIDYINGUPCOMPLETE - BATTLESTRINGS_TABLE_START] = sText_TidyingUpComplete,
-    [STRINGID_SUPERSWEETAROMAWAFTS - BATTLESTRINGS_TABLE_START] = sText_SupersweetAromaWafts,
-    [STRINGID_SHEDITSTAIL - BATTLESTRINGS_TABLE_START] = sText_ShedItsTail,
-    [STRINGID_ELECTROSHOTCHARGING - BATTLESTRINGS_TABLE_START] = sText_ElectroShotCharging,
-    [STRINGID_HOSPITALITYRESTORATION - BATTLESTRINGS_TABLE_START] = sText_HospitalityRestoration,
-    [STRINGID_THESWAMPDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheSwampDisappeared,
-    [STRINGID_SWAMPENVELOPEDSIDE - BATTLESTRINGS_TABLE_START] = sText_SwampEnvelopedSide,
-    [STRINGID_THESEAOFFIREDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheSeaOfFireDisappeared,
-    [STRINGID_HURTBYTHESEAOFFIRE - BATTLESTRINGS_TABLE_START] = sText_HurtByTheSeaOfFire,
-    [STRINGID_SEAOFFIREENVELOPEDSIDE - BATTLESTRINGS_TABLE_START] = sText_SeaOfFireEnvelopedSide,
-    [STRINGID_WAITINGFORPARTNERSMOVE - BATTLESTRINGS_TABLE_START] = sText_WaitingForPartnersMove,
-    [STRINGID_THERAINBOWDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheRainbowDisappeared,
-    [STRINGID_ARAINBOWAPPEAREDONSIDE - BATTLESTRINGS_TABLE_START] = sText_ARainbowAppearedOnSide,
-    [STRINGID_THETWOMOVESBECOMEONE - BATTLESTRINGS_TABLE_START] = sText_TheTwoMovesBecomeOne,
-    [STRINGID_ZEROTOHEROTRANSFORMATION - BATTLESTRINGS_TABLE_START] = sText_ZeroToHeroTransformation,
-    [STRINGID_PKMNTELLCHILLINGRECEPTIONJOKE - BATTLESTRINGS_TABLE_START] = sText_PkmnTellChillingReceptionJoke,
-    [STRINGID_MOVEBLOCKEDBYDYNAMAX - BATTLESTRINGS_TABLE_START] = sText_MoveBlockedByDynamax,
-    [STRINGID_TARGETISHURTBYSALTCURE - BATTLESTRINGS_TABLE_START] = sText_TargetIsHurtBySaltCure,
-    [STRINGID_TARGETISBEINGSALTCURED - BATTLESTRINGS_TABLE_START] = sText_TargetIsBeingSaltCured,
-    [STRINGID_CURRENTMOVECANTSELECT - BATTLESTRINGS_TABLE_START] = sText_CurrentMoveCantSelect,
-    [STRINGID_PKMNITEMMELTED - BATTLESTRINGS_TABLE_START] = sText_PkmnItemMelted,
-    [STRINGID_MIRRORHERBCOPIED - BATTLESTRINGS_TABLE_START] = sText_MirrorHerbCopied,
-    [STRINGID_THUNDERCAGETRAPPED - BATTLESTRINGS_TABLE_START] = sText_AtkTrappedDef,
-    [STRINGID_ITEMRESTOREDSPECIESHEALTH - BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesHealth,
-    [STRINGID_ITEMCUREDSPECIESSTATUS - BATTLESTRINGS_TABLE_START] = sText_ItemCuredSpeciesStatus,
-    [STRINGID_ITEMRESTOREDSPECIESPP - BATTLESTRINGS_TABLE_START] = sText_ItemRestoredSpeciesPP,
-    [STRINGID_PKMNREVIVEDREADYTOFIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnRevivedReadyToFight,
-    [STRINGID_STOCKPILEDEFFECTWOREOFF - BATTLESTRINGS_TABLE_START] = sText_StockpiledEffectWoreOff,
-    [STRINGID_COULDNTFULLYPROTECT - BATTLESTRINGS_TABLE_START] = sText_CouldntFullyProtect,
-    [STRINGID_PKMNHURTBYROCKSTHROWN - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByRocksThrown,
-    [STRINGID_TEAMSURROUNDEDBYROCKS - BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByRocks,
-    [STRINGID_PKMNBURNINGUP - BATTLESTRINGS_TABLE_START] = sText_PkmnBurningUp,
-    [STRINGID_TEAMSURROUNDEDBYFIRE - BATTLESTRINGS_TABLE_START] = sText_TeamSurroundedByFire,
-    [STRINGID_PKMNHURTBYVORTEX - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVortex,
-    [STRINGID_TEAMCAUGHTINVORTEX - BATTLESTRINGS_TABLE_START] = sText_TeamCaughtInVortex,
-    [STRINGID_PKMNHURTBYVINES - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByVines,
-    [STRINGID_TEAMTRAPPEDWITHVINES - BATTLESTRINGS_TABLE_START] = sText_TeamTrappedWithVines,
-    [STRINGID_PKMNBLEWAWAYSHARPSTEEL - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySharpSteel,
-    [STRINGID_SHARPSTEELDMG - BATTLESTRINGS_TABLE_START] = sText_SharpSteelDmg,
-    [STRINGID_SHARPSTEELFLOATS - BATTLESTRINGS_TABLE_START] = sText_SharpSteelFloats,
-    [STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN - BATTLESTRINGS_TABLE_START] = sText_AttackerGainedStrengthFromTheFallen,
-    [STRINGID_ABILITYWEAKENEDSURROUNDINGMONSSTAT - BATTLESTRINGS_TABLE_START] = sText_AbilityWeakenedSurroundingMonsStat,
-    [STRINGID_ELECTRICTERRAINACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainActivatedAbility,
-    [STRINGID_STATWASHEIGHTENED - BATTLESTRINGS_TABLE_START] = sText_StatWasHeightened,
-    [STRINGID_BOOSTERENERGYACTIVATES - BATTLESTRINGS_TABLE_START] = sText_BoosterEnergyActivates,
-    [STRINGID_SUNLIGHTACTIVATEDABILITY - BATTLESTRINGS_TABLE_START] = sText_SunlightActivatedAbility,
-    [STRINGID_BEINGHITCHARGEDPKMNWITHPOWER - BATTLESTRINGS_TABLE_START] = sText_BeingHitChargedPkmnWithPower,
-    [STRINGID_ATTACKERSWITCHEDSTATWITHTARGET - BATTLESTRINGS_TABLE_START] = sText_AttackerSwitchedStatWithTarget,
-    [STRINGID_TARGETTOUGHEDITOUT - BATTLESTRINGS_TABLE_START] = sText_TargetToughedItOut,
-    [STRINGID_ATTACKERMELTEDTHEICE - BATTLESTRINGS_TABLE_START] = sText_AttackerMeltedTheIce,
-    [STRINGID_ATTACKERHEALEDITSBURN - BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsBurn,
-    [STRINGID_ATTACKERBROKETHROUGHPARALYSIS - BATTLESTRINGS_TABLE_START] = sText_AttackerBrokeThroughParalysis,
-    [STRINGID_ATTACKERSHOOKITSELFAWAKE - BATTLESTRINGS_TABLE_START] = sText_AttackerShookItselfAwake,
-    [STRINGID_ATTACKEREXPELLEDTHEPOISON - BATTLESTRINGS_TABLE_START] = sText_AttackerExpelledThePoison,
-    [STRINGID_ZPOWERSURROUNDS - BATTLESTRINGS_TABLE_START] = sText_ZPowerSurrounds,
-    [STRINGID_ZMOVEUNLEASHED - BATTLESTRINGS_TABLE_START] = sText_ZPowerUnleashed,
-    [STRINGID_ZMOVERESETSSTATS - BATTLESTRINGS_TABLE_START] = sText_ZMoveResetsStats,
-    [STRINGID_ZMOVEALLSTATSUP - BATTLESTRINGS_TABLE_START] = sText_ZMoveAllStatsUp,
-    [STRINGID_ZMOVEZBOOSTCRIT - BATTLESTRINGS_TABLE_START] = sText_ZMoveBoostCrit,
-    [STRINGID_ZMOVERESTOREHP - BATTLESTRINGS_TABLE_START] = sText_ZMoveRestoreHp,
-    [STRINGID_ZMOVESTATUP - BATTLESTRINGS_TABLE_START] = sText_ZMoveStatUp,
-    [STRINGID_ZMOVEHPTRAP - BATTLESTRINGS_TABLE_START] = sText_ZMoveHpSwitchInTrap,
-    [STRINGID_PLAYERLOSTTOENEMYTRAINER - BATTLESTRINGS_TABLE_START] = sText_PlayerLostToEnemyTrainer,
-    [STRINGID_PLAYERPAIDPRIZEMONEY - BATTLESTRINGS_TABLE_START] = sText_PlayerPaidPrizeMoney,
-    [STRINGID_SHELLTRAPDIDNTWORK - BATTLESTRINGS_TABLE_START] = sText_ShellTrapDidntWork,
-    [STRINGID_PREPARESHELLTRAP - BATTLESTRINGS_TABLE_START] = sText_PrepareShellTrap,
-    [STRINGID_COURTCHANGE - BATTLESTRINGS_TABLE_START] = sText_CourtChange,
-    [STRINGID_HEATUPBEAK - BATTLESTRINGS_TABLE_START] = sText_HeatingUpBeak,
-    [STRINGID_METEORBEAMCHARGING - BATTLESTRINGS_TABLE_START] = sText_MeteorBeamCharging,
-    [STRINGID_PKMNINSNAPTRAP - BATTLESTRINGS_TABLE_START] = sText_PkmnInSnapTrap,
-    [STRINGID_NEUTRALIZINGGASOVER - BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasOver,
-    [STRINGID_NEUTRALIZINGGASENTERS - BATTLESTRINGS_TABLE_START] = sText_NeutralizingGasEnters,
-    [STRINGID_BATTLERTYPECHANGEDTO - BATTLESTRINGS_TABLE_START] = sText_BattlerTypeChangedTo,
-    [STRINGID_PASTELVEILENTERS - BATTLESTRINGS_TABLE_START] = sText_PastelVeilEnters,
-    [STRINGID_PASTELVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_PastelVeilProtected,
-    [STRINGID_SWAPPEDABILITIES - BATTLESTRINGS_TABLE_START] = sText_SwappedAbilities,
-    [STRINGID_ABILITYALLOWSONLYMOVE - BATTLESTRINGS_TABLE_START] = sText_AbilityAllowsOnlyMove,
-    [STRINGID_BROKETHROUGHPROTECTION - BATTLESTRINGS_TABLE_START] = sText_BrokeThroughProtection,
-    [STRINGID_BUTPOKEMONCANTUSETHEMOVE - BATTLESTRINGS_TABLE_START] = sText_ButPokemonCantUseTheMove,
-    [STRINGID_BUTHOOPACANTUSEIT - BATTLESTRINGS_TABLE_START] = sText_ButHoopaCantUseIt,
-    [STRINGID_PKMNREVERTEDTOPRIMAL - BATTLESTRINGS_TABLE_START] = sText_PkmnRevertedToPrimal,
-    [STRINGID_STUFFCHEEKSCANTSELECT - BATTLESTRINGS_TABLE_START] = sText_StuffCheeksCantSelect,
-    [STRINGID_ATTACKWEAKENEDBSTRONGWINDS - BATTLESTRINGS_TABLE_START] = sText_AttackWeakenedByStrongWinds,
-    [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON - BATTLESTRINGS_TABLE_START] = sText_MysteriousAirCurrentBlowsOn,
-    [STRINGID_STRONGWINDSDISSIPATED - BATTLESTRINGS_TABLE_START] = sText_StrongWindsDissipated,
-    [STRINGID_MYSTERIOUSAIRCURRENT - BATTLESTRINGS_TABLE_START] = sText_MysteriousAirCurrent,
-    [STRINGID_NORELIEFROMHEAVYRAIN - BATTLESTRINGS_TABLE_START] = sText_NoReliefFromHeavyRain,
-    [STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN - BATTLESTRINGS_TABLE_START] = sText_MoveFizzledOutInTheHeavyRain,
-    [STRINGID_HEAVYRAINLIFTED - BATTLESTRINGS_TABLE_START] = sText_HeavyRainLifted,
-    [STRINGID_HEAVYRAIN - BATTLESTRINGS_TABLE_START] = sText_HeavyRain,
-    [STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED - BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlightWasNotLessened,
-    [STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_MoveEvaporatedInTheHarshSunlight,
-    [STRINGID_EXTREMESUNLIGHTFADED - BATTLESTRINGS_TABLE_START] = sText_ExtremeSunlightFaded,
-    [STRINGID_EXTREMELYHARSHSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlight,
-    [STRINGID_ATTACKERBECAMEASHSPECIES - BATTLESTRINGS_TABLE_START] = sText_AttackerBecameAshSpecies,
-    [STRINGID_ATTACKERBECAMEFULLYCHARGED - BATTLESTRINGS_TABLE_START] = sText_AttackerBecameFullyCharged,
-    [STRINGID_HEALBLOCKEDNOMORE - BATTLESTRINGS_TABLE_START] = sText_HealBlockedNoMore,
-    [STRINGID_TORMENTEDNOMORE - BATTLESTRINGS_TABLE_START] = sText_TormentedNoMore,
-    [STRINGID_ATKGOTOVERINFATUATION - BATTLESTRINGS_TABLE_START] = sText_AttackerGotOverInfatuation,
-    [STRINGID_EJECTBUTTONACTIVATE - BATTLESTRINGS_TABLE_START] = sText_EjectButtonActivate,
-    [STRINGID_REDCARDACTIVATE - BATTLESTRINGS_TABLE_START] = sText_RedCardActivate,
-    [STRINGID_PKMNBURNHEALED - BATTLESTRINGS_TABLE_START] = sText_PkmnBurnHealed,
-    [STRINGID_STICKYBARBTRANSFER - BATTLESTRINGS_TABLE_START] = sText_StickyBarbTransfer,
-    [STRINGID_ITEMCANNOTBEREMOVED - BATTLESTRINGS_TABLE_START] = sText_ItemCannotBeRemoved,
-    [STRINGID_PKMNGOTOVERITSINFATUATION - BATTLESTRINGS_TABLE_START] = sText_PkmnGotOverItsInfatuation,
-    [STRINGID_PKMNSHOOKOFFTHETAUNT - BATTLESTRINGS_TABLE_START] = sText_PkmnShookOffTheTaunt,
-    [STRINGID_MICLEBERRYACTIVATES - BATTLESTRINGS_TABLE_START] = sText_MicleBerryActivates,
-    [STRINGID_CANACTFASTERTHANKSTO - BATTLESTRINGS_TABLE_START] = sText_CanActFaster,
-    [STRINGID_CURIOUSMEDICINEENTERS - BATTLESTRINGS_TABLE_START] = sText_CuriousMedicineEnters,
-    [STRINGID_ASONEENTERS - BATTLESTRINGS_TABLE_START] = sText_AsOneEnters,
-    [STRINGID_PKMNMADESHELLGLEAM - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeShellGleam,
-    [STRINGID_ABILITYRAISEDSTATDRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_AbilityRaisedStatDrastically,
-    [STRINGID_PKMNSWILLPERISHIN3TURNS - BATTLESTRINGS_TABLE_START] = sText_PkmnsWillPerishIn3Turns,
-    [STRINGID_ASANDSTORMKICKEDUP - BATTLESTRINGS_TABLE_START] = sText_ASandstormKickedUp,
-    [STRINGID_BATTLERABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_BattlerAbilityRaisedStat,
-    [STRINGID_FETCHEDPOKEBALL - BATTLESTRINGS_TABLE_START] = sText_FetchedPokeBall,
-    [STRINGID_CLEARAMULETWONTLOWERSTATS - BATTLESTRINGS_TABLE_START] = sText_ClearAmuletWontLowerStats,
-    [STRINGID_CLOAKEDINAFREEZINGLIGHT - BATTLESTRINGS_TABLE_START] = sText_CloakedInAFreezingLight,
-    [STRINGID_DESTINYKNOTACTIVATES - BATTLESTRINGS_TABLE_START] = sText_DestinyKnotActivates,
-    [STRINGID_NOONEWILLBEABLETORUNAWAY - BATTLESTRINGS_TABLE_START] = sText_NoOneWillBeAbleToRun,
-    [STRINGID_PKNMABSORBINGPOWER - BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbingPower,
-    [STRINGID_RECEIVERABILITYTAKEOVER - BATTLESTRINGS_TABLE_START] = sText_ReceiverAbilityTakeOver,
-    [STRINGID_SCRIPTINGABILITYSTATRAISE - BATTLESTRINGS_TABLE_START] = sText_ScriptingAbilityRaisedStat,
-    [STRINGID_HEALERCURE - BATTLESTRINGS_TABLE_START] = sText_HealerCure,
-    [STRINGID_ATTACKERLOSTFIRETYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostFireType,
-    [STRINGID_ATTACKERCUREDTARGETSTATUS - BATTLESTRINGS_TABLE_START] = sText_AttackerCuredTargetStatus,
-    [STRINGID_ILLUSIONWOREOFF - BATTLESTRINGS_TABLE_START] = sText_IllusionWoreOff,
-    [STRINGID_BUGBITE - BATTLESTRINGS_TABLE_START] = sText_BugBite,
-    [STRINGID_INCINERATEBURN - BATTLESTRINGS_TABLE_START] = sText_IncinerateBurn,
-    [STRINGID_AIRBALLOONPOP - BATTLESTRINGS_TABLE_START] = sText_AirBalloonPop,
-    [STRINGID_AIRBALLOONFLOAT - BATTLESTRINGS_TABLE_START] = sText_AirBalloonFloat,
-    [STRINGID_TARGETATEITEM - BATTLESTRINGS_TABLE_START] = sText_TargetAteItem,
-    [STRINGID_BERRYDMGREDUCES - BATTLESTRINGS_TABLE_START] = sText_BerryDmgReducing,
-    [STRINGID_GEMACTIVATES - BATTLESTRINGS_TABLE_START] = sText_GemActivates,
-    [STRINGID_LASERFOCUS - BATTLESTRINGS_TABLE_START] = sText_LaserFocusMessage,
-    [STRINGID_THROATCHOPENDS - BATTLESTRINGS_TABLE_START] = sText_ThroatChopEnds,
-    [STRINGID_PKMNCANTUSEMOVETHROATCHOP - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveThroatChop,
-    [STRINGID_USEDINSTRUCTEDMOVE - BATTLESTRINGS_TABLE_START] = sText_UsedInstructedMove,
-    [STRINGID_CELEBRATEMESSAGE - BATTLESTRINGS_TABLE_START] = sText_CelebrateMessage,
-    [STRINGID_AROMAVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_AromaVeilProtected,
-    [STRINGID_SWEETVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_SweetVeilProtected,
-    [STRINGID_FLOWERVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_FlowerVeilProtected,
-    [STRINGID_SAFETYGOGGLESPROTECTED - BATTLESTRINGS_TABLE_START] = sText_SafetyGogglesProtected,
-    [STRINGID_SPECTRALTHIEFSTEAL - BATTLESTRINGS_TABLE_START] = sText_SpectralThiefSteal,
-    [STRINGID_BELCHCANTSELECT - BATTLESTRINGS_TABLE_START] = sText_BelchCantUse,
-    [STRINGID_TRAINER1LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1LoseText,
-    [STRINGID_PKMNGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXP,
-    [STRINGID_PKMNGREWTOLV - BATTLESTRINGS_TABLE_START] = sText_PkmnGrewToLv,
-    [STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnLearnedMove,
-    [STRINGID_TRYTOLEARNMOVE1 - BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove1,
-    [STRINGID_TRYTOLEARNMOVE2 - BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove2,
-    [STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_TABLE_START] = sText_TryToLearnMove3,
-    [STRINGID_PKMNFORGOTMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnForgotMove,
-    [STRINGID_STOPLEARNINGMOVE - BATTLESTRINGS_TABLE_START] = sText_StopLearningMove,
-    [STRINGID_DIDNOTLEARNMOVE - BATTLESTRINGS_TABLE_START] = sText_DidNotLearnMove,
-    [STRINGID_PKMNLEARNEDMOVE2 - BATTLESTRINGS_TABLE_START] = sText_PkmnLearnedMove2,
-    [STRINGID_ATTACKMISSED - BATTLESTRINGS_TABLE_START] = sText_AttackMissed,
-    [STRINGID_PKMNPROTECTEDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself,
-    [STRINGID_STATSWONTINCREASE2 - BATTLESTRINGS_TABLE_START] = sText_StatsWontIncrease2,
-    [STRINGID_AVOIDEDDAMAGE - BATTLESTRINGS_TABLE_START] = sText_AvoidedDamage,
-    [STRINGID_ITDOESNTAFFECT - BATTLESTRINGS_TABLE_START] = sText_ItDoesntAffect,
-    [STRINGID_ATTACKERFAINTED - BATTLESTRINGS_TABLE_START] = sText_AttackerFainted,
-    [STRINGID_TARGETFAINTED - BATTLESTRINGS_TABLE_START] = sText_TargetFainted,
-    [STRINGID_PLAYERGOTMONEY - BATTLESTRINGS_TABLE_START] = sText_PlayerGotMoney,
-    [STRINGID_PLAYERWHITEOUT - BATTLESTRINGS_TABLE_START] = sText_PlayerWhiteout,
-    [STRINGID_PLAYERWHITEOUT2 - BATTLESTRINGS_TABLE_START] = sText_PlayerWhiteout2,
-    [STRINGID_PREVENTSESCAPE - BATTLESTRINGS_TABLE_START] = sText_PreventsEscape,
-    [STRINGID_HITXTIMES - BATTLESTRINGS_TABLE_START] = sText_HitXTimes,
-    [STRINGID_PKMNFELLASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnFellAsleep,
-    [STRINGID_PKMNMADESLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSleep,
-    [STRINGID_PKMNALREADYASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyAsleep,
-    [STRINGID_PKMNALREADYASLEEP2 - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyAsleep2,
-    [STRINGID_PKMNWASNTAFFECTED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasntAffected,
-    [STRINGID_PKMNWASPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasPoisoned,
-    [STRINGID_PKMNPOISONEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnPoisonedBy,
-    [STRINGID_PKMNHURTBYPOISON - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByPoison,
-    [STRINGID_PKMNALREADYPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyPoisoned,
-    [STRINGID_PKMNBADLYPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnBadlyPoisoned,
-    [STRINGID_PKMNENERGYDRAINED - BATTLESTRINGS_TABLE_START] = sText_PkmnEnergyDrained,
-    [STRINGID_PKMNWASBURNED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasBurned,
-    [STRINGID_PKMNBURNEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnBurnedBy,
-    [STRINGID_PKMNHURTBYBURN - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByBurn,
-    [STRINGID_PKMNWASFROZEN - BATTLESTRINGS_TABLE_START] = sText_PkmnWasFrozen,
-    [STRINGID_PKMNFROZENBY - BATTLESTRINGS_TABLE_START] = sText_PkmnFrozenBy,
-    [STRINGID_PKMNISFROZEN - BATTLESTRINGS_TABLE_START] = sText_PkmnIsFrozen,
-    [STRINGID_PKMNWASDEFROSTED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrosted,
-    [STRINGID_PKMNWASDEFROSTED2 - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrosted2,
-    [STRINGID_PKMNWASDEFROSTEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDefrostedBy,
-    [STRINGID_PKMNWASPARALYZED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasParalyzed,
-    [STRINGID_PKMNWASPARALYZEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnWasParalyzedBy,
-    [STRINGID_PKMNISPARALYZED - BATTLESTRINGS_TABLE_START] = sText_PkmnIsParalyzed,
-    [STRINGID_PKMNISALREADYPARALYZED - BATTLESTRINGS_TABLE_START] = sText_PkmnIsAlreadyParalyzed,
-    [STRINGID_PKMNHEALEDPARALYSIS - BATTLESTRINGS_TABLE_START] = sText_PkmnHealedParalysis,
-    [STRINGID_PKMNDREAMEATEN - BATTLESTRINGS_TABLE_START] = sText_PkmnDreamEaten,
-    [STRINGID_STATSWONTINCREASE - BATTLESTRINGS_TABLE_START] = sText_StatsWontIncrease,
-    [STRINGID_STATSWONTDECREASE - BATTLESTRINGS_TABLE_START] = sText_StatsWontDecrease,
-    [STRINGID_TEAMSTOPPEDWORKING - BATTLESTRINGS_TABLE_START] = sText_TeamStoppedWorking,
-    [STRINGID_FOESTOPPEDWORKING - BATTLESTRINGS_TABLE_START] = sText_FoeStoppedWorking,
-    [STRINGID_PKMNISCONFUSED - BATTLESTRINGS_TABLE_START] = sText_PkmnIsConfused,
-    [STRINGID_PKMNHEALEDCONFUSION - BATTLESTRINGS_TABLE_START] = sText_PkmnHealedConfusion,
-    [STRINGID_PKMNWASCONFUSED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasConfused,
-    [STRINGID_PKMNALREADYCONFUSED - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyConfused,
-    [STRINGID_PKMNFELLINLOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnFellInLove,
-    [STRINGID_PKMNINLOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnInLove,
-    [STRINGID_PKMNIMMOBILIZEDBYLOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnImmobilizedByLove,
-    [STRINGID_PKMNBLOWNAWAY - BATTLESTRINGS_TABLE_START] = sText_PkmnBlownAway,
-    [STRINGID_PKMNCHANGEDTYPE - BATTLESTRINGS_TABLE_START] = sText_PkmnChangedType,
-    [STRINGID_PKMNFLINCHED - BATTLESTRINGS_TABLE_START] = sText_PkmnFlinched,
-    [STRINGID_PKMNREGAINEDHEALTH - BATTLESTRINGS_TABLE_START] = sText_PkmnRegainedHealth,
-    [STRINGID_PKMNHPFULL - BATTLESTRINGS_TABLE_START] = sText_PkmnHPFull,
-    [STRINGID_PKMNRAISEDSPDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpDef,
-    [STRINGID_PKMNRAISEDDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedDef,
-    [STRINGID_PKMNCOVEREDBYVEIL - BATTLESTRINGS_TABLE_START] = sText_PkmnCoveredByVeil,
-    [STRINGID_PKMNUSEDSAFEGUARD - BATTLESTRINGS_TABLE_START] = sText_PkmnUsedSafeguard,
-    [STRINGID_PKMNSAFEGUARDEXPIRED - BATTLESTRINGS_TABLE_START] = sText_PkmnSafeguardExpired,
-    [STRINGID_PKMNWENTTOSLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnWentToSleep,
-    [STRINGID_PKMNSLEPTHEALTHY - BATTLESTRINGS_TABLE_START] = sText_PkmnSleptHealthy,
-    [STRINGID_PKMNWHIPPEDWHIRLWIND - BATTLESTRINGS_TABLE_START] = sText_PkmnWhippedWhirlwind,
-    [STRINGID_PKMNTOOKSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnTookSunlight,
-    [STRINGID_PKMNLOWEREDHEAD - BATTLESTRINGS_TABLE_START] = sText_PkmnLoweredHead,
-    [STRINGID_PKMNISGLOWING - BATTLESTRINGS_TABLE_START] = sText_PkmnIsGlowing,
-    [STRINGID_PKMNFLEWHIGH - BATTLESTRINGS_TABLE_START] = sText_PkmnFlewHigh,
-    [STRINGID_PKMNDUGHOLE - BATTLESTRINGS_TABLE_START] = sText_PkmnDugHole,
-    [STRINGID_PKMNSQUEEZEDBYBIND - BATTLESTRINGS_TABLE_START] = sText_PkmnSqueezedByBind,
-    [STRINGID_PKMNTRAPPEDINVORTEX - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedInVortex,
-    [STRINGID_PKMNWRAPPEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnWrappedBy,
-    [STRINGID_PKMNCLAMPED - BATTLESTRINGS_TABLE_START] = sText_PkmnClamped,
-    [STRINGID_PKMNHURTBY - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtBy,
-    [STRINGID_PKMNFREEDFROM - BATTLESTRINGS_TABLE_START] = sText_PkmnFreedFrom,
-    [STRINGID_PKMNCRASHED - BATTLESTRINGS_TABLE_START] = sText_PkmnCrashed,
-    [STRINGID_PKMNSHROUDEDINMIST - BATTLESTRINGS_TABLE_START] = gText_PkmnShroudedInMist,
-    [STRINGID_PKMNPROTECTEDBYMIST - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedByMist,
-    [STRINGID_PKMNGETTINGPUMPED - BATTLESTRINGS_TABLE_START] = gText_PkmnGettingPumped,
-    [STRINGID_PKMNHITWITHRECOIL - BATTLESTRINGS_TABLE_START] = sText_PkmnHitWithRecoil,
-    [STRINGID_PKMNPROTECTEDITSELF2 - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself2,
-    [STRINGID_PKMNBUFFETEDBYSANDSTORM - BATTLESTRINGS_TABLE_START] = sText_PkmnBuffetedBySandstorm,
-    [STRINGID_PKMNPELTEDBYHAIL - BATTLESTRINGS_TABLE_START] = sText_PkmnPeltedByHail,
-    [STRINGID_PKMNSEEDED - BATTLESTRINGS_TABLE_START] = sText_PkmnSeeded,
-    [STRINGID_PKMNEVADEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnEvadedAttack,
-    [STRINGID_PKMNSAPPEDBYLEECHSEED - BATTLESTRINGS_TABLE_START] = sText_PkmnSappedByLeechSeed,
-    [STRINGID_PKMNFASTASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnFastAsleep,
-    [STRINGID_PKMNWOKEUP - BATTLESTRINGS_TABLE_START] = sText_PkmnWokeUp,
-    [STRINGID_PKMNUPROARKEPTAWAKE - BATTLESTRINGS_TABLE_START] = sText_PkmnUproarKeptAwake,
-    [STRINGID_PKMNWOKEUPINUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnWokeUpInUproar,
-    [STRINGID_PKMNCAUSEDUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnCausedUproar,
-    [STRINGID_PKMNMAKINGUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnMakingUproar,
-    [STRINGID_PKMNCALMEDDOWN - BATTLESTRINGS_TABLE_START] = sText_PkmnCalmedDown,
-    [STRINGID_PKMNCANTSLEEPINUPROAR - BATTLESTRINGS_TABLE_START] = sText_PkmnCantSleepInUproar,
-    [STRINGID_PKMNSTOCKPILED - BATTLESTRINGS_TABLE_START] = sText_PkmnStockpiled,
-    [STRINGID_PKMNCANTSTOCKPILE - BATTLESTRINGS_TABLE_START] = sText_PkmnCantStockpile,
-    [STRINGID_PKMNCANTSLEEPINUPROAR2 - BATTLESTRINGS_TABLE_START] = sText_PkmnCantSleepInUproar2,
-    [STRINGID_UPROARKEPTPKMNAWAKE - BATTLESTRINGS_TABLE_START] = sText_UproarKeptPkmnAwake,
-    [STRINGID_PKMNSTAYEDAWAKEUSING - BATTLESTRINGS_TABLE_START] = sText_PkmnStayedAwakeUsing,
-    [STRINGID_PKMNSTORINGENERGY - BATTLESTRINGS_TABLE_START] = sText_PkmnStoringEnergy,
-    [STRINGID_PKMNUNLEASHEDENERGY - BATTLESTRINGS_TABLE_START] = sText_PkmnUnleashedEnergy,
-    [STRINGID_PKMNFATIGUECONFUSION - BATTLESTRINGS_TABLE_START] = sText_PkmnFatigueConfusion,
-    [STRINGID_PLAYERPICKEDUPMONEY - BATTLESTRINGS_TABLE_START] = sText_PlayerPickedUpMoney,
-    [STRINGID_PKMNUNAFFECTED - BATTLESTRINGS_TABLE_START] = sText_PkmnUnaffected,
-    [STRINGID_PKMNTRANSFORMEDINTO - BATTLESTRINGS_TABLE_START] = sText_PkmnTransformedInto,
-    [STRINGID_PKMNMADESUBSTITUTE - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSubstitute,
-    [STRINGID_PKMNHASSUBSTITUTE - BATTLESTRINGS_TABLE_START] = sText_PkmnHasSubstitute,
-    [STRINGID_SUBSTITUTEDAMAGED - BATTLESTRINGS_TABLE_START] = sText_SubstituteDamaged,
-    [STRINGID_PKMNSUBSTITUTEFADED - BATTLESTRINGS_TABLE_START] = sText_PkmnSubstituteFaded,
-    [STRINGID_PKMNMUSTRECHARGE - BATTLESTRINGS_TABLE_START] = sText_PkmnMustRecharge,
-    [STRINGID_PKMNRAGEBUILDING - BATTLESTRINGS_TABLE_START] = sText_PkmnRageBuilding,
-    [STRINGID_PKMNMOVEWASDISABLED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveWasDisabled,
-    [STRINGID_PKMNMOVEISDISABLED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveIsDisabled,
-    [STRINGID_PKMNMOVEDISABLEDNOMORE - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveDisabledNoMore,
-    [STRINGID_PKMNGOTENCORE - BATTLESTRINGS_TABLE_START] = sText_PkmnGotEncore,
-    [STRINGID_PKMNENCOREENDED - BATTLESTRINGS_TABLE_START] = sText_PkmnEncoreEnded,
-    [STRINGID_PKMNTOOKAIM - BATTLESTRINGS_TABLE_START] = sText_PkmnTookAim,
-    [STRINGID_PKMNSKETCHEDMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnSketchedMove,
-    [STRINGID_PKMNTRYINGTOTAKEFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTryingToTakeFoe,
-    [STRINGID_PKMNTOOKFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnTookFoe,
-    [STRINGID_PKMNREDUCEDPP - BATTLESTRINGS_TABLE_START] = sText_PkmnReducedPP,
-    [STRINGID_PKMNSTOLEITEM - BATTLESTRINGS_TABLE_START] = sText_PkmnStoleItem,
-    [STRINGID_TARGETCANTESCAPENOW - BATTLESTRINGS_TABLE_START] = sText_TargetCantEscapeNow,
-    [STRINGID_PKMNFELLINTONIGHTMARE - BATTLESTRINGS_TABLE_START] = sText_PkmnFellIntoNightmare,
-    [STRINGID_PKMNLOCKEDINNIGHTMARE - BATTLESTRINGS_TABLE_START] = sText_PkmnLockedInNightmare,
-    [STRINGID_PKMNLAIDCURSE - BATTLESTRINGS_TABLE_START] = sText_PkmnLaidCurse,
-    [STRINGID_PKMNAFFLICTEDBYCURSE - BATTLESTRINGS_TABLE_START] = sText_PkmnAfflictedByCurse,
-    [STRINGID_SPIKESSCATTERED - BATTLESTRINGS_TABLE_START] = sText_SpikesScattered,
-    [STRINGID_PKMNHURTBYSPIKES - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtBySpikes,
-    [STRINGID_PKMNIDENTIFIED - BATTLESTRINGS_TABLE_START] = sText_PkmnIdentified,
-    [STRINGID_PKMNPERISHCOUNTFELL - BATTLESTRINGS_TABLE_START] = sText_PkmnPerishCountFell,
-    [STRINGID_PKMNBRACEDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnBracedItself,
-    [STRINGID_PKMNENDUREDHIT - BATTLESTRINGS_TABLE_START] = sText_PkmnEnduredHit,
-    [STRINGID_MAGNITUDESTRENGTH - BATTLESTRINGS_TABLE_START] = sText_MagnitudeStrength,
-    [STRINGID_PKMNCUTHPMAXEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnCutHPMaxedAttack,
-    [STRINGID_PKMNCOPIEDSTATCHANGES - BATTLESTRINGS_TABLE_START] = sText_PkmnCopiedStatChanges,
-    [STRINGID_PKMNGOTFREE - BATTLESTRINGS_TABLE_START] = sText_PkmnGotFree,
-    [STRINGID_PKMNSHEDLEECHSEED - BATTLESTRINGS_TABLE_START] = sText_PkmnShedLeechSeed,
-    [STRINGID_PKMNBLEWAWAYSPIKES - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwaySpikes,
-    [STRINGID_PKMNFLEDFROMBATTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnFledFromBattle,
-    [STRINGID_PKMNFORESAWATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnForesawAttack,
-    [STRINGID_PKMNTOOKATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnTookAttack,
-    [STRINGID_PKMNATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnAttack,
-    [STRINGID_PKMNCENTERATTENTION - BATTLESTRINGS_TABLE_START] = sText_PkmnCenterAttention,
-    [STRINGID_PKMNCHARGINGPOWER - BATTLESTRINGS_TABLE_START] = sText_PkmnChargingPower,
-    [STRINGID_NATUREPOWERTURNEDINTO - BATTLESTRINGS_TABLE_START] = sText_NaturePowerTurnedInto,
-    [STRINGID_PKMNSTATUSNORMAL - BATTLESTRINGS_TABLE_START] = sText_PkmnStatusNormal,
-    [STRINGID_PKMNHASNOMOVESLEFT - BATTLESTRINGS_TABLE_START] = sText_PkmnHasNoMovesLeft,
-    [STRINGID_PKMNSUBJECTEDTOTORMENT - BATTLESTRINGS_TABLE_START] = sText_PkmnSubjectedToTorment,
-    [STRINGID_PKMNCANTUSEMOVETORMENT - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveTorment,
-    [STRINGID_PKMNTIGHTENINGFOCUS - BATTLESTRINGS_TABLE_START] = sText_PkmnTighteningFocus,
-    [STRINGID_PKMNFELLFORTAUNT - BATTLESTRINGS_TABLE_START] = sText_PkmnFellForTaunt,
-    [STRINGID_PKMNCANTUSEMOVETAUNT - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveTaunt,
-    [STRINGID_PKMNREADYTOHELP - BATTLESTRINGS_TABLE_START] = sText_PkmnReadyToHelp,
-    [STRINGID_PKMNSWITCHEDITEMS - BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedItems,
-    [STRINGID_PKMNCOPIEDFOE - BATTLESTRINGS_TABLE_START] = sText_PkmnCopiedFoe,
-    [STRINGID_PKMNMADEWISH - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeWish,
-    [STRINGID_PKMNWISHCAMETRUE - BATTLESTRINGS_TABLE_START] = sText_PkmnWishCameTrue,
-    [STRINGID_PKMNPLANTEDROOTS - BATTLESTRINGS_TABLE_START] = sText_PkmnPlantedRoots,
-    [STRINGID_PKMNABSORBEDNUTRIENTS - BATTLESTRINGS_TABLE_START] = sText_PkmnAbsorbedNutrients,
-    [STRINGID_PKMNANCHOREDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnAnchoredItself,
-    [STRINGID_PKMNWASMADEDROWSY - BATTLESTRINGS_TABLE_START] = sText_PkmnWasMadeDrowsy,
-    [STRINGID_PKMNKNOCKEDOFF - BATTLESTRINGS_TABLE_START] = sText_PkmnKnockedOff,
-    [STRINGID_PKMNSWAPPEDABILITIES - BATTLESTRINGS_TABLE_START] = sText_PkmnSwappedAbilities,
-    [STRINGID_PKMNSEALEDOPPONENTMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnSealedOpponentMove,
-    [STRINGID_PKMNCANTUSEMOVESEALED - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseMoveSealed,
-    [STRINGID_PKMNWANTSGRUDGE - BATTLESTRINGS_TABLE_START] = sText_PkmnWantsGrudge,
-    [STRINGID_PKMNLOSTPPGRUDGE - BATTLESTRINGS_TABLE_START] = sText_PkmnLostPPGrudge,
-    [STRINGID_PKMNSHROUDEDITSELF - BATTLESTRINGS_TABLE_START] = sText_PkmnShroudedItself,
-    [STRINGID_PKMNMOVEBOUNCED - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBounced,
-    [STRINGID_PKMNWAITSFORTARGET - BATTLESTRINGS_TABLE_START] = sText_PkmnWaitsForTarget,
-    [STRINGID_PKMNSNATCHEDMOVE - BATTLESTRINGS_TABLE_START] = sText_PkmnSnatchedMove,
-    [STRINGID_PKMNMADEITRAIN - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeItRain,
-    [STRINGID_PKMNRAISEDSPEED - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpeed,
-    [STRINGID_PKMNPROTECTEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedBy,
-    [STRINGID_PKMNPREVENTSUSAGE - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsUsage,
-    [STRINGID_PKMNRESTOREDHPUSING - BATTLESTRINGS_TABLE_START] = sText_PkmnRestoredHPUsing,
-    [STRINGID_PKMNCHANGEDTYPEWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnChangedTypeWith,
-    [STRINGID_PKMNPREVENTSPARALYSISWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsParalysisWith,
-    [STRINGID_PKMNPREVENTSROMANCEWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsRomanceWith,
-    [STRINGID_PKMNPREVENTSPOISONINGWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsPoisoningWith,
-    [STRINGID_PKMNPREVENTSCONFUSIONWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsConfusionWith,
-    [STRINGID_PKMNRAISEDFIREPOWERWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedFirePowerWith,
-    [STRINGID_PKMNANCHORSITSELFWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnAnchorsItselfWith,
-    [STRINGID_PKMNCUTSATTACKWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsAttackWith,
-    [STRINGID_PKMNPREVENTSSTATLOSSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsStatLossWith,
-    [STRINGID_PKMNHURTSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtsWith,
-    [STRINGID_PKMNTRACED - BATTLESTRINGS_TABLE_START] = sText_PkmnTraced,
-    [STRINGID_STATSHARPLY - BATTLESTRINGS_TABLE_START] = gText_StatSharply,
-    [STRINGID_STATROSE - BATTLESTRINGS_TABLE_START] = gText_StatRose,
-    [STRINGID_STATHARSHLY - BATTLESTRINGS_TABLE_START] = sText_StatHarshly,
-    [STRINGID_STATFELL - BATTLESTRINGS_TABLE_START] = sText_StatFell,
-    [STRINGID_ATTACKERSSTATROSE - BATTLESTRINGS_TABLE_START] = sText_AttackersStatRose,
-    [STRINGID_DEFENDERSSTATROSE - BATTLESTRINGS_TABLE_START] = gText_DefendersStatRose,
-    [STRINGID_ATTACKERSSTATFELL - BATTLESTRINGS_TABLE_START] = sText_AttackersStatFell,
-    [STRINGID_DEFENDERSSTATFELL - BATTLESTRINGS_TABLE_START] = sText_DefendersStatFell,
-    [STRINGID_CRITICALHIT - BATTLESTRINGS_TABLE_START] = sText_CriticalHit,
-    [STRINGID_ONEHITKO - BATTLESTRINGS_TABLE_START] = sText_OneHitKO,
-    [STRINGID_123POOF - BATTLESTRINGS_TABLE_START] = sText_123Poof,
-    [STRINGID_ANDELLIPSIS - BATTLESTRINGS_TABLE_START] = sText_AndEllipsis,
-    [STRINGID_NOTVERYEFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_NotVeryEffective,
-    [STRINGID_SUPEREFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_SuperEffective,
-    [STRINGID_GOTAWAYSAFELY - BATTLESTRINGS_TABLE_START] = sText_GotAwaySafely,
-    [STRINGID_WILDPKMNFLED - BATTLESTRINGS_TABLE_START] = sText_WildPkmnFled,
-    [STRINGID_NORUNNINGFROMTRAINERS - BATTLESTRINGS_TABLE_START] = sText_NoRunningFromTrainers,
-    [STRINGID_CANTESCAPE - BATTLESTRINGS_TABLE_START] = sText_CantEscape,
-    [STRINGID_DONTLEAVEBIRCH - BATTLESTRINGS_TABLE_START] = sText_DontLeaveBirch,
-    [STRINGID_BUTNOTHINGHAPPENED - BATTLESTRINGS_TABLE_START] = sText_ButNothingHappened,
-    [STRINGID_BUTITFAILED - BATTLESTRINGS_TABLE_START] = sText_ButItFailed,
-    [STRINGID_ITHURTCONFUSION - BATTLESTRINGS_TABLE_START] = sText_ItHurtConfusion,
-    [STRINGID_MIRRORMOVEFAILED - BATTLESTRINGS_TABLE_START] = sText_MirrorMoveFailed,
-    [STRINGID_STARTEDTORAIN - BATTLESTRINGS_TABLE_START] = sText_StartedToRain,
-    [STRINGID_DOWNPOURSTARTED - BATTLESTRINGS_TABLE_START] = sText_DownpourStarted,
-    [STRINGID_RAINCONTINUES - BATTLESTRINGS_TABLE_START] = sText_RainContinues,
-    [STRINGID_DOWNPOURCONTINUES - BATTLESTRINGS_TABLE_START] = sText_DownpourContinues,
-    [STRINGID_RAINSTOPPED - BATTLESTRINGS_TABLE_START] = sText_RainStopped,
-    [STRINGID_SANDSTORMBREWED - BATTLESTRINGS_TABLE_START] = sText_SandstormBrewed,
-    [STRINGID_SANDSTORMRAGES - BATTLESTRINGS_TABLE_START] = sText_SandstormRages,
-    [STRINGID_SANDSTORMSUBSIDED - BATTLESTRINGS_TABLE_START] = sText_SandstormSubsided,
-    [STRINGID_SUNLIGHTGOTBRIGHT - BATTLESTRINGS_TABLE_START] = sText_SunlightGotBright,
-    [STRINGID_SUNLIGHTSTRONG - BATTLESTRINGS_TABLE_START] = sText_SunlightStrong,
-    [STRINGID_SUNLIGHTFADED - BATTLESTRINGS_TABLE_START] = sText_SunlightFaded,
-    [STRINGID_STARTEDHAIL - BATTLESTRINGS_TABLE_START] = sText_StartedHail,
-    [STRINGID_HAILCONTINUES - BATTLESTRINGS_TABLE_START] = sText_HailContinues,
-    [STRINGID_HAILSTOPPED - BATTLESTRINGS_TABLE_START] = sText_HailStopped,
-    [STRINGID_STARTEDSNOW - BATTLESTRINGS_TABLE_START] = sText_StartedSnow,
-    [STRINGID_SNOWCONTINUES -BATTLESTRINGS_TABLE_START] = sText_SnowContinues,
-    [STRINGID_SNOWSTOPPED - BATTLESTRINGS_TABLE_START] = sText_SnowStopped,
-    [STRINGID_FOGCREPTUP - BATTLESTRINGS_TABLE_START] = sText_FogCreptUp,
-    [STRINGID_FOGISDEEP - BATTLESTRINGS_TABLE_START] = sText_FogIsDeep,
-    [STRINGID_FOGLIFTED - BATTLESTRINGS_TABLE_START] = sText_FogLifted,
-    [STRINGID_FAILEDTOSPITUP - BATTLESTRINGS_TABLE_START] = sText_FailedToSpitUp,
-    [STRINGID_FAILEDTOSWALLOW - BATTLESTRINGS_TABLE_START] = sText_FailedToSwallow,
-    [STRINGID_WINDBECAMEHEATWAVE - BATTLESTRINGS_TABLE_START] = sText_WindBecameHeatWave,
-    [STRINGID_STATCHANGESGONE - BATTLESTRINGS_TABLE_START] = sText_StatChangesGone,
-    [STRINGID_COINSSCATTERED - BATTLESTRINGS_TABLE_START] = sText_CoinsScattered,
-    [STRINGID_TOOWEAKFORSUBSTITUTE - BATTLESTRINGS_TABLE_START] = sText_TooWeakForSubstitute,
-    [STRINGID_SHAREDPAIN - BATTLESTRINGS_TABLE_START] = sText_SharedPain,
-    [STRINGID_BELLCHIMED - BATTLESTRINGS_TABLE_START] = sText_BellChimed,
-    [STRINGID_FAINTINTHREE - BATTLESTRINGS_TABLE_START] = sText_FaintInThree,
-    [STRINGID_NOPPLEFT - BATTLESTRINGS_TABLE_START] = sText_NoPPLeft,
-    [STRINGID_BUTNOPPLEFT - BATTLESTRINGS_TABLE_START] = sText_ButNoPPLeft,
-    [STRINGID_PLAYERUSEDITEM - BATTLESTRINGS_TABLE_START] = sText_PlayerUsedItem,
-    [STRINGID_WALLYUSEDITEM - BATTLESTRINGS_TABLE_START] = sText_WallyUsedItem,
-    [STRINGID_TRAINERBLOCKEDBALL - BATTLESTRINGS_TABLE_START] = sText_TrainerBlockedBall,
-    [STRINGID_DONTBEATHIEF - BATTLESTRINGS_TABLE_START] = sText_DontBeAThief,
-    [STRINGID_ITDODGEDBALL - BATTLESTRINGS_TABLE_START] = sText_ItDodgedBall,
-    [STRINGID_YOUMISSEDPKMN - BATTLESTRINGS_TABLE_START] = sText_YouMissedPkmn,
-    [STRINGID_PKMNBROKEFREE - BATTLESTRINGS_TABLE_START] = sText_PkmnBrokeFree,
-    [STRINGID_ITAPPEAREDCAUGHT - BATTLESTRINGS_TABLE_START] = sText_ItAppearedCaught,
-    [STRINGID_AARGHALMOSTHADIT - BATTLESTRINGS_TABLE_START] = sText_AarghAlmostHadIt,
-    [STRINGID_SHOOTSOCLOSE - BATTLESTRINGS_TABLE_START] = sText_ShootSoClose,
-    [STRINGID_GOTCHAPKMNCAUGHTPLAYER - BATTLESTRINGS_TABLE_START] = sText_GotchaPkmnCaughtPlayer,
-    [STRINGID_GOTCHAPKMNCAUGHTWALLY - BATTLESTRINGS_TABLE_START] = sText_GotchaPkmnCaughtWally,
-    [STRINGID_GIVENICKNAMECAPTURED - BATTLESTRINGS_TABLE_START] = sText_GiveNicknameCaptured,
-    [STRINGID_PKMNSENTTOPC - BATTLESTRINGS_TABLE_START] = sText_PkmnSentToPC,
-    [STRINGID_PKMNDATAADDEDTODEX - BATTLESTRINGS_TABLE_START] = sText_PkmnDataAddedToDex,
-    [STRINGID_ITISRAINING - BATTLESTRINGS_TABLE_START] = sText_ItIsRaining,
-    [STRINGID_SANDSTORMISRAGING - BATTLESTRINGS_TABLE_START] = sText_SandstormIsRaging,
-    [STRINGID_CANTESCAPE2 - BATTLESTRINGS_TABLE_START] = sText_CantEscape2,
-    [STRINGID_PKMNIGNORESASLEEP - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoresAsleep,
-    [STRINGID_PKMNIGNOREDORDERS - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoredOrders,
-    [STRINGID_PKMNBEGANTONAP - BATTLESTRINGS_TABLE_START] = sText_PkmnBeganToNap,
-    [STRINGID_PKMNLOAFING - BATTLESTRINGS_TABLE_START] = sText_PkmnLoafing,
-    [STRINGID_PKMNWONTOBEY - BATTLESTRINGS_TABLE_START] = sText_PkmnWontObey,
-    [STRINGID_PKMNTURNEDAWAY - BATTLESTRINGS_TABLE_START] = sText_PkmnTurnedAway,
-    [STRINGID_PKMNPRETENDNOTNOTICE - BATTLESTRINGS_TABLE_START] = sText_PkmnPretendNotNotice,
-    [STRINGID_ENEMYABOUTTOSWITCHPKMN - BATTLESTRINGS_TABLE_START] = sText_EnemyAboutToSwitchPkmn,
-    [STRINGID_CREPTCLOSER - BATTLESTRINGS_TABLE_START] = sText_CreptCloser,
-    [STRINGID_CANTGETCLOSER - BATTLESTRINGS_TABLE_START] = sText_CantGetCloser,
-    [STRINGID_PKMNWATCHINGCAREFULLY - BATTLESTRINGS_TABLE_START] = sText_PkmnWatchingCarefully,
-    [STRINGID_PKMNCURIOUSABOUTX - BATTLESTRINGS_TABLE_START] = sText_PkmnCuriousAboutX,
-    [STRINGID_PKMNENTHRALLEDBYX - BATTLESTRINGS_TABLE_START] = sText_PkmnEnthralledByX,
-    [STRINGID_PKMNIGNOREDX - BATTLESTRINGS_TABLE_START] = sText_PkmnIgnoredX,
-    [STRINGID_THREWPOKEBLOCKATPKMN - BATTLESTRINGS_TABLE_START] = sText_ThrewPokeblockAtPkmn,
-    [STRINGID_OUTOFSAFARIBALLS - BATTLESTRINGS_TABLE_START] = sText_OutOfSafariBalls,
-    [STRINGID_PKMNSITEMCUREDPARALYSIS - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredParalysis,
-    [STRINGID_PKMNSITEMCUREDPOISON - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredPoison,
-    [STRINGID_PKMNSITEMHEALEDBURN - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemHealedBurn,
-    [STRINGID_PKMNSITEMDEFROSTEDIT - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemDefrostedIt,
-    [STRINGID_PKMNSITEMWOKEIT - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemWokeIt,
-    [STRINGID_PKMNSITEMSNAPPEDOUT - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemSnappedOut,
-    [STRINGID_PKMNSITEMCUREDPROBLEM - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemCuredProblem,
-    [STRINGID_PKMNSITEMRESTOREDHEALTH - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredHealth,
-    [STRINGID_PKMNSITEMRESTOREDPP - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredPP,
-    [STRINGID_PKMNSITEMRESTOREDSTATUS - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredStatus,
-    [STRINGID_PKMNSITEMRESTOREDHPALITTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemRestoredHPALittle,
-    [STRINGID_ITEMALLOWSONLYYMOVE - BATTLESTRINGS_TABLE_START] = sText_ItemAllowsOnlyYMove,
-    [STRINGID_PKMNHUNGONWITHX - BATTLESTRINGS_TABLE_START] = sText_PkmnHungOnWithX,
-    [STRINGID_EMPTYSTRING3 - BATTLESTRINGS_TABLE_START] = gText_EmptyString3,
-    [STRINGID_PKMNSXPREVENTSBURNS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsBurns,
-    [STRINGID_PKMNSXBLOCKSY - BATTLESTRINGS_TABLE_START] = sText_PkmnsXBlocksY,
-    [STRINGID_PKMNSXRESTOREDHPALITTLE2 - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRestoredHPALittle2,
-    [STRINGID_PKMNSXWHIPPEDUPSANDSTORM - BATTLESTRINGS_TABLE_START] = sText_PkmnsXWhippedUpSandstorm,
-    [STRINGID_PKMNSXPREVENTSYLOSS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsYLoss,
-    [STRINGID_PKMNSXINFATUATEDY - BATTLESTRINGS_TABLE_START] = sText_PkmnsXInfatuatedY,
-    [STRINGID_PKMNSXMADEYINEFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYIneffective,
-    [STRINGID_PKMNSXCUREDYPROBLEM - BATTLESTRINGS_TABLE_START] = sText_PkmnsXCuredYProblem,
-    [STRINGID_ITSUCKEDLIQUIDOOZE - BATTLESTRINGS_TABLE_START] = sText_ItSuckedLiquidOoze,
-    [STRINGID_PKMNTRANSFORMED - BATTLESTRINGS_TABLE_START] = sText_PkmnTransformed,
-    [STRINGID_ELECTRICITYWEAKENED - BATTLESTRINGS_TABLE_START] = sText_ElectricityWeakened,
-    [STRINGID_FIREWEAKENED - BATTLESTRINGS_TABLE_START] = sText_FireWeakened,
-    [STRINGID_PKMNHIDUNDERWATER - BATTLESTRINGS_TABLE_START] = sText_PkmnHidUnderwater,
-    [STRINGID_PKMNSPRANGUP - BATTLESTRINGS_TABLE_START] = sText_PkmnSprangUp,
-    [STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_TABLE_START] = sText_HMMovesCantBeForgotten,
-    [STRINGID_XFOUNDONEY - BATTLESTRINGS_TABLE_START] = sText_XFoundOneY,
-    [STRINGID_PLAYERDEFEATEDTRAINER1 - BATTLESTRINGS_TABLE_START] = sText_PlayerDefeatedLinkTrainerTrainer1,
-    [STRINGID_SOOTHINGAROMA - BATTLESTRINGS_TABLE_START] = sText_SoothingAroma,
-    [STRINGID_ITEMSCANTBEUSEDNOW - BATTLESTRINGS_TABLE_START] = sText_ItemsCantBeUsedNow,
-    [STRINGID_FORXCOMMAYZ - BATTLESTRINGS_TABLE_START] = sText_ForXCommaYZ,
-    [STRINGID_USINGITEMSTATOFPKMNROSE - BATTLESTRINGS_TABLE_START] = sText_UsingItemTheStatOfPkmnRose,
-    [STRINGID_PKMNUSEDXTOGETPUMPED - BATTLESTRINGS_TABLE_START] = sText_PkmnUsedXToGetPumped,
-    [STRINGID_PKMNSXMADEYUSELESS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYUseless,
-    [STRINGID_PKMNTRAPPEDBYSANDTOMB - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedBySandTomb,
-    [STRINGID_EMPTYSTRING4 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
-    [STRINGID_ABOOSTED - BATTLESTRINGS_TABLE_START] = sText_ABoosted,
-    [STRINGID_PKMNSXINTENSIFIEDSUN - BATTLESTRINGS_TABLE_START] = sText_PkmnsXIntensifiedSun,
-    [STRINGID_PKMNMAKESGROUNDMISS - BATTLESTRINGS_TABLE_START] = sText_PkmnMakesGroundMiss,
-    [STRINGID_YOUTHROWABALLNOWRIGHT - BATTLESTRINGS_TABLE_START] = sText_YouThrowABallNowRight,
-    [STRINGID_PKMNSXTOOKATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnsXTookAttack,
-    [STRINGID_PKMNCHOSEXASDESTINY - BATTLESTRINGS_TABLE_START] = sText_PkmnChoseXAsDestiny,
-    [STRINGID_PKMNLOSTFOCUS - BATTLESTRINGS_TABLE_START] = sText_PkmnLostFocus,
-    [STRINGID_USENEXTPKMN - BATTLESTRINGS_TABLE_START] = sText_UseNextPkmn,
-    [STRINGID_PKMNFLEDUSINGITS - BATTLESTRINGS_TABLE_START] = sText_PkmnFledUsingIts,
-    [STRINGID_PKMNFLEDUSING - BATTLESTRINGS_TABLE_START] = sText_PkmnFledUsing,
-    [STRINGID_PKMNWASDRAGGEDOUT - BATTLESTRINGS_TABLE_START] = sText_PkmnWasDraggedOut,
-    [STRINGID_PREVENTEDFROMWORKING - BATTLESTRINGS_TABLE_START] = sText_PreventedFromWorking,
-    [STRINGID_PKMNSITEMNORMALIZEDSTATUS - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemNormalizedStatus,
-    [STRINGID_TRAINER1USEDITEM - BATTLESTRINGS_TABLE_START] = sText_Trainer1UsedItem,
-    [STRINGID_BOXISFULL - BATTLESTRINGS_TABLE_START] = sText_BoxIsFull,
-    [STRINGID_PKMNAVOIDEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnAvoidedAttack,
-    [STRINGID_PKMNSXMADEITINEFFECTIVE - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeItIneffective,
-    [STRINGID_PKMNSXPREVENTSFLINCHING - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsFlinching,
-    [STRINGID_PKMNALREADYHASBURN - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyHasBurn,
-    [STRINGID_STATSWONTDECREASE2 - BATTLESTRINGS_TABLE_START] = sText_StatsWontDecrease2,
-    [STRINGID_PKMNSXBLOCKSY2 - BATTLESTRINGS_TABLE_START] = sText_PkmnsXBlocksY2,
-    [STRINGID_PKMNSXWOREOFF - BATTLESTRINGS_TABLE_START] = sText_PkmnsXWoreOff,
-    [STRINGID_PKMNRAISEDDEFALITTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedDefALittle,
-    [STRINGID_PKMNRAISEDSPDEFALITTLE - BATTLESTRINGS_TABLE_START] = sText_PkmnRaisedSpDefALittle,
-    [STRINGID_THEWALLSHATTERED - BATTLESTRINGS_TABLE_START] = sText_TheWallShattered,
-    [STRINGID_PKMNSXPREVENTSYSZ - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsYsZ,
-    [STRINGID_PKMNSXCUREDITSYPROBLEM - BATTLESTRINGS_TABLE_START] = sText_PkmnsXCuredItsYProblem,
-    [STRINGID_ATTACKERCANTESCAPE - BATTLESTRINGS_TABLE_START] = sText_AttackerCantEscape,
-    [STRINGID_PKMNOBTAINEDX - BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedX,
-    [STRINGID_PKMNOBTAINEDX2 - BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedX2,
-    [STRINGID_PKMNOBTAINEDXYOBTAINEDZ - BATTLESTRINGS_TABLE_START] = sText_PkmnObtainedXYObtainedZ,
-    [STRINGID_BUTNOEFFECT - BATTLESTRINGS_TABLE_START] = sText_ButNoEffect,
-    [STRINGID_PKMNSXHADNOEFFECTONY - BATTLESTRINGS_TABLE_START] = sText_PkmnsXHadNoEffectOnY,
-    [STRINGID_TWOENEMIESDEFEATED - BATTLESTRINGS_TABLE_START] = sText_TwoInGameTrainersDefeated,
-    [STRINGID_TRAINER2LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2LoseText,
-    [STRINGID_PKMNINCAPABLEOFPOWER - BATTLESTRINGS_TABLE_START] = sText_PkmnIncapableOfPower,
-    [STRINGID_GLINTAPPEARSINEYE - BATTLESTRINGS_TABLE_START] = sText_GlintAppearsInEye,
-    [STRINGID_PKMNGETTINGINTOPOSITION - BATTLESTRINGS_TABLE_START] = sText_PkmnGettingIntoPosition,
-    [STRINGID_PKMNBEGANGROWLINGDEEPLY - BATTLESTRINGS_TABLE_START] = sText_PkmnBeganGrowlingDeeply,
-    [STRINGID_PKMNEAGERFORMORE - BATTLESTRINGS_TABLE_START] = sText_PkmnEagerForMore,
-    [STRINGID_DEFEATEDOPPONENTBYREFEREE - BATTLESTRINGS_TABLE_START] = sText_DefeatedOpponentByReferee,
-    [STRINGID_LOSTTOOPPONENTBYREFEREE - BATTLESTRINGS_TABLE_START] = sText_LostToOpponentByReferee,
-    [STRINGID_TIEDOPPONENTBYREFEREE - BATTLESTRINGS_TABLE_START] = sText_TiedOpponentByReferee,
-    [STRINGID_QUESTIONFORFEITMATCH - BATTLESTRINGS_TABLE_START] = sText_QuestionForfeitMatch,
-    [STRINGID_FORFEITEDMATCH - BATTLESTRINGS_TABLE_START] = sText_ForfeitedMatch,
-    [STRINGID_PKMNTRANSFERREDSOMEONESPC - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredSomeonesPC,
-    [STRINGID_PKMNTRANSFERREDLANETTESPC - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPC,
-    [STRINGID_PKMNBOXSOMEONESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredSomeonesPCBoxFull,
-    [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
-    [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
-    [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
-    [STRINGID_ENDUREDSTURDY - BATTLESTRINGS_TABLE_START] = sText_EnduredViaSturdy,
-    [STRINGID_POWERHERB - BATTLESTRINGS_TABLE_START] = sText_PowerHerbActivation,
-    [STRINGID_HURTBYITEM - BATTLESTRINGS_TABLE_START] = sText_HurtByItem,
-    [STRINGID_PSNBYITEM - BATTLESTRINGS_TABLE_START] = sText_BadlyPoisonedByItem,
-    [STRINGID_BRNBYITEM - BATTLESTRINGS_TABLE_START] = sText_BurnedByItem,
-    [STRINGID_DEFABILITYIN - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityActivates,
-    [STRINGID_GRAVITYINTENSIFIED - BATTLESTRINGS_TABLE_START] = sText_GravityIntensified,
-    [STRINGID_TARGETIDENTIFIED - BATTLESTRINGS_TABLE_START] = sText_TargetIdentified,
-    [STRINGID_TARGETWOKEUP - BATTLESTRINGS_TABLE_START] = sText_TargetWokeUp,
-    [STRINGID_PKMNSTOLEANDATEITEM - BATTLESTRINGS_TABLE_START] = sText_PkmnStoleAndAteItem,
-    [STRINGID_TAILWINDBLEW - BATTLESTRINGS_TABLE_START] = sText_TailWindBlew,
-    [STRINGID_PKMNWENTBACK - BATTLESTRINGS_TABLE_START] = sText_PkmnWentBack,
-    [STRINGID_PKMNCANTUSEITEMSANYMORE - BATTLESTRINGS_TABLE_START] = sText_PkmnCantUseItemsAnymore,
-    [STRINGID_PKMNFLUNG - BATTLESTRINGS_TABLE_START] = sText_PkmnFlung,
-    [STRINGID_PKMNPREVENTEDFROMHEALING - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventedFromHealing,
-    [STRINGID_PKMNSWITCHEDATKANDDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedAtkAndDef,
-    [STRINGID_PKMNSABILITYSUPPRESSED - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilitySuppressed,
-    [STRINGID_SHIELDEDFROMCRITICALHITS - BATTLESTRINGS_TABLE_START] = sText_ShieldedFromCriticalHits,
-    [STRINGID_SWITCHEDATKANDSPATK - BATTLESTRINGS_TABLE_START] = sText_SwitchedAtkAndSpAtk,
-    [STRINGID_SWITCHEDDEFANDSPDEF - BATTLESTRINGS_TABLE_START] = sText_SwitchedDefAndSpDef,
-    [STRINGID_PKMNACQUIREDABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredAbility,
-    [STRINGID_POISONSPIKESSCATTERED - BATTLESTRINGS_TABLE_START] = sText_PoisonSpikesScattered,
-    [STRINGID_PKMNSWITCHEDSTATCHANGES - BATTLESTRINGS_TABLE_START] = sText_PkmnSwitchedStatChanges,
-    [STRINGID_PKMNSURROUNDEDWITHVEILOFWATER - BATTLESTRINGS_TABLE_START] = sText_PkmnSurroundedWithVeilOfWater,
-    [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_PkmnLevitatedOnElectromagnetism,
-    [STRINGID_PKMNTWISTEDDIMENSIONS - BATTLESTRINGS_TABLE_START] = sText_PkmnTwistedDimensions,
-    [STRINGID_DIMENSIONSWERETWISTED - BATTLESTRINGS_TABLE_START] = sText_DimensionsWereTwisted,
-    [STRINGID_POINTEDSTONESFLOAT - BATTLESTRINGS_TABLE_START] = sText_PointedStonesFloat,
-    [STRINGID_CLOAKEDINMYSTICALMOONLIGHT - BATTLESTRINGS_TABLE_START] = sText_CloakedInMysticalMoonlight,
-    [STRINGID_TRAPPEDBYSWIRLINGMAGMA - BATTLESTRINGS_TABLE_START] = sText_TrappedBySwirlingMagma,
-    [STRINGID_VANISHEDINSTANTLY - BATTLESTRINGS_TABLE_START] = sText_VanishedInstantly,
-    [STRINGID_PROTECTEDTEAM - BATTLESTRINGS_TABLE_START] = sText_ProtectedTeam,
-    [STRINGID_SHAREDITSGUARD - BATTLESTRINGS_TABLE_START] = sText_SharedItsGuard,
-    [STRINGID_SHAREDITSPOWER - BATTLESTRINGS_TABLE_START] = sText_SharedItsPower,
-    [STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON - BATTLESTRINGS_TABLE_START] = sText_SwapsDefAndSpDefOfAllPkmn,
-    [STRINGID_BIZARREAREACREATED - BATTLESTRINGS_TABLE_START] = sText_BizzareAreaCreated,
-    [STRINGID_BECAMENIMBLE - BATTLESTRINGS_TABLE_START] = sText_BecameNimble,
-    [STRINGID_HURLEDINTOTHEAIR - BATTLESTRINGS_TABLE_START] = sText_HurledIntoTheAir,
-    [STRINGID_HELDITEMSLOSEEFFECTS - BATTLESTRINGS_TABLE_START] = sText_HeldItemsLoseEffects,
-    [STRINGID_BIZARREARENACREATED - BATTLESTRINGS_TABLE_START] = sText_BizarreArenaCreated,
-    [STRINGID_FELLSTRAIGHTDOWN - BATTLESTRINGS_TABLE_START] = sText_FellStraightDown,
-    [STRINGID_TARGETCHANGEDTYPE  - BATTLESTRINGS_TABLE_START] = sText_TargetChangedType,
-    [STRINGID_PKMNACQUIREDSIMPLE - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredSimple,
-    [STRINGID_EMPTYSTRING5 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
-    [STRINGID_KINDOFFER - BATTLESTRINGS_TABLE_START] = sText_KindOffer,
-    [STRINGID_RESETSTARGETSSTATLEVELS - BATTLESTRINGS_TABLE_START] = sText_ResetsTargetsStatLevels,
-    [STRINGID_EMPTYSTRING6 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
-    [STRINGID_ALLYSWITCHPOSITION - BATTLESTRINGS_TABLE_START] = sText_AllySwitchPosition,
-    [STRINGID_RESTORETARGETSHEALTH - BATTLESTRINGS_TABLE_START] = sText_RestoreTargetsHealth,
-    [STRINGID_TOOKPJMNINTOTHESKY - BATTLESTRINGS_TABLE_START] = sText_TookPkmnIntoTheSky,
-    [STRINGID_FREEDFROMSKYDROP - BATTLESTRINGS_TABLE_START] = sText_FreedFromSkyDrop,
-    [STRINGID_POSTPONETARGETMOVE - BATTLESTRINGS_TABLE_START] = sText_PostponeTargetMove,
-    [STRINGID_REFLECTTARGETSTYPE - BATTLESTRINGS_TABLE_START] = sText_ReflectTargetsType,
-    [STRINGID_TRANSFERHELDITEM - BATTLESTRINGS_TABLE_START] = sText_TransferHeldItem,
-    [STRINGID_EMBARGOENDS - BATTLESTRINGS_TABLE_START] = sText_EmbargoEnds,
-    [STRINGID_ELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_Electromagnetism,
-    [STRINGID_BUFFERENDS - BATTLESTRINGS_TABLE_START] = sText_BufferEnds,
-    [STRINGID_TELEKINESISENDS - BATTLESTRINGS_TABLE_START] = sText_TelekinesisEnds,
-    [STRINGID_TAILWINDENDS - BATTLESTRINGS_TABLE_START] = sText_TailwindEnds,
-    [STRINGID_LUCKYCHANTENDS - BATTLESTRINGS_TABLE_START] = sText_LuckyChantEnds,
-    [STRINGID_TRICKROOMENDS - BATTLESTRINGS_TABLE_START] = sText_TrickRoomEnds,
-    [STRINGID_WONDERROOMENDS - BATTLESTRINGS_TABLE_START] = sText_WonderRoomEnds,
-    [STRINGID_MAGICROOMENDS - BATTLESTRINGS_TABLE_START] = sText_MagicRoomEnds,
-    [STRINGID_MUDSPORTENDS - BATTLESTRINGS_TABLE_START] = sText_MudSportEnds,
-    [STRINGID_WATERSPORTENDS - BATTLESTRINGS_TABLE_START] = sText_WaterSportEnds,
-    [STRINGID_GRAVITYENDS - BATTLESTRINGS_TABLE_START] = sText_GravityEnds,
-    [STRINGID_AQUARINGHEAL - BATTLESTRINGS_TABLE_START] = sText_AquaRingHeal,
-    [STRINGID_ELECTRICTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainEnds,
-    [STRINGID_MISTYTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_MistyTerrainEnds,
-    [STRINGID_PSYCHICTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainEnds,
-    [STRINGID_GRASSYTERRAINENDS - BATTLESTRINGS_TABLE_START] = sText_GrassyTerrainEnds,
-    [STRINGID_TARGETABILITYSTATRAISE - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityRaisedStat,
-    [STRINGID_TARGETSSTATWASMAXEDOUT - BATTLESTRINGS_TABLE_START] = sText_TargetsStatWasMaxedOut,
-    [STRINGID_ATTACKERABILITYSTATRAISE - BATTLESTRINGS_TABLE_START] = sText_AttackerAbilityRaisedStat,
-    [STRINGID_POISONHEALHPUP - BATTLESTRINGS_TABLE_START] = sText_PoisonHealHpUp,
-    [STRINGID_BADDREAMSDMG - BATTLESTRINGS_TABLE_START] = sText_BadDreamsDmg,
-    [STRINGID_MOLDBREAKERENTERS - BATTLESTRINGS_TABLE_START] = sText_MoldBreakerEnters,
-    [STRINGID_TERAVOLTENTERS - BATTLESTRINGS_TABLE_START] = sText_TeravoltEnters,
-    [STRINGID_TURBOBLAZEENTERS - BATTLESTRINGS_TABLE_START] = sText_TurboblazeEnters,
-    [STRINGID_SLOWSTARTENTERS - BATTLESTRINGS_TABLE_START] = sText_SlowStartEnters,
-    [STRINGID_SLOWSTARTEND - BATTLESTRINGS_TABLE_START] = sText_SlowStartEnd,
-    [STRINGID_SOLARPOWERHPDROP - BATTLESTRINGS_TABLE_START] = sText_SolarPowerHpDrop,
-    [STRINGID_AFTERMATHDMG - BATTLESTRINGS_TABLE_START] = sText_AftermathDmg,
-    [STRINGID_ANTICIPATIONACTIVATES - BATTLESTRINGS_TABLE_START] = sText_AnticipationActivates,
-    [STRINGID_FOREWARNACTIVATES - BATTLESTRINGS_TABLE_START] = sText_ForewarnActivates,
-    [STRINGID_ICEBODYHPGAIN - BATTLESTRINGS_TABLE_START] = sText_IceBodyHpGain,
-    [STRINGID_SNOWWARNINGHAIL - BATTLESTRINGS_TABLE_START] = sText_SnowWarningHail,
-    [STRINGID_SNOWWARNINGSNOW - BATTLESTRINGS_TABLE_START] = sText_SnowWarningSnow,
-    [STRINGID_FRISKACTIVATES - BATTLESTRINGS_TABLE_START] = sText_FriskActivates,
-    [STRINGID_UNNERVEENTERS - BATTLESTRINGS_TABLE_START] = sText_UnnerveEnters,
-    [STRINGID_HARVESTBERRY - BATTLESTRINGS_TABLE_START] = sText_HarvestBerry,
-    [STRINGID_LASTABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedBuff1,
-    [STRINGID_MAGICBOUNCEACTIVATES - BATTLESTRINGS_TABLE_START] = sText_MagicBounceActivates,
-    [STRINGID_PROTEANTYPECHANGE - BATTLESTRINGS_TABLE_START] = sText_ProteanTypeChange,
-    [STRINGID_SYMBIOSISITEMPASS - BATTLESTRINGS_TABLE_START] = sText_SymbiosisItemPass,
-    [STRINGID_STEALTHROCKDMG - BATTLESTRINGS_TABLE_START] = sText_StealthRockDmg,
-    [STRINGID_TOXICSPIKESABSORBED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesAbsorbed,
-    [STRINGID_TOXICSPIKESPOISONED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesPoisoned,
-    [STRINGID_STICKYWEBSWITCHIN - BATTLESTRINGS_TABLE_START] = sText_StickyWebSwitchIn,
-    [STRINGID_HEALINGWISHCAMETRUE - BATTLESTRINGS_TABLE_START] = sText_HealingWishCameTrue,
-    [STRINGID_HEALINGWISHHEALED - BATTLESTRINGS_TABLE_START] = sText_HealingWishHealed,
-    [STRINGID_LUNARDANCECAMETRUE - BATTLESTRINGS_TABLE_START] = sText_LunarDanceCameTrue,
-    [STRINGID_CUSEDBODYDISABLED - BATTLESTRINGS_TABLE_START] = sText_CursedBodyDisabled,
-    [STRINGID_ATTACKERACQUIREDABILITY - BATTLESTRINGS_TABLE_START] = sText_AttackerAcquiredAbility,
-    [STRINGID_TARGETABILITYSTATLOWER - BATTLESTRINGS_TABLE_START] = sText_TargetAbilityLoweredStat,
-    [STRINGID_TARGETSTATWONTGOHIGHER - BATTLESTRINGS_TABLE_START] = sText_TargetStatWontGoHigher,
-    [STRINGID_PKMNMOVEBOUNCEDABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnMoveBouncedViaAbility,
-    [STRINGID_IMPOSTERTRANSFORM - BATTLESTRINGS_TABLE_START] = sText_ImposterTransform,
-    [STRINGID_ASSAULTVESTDOESNTALLOW - BATTLESTRINGS_TABLE_START] = sText_AssaultVestDoesntAllow,
-    [STRINGID_GRAVITYPREVENTSUSAGE - BATTLESTRINGS_TABLE_START] = sText_GravityPreventsUsage,
-    [STRINGID_HEALBLOCKPREVENTSUSAGE - BATTLESTRINGS_TABLE_START] = sText_HealBlockPreventsUsage,
-    [STRINGID_NOTDONEYET - BATTLESTRINGS_TABLE_START] = sText_NotDoneYet,
-    [STRINGID_STICKYWEBUSED - BATTLESTRINGS_TABLE_START] = sText_StickyWebUsed,
-    [STRINGID_QUASHSUCCESS - BATTLESTRINGS_TABLE_START] = sText_QuashSuccess,
-    [STRINGID_PKMNBLEWAWAYTOXICSPIKES - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayToxicSpikes,
-    [STRINGID_PKMNBLEWAWAYSTICKYWEB - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayStickyWeb,
-    [STRINGID_PKMNBLEWAWAYSTEALTHROCK - BATTLESTRINGS_TABLE_START] = sText_PkmnBlewAwayStealthRock,
-    [STRINGID_SPIKESDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_SpikesDisappearedFromTeam,
-    [STRINGID_TOXICSPIKESDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesDisappearedFromTeam,
-    [STRINGID_STEALTHROCKDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_StealthRockDisappearedFromTeam,
-    [STRINGID_STICKYWEBDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_StickyWebDisappearedFromTeam,
-    [STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM - BATTLESTRINGS_TABLE_START] = sText_SharpSteelDisappearedFromTeam,
-    [STRINGID_IONDELUGEON - BATTLESTRINGS_TABLE_START] = sText_IonDelugeOn,
-    [STRINGID_TOPSYTURVYSWITCHEDSTATS - BATTLESTRINGS_TABLE_START] = sText_TopsyTurvySwitchedStats,
-    [STRINGID_TERRAINBECOMESMISTY - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesMisty,
-    [STRINGID_TERRAINBECOMESGRASSY - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesGrassy,
-    [STRINGID_TERRAINBECOMESELECTRIC - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesElectric,
-    [STRINGID_TERRAINBECOMESPSYCHIC - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesPsychic,
-    [STRINGID_TARGETELECTRIFIED - BATTLESTRINGS_TABLE_START] = sText_TargetElectrified,
-    [STRINGID_MEGAEVOREACTING - BATTLESTRINGS_TABLE_START] = sText_MegaEvoReacting,
-    [STRINGID_FERVENTWISHREACHED - BATTLESTRINGS_TABLE_START] = sText_FerventWishReached,
-    [STRINGID_MEGAEVOEVOLVED - BATTLESTRINGS_TABLE_START] = sText_MegaEvoEvolved,
-    [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_drastically,
-    [STRINGID_SEVERELY - BATTLESTRINGS_TABLE_START] = sText_severely,
-    [STRINGID_INFESTATION - BATTLESTRINGS_TABLE_START] = sText_Infestation,
-    [STRINGID_NOEFFECTONTARGET - BATTLESTRINGS_TABLE_START] = sText_NoEffectOnTarget,
-    [STRINGID_BURSTINGFLAMESHIT - BATTLESTRINGS_TABLE_START] = sText_BurstingFlames,
-    [STRINGID_BESTOWITEMGIVING - BATTLESTRINGS_TABLE_START] = sText_BestowItemGiving,
-    [STRINGID_THIRDTYPEADDED - BATTLESTRINGS_TABLE_START] = sText_ThirdTypeAdded,
-    [STRINGID_FELLFORFEINT - BATTLESTRINGS_TABLE_START] = sText_FellForFeint,
-    [STRINGID_POKEMONCANNOTUSEMOVE - BATTLESTRINGS_TABLE_START] = sText_PokemonCannotUseMove,
-    [STRINGID_COVEREDINPOWDER - BATTLESTRINGS_TABLE_START] = sText_CoveredInPowder,
-    [STRINGID_POWDEREXPLODES - BATTLESTRINGS_TABLE_START] = sText_PowderExplodes,
-    [STRINGID_GRAVITYGROUNDING - BATTLESTRINGS_TABLE_START] = sText_GravityGrounding,
-    [STRINGID_MISTYTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_MistyTerrainPreventsStatus,
-    [STRINGID_GRASSYTERRAINHEALS - BATTLESTRINGS_TABLE_START] = sText_GrassyTerrainHeals,
-    [STRINGID_ELECTRICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_ElectricTerrainPreventsSleep,
-    [STRINGID_PSYCHICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainPreventsPriority,
-    [STRINGID_AURAFLAREDTOLIFE - BATTLESTRINGS_TABLE_START] = sText_AuraFlaredToLife,
-    [STRINGID_AIRLOCKACTIVATES - BATTLESTRINGS_TABLE_START] = sText_AirLockActivates,
-    [STRINGID_PRESSUREENTERS - BATTLESTRINGS_TABLE_START] = sText_PressureActivates,
-    [STRINGID_DARKAURAENTERS - BATTLESTRINGS_TABLE_START] = sText_DarkAuraActivates,
-    [STRINGID_FAIRYAURAENTERS - BATTLESTRINGS_TABLE_START] = sText_FairyAuraActivates,
-    [STRINGID_AURABREAKENTERS - BATTLESTRINGS_TABLE_START] = sText_AuraBreakActivates,
-    [STRINGID_COMATOSEENTERS - BATTLESTRINGS_TABLE_START] = sText_ComatoseActivates,
-    [STRINGID_SCREENCLEANERENTERS - BATTLESTRINGS_TABLE_START] = sText_ScreenCleanerActivates,
-    [STRINGID_BOTHCANNOLONGERESCAPE - BATTLESTRINGS_TABLE_START] = sText_BothCanNoLongerEscape,
-    [STRINGID_CANTESCAPEDUETOUSEDMOVE - BATTLESTRINGS_TABLE_START] = sText_CantEscapeDueToUsedMove,
-    [STRINGID_PKMNBECAMEWEAKERTOFIRE - BATTLESTRINGS_TABLE_START] = sText_PkmnBecameWeakerToFire,
-    [STRINGID_ABOUTTOUSEPOLTERGEIST - BATTLESTRINGS_TABLE_START] = sText_PkmnAboutToBeAttackedByItsItem,
-    [STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE - BATTLESTRINGS_TABLE_START] = sText_CantEscapeBecauseOfCurrentMove,
-    [STRINGID_PKMNTOOKTARGETHIGH - BATTLESTRINGS_TABLE_START] = sText_PkmnTookTargetHigh,
-    [STRINGID_TARGETTOOHEAVY - BATTLESTRINGS_TABLE_START] = sText_TargetTooHeavy,
-    [STRINGID_ATTACKERLOSTELECTRICTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostElectricType,
-    [STRINGID_PKMNSABILITYPREVENTSABILITY - BATTLESTRINGS_TABLE_START] = sText_PkmnsAbilityPreventsAbility,
-    [STRINGID_PKMNHURTBYFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByFrostbite,
-    [STRINGID_PKMNGOTFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_PkmnGotFrostbite,
-    [STRINGID_PKMNSITEMHEALEDFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_PkmnsItemHealedFrostbite,
-    [STRINGID_ATTACKERHEALEDITSFROSTBITE - BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsFrostbite,
-    [STRINGID_PKMNFROSTBITEHEALED - BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealed,
-    [STRINGID_PKMNFROSTBITEHEALED2 - BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealed2,
-    [STRINGID_PKMNFROSTBITEHEALEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnFrostbiteHealedBy,
-    [STRINGID_ULTRABURSTREACTING - BATTLESTRINGS_TABLE_START] = sText_UltraBurstReacting,
-    [STRINGID_ULTRABURSTCOMPLETED - BATTLESTRINGS_TABLE_START] = sText_UltraBurstCompleted,
-    [STRINGID_TEAMGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_TeamGainedEXP,
-    [STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP - BATTLESTRINGS_TABLE_START] = sText_TargetCoveredInStickyCandySyrup,
-    [STRINGID_ITEMWASUSEDUP - BATTLESTRINGS_TABLE_START] = sText_ItemWasUsedUp,
-    [STRINGID_ATTACKERLOSTITSTYPE - BATTLESTRINGS_TABLE_START] = sText_AttackerLostItsType,
-    [STRINGID_CLOAKEDINAHARSHLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnIsCloakedInAHarshLight,
+    [STRINGID_TRAINER1LOSETEXT]                     = COMPOUND_STRING("{B_TRAINER1_LOSE_TEXT}"),
+    [STRINGID_PKMNGAINEDEXP]                        = COMPOUND_STRING("{B_BUFF1}获得了{B_BUFF2} {B_BUFF3} 经验点数!\p"),
+    [STRINGID_PKMNGREWTOLV]                         = COMPOUND_STRING("{B_BUFF1}升到了等级{B_BUFF2}!{WAIT_SE}\p"),
+    [STRINGID_PKMNLEARNEDMOVE]                      = COMPOUND_STRING("{B_BUFF1}学会了{B_BUFF2}!{WAIT_SE}\p"),
+    [STRINGID_TRYTOLEARNMOVE1]                      = COMPOUND_STRING("{B_BUFF1}想要学习招式{B_BUFF2}。\p"),
+    [STRINGID_TRYTOLEARNMOVE2]                      = COMPOUND_STRING("但是，{B_BUFF1}已经学会了四个招式。\p"),
+    [STRINGID_TRYTOLEARNMOVE3]                      = COMPOUND_STRING("是否要忘记另一个招式，并用{B_BUFF2}替换？"),
+    [STRINGID_PKMNFORGOTMOVE]                       = COMPOUND_STRING("{B_BUFF1}忘记了{B_BUFF2}…\p"),
+    [STRINGID_STOPLEARNINGMOVE]                     = COMPOUND_STRING("{PAUSE 32}你想让{B_BUFF1}放弃学习{B_BUFF2}吗？"),
+    [STRINGID_DIDNOTLEARNMOVE]                      = COMPOUND_STRING("{B_BUFF1}没有学会{B_BUFF2}。\p"),
+    [STRINGID_PKMNLEARNEDMOVE2]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}学会了{B_BUFF1}!"),
+    [STRINGID_ATTACKMISSED]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的攻击落空了!"),
+    [STRINGID_PKMNPROTECTEDITSELF]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}保护自己!"),
+    [STRINGID_STATSWONTINCREASE2]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的数值不会再增加了!"),
+    [STRINGID_AVOIDEDDAMAGE]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}依靠{B_DEF_ABILITY}避开了伤害!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_ITDOESNTAFFECT]                       = COMPOUND_STRING("对{B_DEF_NAME_WITH_PREFIX2}没有效果…"),
+    [STRINGID_ATTACKERFAINTED]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}晕倒了!\p"),
+    [STRINGID_TARGETFAINTED]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}晕倒了!\p"),
+    [STRINGID_PLAYERGOTMONEY]                       = COMPOUND_STRING("你赢得了¥{B_BUFF1}!\p"),
+    [STRINGID_PLAYERWHITEOUT]                       = COMPOUND_STRING("你没有能战斗的宝可梦了!\p"),
+    #if B_WHITEOUT_MONEY >= GEN_4
+    [STRINGID_PLAYERWHITEOUT2]                      = COMPOUND_STRING("你在恐慌中丢失了¥{B_BUFF1}…\p你被击败了!{PAUSE_UNTIL_PRESS}"),
+    #else
+    [STRINGID_PLAYERWHITEOUT2]                      = COMPOUND_STRING("你被击败了!{PAUSE_UNTIL_PRESS}"),
+    #endif
+    [STRINGID_PREVENTSESCAPE]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}用{B_SCR_ACTIVE_ABILITY}阻止了逃跑!\p"),
+    [STRINGID_HITXTIMES]                            = COMPOUND_STRING("宝可梦被击中了{B_BUFF1}次!"), //SV在这里有动态复数
+    [STRINGID_PKMNFELLASLEEP]                       = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}睡着了!"),
+    [STRINGID_PKMNMADESLEEP]                        = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_BUFF1}让{B_EFF_NAME_WITH_PREFIX2}睡着了!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNALREADYASLEEP]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}已经睡着了!"),
+    [STRINGID_PKMNALREADYASLEEP2]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}已经睡着了!"),
+    [STRINGID_PKMNWASNTAFFECTED]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}没有被影响!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNWASPOISONED]                      = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}中毒了!"),
+    [STRINGID_PKMNPOISONEDBY]                       = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}被{B_SCR_NAME_WITH_PREFIX2}的{B_BUFF1}毒害了!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNHURTBYPOISON]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为中毒而受伤了!"),
+    [STRINGID_PKMNALREADYPOISONED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}已经中毒了!"),
+    [STRINGID_PKMNBADLYPOISONED]                    = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}剧毒发作了!"),
+    [STRINGID_PKMNENERGYDRAINED]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的能量被吸走了!"),
+    [STRINGID_PKMNWASBURNED]                        = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}烧伤了!"),
+    [STRINGID_PKMNBURNEDBY]                         = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_BUFF1}让{B_EFF_NAME_WITH_PREFIX2}烧伤了!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNHURTBYBURN]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为烧伤而受伤了!"),
+    [STRINGID_PKMNWASFROZEN]                        = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}被冻结了!"),
+    [STRINGID_PKMNFROZENBY]                         = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_BUFF1}把{B_EFF_NAME_WITH_PREFIX2}冻结了!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNISFROZEN]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被冻结了!"),
+    [STRINGID_PKMNWASDEFROSTED]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}解冻了!"),
+    [STRINGID_PKMNWASDEFROSTED2]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}解冻了!"),
+    [STRINGID_PKMNWASDEFROSTEDBY]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}融化了冰!"),
+    [STRINGID_PKMNWASPARALYZED]                     = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}麻痹了，可能无法行动!"),
+    [STRINGID_PKMNWASPARALYZEDBY]                   = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_BUFF1}让{B_EFF_NAME_WITH_PREFIX2}麻痹了，可能无法行动!"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNISPARALYZED]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为麻痹而无法行动!"),
+    [STRINGID_PKMNISALREADYPARALYZED]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}已经麻痹了!"),
+    [STRINGID_PKMNHEALEDPARALYSIS]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的麻痹被治愈了!"),
+    [STRINGID_PKMNDREAMEATEN]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的梦境被吃掉了!"), //不在第五世代及以后版本中，扩展不再使用
+    [STRINGID_STATSWONTINCREASE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}不会再提升了！"),
+    [STRINGID_STATSWONTDECREASE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}不会再下降了！"),
+    [STRINGID_TEAMSTOPPEDWORKING]                   = COMPOUND_STRING("你的队伍的{B_BUFF1}停止生效了！"), //未使用
+    [STRINGID_FOESTOPPEDWORKING]                    = COMPOUND_STRING("对手的{B_BUFF1}停止生效了！"), //未使用
+    [STRINGID_PKMNISCONFUSED]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}混乱了！"),
+    [STRINGID_PKMNHEALEDCONFUSION]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}从混乱中恢复了！"),
+    [STRINGID_PKMNWASCONFUSED]                      = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}变得混乱了！"),
+    [STRINGID_PKMNALREADYCONFUSED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}已经混乱了！"),
+    [STRINGID_PKMNFELLINLOVE]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}陷入了爱河！"),
+    [STRINGID_PKMNINLOVE]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}爱上了{B_SCR_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNIMMOBILIZEDBYLOVE]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为爱情而动弹不得！"),
+    [STRINGID_PKMNBLOWNAWAY]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被吹走了！"), //未使用
+    [STRINGID_PKMNCHANGEDTYPE]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}变成了{B_BUFF1}属性！"),
+    [STRINGID_PKMNFLINCHED]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为退缩而无法行动！"),
+    [STRINGID_PKMNREGAINEDHEALTH]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的HP恢复了。"),
+    [STRINGID_PKMNHPFULL]                           = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的HP全满了！"),
+    [STRINGID_PKMNRAISEDSPDEF]                      = COMPOUND_STRING("光之壁让{B_ATK_TEAM2}队伍对特殊招式的防御力增强了！"),
+    [STRINGID_PKMNRAISEDDEF]                        = COMPOUND_STRING("反射让{B_ATK_TEAM2}队伍对物理招式更强了！"),
+    [STRINGID_PKMNCOVEREDBYVEIL]                    = COMPOUND_STRING("{B_ATK_TEAM1}队伍用神秘的面纱包裹了自己！"),
+    [STRINGID_PKMNUSEDSAFEGUARD]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}受到安全保护的保护！"),
+    [STRINGID_PKMNSAFEGUARDEXPIRED]                 = COMPOUND_STRING("{B_ATK_TEAM1}队伍不再受到安全保护的保护！"),
+    [STRINGID_PKMNWENTTOSLEEP]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}去睡觉了！"), //不在第五世代及以后版本中
+    [STRINGID_PKMNSLEPTHEALTHY]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}睡觉并恢复了HP！"),
+    [STRINGID_PKMNWHIPPEDWHIRLWIND]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}掀起了旋风！"),
+    [STRINGID_PKMNTOOKSUNLIGHT]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吸收了光线！"),
+    [STRINGID_PKMNLOWEREDHEAD]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}缩进了头！"),
+    [STRINGID_PKMNISGLOWING]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被强烈的光芒包围了！"),
+    [STRINGID_PKMNFLEWHIGH]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}飞得很高！"),
+    [STRINGID_PKMNDUGHOLE]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}挖洞潜入了地下！"),
+    [STRINGID_PKMNSQUEEZEDBYBIND]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被{B_ATK_NAME_WITH_PREFIX2}挤压！"),
+    [STRINGID_PKMNTRAPPEDINVORTEX]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}陷入了漩涡之中！"),
+    [STRINGID_PKMNWRAPPEDBY]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被{B_ATK_NAME_WITH_PREFIX2}缠绕！"),
+    [STRINGID_PKMNCLAMPED]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}夹住了{B_DEF_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNHURTBY]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被{B_BUFF1}伤害了！"),
+    [STRINGID_PKMNFREEDFROM]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}从{B_BUFF1}中解脱了！"),
+    [STRINGID_PKMNCRASHED]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}继续前进并撞毁了！"),
+    [STRINGID_PKMNSHROUDEDINMIST]                   = gText_PkmnShroudedInMist,
+    [STRINGID_PKMNPROTECTEDBYMIST]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}被雾气保护！"),
+    [STRINGID_PKMNGETTINGPUMPED]                    = gText_PkmnGettingPumped,
+    [STRINGID_PKMNHITWITHRECOIL]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被反弹伤害了！"),
+    [STRINGID_PKMNPROTECTEDITSELF2]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}保护自己！"),
+    [STRINGID_PKMNBUFFETEDBYSANDSTORM]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被沙暴冲击！"),
+    [STRINGID_PKMNPELTEDBYHAIL]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被冰雹冲击！"),
+    [STRINGID_PKMNSEEDED]                           = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被种子了！"),
+    [STRINGID_PKMNEVADEDATTACK]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}避开了攻击！"),
+    [STRINGID_PKMNSAPPEDBYLEECHSEED]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被吸取种子吸取了生命值！"),
+    [STRINGID_PKMNFASTASLEEP]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}睡得很沉。"),
+    [STRINGID_PKMNWOKEUP]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}醒了！"),
+    [STRINGID_PKMNUPROARKEPTAWAKE]                  = COMPOUND_STRING("但是骚动让{B_SCR_NAME_WITH_PREFIX2}保持清醒！"),
+    [STRINGID_PKMNWOKEUPINUPROAR]                   = COMPOUND_STRING("骚动唤醒了{B_ATK_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNCAUSEDUPROAR]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}引起了骚动！"),
+    [STRINGID_PKMNMAKINGUPROAR]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}正在制造骚动！"),
+    [STRINGID_PKMNCALMEDDOWN]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}冷静下来了。"),
+    [STRINGID_PKMNCANTSLEEPINUPROAR]                = COMPOUND_STRING("但是{B_DEF_NAME_WITH_PREFIX2}在骚动中无法入睡！"),
+    [STRINGID_PKMNSTOCKPILED]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}储存了{B_BUFF1}！"),
+    [STRINGID_PKMNCANTSTOCKPILE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}不能再储存了！"), //我认为这个被替换成了简单的"But it failed!"
+    [STRINGID_PKMNCANTSLEEPINUPROAR2]               = COMPOUND_STRING("但是{B_DEF_NAME_WITH_PREFIX2}在骚动中无法入睡！"),
+    [STRINGID_UPROARKEPTPKMNAWAKE]                  = COMPOUND_STRING("但是骚动让{B_DEF_NAME_WITH_PREFIX2}保持清醒！"),
+    [STRINGID_PKMNSTAYEDAWAKEUSING]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}利用其{B_DEF_ABILITY}保持清醒！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSTORINGENERGY]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}正在储存能量！"),
+    [STRINGID_PKMNUNLEASHEDENERGY]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}释放了它的能量！"),
+    [STRINGID_PKMNFATIGUECONFUSION]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因疲劳而混乱！"),
+    [STRINGID_PLAYERPICKEDUPMONEY]                  = COMPOUND_STRING("你捡起了¥{B_BUFF1}！\p"),
+    [STRINGID_PKMNUNAFFECTED]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}不受影响！"),
+    [STRINGID_PKMNTRANSFORMEDINTO]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}变成了{B_BUFF1}！"),
+    [STRINGID_PKMNMADESUBSTITUTE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}设置了替身！"),
+    [STRINGID_PKMNHASSUBSTITUTE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}已经有替身了！"),
+    [STRINGID_SUBSTITUTEDAMAGED]                    = COMPOUND_STRING("替身为{B_DEF_NAME_WITH_PREFIX2}承受了伤害！\p"),
+    [STRINGID_PKMNSUBSTITUTEFADED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的替身消失了！\p"),
+    [STRINGID_PKMNMUSTRECHARGE]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}必须重新充电！"),
+    [STRINGID_PKMNRAGEBUILDING]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的愤怒正在积累！"),
+    [STRINGID_PKMNMOVEWASDISABLED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}被禁用了！"),
+    [STRINGID_PKMNMOVEISDISABLED]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}被禁用了！\p"),
+    [STRINGID_PKMNMOVEDISABLEDNOMORE]               = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的招式不再被禁用！"),
+    [STRINGID_PKMNGOTENCORE]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}必须再来一次！"),
+    [STRINGID_PKMNENCOREENDED]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的再来一次结束了！"),
+    [STRINGID_PKMNTOOKAIM]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}瞄准了{B_DEF_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNSKETCHEDMOVE]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}素描了{B_BUFF1}！"),
+    [STRINGID_PKMNTRYINGTOTAKEFOE]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}试图与攻击者同归于尽！"),
+    [STRINGID_PKMNTOOKFOE]                          = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}与攻击者同归于尽了！"),
+    [STRINGID_PKMNREDUCEDPP]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的PP值减少了！"),
+    [STRINGID_PKMNSTOLEITEM]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}偷走了{B_DEF_NAME_WITH_PREFIX2}的{B_LAST_ITEM}！"),
+    [STRINGID_TARGETCANTESCAPENOW]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}现在无法逃跑了！"),
+    [STRINGID_PKMNFELLINTONIGHTMARE]                = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}开始做噩梦了！"),
+    [STRINGID_PKMNLOCKEDINNIGHTMARE]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}陷入了噩梦！"),
+    [STRINGID_PKMNLAIDCURSE]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}削减了自己的HP并对{B_DEF_NAME_WITH_PREFIX2}施加了诅咒！"),
+    [STRINGID_PKMNAFFLICTEDBYCURSE]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}受到了诅咒的影响！"),
+    [STRINGID_SPIKESSCATTERED]                      = COMPOUND_STRING("在{B_DEF_TEAM2}队伍周围散布了尖刺！"),
+    [STRINGID_PKMNHURTBYSPIKES]                     = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}被尖刺伤害了！"),
+    [STRINGID_PKMNIDENTIFIED]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被识别了！"),
+    [STRINGID_PKMNPERISHCOUNTFELL]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的灭亡之数降至{B_BUFF1}！"),
+    [STRINGID_PKMNBRACEDITSELF]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}稳住了自己！"),
+    [STRINGID_PKMNENDUREDHIT]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}承受了这次攻击！"),
+    [STRINGID_MAGNITUDESTRENGTH]                    = COMPOUND_STRING("震级为{B_BUFF1}！"),
+    [STRINGID_PKMNCUTHPMAXEDATTACK]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}削减了自己的HP并最大化了攻击！"),
+    [STRINGID_PKMNCOPIEDSTATCHANGES]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}复制了{B_DEF_NAME_WITH_PREFIX2}的属性变化！"),
+    [STRINGID_PKMNGOTFREE]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}从{B_DEF_NAME_WITH_PREFIX2}的{B_BUFF1}中解脱了！"), //不在第五世代及以后版本中，通用的急速旋转？
+    [STRINGID_PKMNSHEDLEECHSEED]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}摆脱了吸取种子！"), //不在第五世代及以后版本中，通用的急速旋转？
+    [STRINGID_PKMNBLEWAWAYSPIKES]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吹走了尖刺！"), //不在第五世代及以后版本中，通用的急速旋转？
+    [STRINGID_PKMNFLEDFROMBATTLE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}逃离了战斗！"),
+    [STRINGID_PKMNFORESAWATTACK]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}预见了攻击！"),
+    [STRINGID_PKMNTOOKATTACK]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}承受了{B_BUFF1}的攻击！"),
+    [STRINGID_PKMNATTACK]                           = COMPOUND_STRING("{B_BUFF1}的攻击！"), //不在第五世代及以后版本中，扩展不再使用
+    [STRINGID_PKMNCENTERATTENTION]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}成为了注意的中心！"),
+    [STRINGID_PKMNCHARGINGPOWER]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}开始积蓄力量！"),
+    [STRINGID_NATUREPOWERTURNEDINTO]                = COMPOUND_STRING("自然之力变成了{B_CURRENT_MOVE}！"),
+    [STRINGID_PKMNSTATUSNORMAL]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的状态恢复正常了！"),
+    [STRINGID_PKMNHASNOMOVESLEFT]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}没有可以使用的招式了！\p"),
+    [STRINGID_PKMNSUBJECTEDTOTORMENT]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 被施加了折磨！"),
+    [STRINGID_PKMNCANTUSEMOVETORMENT]               = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 由于折磨，不能连续使用相同的招式！\p"),
+    [STRINGID_PKMNTIGHTENINGFOCUS]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 正在加强集中力！"),
+    [STRINGID_PKMNFELLFORTAUNT]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 中了挑衅！"),
+    [STRINGID_PKMNCANTUSEMOVETAUNT]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 在挑衅之后不能使用{B_CURRENT_MOVE}！\p"),
+    [STRINGID_PKMNREADYTOHELP]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 准备帮助{B_DEF_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNSWITCHEDITEMS]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 与对手交换了道具！"),
+    [STRINGID_PKMNCOPIEDFOE]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 复制了{B_DEF_NAME_WITH_PREFIX2}的能力！"),
+    [STRINGID_PKMNMADEWISH]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 许了愿！"), //未使用
+    [STRINGID_PKMNWISHCAMETRUE]                     = COMPOUND_STRING("{B_BUFF1} 的愿望成真了！"),
+    [STRINGID_PKMNPLANTEDROOTS]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 扎根了！"),
+    [STRINGID_PKMNABSORBEDNUTRIENTS]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 通过根吸收了养分！"),
+    [STRINGID_PKMNANCHOREDITSELF]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 用根将自己固定住了！"),
+    [STRINGID_PKMNWASMADEDROWSY]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 变得昏昏欲睡！"),
+    [STRINGID_PKMNKNOCKEDOFF]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 打掉了{B_DEF_NAME_WITH_PREFIX2}的{B_LAST_ITEM}！"),
+    [STRINGID_PKMNSWAPPEDABILITIES]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 与对手交换了特性！"),
+    [STRINGID_PKMNSEALEDOPPONENTMOVE]               = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 封印了与它共有的招式！"),
+    [STRINGID_PKMNCANTUSEMOVESEALED]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 不能使用被封印的{B_CURRENT_MOVE}！\p"),
+    [STRINGID_PKMNWANTSGRUDGE]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 想要目标怀恨在心！"),
+    [STRINGID_PKMNLOSTPPGRUDGE]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 的{B_BUFF1}因为怨恨而失去了所有PP！"),
+    [STRINGID_PKMNSHROUDEDITSELF]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 用魔法外衣将自己包围！"),
+    [STRINGID_PKMNMOVEBOUNCED]                      = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} 将{B_CURRENT_MOVE}反弹回去了！"),
+    [STRINGID_PKMNWAITSFORTARGET]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 等待目标行动！"),
+    [STRINGID_PKMNSNATCHEDMOVE]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 抢走了{B_SCR_NAME_WITH_PREFIX2}的招式！"),
+    [STRINGID_PKMNMADEITRAIN]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} 的{B_SCR_ACTIVE_ABILITY}使天气变为雨天！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNRAISEDSPEED]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} 的{B_SCR_ACTIVE_ABILITY}提高了自己的速度！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPROTECTEDBY]                      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 被{B_DEF_ABILITY}保护！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPREVENTSUSAGE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}阻止了{B_ATK_NAME_WITH_PREFIX2}使用{B_CURRENT_MOVE}！"), //我未在SV文本中看到此句
+    [STRINGID_PKMNRESTOREDHPUSING]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 使用其{B_DEF_ABILITY}恢复了HP！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNCHANGEDTYPEWITH]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}使其变成了{B_BUFF1}属性！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPREVENTSPARALYSISWITH]            = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}防止了麻痹！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPREVENTSROMANCEWITH]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}防止了恋爱！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPREVENTSPOISONINGWITH]            = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}防止了中毒！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPREVENTSCONFUSIONWITH]            = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}防止了混乱！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNRAISEDFIREPOWERWITH]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 的{B_DEF_ABILITY}提高了火属性招式的威力！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNANCHORSITSELFWITH]                = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} 用{B_DEF_ABILITY}将自己固定！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNCUTSATTACKWITH]                   = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} 的{B_SCR_ACTIVE_ABILITY}削减了{B_DEF_NAME_WITH_PREFIX2}的攻击！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNPREVENTSSTATLOSSWITH]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} 的{B_SCR_ACTIVE_ABILITY}防止了能力下降！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNHURTSWITH]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} 被{B_DEF_NAME_WITH_PREFIX2}的{B_BUFF1}伤害了！"),
+    [STRINGID_PKMNTRACED]                           = COMPOUND_STRING("它追踪了{B_BUFF1}的{B_BUFF2}！"),
+    [STRINGID_STATSHARPLY]                          = gText_StatSharply,
+    [STRINGID_STATROSE]                             = gText_StatRose,
+    [STRINGID_STATHARSHLY]                          = COMPOUND_STRING("猛烈地 "),
+    [STRINGID_STATFELL]                             = gText_StatFell,
+    [STRINGID_ATTACKERSSTATROSE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}{B_BUFF2}"),
+    [STRINGID_DEFENDERSSTATROSE]                    = gText_DefendersStatRose,
+    [STRINGID_ATTACKERSSTATFELL]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}{B_BUFF2}"),
+    [STRINGID_DEFENDERSSTATFELL]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}{B_BUFF2}"),
+    [STRINGID_CRITICALHIT]                          = COMPOUND_STRING("效果拔群！"),
+    [STRINGID_ONEHITKO]                             = COMPOUND_STRING("一击必杀！"),
+    [STRINGID_123POOF]                              = COMPOUND_STRING("一…{PAUSE 10}二…{PAUSE 10}三…{PAUSE 10}{PAUSE 20}{PLAY_SE SE_BALL_BOUNCE_1}嗒哒！\p"),
+    [STRINGID_ANDELLIPSIS]                          = COMPOUND_STRING("然后…\p"),
+    [STRINGID_NOTVERYEFFECTIVE]                     = COMPOUND_STRING("效果不是很明显…"),
+    [STRINGID_SUPEREFFECTIVE]                       = COMPOUND_STRING("效果超群！"),
+    [STRINGID_GOTAWAYSAFELY]                        = sText_GotAwaySafely,
+    [STRINGID_WILDPKMNFLED]                         = COMPOUND_STRING("{PLAY_SE SE_FLEE}野生的{B_BUFF1}逃跑了！"),
+    [STRINGID_NORUNNINGFROMTRAINERS]                = COMPOUND_STRING("不！不能从训练师对战中逃跑！\p"),
+    [STRINGID_CANTESCAPE]                           = COMPOUND_STRING("你无法逃脱！\p"),
+    [STRINGID_DONTLEAVEBIRCH]                       = COMPOUND_STRING("BIRCH教授：别这样丢下我！\p"), //直到到处都是小写之前，这里不使用小写
+    [STRINGID_BUTNOTHINGHAPPENED]                   = COMPOUND_STRING("但是什么都没发生！"),
+    [STRINGID_BUTITFAILED]                          = COMPOUND_STRING("但是失败了！"),
+    [STRINGID_ITHURTCONFUSION]                      = COMPOUND_STRING("它在混乱中伤害了自己！"),
+    [STRINGID_MIRRORMOVEFAILED]                     = COMPOUND_STRING("镜像招式失败了！"), //不在第五世代及以后版本中，使用"但是失败了"
+    [STRINGID_STARTEDTORAIN]                        = COMPOUND_STRING("开始下雨了！"),
+    [STRINGID_DOWNPOURSTARTED]                      = COMPOUND_STRING("开始下大雨了！"), //对应金银水晶版中的Rain Dance
+    [STRINGID_RAINCONTINUES]                        = COMPOUND_STRING("雨持续在下。"), //不在第五世代及以后版本中
+    [STRINGID_DOWNPOURCONTINUES]                    = COMPOUND_STRING("大雨仍在持续。"), //未使用
+    [STRINGID_RAINSTOPPED]                          = COMPOUND_STRING("雨停了。"),
+    [STRINGID_SANDSTORMBREWED]                      = COMPOUND_STRING("沙暴开始了！"),
+    [STRINGID_SANDSTORMRAGES]                       = COMPOUND_STRING("沙暴正在肆虐。"),
+    [STRINGID_SANDSTORMSUBSIDED]                    = COMPOUND_STRING("沙暴平息了。"),
+    [STRINGID_SUNLIGHTGOTBRIGHT]                    = COMPOUND_STRING("阳光变得强烈！"),
+    [STRINGID_SUNLIGHTSTRONG]                       = COMPOUND_STRING("阳光很强。"), //不在第五世代及以后版本中
+    [STRINGID_SUNLIGHTFADED]                        = COMPOUND_STRING("阳光变弱了。"),
+    [STRINGID_STARTEDHAIL]                          = COMPOUND_STRING("开始下冰雹了！"),
+    [STRINGID_HAILCONTINUES]                        = COMPOUND_STRING("冰雹猛烈地下着。"),
+    [STRINGID_HAILSTOPPED]                          = COMPOUND_STRING("冰雹停了。"),
+    [STRINGID_FAILEDTOSPITUP]                       = COMPOUND_STRING("但它什么也没吐出来！"), //不在第五世代及以后版本中，使用"但失败了"
+    [STRINGID_FAILEDTOSWALLOW]                      = COMPOUND_STRING("但它什么也没吞下去！"), //不在第五世代及以后版本中，使用"但失败了"
+    [STRINGID_WINDBECAMEHEATWAVE]                   = COMPOUND_STRING("风变成了热风！"), //未使用
+    [STRINGID_STATCHANGESGONE]                      = COMPOUND_STRING("所有能力变化都被消除了！"),
+    [STRINGID_COINSSCATTERED]                       = COMPOUND_STRING("硬币撒得到处都是！"),
+    [STRINGID_TOOWEAKFORSUBSTITUTE]                 = COMPOUND_STRING("但是它的HP不足以制造替身！"),
+    [STRINGID_SHAREDPAIN]                           = COMPOUND_STRING("战斗者们分担了痛苦！"),
+    [STRINGID_BELLCHIMED]                           = COMPOUND_STRING("铃铛响了！"),
+    [STRINGID_FAINTINTHREE]                         = COMPOUND_STRING("所有听到歌声的宝可梦将在三回合内昏倒！"),
+    [STRINGID_NOPPLEFT]                             = COMPOUND_STRING("这个招式的PP已经用完了！\p"), //不在第五世代及以后版本中
+    [STRINGID_BUTNOPPLEFT]                          = COMPOUND_STRING("但是这个招式的PP已经用完了！"),
+    [STRINGID_PLAYERUSEDITEM]                       = COMPOUND_STRING("你使用了{B_LAST_ITEM}！"),
+    [STRINGID_WALLYUSEDITEM]                        = COMPOUND_STRING("WALLY使用了{B_LAST_ITEM}！"), //直到到处都是小写之前，这里不使用小写
+    [STRINGID_TRAINERBLOCKEDBALL]                   = COMPOUND_STRING("训练师挡住了你的宝可梦球！"),
+    [STRINGID_DONTBEATHIEF]                         = COMPOUND_STRING("不要做个小偷！"),
+    [STRINGID_ITDODGEDBALL]                         = COMPOUND_STRING("它躲开了你扔出的宝可梦球！这只宝可梦无法被收服！"),
+    [STRINGID_YOUMISSEDPKMN]                        = COMPOUND_STRING("你错过了宝可梦！"),
+    [STRINGID_PKMNBROKEFREE]                        = COMPOUND_STRING("哦不！宝可梦挣脱了！"),
+    [STRINGID_ITAPPEAREDCAUGHT]                     = COMPOUND_STRING("啊！它看起来好像被抓住了！"),
+    [STRINGID_AARGHALMOSTHADIT]                     = COMPOUND_STRING("啊！差点就抓住了！"),
+    [STRINGID_SHOOTSOCLOSE]                         = COMPOUND_STRING("嘎！就差那么一点！"),
+    [STRINGID_GOTCHAPKMNCAUGHTPLAYER]               = COMPOUND_STRING("抓到了！{B_DEF_NAME}被抓到了！{WAIT_SE}{PLAY_BGM MUS_CAUGHT}\p"),
+    [STRINGID_GOTCHAPKMNCAUGHTWALLY]                = COMPOUND_STRING("抓到了！{B_DEF_NAME}被抓到了！{WAIT_SE}{PLAY_BGM MUS_CAUGHT}{PAUSE 127}"),
+    [STRINGID_GIVENICKNAMECAPTURED]                 = COMPOUND_STRING("你想给{B_DEF_NAME}起个昵称吗？"),
+    [STRINGID_PKMNSENTTOPC]                         = COMPOUND_STRING("{B_DEF_NAME}已经被送到了{B_PC_CREATOR_NAME}的电脑里！"), //仍然使用兰妮的电脑，因为术语不同
+    [STRINGID_PKMNDATAADDEDTODEX]                   = COMPOUND_STRING("{B_DEF_NAME}的数据已经被添加到宝可梦图鉴了！\p"),
+    [STRINGID_ITISRAINING]                          = COMPOUND_STRING("正在下雨！"),
+    [STRINGID_SANDSTORMISRAGING]                    = COMPOUND_STRING("沙暴正在肆虐！"),
+    [STRINGID_CANTESCAPE2]                          = COMPOUND_STRING("你无法逃脱！\p"),
+    [STRINGID_PKMNIGNORESASLEEP]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}忽视了命令，继续睡觉！"),
+    [STRINGID_PKMNIGNOREDORDERS]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}忽视了命令！"),
+    [STRINGID_PKMNBEGANTONAP]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}开始打盹！"),
+    [STRINGID_PKMNLOAFING]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}在偷懒！"),
+    [STRINGID_PKMNWONTOBEY]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}不会服从！"),
+    [STRINGID_PKMNTURNEDAWAY]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}转过身去！"),
+    [STRINGID_PKMNPRETENDNOTNOTICE]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}假装没注意到！"),
+    [STRINGID_ENEMYABOUTTOSWITCHPKMN]               = COMPOUND_STRING("{B_TRAINER1_NAME_WITH_CLASS}即将派出{B_BUFF2}。\p你要切换你的宝可梦吗？"),
+    [STRINGID_CREPTCLOSER]                          = COMPOUND_STRING("{B_PLAYER_NAME}悄悄接近了{B_OPPONENT_MON1_NAME}！"), //狩猎区
+    [STRINGID_CANTGETCLOSER]                        = COMPOUND_STRING("{B_PLAYER_NAME}不能再靠近了！"), //狩猎区
+    [STRINGID_PKMNWATCHINGCAREFULLY]                = COMPOUND_STRING("{B_OPPONENT_MON1_NAME}正在仔细地观察！"), //狩猎区
+    [STRINGID_PKMNCURIOUSABOUTX]                    = COMPOUND_STRING("{B_OPPONENT_MON1_NAME}对{B_BUFF1}感到好奇！"), //狩猎区
+    [STRINGID_PKMNENTHRALLEDBYX]                    = COMPOUND_STRING("{B_OPPONENT_MON1_NAME}被{B_BUFF1}深深吸引！"), //狩猎区
+    [STRINGID_PKMNIGNOREDX]                         = COMPOUND_STRING("{B_OPPONENT_MON1_NAME}完全忽视了{B_BUFF1}！"), //狩猎区
+    [STRINGID_THREWPOKEBLOCKATPKMN]                 = COMPOUND_STRING("{B_PLAYER_NAME}向{B_OPPONENT_MON1_NAME}扔了一个{POKEBLOCK}！"), //狩猎区
+    [STRINGID_OUTOFSAFARIBALLS]                     = COMPOUND_STRING("{PLAY_SE SE_DING_DONG}广播员：你没有更多的狩猎球了！游戏结束！\p"), //狩猎区
+    [STRINGID_PKMNSITEMCUREDPARALYSIS]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}治愈了它的麻痹！"),
+    [STRINGID_PKMNSITEMCUREDPOISON]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}治愈了它的中毒！"),
+    [STRINGID_PKMNSITEMHEALEDBURN]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}治愈了它的烧伤！"),
+    [STRINGID_PKMNSITEMDEFROSTEDIT]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}解冻了它！"),
+    [STRINGID_PKMNSITEMWOKEIT]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}唤醒了它！"),
+    [STRINGID_PKMNSITEMSNAPPEDOUT]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}让它从混乱中恢复过来！"),
+    [STRINGID_PKMNSITEMCUREDPROBLEM]                = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}治愈了它的{B_BUFF1}问题！"),
+    [STRINGID_PKMNSITEMRESTOREDHEALTH]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}恢复了健康！"),
+    [STRINGID_PKMNSITEMRESTOREDPP]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}恢复了招式{B_BUFF1}的PP！"),
+    [STRINGID_PKMNSITEMRESTOREDSTATUS]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}恢复了状态！"),
+    [STRINGID_PKMNSITEMRESTOREDHPALITTLE]           = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}恢复了少许HP！"),
+    [STRINGID_ITEMALLOWSONLYYMOVE]                  = COMPOUND_STRING("{B_LAST_ITEM}只允许使用{B_CURRENT_MOVE}！\p"),
+    [STRINGID_PKMNHUNGONWITHX]                      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}坚持了下来！"),
+    [STRINGID_EMPTYSTRING3]                         = gText_EmptyString3,
+    [STRINGID_PKMNSXPREVENTSBURNS]                  = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}的{B_EFF_ABILITY}防止了烧伤！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXBLOCKSY]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}阻挡了{B_CURRENT_MOVE}！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXRESTOREDHPALITTLE2]             = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}恢复了少许HP！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXWHIPPEDUPSANDSTORM]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}引发了沙暴！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXPREVENTSYLOSS]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}防止了{B_BUFF1}的下降！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXINFATUATEDY]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}让{B_ATK_NAME_WITH_PREFIX2}变得着迷！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXMADEYINEFFECTIVE]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}使{B_CURRENT_MOVE}变得无效！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXCUREDYPROBLEM]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}治愈了它的{B_BUFF1}问题！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_ITSUCKEDLIQUIDOOZE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吸收了液态毒素！"),
+    [STRINGID_PKMNTRANSFORMED]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}变形了！"),
+    [STRINGID_ELECTRICITYWEAKENED]                  = COMPOUND_STRING("电的威力被削弱了！"),
+    [STRINGID_FIREWEAKENED]                         = COMPOUND_STRING("火的威力被削弱了！"),
+    [STRINGID_PKMNHIDUNDERWATER]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}潜入了水下！"),
+    [STRINGID_PKMNSPRANGUP]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}跳了出来！"),
+    [STRINGID_HMMOVESCANTBEFORGOTTEN]               = COMPOUND_STRING("HM技能现在不能被忘记了。\p"),
+    [STRINGID_XFOUNDONEY]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}发现了一个{B_LAST_ITEM}！"),
+    [STRINGID_PLAYERDEFEATEDTRAINER1]               = sText_PlayerDefeatedLinkTrainerTrainer1,
+    [STRINGID_SOOTHINGAROMA]                        = COMPOUND_STRING("一股舒缓的香气弥漫开来！"),
+    [STRINGID_ITEMSCANTBEUSEDNOW]                   = COMPOUND_STRING("现在不能使用道具。{PAUSE 64}"), //不在第五世代及以后版本中，我认为
+    [STRINGID_FORXCOMMAYZ]                          = COMPOUND_STRING("对于{B_SCR_NAME_WITH_PREFIX2}，{B_LAST_ITEM} {B_BUFF1}"), //不在第五世代及以后版本中，扩展不再使用
+    [STRINGID_USINGITEMSTATOFPKMNROSE]              = COMPOUND_STRING("使用{B_LAST_ITEM}，{B_SCR_NAME_WITH_PREFIX2}的{B_BUFF1}{B_BUFF2}"), //待办：更新这个，将需要代码更改
+    [STRINGID_PKMNUSEDXTOGETPUMPED]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用了{B_LAST_ITEM}来增强力量！"),
+    [STRINGID_PKMNSXMADEYUSELESS]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}使{B_CURRENT_MOVE}变得无效！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNTRAPPEDBYSANDTOMB]                = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被流沙困住了！"),
+    [STRINGID_EMPTYSTRING4]                         = COMPOUND_STRING(""),
+    [STRINGID_ABOOSTED]                             = COMPOUND_STRING(" 增强了"),
+    [STRINGID_PKMNSXINTENSIFIEDSUN]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}加强了阳光！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNMAKESGROUNDMISS]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}用{B_DEF_ABILITY}使地面属性招式失效！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_YOUTHROWABALLNOWRIGHT]                = COMPOUND_STRING("你现在扔一个球，对吧？我…我会尽力的！"),
+    [STRINGID_PKMNSXTOOKATTACK]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}承受了攻击！"), //在第五世代及以后版本中，但没有命名特性
+    [STRINGID_PKMNCHOSEXASDESTINY]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}选择了命运之约作为它的命运！"),
+    [STRINGID_PKMNLOSTFOCUS]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}失去了专注，不能行动！"),
+    [STRINGID_USENEXTPKMN]                          = COMPOUND_STRING("使用下一个宝可梦？"),
+    [STRINGID_PKMNFLEDUSINGITS]                     = COMPOUND_STRING("{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX}使用它的{B_LAST_ITEM}逃跑了！\p"),
+    [STRINGID_PKMNFLEDUSING]                        = COMPOUND_STRING("{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX}使用{B_ATK_ABILITY}逃跑了！\p"), //不在第五世代及以后版本中
+    [STRINGID_PKMNWASDRAGGEDOUT]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被拖了出来！\p"),
+    [STRINGID_PREVENTEDFROMWORKING]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}阻止了{B_SCR_NAME_WITH_PREFIX2}的{B_BUFF1}生效！"), //未使用
+    [STRINGID_PKMNSITEMNORMALIZEDSTATUS]            = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}使其状态恢复正常！"),
+    [STRINGID_TRAINER1USEDITEM]                     = COMPOUND_STRING("{B_ATK_TRAINER_NAME_WITH_CLASS}使用了{B_LAST_ITEM}！"),
+    [STRINGID_BOXISFULL]                            = COMPOUND_STRING("箱子已满！不能再抓更多了！\p"),
+    [STRINGID_PKMNAVOIDEDATTACK]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}避开了攻击！"),
+    [STRINGID_PKMNSXMADEITINEFFECTIVE]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}使其无效！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXPREVENTSFLINCHING]              = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}的{B_EFF_ABILITY}防止畏缩！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNALREADYHASBURN]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}已经烧伤了！"),
+    [STRINGID_STATSWONTDECREASE2]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的数值不会再下降了！"),
+    [STRINGID_PKMNSXBLOCKSY2]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}阻挡了{B_CURRENT_MOVE}！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PKMNSXWOREOFF]                        = COMPOUND_STRING("{B_ATK_TEAM1}队伍的{B_BUFF1}效果消失了！"),
+    [STRINGID_PKMNRAISEDDEFALITTLE]                 = COMPOUND_STRING("{B_ATK_PREFIX1}的{B_CURRENT_MOVE}稍微提高了防御力！"), //扩展不再使用
+    [STRINGID_PKMNRAISEDSPDEFALITTLE]               = COMPOUND_STRING("{B_ATK_PREFIX1}的{B_CURRENT_MOVE}稍微提高了特防力！"), //扩展不再使用
+    [STRINGID_THEWALLSHATTERED]                     = COMPOUND_STRING("墙壁破碎了！"), //不在第五世代及以后版本中，使用“你的队伍的光之壁效果消失了！”等代替
+    [STRINGID_PKMNSXPREVENTSYSZ]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}阻止了{B_DEF_NAME_WITH_PREFIX2}的{B_DEF_ABILITY}生效！"),
+    [STRINGID_PKMNSXCUREDITSYPROBLEM]               = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}治愈了它的{B_BUFF1}问题！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_ATTACKERCANTESCAPE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}无法逃脱！"),
+    [STRINGID_PKMNOBTAINEDX]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}获得了{B_BUFF1}。"),
+    [STRINGID_PKMNOBTAINEDX2]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}获得了{B_BUFF2}。"),
+    [STRINGID_PKMNOBTAINEDXYOBTAINEDZ]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}获得了{B_BUFF1}。\p{B_DEF_NAME_WITH_PREFIX}获得了{B_BUFF2}。"),
+    [STRINGID_BUTNOEFFECT]                          = COMPOUND_STRING("但是没有效果！"),
+    [STRINGID_PKMNSXHADNOEFFECTONY]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}对{B_EFF_NAME_WITH_PREFIX2}没有效果！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_TWOENEMIESDEFEATED]                   = sText_TwoInGameTrainersDefeated,
+    [STRINGID_TRAINER2LOSETEXT]                     = COMPOUND_STRING("{B_TRAINER2_LOSE_TEXT}"),
+    [STRINGID_PKMNINCAPABLEOFPOWER]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}似乎无法使用它的力量！"),
+    [STRINGID_GLINTAPPEARSINEYE]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX2}的眼中出现了一丝闪光！"),
+    [STRINGID_PKMNGETTINGINTOPOSITION]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}正在就位！"),
+    [STRINGID_PKMNBEGANGROWLINGDEEPLY]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}开始深沉地咆哮！"),
+    [STRINGID_PKMNEAGERFORMORE]                     = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}渴望更多！"),
+    [STRINGID_DEFEATEDOPPONENTBYREFEREE]            = COMPOUND_STRING("{B_PLAYER_MON1_NAME}在裁判判定下击败了对手{B_OPPONENT_MON1_NAME}！"),
+    [STRINGID_LOSTTOOPPONENTBYREFEREE]              = COMPOUND_STRING("{B_PLAYER_MON1_NAME}在裁判判定下输给了对手{B_OPPONENT_MON1_NAME}！"),
+    [STRINGID_TIEDOPPONENTBYREFEREE]                = COMPOUND_STRING("{B_PLAYER_MON1_NAME}在裁判判定下与对手{B_OPPONENT_MON1_NAME}战平！"),
+    [STRINGID_QUESTIONFORFEITMATCH]                 = COMPOUND_STRING("你想要放弃比赛并退出吗？"),
+    [STRINGID_FORFEITEDMATCH]                       = COMPOUND_STRING("比赛被放弃了。"),
+    [STRINGID_PKMNTRANSFERREDSOMEONESPC]            = gText_PkmnTransferredSomeonesPC,
+    [STRINGID_PKMNTRANSFERREDLANETTESPC]            = gText_PkmnTransferredLanettesPC,
+    [STRINGID_PKMNBOXSOMEONESPCFULL]                = gText_PkmnTransferredSomeonesPCBoxFull,
+    [STRINGID_PKMNBOXLANETTESPCFULL]                = gText_PkmnTransferredLanettesPCBoxFull,
+    [STRINGID_TRAINER1WINTEXT]                      = COMPOUND_STRING("{B_TRAINER1_WIN_TEXT}"),
+    [STRINGID_TRAINER2WINTEXT]                      = COMPOUND_STRING("{B_TRAINER2_WIN_TEXT}"),
+    [STRINGID_ENDUREDSTURDY]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}凭借{B_DEF_ABILITY}承受了这一击！"),
+    [STRINGID_POWERHERB]                            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为{B_LAST_ITEM}而完全充满力量！"),
+    [STRINGID_HURTBYITEM]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被{B_LAST_ITEM}伤害了！"),
+    [STRINGID_PSNBYITEM]                            = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}被{B_LAST_ITEM}剧毒了！"),
+    [STRINGID_BRNBYITEM]                            = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}被{B_LAST_ITEM}烧伤了！"),
+    [STRINGID_DEFABILITYIN]                         = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}激活了！"),
+    [STRINGID_GRAVITYINTENSIFIED]                   = COMPOUND_STRING("重力加强了！"),
+    [STRINGID_TARGETIDENTIFIED]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被识别了！"),
+    [STRINGID_TARGETWOKEUP]                         = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}醒了！"),
+    [STRINGID_PKMNSTOLEANDATEITEM]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}偷吃了对手的{B_LAST_ITEM}！"),
+    [STRINGID_TAILWINDBLEW]                         = COMPOUND_STRING("顺风从{B_ATK_TEAM2}队伍后方吹来！"),
+    [STRINGID_PKMNWENTBACK]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}回到了{B_ATK_TRAINER_NAME}身边！"),
+    [STRINGID_PKMNCANTUSEITEMSANYMORE]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}不能再使用道具了！"),
+    [STRINGID_PKMNFLUNG]                            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}投掷了它的{B_LAST_ITEM}！"),
+    [STRINGID_PKMNPREVENTEDFROMHEALING]             = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被阻止治疗了！"),
+    [STRINGID_PKMNSWITCHEDATKANDDEF]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的攻击和防御互换了！"),
+    [STRINGID_PKMNSABILITYSUPPRESSED]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的特性被压制了！"),
+    [STRINGID_SHIELDEDFROMCRITICALHITS]             = COMPOUND_STRING("幸运咒语保护了{B_ATK_TEAM2}队伍免受会心一击！"),
+    [STRINGID_SWITCHEDATKANDSPATK]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}和目标交换了所有对攻击和特攻的变化！"),
+    [STRINGID_SWITCHEDDEFANDSPDEF]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}和目标交换了所有对防御和特防的变化！"),
+    [STRINGID_PKMNACQUIREDABILITY]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}获得了{B_DEF_ABILITY}！"),
+    [STRINGID_POISONSPIKESSCATTERED]                = COMPOUND_STRING("毒刺散布在{B_DEF_TEAM2}队伍周围！"),
+    [STRINGID_PKMNSWITCHEDSTATCHANGES]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}和目标交换了所有能力变化！"),
+    [STRINGID_PKMNSURROUNDEDWITHVEILOFWATER]        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被水幕包围！"),
+    [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM]      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因电磁悬浮而浮空！"),
+    [STRINGID_PKMNTWISTEDDIMENSIONS]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}扭曲了空间维度！"),
+    [STRINGID_POINTEDSTONESFLOAT]                   = COMPOUND_STRING("尖锐的石头在{B_DEF_TEAM2}队伍周围漂浮！"),
+    [STRINGID_CLOAKEDINMYSTICALMOONLIGHT]           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被神秘的月光笼罩！"),
+    [STRINGID_TRAPPEDBYSWIRLINGMAGMA]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被旋转的岩浆困住！"),
+    [STRINGID_VANISHEDINSTANTLY]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}瞬间消失了！"),
+    [STRINGID_PROTECTEDTEAM]                        = COMPOUND_STRING("{B_CURRENT_MOVE}保护了{B_ATK_TEAM2}队伍！"),
+    [STRINGID_SHAREDITSGUARD]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}与目标分享了它的守护！"),
+    [STRINGID_SHAREDITSPOWER]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}与目标分享了它的力量！"),
+    [STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON]         = COMPOUND_STRING("创造了一个奇怪的空间，其中宝可梦的防御和特防数值互换！"),
+    [STRINGID_BECAMENIMBLE]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}变得敏捷！"),
+    [STRINGID_HURLEDINTOTHEAIR]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被抛向空中！"),
+    [STRINGID_HELDITEMSLOSEEFFECTS]                 = COMPOUND_STRING("创造了一个奇怪的空间，宝可梦持有的道具效果消失！"),
+    [STRINGID_FELLSTRAIGHTDOWN]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}直接坠落！"),
+    [STRINGID_TARGETCHANGEDTYPE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}变成了{B_BUFF1}属性！"),
+    [STRINGID_PKMNACQUIREDSIMPLE]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}获得了单纯特性！"), //不应直接使用名称
+    [STRINGID_EMPTYSTRING5]                         = sText_EmptyString4,
+    [STRINGID_KINDOFFER]                            = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}接受了好意！"),
+    [STRINGID_RESETSTARGETSSTATLEVELS]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的能力变化被移除了！"),
+    [STRINGID_EMPTYSTRING6]                         = sText_EmptyString4,
+    [STRINGID_ALLYSWITCHPOSITION]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}和{B_SCR_NAME_WITH_PREFIX2}交换了位置！"),
+    [STRINGID_RESTORETARGETSHEALTH]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的HP恢复了！"),
+    [STRINGID_TOOKPJMNINTOTHESKY]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}带着{B_DEF_NAME_WITH_PREFIX2}飞向了天空！"),
+    [STRINGID_FREEDFROMSKYDROP]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}从天空降下中解脱了！"),
+    [STRINGID_POSTPONETARGETMOVE]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的招式被推迟了！"),
+    [STRINGID_REFLECTTARGETSTYPE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}变成了和{B_DEF_NAME_WITH_PREFIX2}相同的属性！"),
+    [STRINGID_TRANSFERHELDITEM]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}从{B_ATK_NAME_WITH_PREFIX2}那里接收了{B_LAST_ITEM}"),
+    [STRINGID_EMBARGOENDS]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}可以再次使用道具了！"),
+    [STRINGID_ELECTROMAGNETISM]                     = COMPOUND_STRING("电磁场"),
+    [STRINGID_BUFFERENDS]                            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}效果消失了！"),
+    [STRINGID_TELEKINESISENDS]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}从念力中解脱了！"),
+    [STRINGID_TAILWINDENDS]                         = COMPOUND_STRING("{B_ATK_TEAM1}队伍的顺风消失了！"),
+    [STRINGID_LUCKYCHANTENDS]                       = COMPOUND_STRING("{B_ATK_TEAM1}队伍的幸运咒语效果消失了！"),
+    [STRINGID_TRICKROOMENDS]                        = COMPOUND_STRING("扭曲的空间恢复正常了！"),
+    [STRINGID_WONDERROOMENDS]                       = COMPOUND_STRING("奇妙房间效果消失，防御和特防数值恢复正常！"),
+    [STRINGID_MAGICROOMENDS]                        = COMPOUND_STRING("魔法房间效果消失，持有道具的效果恢复正常！"),
+    [STRINGID_MUDSPORTENDS]                         = COMPOUND_STRING("泥浆运动的效果已经消退。"),
+    [STRINGID_WATERSPORTENDS]                       = COMPOUND_STRING("水域运动的效果已经消退。"),
+    [STRINGID_GRAVITYENDS]                          = COMPOUND_STRING("重力恢复正常了！"),
+    [STRINGID_AQUARINGHEAL]                         = COMPOUND_STRING("水幕恢复了{B_ATK_NAME_WITH_PREFIX2}的HP！"),
+    [STRINGID_ELECTRICTERRAINENDS]                  = COMPOUND_STRING("战场上的电流消失了。"),
+    [STRINGID_MISTYTERRAINENDS]                     = COMPOUND_STRING("战场上的雾气消失了。"),
+    [STRINGID_PSYCHICTERRAINENDS]                   = COMPOUND_STRING("战场上的奇怪现象消失了！"),
+    [STRINGID_GRASSYTERRAINENDS]                    = COMPOUND_STRING("战场上的草丛消失了。"),
+    [STRINGID_TARGETABILITYSTATRAISE]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}提高了它的{B_BUFF1}！"),
+    [STRINGID_TARGETSSTATWASMAXEDOUT]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}将它的{B_BUFF1}提升至最大！"),
+    [STRINGID_ATTACKERABILITYSTATRAISE]             = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}提高了它的{B_BUFF1}！"),
+    [STRINGID_POISONHEALHPUP]                       = COMPOUND_STRING("中毒使{B_ATK_NAME_WITH_PREFIX2}恢复了一些HP！"), //不认为这条消息还会显示
+    [STRINGID_BADDREAMSDMG]                         = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}受到恶梦折磨！"),
+    [STRINGID_MOLDBREAKERENTERS]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}打破了陈规！"),
+    [STRINGID_TERAVOLTENTERS]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}散发着爆发的气场！"),
+    [STRINGID_TURBOBLAZEENTERS]                     = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}散发着炽热的气场！"),
+    [STRINGID_SLOWSTARTENTERS]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}行动缓慢！"),
+    [STRINGID_SLOWSTARTEND]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}终于行动起来了！"),
+    [STRINGID_SOLARPOWERHPDROP]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}使它付出了代价！"), //不认为这条消息还会显示
+    [STRINGID_AFTERMATHDMG]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}受伤了！"),
+    [STRINGID_ANTICIPATIONACTIVATES]                = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}颤抖了！"),
+    [STRINGID_FOREWARNACTIVATES]                    = COMPOUND_STRING("{B_SCR_ACTIVE_ABILITY}使{B_SCR_NAME_WITH_PREFIX2}警觉到{B_DEF_NAME_WITH_PREFIX2}的{B_BUFF1}！"),
+    [STRINGID_ICEBODYHPGAIN]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}使它恢复了一些HP！"), //不认为这条消息还会显示
+    [STRINGID_SNOWWARNINGHAIL]                      = COMPOUND_STRING("开始下冰雹了！"),
+    [STRINGID_FRISKACTIVATES]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}搜查了{B_DEF_NAME_WITH_PREFIX2}并找到了它的{B_LAST_ITEM}！"),
+    [STRINGID_UNNERVEENTERS]                        = COMPOUND_STRING("{B_DEF_TEAM1}队伍太紧张了，不能吃树果！"),
+    [STRINGID_HARVESTBERRY]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}收获了它的{B_LAST_ITEM}！"),
+    [STRINGID_LASTABILITYRAISEDSTAT]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ABILITY}提高了它的{B_BUFF1}！"),
+    [STRINGID_MAGICBOUNCEACTIVATES]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}将{B_ATK_NAME_WITH_PREFIX2}反弹回去了！"),
+    [STRINGID_PROTEANTYPECHANGE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}将它变成了{B_BUFF1}属性！"),
+    [STRINGID_SYMBIOSISITEMPASS]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}通过{B_LAST_ABILITY}将{B_LAST_ITEM}传递给了{B_ATK_NAME_WITH_PREFIX2}！"),
+    [STRINGID_STEALTHROCKDMG]                       = COMPOUND_STRING("尖石刺入了{B_SCR_NAME_WITH_PREFIX2}！"),
+    [STRINGID_TOXICSPIKESABSORBED]                  = COMPOUND_STRING("{B_ATK_TEAM2}队伍周围的毒刺消失了！"),
+    [STRINGID_TOXICSPIKESPOISONED]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}中毒了！"),
+    [STRINGID_STICKYWEBSWITCHIN]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}被粘网困住了！"),
+    [STRINGID_HEALINGWISHCAMETRUE]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX2}的愿望成真了！"),
+    [STRINGID_HEALINGWISHHEALED]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}恢复了健康！"),
+    [STRINGID_LUNARDANCECAMETRUE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被神秘的月光笼罩了！"),
+    [STRINGID_CUSEDBODYDISABLED]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_BUFF1}被{B_DEF_NAME_WITH_PREFIX2}的{B_DEF_ABILITY}禁用了！"),
+    [STRINGID_ATTACKERACQUIREDABILITY]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}获得了{B_ATK_ABILITY}！"),
+    [STRINGID_TARGETABILITYSTATLOWER]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_DEF_ABILITY}降低了它的{B_BUFF1}！"),
+    [STRINGID_TARGETSTATWONTGOHIGHER]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的{B_BUFF1}不会再提升了！"),
+    [STRINGID_PKMNMOVEBOUNCEDABILITY]               = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}被{B_DEF_NAME_WITH_PREFIX2}的{B_DEF_ABILITY}反弹了！"),
+    [STRINGID_IMPOSTERTRANSFORM]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}使用{B_LAST_ABILITY}变成了{B_DEF_NAME_WITH_PREFIX2}！"),
+    [STRINGID_ASSAULTVESTDOESNTALLOW]               = COMPOUND_STRING("{B_LAST_ITEM}的效果阻止了使用状态变化招式！\p"),
+    [STRINGID_GRAVITYPREVENTSUSAGE]                 = COMPOUND_STRING("因为重力，{B_ATK_NAME_WITH_PREFIX}不能使用{B_CURRENT_MOVE}！\p"),
+    [STRINGID_HEALBLOCKPREVENTSUSAGE]               = COMPOUND_STRING("治疗被阻止了！\p"),
+    [STRINGID_NOTDONEYET]                           = COMPOUND_STRING("这个招式效果还未完成！\p"),
+    [STRINGID_STICKYWEBUSED]                        = COMPOUND_STRING("在{B_DEF_TEAM2}队伍周围布置了粘网！"),
+    [STRINGID_QUASHSUCCESS]                         = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的招式被推迟了！"),
+    [STRINGID_PKMNBLEWAWAYTOXICSPIKES]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吹走了毒刺！"),
+    [STRINGID_PKMNBLEWAWAYSTICKYWEB]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吹走了粘网！"),
+    [STRINGID_PKMNBLEWAWAYSTEALTHROCK]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吹走了隐形岩！"),
+    [STRINGID_IONDELUGEON]                          = COMPOUND_STRING("离子的洪流覆盖了战场！"),
+    [STRINGID_TOPSYTURVYSWITCHEDSTATS]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX2}的所有能力变化都被反转了！"),
+    [STRINGID_TERRAINBECOMESMISTY]                  = COMPOUND_STRING("战场上雾气弥漫！"),
+    [STRINGID_TERRAINBECOMESGRASSY]                 = COMPOUND_STRING("草丛覆盖了战场！"),
+    [STRINGID_TERRAINBECOMESELECTRIC]               = COMPOUND_STRING("电流流过战场！"),
+    [STRINGID_TERRAINBECOMESPSYCHIC]                = COMPOUND_STRING("战场变得奇怪了！"),
+    [STRINGID_TARGETELECTRIFIED]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的招式被电气化了！"),
+    [STRINGID_MEGAEVOREACTING]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ITEM}正在响应{B_ATK_TRAINER_NAME}的超级环！"), //实际上显示了超级环的类型，但我们没有实现它们 :(
+    [STRINGID_MEGAEVOEVOLVED]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}超级进化成了超级{B_BUFF1}！"),
+    [STRINGID_DRASTICALLY]                          = gText_drastically,
+    [STRINGID_SEVERELY]                             = gText_severely,
+    [STRINGID_INFESTATION]                          = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被{B_ATK_NAME_WITH_PREFIX2}的虫茧束缚了！"),
+    [STRINGID_NOEFFECTONTARGET]                     = COMPOUND_STRING("对{B_DEF_NAME_WITH_PREFIX2}不会有任何效果！"),
+    [STRINGID_BURSTINGFLAMESHIT]                    = COMPOUND_STRING("爆裂火焰击中了{B_SCR_NAME_WITH_PREFIX2}！"),
+    [STRINGID_BESTOWITEMGIVING]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}从{B_ATK_NAME_WITH_PREFIX2}那里收到了{B_LAST_ITEM}！"),
+    [STRINGID_THIRDTYPEADDED]                       = COMPOUND_STRING("{B_BUFF1}属性被添加到了{B_DEF_NAME_WITH_PREFIX2}身上！"),
+    [STRINGID_FELLFORFEINT]                         = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}中了佯攻！"),
+    [STRINGID_POKEMONCANNOTUSEMOVE]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}不能使用{B_CURRENT_MOVE}！"),
+    [STRINGID_COVEREDINPOWDER]                      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被粉末覆盖了！"),
+    [STRINGID_POWDEREXPLODES]                       = COMPOUND_STRING("当火焰触碰到宝可梦身上的粉末时，它爆炸了！"),
+    [STRINGID_BELCHCANTSELECT]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}没有吃任何持有的树果，所以它不可能打嗝！\p"),
+    [STRINGID_SPECTRALTHIEFSTEAL]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}偷走了目标增强的属性！"),
+    [STRINGID_GRAVITYGROUNDING]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}因重力从空中坠落！"),
+    [STRINGID_MISTYTERRAINPREVENTS]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}用保护性的雾气包围了自己！"),
+    [STRINGID_GRASSYTERRAINHEALS]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被草地治愈了！"),
+    [STRINGID_ELECTRICTERRAINPREVENTS]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}用电气化的地形包围了自己！"),
+    [STRINGID_PSYCHICTERRAINPREVENTS]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}用超能力的地形包围了自己！"),
+    [STRINGID_SAFETYGOGGLESPROTECTED]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}因持有的{B_LAST_ITEM}而不受影响！"),
+    [STRINGID_FLOWERVEILPROTECTED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}用花瓣幕包围了自己！"),
+    [STRINGID_SWEETVEILPROTECTED]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}因甜蜜幕而不会陷入睡眠！"),
+    [STRINGID_AROMAVEILPROTECTED]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被芳香幕保护着！"),
+    [STRINGID_CELEBRATEMESSAGE]                     = COMPOUND_STRING("恭喜，{B_PLAYER_NAME}！"),
+    [STRINGID_USEDINSTRUCTEDMOVE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}遵循了{B_BUFF1}的指示！"),
+    [STRINGID_THROATCHOPENDS]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}可以再次使用声音类招式了！"),
+    [STRINGID_PKMNCANTUSEMOVETHROATCHOP]            = COMPOUND_STRING("喉咙钳制的效果阻止了{B_ATK_NAME_WITH_PREFIX2}使用某些招式！\p"),
+    [STRINGID_LASERFOCUS]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}强烈集中精神！"),
+    [STRINGID_GEMACTIVATES]                         = COMPOUND_STRING("{B_LAST_ITEM}加强了{B_ATK_NAME_WITH_PREFIX2}的力量！"),
+    [STRINGID_BERRYDMGREDUCES]                      = COMPOUND_STRING("{B_LAST_ITEM}减轻了对{B_DEF_NAME_WITH_PREFIX2}的伤害！"),
+    [STRINGID_TARGETATEITEM]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}吃了它的{B_LAST_ITEM}！"),
+    [STRINGID_AIRBALLOONFLOAT]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}用它的气球使自身漂浮在空中！"),
+    [STRINGID_AIRBALLOONPOP]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的气球爆裂了！"),
+    [STRINGID_INCINERATEBURN]                       = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}的{B_LAST_ITEM}被烧毁了！"),
+    [STRINGID_BUGBITE]                              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}偷走了并吃掉了目标的{B_LAST_ITEM}！"),
+    [STRINGID_ILLUSIONWOREOFF]                      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的幻象消失了！"),
+    [STRINGID_ATTACKERCUREDTARGETSTATUS]            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}治愈了{B_DEF_NAME_WITH_PREFIX2}的问题！"),
+    [STRINGID_ATTACKERLOSTFIRETYPE]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}燃尽了自己！"),
+    [STRINGID_HEALERCURE]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_LAST_ABILITY}治愈了{B_SCR_NAME_WITH_PREFIX2}的问题！"),
+    [STRINGID_SCRIPTINGABILITYSTATRAISE]            = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}提高了它的{B_BUFF1}！"),
+    [STRINGID_RECEIVERABILITYTAKEOVER]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}被接管了！"),
+    [STRINGID_PKNMABSORBINGPOWER]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}正在吸收力量！"),
+    [STRINGID_NOONEWILLBEABLETORUNAWAY]             = COMPOUND_STRING("在下一回合中，没有人会能够逃跑！"),
+    [STRINGID_DESTINYKNOTACTIVATES]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}因为{B_LAST_ITEM}而陷入了恋爱！"),
+    [STRINGID_CLOAKEDINAFREEZINGLIGHT]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被冰冻之光笼罩！"),
+    [STRINGID_CLEARAMULETWONTLOWERSTATS]            = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX2}持有的{B_LAST_ITEM}的效果防止了它的属性降低！"),
+    [STRINGID_FERVENTWISHREACHED]                   = COMPOUND_STRING("{B_ATK_TRAINER_NAME}的热切愿望传达给了{B_ATK_NAME_WITH_PREFIX2}！"),
+    [STRINGID_AIRLOCKACTIVATES]                     = COMPOUND_STRING("天气效果消失了。"),
+    [STRINGID_PRESSUREENTERS]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}施加了压力！"),
+    [STRINGID_DARKAURAENTERS]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}散发出黑暗气场！"),
+    [STRINGID_FAIRYAURAENTERS]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}散发出妖精气场！"),
+    [STRINGID_AURABREAKENTERS]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}反转了所有其他宝可梦的气场！"),
+    [STRINGID_COMATOSEENTERS]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}在打瞌睡！"),
+    [STRINGID_SCREENCLEANERENTERS]                  = COMPOUND_STRING("场上所有的屏幕都被清除了！"),
+    [STRINGID_FETCHEDPOKEBALL]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}找到了一个{B_LAST_ITEM}！"),
+    [STRINGID_BATTLERABILITYRAISEDSTAT]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}提高了它的{B_BUFF1}！"),
+    [STRINGID_ASANDSTORMKICKEDUP]                   = COMPOUND_STRING("沙暴开始了！"),
+    [STRINGID_PKMNSWILLPERISHIN3TURNS]              = COMPOUND_STRING("两只宝可梦都将在三回合后消失！"),  //不认为这条消息还会显示
+    [STRINGID_ABILITYRAISEDSTATDRASTICALLY]         = COMPOUND_STRING("{B_DEF_ABILITY}极大地提高了{B_DEF_NAME_WITH_PREFIX2}的{B_BUFF1}！"),
+    [STRINGID_AURAFLAREDTOLIFE]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的气场焕发了生机！"),
+    [STRINGID_ASONEENTERS]                          = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}拥有两种特性！"),
+    [STRINGID_CURIOUSMEDICINEENTERS]                = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}的能力变化被移除了！"),
+    [STRINGID_CANACTFASTERTHANKSTO]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}得益于它的{B_BUFF1}，行动速度比正常快！"),
+    [STRINGID_MICLEBERRYACTIVATES]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用{B_LAST_ITEM}提高了下一招式的命中率！"),
+    [STRINGID_PKMNSHOOKOFFTHETAUNT]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}摆脱了挑衅！"),
+    [STRINGID_PKMNGOTOVERITSINFATUATION]            = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}不再迷恋了！"),
+    [STRINGID_ITEMCANNOTBEREMOVED]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的物品不能被移除！"),
+    [STRINGID_STICKYBARBTRANSFER]                   = COMPOUND_STRING("{B_LAST_ITEM}依附到了{B_ATK_NAME_WITH_PREFIX2}身上！"),
+    [STRINGID_PKMNBURNHEALED]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的烧伤被治愈了！"),
+    [STRINGID_REDCARDACTIVATE]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}对{B_ATK_NAME_WITH_PREFIX2}举起了红牌！"),
+    [STRINGID_EJECTBUTTONACTIVATE]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用{B_LAST_ITEM}与对手交换了！"),
+    [STRINGID_ATKGOTOVERINFATUATION]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}不再迷恋了！"),
+    [STRINGID_TORMENTEDNOMORE]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}不再受到折磨！"),
+    [STRINGID_HEALBLOCKEDNOMORE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的治愈封锁被解除了！"),
+    [STRINGID_ATTACKERBECAMEFULLYCHARGED]           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为与训练师的羁绊而充满了能量！\p"),
+    [STRINGID_ATTACKERBECAMEASHSPECIES]             = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}变成了灰烬形态！\p"),
+    [STRINGID_EXTREMELYHARSHSUNLIGHT]               = COMPOUND_STRING("阳光变得极度强烈！"),
+    [STRINGID_EXTREMESUNLIGHTFADED]                 = COMPOUND_STRING("极度强烈的阳光消失了！"),
+    [STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT]     = COMPOUND_STRING("水属性攻击在极度强烈的阳光下蒸发了！"),
+    [STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED] = COMPOUND_STRING("极度强烈的阳光一点也没有减弱！"),
+    [STRINGID_HEAVYRAIN]                            = COMPOUND_STRING("开始下起了大雨！"),
+    [STRINGID_HEAVYRAINLIFTED]                      = COMPOUND_STRING("大雨停了！"),
+    [STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN]         = COMPOUND_STRING("火属性攻击在大雨中熄灭了！"),
+    [STRINGID_NORELIEFROMHEAVYRAIN]                 = COMPOUND_STRING("这场大雨没有停的迹象！"),
+    [STRINGID_MYSTERIOUSAIRCURRENT]                 = COMPOUND_STRING("神秘的强风正在保护飞行属性宝可梦！"),
+    [STRINGID_STRONGWINDSDISSIPATED]                = COMPOUND_STRING("神秘的强风已经消散！"),
+    [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON]          = COMPOUND_STRING("神秘的强风依旧在吹！"),
+    [STRINGID_ATTACKWEAKENEDBSTRONGWINDS]           = COMPOUND_STRING("神秘的强风削弱了攻击！"),
+    [STRINGID_STUFFCHEEKSCANTSELECT]                = COMPOUND_STRING("因为没有树果，所以不能使用这个招式！\p"),
+    [STRINGID_PKMNREVERTEDTOPRIMAL]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}原始回归了！它恢复到了原始状态！"),
+    [STRINGID_BUTPOKEMONCANTUSETHEMOVE]             = COMPOUND_STRING("但是{B_ATK_NAME_WITH_PREFIX2}不能使用这个招式！"),
+    [STRINGID_BUTHOOPACANTUSEIT]                    = COMPOUND_STRING("但是现在{B_ATK_NAME_WITH_PREFIX2}不能使用它！"),
+    [STRINGID_BROKETHROUGHPROTECTION]               = COMPOUND_STRING("它突破了{B_DEF_NAME_WITH_PREFIX2}的保护！"),
+    [STRINGID_ABILITYALLOWSONLYMOVE]                = COMPOUND_STRING("{B_ATK_ABILITY}只允许使用{B_CURRENT_MOVE}！\p"),
+    [STRINGID_SWAPPEDABILITIES]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}和目标交换了特性！"),
+    [STRINGID_PASTELVEILPROTECTED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被粉彩色的幕布保护了！"),
+    [STRINGID_PASTELVEILENTERS]                     = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的中毒被治愈了！"),
+    [STRINGID_BATTLERTYPECHANGEDTO]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的属性变成了{B_BUFF1}！"),
+    [STRINGID_BOTHCANNOLONGERESCAPE]                = COMPOUND_STRING("两只宝可梦都不能逃跑了！"),
+    [STRINGID_CANTESCAPEDUETOUSEDMOVE]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}因为使用了不屈之心，不能再逃跑了！"),
+    [STRINGID_PKMNBECAMEWEAKERTOFIRE]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}对火属性变得更弱了！"),
+    [STRINGID_ABOUTTOUSEPOLTERGEIST]                = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}即将被它的{B_BUFF1}攻击！"),
+    [STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE]       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}因为八爪锁，不能再逃跑了！"),
+    [STRINGID_NEUTRALIZINGGASENTERS]                = COMPOUND_STRING("中和气体充满了整个区域！"),
+    [STRINGID_NEUTRALIZINGGASOVER]                  = COMPOUND_STRING("中和气体的效果消失了！"),
+    [STRINGID_TARGETTOOHEAVY]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}太重了，无法被举起！"),
+    [STRINGID_PKMNTOOKTARGETHIGH]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}带着{B_DEF_NAME_WITH_PREFIX2}飞向高空！"),
+    [STRINGID_PKMNINSNAPTRAP]                       = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被陷阱抓住了！"),
+    [STRINGID_METEORBEAMCHARGING]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}充满了宇宙力量！"),
+    [STRINGID_HEATUPBEAK]                           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}开始加热它的喙！"),
+    [STRINGID_COURTCHANGE]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}交换了影响场地两侧的效果！"),
+    [STRINGID_PLAYERLOSTTOENEMYTRAINER]             = COMPOUND_STRING("你没有能战斗的宝可梦了！\p你输给了{B_TRAINER1_NAME_WITH_CLASS}！{PAUSE_UNTIL_PRESS}"),
+    [STRINGID_PLAYERPAIDPRIZEMONEY]                 = COMPOUND_STRING("你给了获胜者¥{B_BUFF1}…\p你被击败了！{PAUSE_UNTIL_PRESS}"),
+    [STRINGID_ZPOWERSURROUNDS]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被Z力量包围了！"),
+    [STRINGID_ZMOVEUNLEASHED]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}全力释放了Z招式！"),
+    [STRINGID_ZMOVERESETSSTATS]                     = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用Z力量恢复了降低的能力！"),
+    [STRINGID_ZMOVEALLSTATSUP]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用Z力量提高了所有能力！"),
+    [STRINGID_ZMOVEZBOOSTCRIT]                      = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用Z力量提高了暴击率！"),
+    [STRINGID_ZMOVERESTOREHP]                       = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用Z力量恢复了HP！"),
+    [STRINGID_ZMOVESTATUP]                          = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用Z力量提升了能力！"),
+    [STRINGID_ZMOVEHPTRAP]                          = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的HP被Z力量恢复了！"),
+    [STRINGID_ATTACKEREXPELLEDTHEPOISON]            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}成功排出了毒素，所以你不必担心！"),
+    [STRINGID_ATTACKERSHOOKITSELFAWAKE]             = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}让自己清醒过来，所以你不必担心！"),
+    [STRINGID_ATTACKERBROKETHROUGHPARALYSIS]        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}集中所有能量突破了麻痹状态，所以你不必担心！"),
+    [STRINGID_ATTACKERHEALEDITSBURN]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}凭借坚定的决心治愈了自己的烧伤，所以你不必担心！"),
+    [STRINGID_ATTACKERMELTEDTHEICE]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}用火热的决心融化了冰，所以你不必担心！"),
+    [STRINGID_TARGETTOUGHEDITOUT]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}坚持住了，所以你不会感到难过！"),
+    [STRINGID_ATTACKERLOSTELECTRICTYPE]             = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}消耗了所有的电能！"),
+    [STRINGID_ATTACKERSWITCHEDSTATWITHTARGET]       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}与目标交换了{B_BUFF1}！"),
+    [STRINGID_BEINGHITCHARGEDPKMNWITHPOWER]         = COMPOUND_STRING("被{B_CURRENT_MOVE}击中使{B_DEF_NAME_WITH_PREFIX2}充满了力量！"),
+    [STRINGID_SUNLIGHTACTIVATEDABILITY]             = COMPOUND_STRING("强烈的阳光激活了{B_SCR_NAME_WITH_PREFIX2}的叶绿合成！"),
+    [STRINGID_STATWASHEIGHTENED]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_BUFF1}被加强了！"),
+    [STRINGID_ELECTRICTERRAINACTIVATEDABILITY]      = COMPOUND_STRING("电网激活了{B_SCR_NAME_WITH_PREFIX2}的夸克驱动！"),
+    [STRINGID_ABILITYWEAKENEDSURROUNDINGMONSSTAT]   = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}削弱了周围所有宝可梦的{B_BUFF1}！\p"),
+    [STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN]  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}从倒下的宝可梦中获得了力量！"),
+    [STRINGID_PKMNSABILITYPREVENTSABILITY]          = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_SCR_ACTIVE_ABILITY}阻止了{B_DEF_NAME_WITH_PREFIX2}的{B_DEF_ABILITY}生效！"), //不在第五世代及以后版本中，特性弹窗
+    [STRINGID_PREPARESHELLTRAP]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}设置了贝壳陷阱！"),
+    [STRINGID_SHELLTRAPDIDNTWORK]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的贝壳陷阱没有效果！"),
+    [STRINGID_SPIKESDISAPPEAREDFROMTEAM]            = COMPOUND_STRING("尖刺从{B_ATK_TEAM2}队伍周围消失了！"),
+    [STRINGID_TOXICSPIKESDISAPPEAREDFROMTEAM]       = COMPOUND_STRING("毒刺从{B_ATK_TEAM2}队伍周围消失了！"),
+    [STRINGID_STICKYWEBDISAPPEAREDFROMTEAM]         = COMPOUND_STRING("粘网从{B_ATK_TEAM2}队伍周围消失了！"),
+    [STRINGID_STEALTHROCKDISAPPEAREDFROMTEAM]       = COMPOUND_STRING("隐形岩从{B_ATK_TEAM2}队伍周围消失了！"),
+    [STRINGID_COULDNTFULLYPROTECT]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}没能完全保护自己，受伤了！"),
+    [STRINGID_STOCKPILEDEFFECTWOREOFF]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的积蓄效果消失了！"),
+    [STRINGID_PKMNREVIVEDREADYTOFIGHT]              = COMPOUND_STRING("{B_BUFF1}复活了，准备好再次战斗！"),
+    [STRINGID_ITEMRESTOREDSPECIESHEALTH]            = COMPOUND_STRING("{B_BUFF1}恢复了HP。"),
+    [STRINGID_ITEMCUREDSPECIESSTATUS]               = COMPOUND_STRING("{B_BUFF1}治愈了状态。"),
+    [STRINGID_ITEMRESTOREDSPECIESPP]                = COMPOUND_STRING("{B_BUFF1}恢复了PP。"),
+    [STRINGID_THUNDERCAGETRAPPED]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}困住了{B_DEF_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNHURTBYFROSTBITE]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被霜冻伤害了！"),
+    [STRINGID_PKMNGOTFROSTBITE]                     = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX}受到了霜冻！"),
+    [STRINGID_PKMNSITEMHEALEDFROSTBITE]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}的{B_LAST_ITEM}治愈了它的霜冻！"),
+    [STRINGID_ATTACKERHEALEDITSFROSTBITE]           = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}凭借坚定的决心治愈了自己的霜冻，所以你不必担心！"),
+    [STRINGID_PKMNFROSTBITEHEALED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}的霜冻被治愈了！"),
+    [STRINGID_PKMNFROSTBITEHEALED2]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的霜冻被治愈了！"),
+    [STRINGID_PKMNFROSTBITEHEALEDBY]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_CURRENT_MOVE}治愈了它的霜冻！"),
+    [STRINGID_MIRRORHERBCOPIED]                     = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用了镜子香草，复制了对手的能力变化！"),
+    [STRINGID_STARTEDSNOW]                          = COMPOUND_STRING("开始下雪了！"),
+    [STRINGID_SNOWCONTINUES]                        = COMPOUND_STRING("雪继续在下。"), //不在第五世代及以后版本中
+    [STRINGID_SNOWSTOPPED]                          = COMPOUND_STRING("雪停了。"),
+    [STRINGID_SNOWWARNINGSNOW]                      = COMPOUND_STRING("开始下雪了！"),
+    [STRINGID_PKMNITEMMELTED]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}腐蚀了{B_DEF_NAME_WITH_PREFIX2}的{B_LAST_ITEM}！"),
+    [STRINGID_ULTRABURSTREACTING]                   = COMPOUND_STRING("明亮的光芒即将从{B_ATK_NAME_WITH_PREFIX2}爆发出来！"),
+    [STRINGID_ULTRABURSTCOMPLETED]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}通过极巨化恢复了真正的力量！"),
+    [STRINGID_TEAMGAINEDEXP]                        = COMPOUND_STRING("由于经验分享，你的队伍其他成员获得了经验点数！\p"),
+    [STRINGID_CURRENTMOVECANTSELECT]                = COMPOUND_STRING("{B_BUFF1}不能使用！\p"),
+    [STRINGID_TARGETISBEINGSALTCURED]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}正在被盐腌！"),
+    [STRINGID_TARGETISHURTBYSALTCURE]               = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被{B_BUFF1}伤害了！"),
+    [STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP]      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}被粘稠的糖果糖浆覆盖了！"),
+    [STRINGID_SHARPSTEELFLOATS]                     = COMPOUND_STRING("尖锐的钢铁碎片开始围绕{B_DEF_TEAM2}宝可梦漂浮！"),
+    [STRINGID_SHARPSTEELDMG]                        = COMPOUND_STRING("尖锐的钢铁刺入了{B_DEF_NAME_WITH_PREFIX2}！"),
+    [STRINGID_PKMNBLEWAWAYSHARPSTEEL]               = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吹走了尖锐的钢铁！"),
+    [STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM]        = COMPOUND_STRING("围绕{B_ATK_TEAM2}宝可梦的钢铁碎片消失了！"),
+    [STRINGID_TEAMTRAPPEDWITHVINES]                 = COMPOUND_STRING("{B_DEF_TEAM1}宝可梦被藤蔓困住了！"),
+    [STRINGID_PKMNHURTBYVINES]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被极巨藤蔓鞭打伤害了！"),
+    [STRINGID_TEAMCAUGHTINVORTEX]                   = COMPOUND_STRING("{B_DEF_TEAM1}宝可梦被卷入了漩涡之中！"),
+    [STRINGID_PKMNHURTBYVORTEX]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被极巨炮水漩涡伤害了！"),
+    [STRINGID_TEAMSURROUNDEDBYFIRE]                 = COMPOUND_STRING("{B_DEF_TEAM1}宝可梦被火焰包围了！"),
+    [STRINGID_PKMNBURNINGUP]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}在极巨熔火中燃烧起来了！"),
+    [STRINGID_TEAMSURROUNDEDBYROCKS]                = COMPOUND_STRING("{B_DEF_TEAM1}宝可梦被岩石包围了！"),
+    [STRINGID_PKMNHURTBYROCKSTHROWN]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被极巨岩陨抛出的岩石击中受伤了！"),
+    [STRINGID_MOVEBLOCKEDBYDYNAMAX]                 = COMPOUND_STRING("招式被极巨化的力量阻挡了！"),
+    [STRINGID_ZEROTOHEROTRANSFORMATION]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}经历了英雄般的转变！"),
+    [STRINGID_THETWOMOVESBECOMEONE]                 = COMPOUND_STRING("两招合为一体！这是联合招式！{PAUSE 16}"),
+    [STRINGID_ARAINBOWAPPEAREDONSIDE]               = COMPOUND_STRING("在{B_ATK_TEAM2}队伍的上空出现了一道彩虹！"),
+    [STRINGID_THERAINBOWDISAPPEARED]                = COMPOUND_STRING("{B_ATK_TEAM2}队伍上空的彩虹消失了！"),
+    [STRINGID_WAITINGFORPARTNERSMOVE]               = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}正在等待{B_ATK_PARTNER_NAME}的招式…{PAUSE 16}"),
+    [STRINGID_SEAOFFIREENVELOPEDSIDE]               = COMPOUND_STRING("一片火海包围了{B_DEF_TEAM2}队伍！"),
+    [STRINGID_HURTBYTHESEAOFFIRE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被火海伤害了！"),
+    [STRINGID_THESEAOFFIREDISAPPEARED]              = COMPOUND_STRING("{B_ATK_TEAM2}队伍周围的火海消失了！"),
+    [STRINGID_SWAMPENVELOPEDSIDE]                   = COMPOUND_STRING("一个沼泽包围了{B_DEF_TEAM2}队伍！"),
+    [STRINGID_THESWAMPDISAPPEARED]                  = COMPOUND_STRING("{B_DEF_TEAM2}队伍周围的沼泽消失了！"),
+    [STRINGID_PKMNTELLCHILLINGRECEPTIONJOKE]        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}准备讲一个冷到极点的笑话！"),
+    [STRINGID_HOSPITALITYRESTORATION]               = COMPOUND_STRING("{B_ATK_PARTNER_NAME}喝下了{B_ATK_NAME_WITH_PREFIX2}制作的全部抹茶！"),
+    [STRINGID_ELECTROSHOTCHARGING]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}吸收了电力！"),
+    [STRINGID_ITEMWASUSEDUP]                        = COMPOUND_STRING("最后一件{B_LAST_ITEM}已经用掉了…"),
+    [STRINGID_ATTACKERLOSTITSTYPE]                  = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}失去了{B_BUFF1}属性！"),
+    [STRINGID_SHEDITSTAIL]                          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}蜕下尾巴制造了一个诱饵！"),
+    [STRINGID_CLOAKEDINAHARSHLIGHT]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}被强烈的光线包围了！"),
+    [STRINGID_SUPERSWEETAROMAWAFTS]                 = COMPOUND_STRING("从覆盖{B_ATK_NAME_WITH_PREFIX2}的糖浆中散发出超甜的香气！"),
+    [STRINGID_DIMENSIONSWERETWISTED]                = COMPOUND_STRING("空间被扭曲了！"),
+    [STRINGID_BIZARREARENACREATED]                  = COMPOUND_STRING("创造了一个奇怪的空间，宝可梦持有的道具效果消失！"),
+    [STRINGID_BIZARREAREACREATED]                   = COMPOUND_STRING("创造了一个奇怪的空间，其中防御和特防的数值互换了！"),
+    [STRINGID_TIDYINGUPCOMPLETE]                    = COMPOUND_STRING("整理完毕！"),
+    [STRINGID_PKMNTERASTALLIZEDINTO]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}变成了{B_BUFF1}属性！"),
+    [STRINGID_BOOSTERENERGYACTIVATES]               = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}使用了它的{B_LAST_ITEM}激活了{B_SCR_ACTIVE_ABILITY}！"),
+    [STRINGID_FOGCREPTUP]                           = COMPOUND_STRING("像汤一样浓的雾气弥漫上来！"),
+    [STRINGID_FOGISDEEP]                            = COMPOUND_STRING("雾非常浓…"),
+    [STRINGID_FOGLIFTED]                            = COMPOUND_STRING("雾散去了。"),
+    [STRINGID_PKMNMADESHELLGLEAM]                   = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}使其壳发光！它扭曲了属性相性！"),
+    [STRINGID_FICKLEBEAMDOUBLED]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}全力以赴进行这次攻击！"),
+    [STRINGID_COMMANDERACTIVATES]                   = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}被吞下并成为了多边兽的指挥官！"),
+    [STRINGID_POKEFLUTECATCHY]                      = COMPOUND_STRING("{B_PLAYER_NAME}吹奏了{B_LAST_ITEM}。\p现在，那是一个朗朗上口的旋律！"),
+    [STRINGID_POKEFLUTE]                            = COMPOUND_STRING("{B_PLAYER_NAME}吹奏了{B_LAST_ITEM}。"),
+    [STRINGID_MONHEARINGFLUTEAWOKE]                 = COMPOUND_STRING("听到笛声的宝可梦醒来了！"),
+    [STRINGID_SUNLIGHTISHARSH]                      = COMPOUND_STRING("阳光很强烈！"),
+    [STRINGID_ITISHAILING]                          = COMPOUND_STRING("正在下冰雹！"),
+    [STRINGID_ITISSNOWING]                          = COMPOUND_STRING("正在下雪！"),
+    [STRINGID_ISCOVEREDWITHGRASS]                   = COMPOUND_STRING("战场被草地覆盖了！"),
+    [STRINGID_MISTSWIRLSAROUND]                     = COMPOUND_STRING("雾气在战场上旋转！"),
+    [STRINGID_ELECTRICCURRENTISRUNNING]             = COMPOUND_STRING("电流在战场上流动！"),
+    [STRINGID_SEEMSWEIRD]                           = COMPOUND_STRING("战场看起来很奇怪！"),
+    [STRINGID_WAGGLINGAFINGER]                      = COMPOUND_STRING("摇动手指让它使用了{B_CURRENT_MOVE}！"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
-    {
-        STRINGID_PLAYERUSEDITEM, STRINGID_TRAINER1USEDITEM};
+{
+    STRINGID_PLAYERUSEDITEM, STRINGID_TRAINER1USEDITEM
+};
 
 const u16 gZEffectStringIds[] =
-    {
-        [B_MSG_Z_RESET_STATS] = STRINGID_ZMOVERESETSSTATS,
-        [B_MSG_Z_ALL_STATS_UP] = STRINGID_ZMOVEALLSTATSUP,
-        [B_MSG_Z_BOOST_CRITS] = STRINGID_ZMOVEZBOOSTCRIT,
-        [B_MSG_Z_FOLLOW_ME] = STRINGID_PKMNCENTERATTENTION,
-        [B_MSG_Z_RECOVER_HP] = STRINGID_ZMOVERESTOREHP,
-        [B_MSG_Z_STAT_UP] = STRINGID_ZMOVESTATUP,
-        [B_MSG_Z_HP_TRAP] = STRINGID_ZMOVEHPTRAP,
+{
+    [B_MSG_Z_RESET_STATS] = STRINGID_ZMOVERESETSSTATS,
+    [B_MSG_Z_ALL_STATS_UP]= STRINGID_ZMOVEALLSTATSUP,
+    [B_MSG_Z_BOOST_CRITS] = STRINGID_ZMOVEZBOOSTCRIT,
+    [B_MSG_Z_FOLLOW_ME]   = STRINGID_PKMNCENTERATTENTION,
+    [B_MSG_Z_RECOVER_HP]  = STRINGID_ZMOVERESTOREHP,
+    [B_MSG_Z_STAT_UP]     = STRINGID_ZMOVESTATUP,
+    [B_MSG_Z_HP_TRAP]     = STRINGID_ZMOVEHPTRAP,
 };
 
 const u16 gMentalHerbCureStringIds[] =
-    {
-        [B_MSG_MENTALHERBCURE_INFATUATION] = STRINGID_ATKGOTOVERINFATUATION,
-        [B_MSG_MENTALHERBCURE_TAUNT] = STRINGID_BUFFERENDS,
-        [B_MSG_MENTALHERBCURE_ENCORE] = STRINGID_PKMNENCOREENDED,
-        [B_MSG_MENTALHERBCURE_TORMENT] = STRINGID_TORMENTEDNOMORE,
-        [B_MSG_MENTALHERBCURE_HEALBLOCK] = STRINGID_HEALBLOCKEDNOMORE,
-        [B_MSG_MENTALHERBCURE_DISABLE] = STRINGID_PKMNMOVEDISABLEDNOMORE,
+{
+    [B_MSG_MENTALHERBCURE_INFATUATION] = STRINGID_ATKGOTOVERINFATUATION,
+    [B_MSG_MENTALHERBCURE_TAUNT]       = STRINGID_BUFFERENDS,
+    [B_MSG_MENTALHERBCURE_ENCORE]      = STRINGID_PKMNENCOREENDED,
+    [B_MSG_MENTALHERBCURE_TORMENT]     = STRINGID_TORMENTEDNOMORE,
+    [B_MSG_MENTALHERBCURE_HEALBLOCK]   = STRINGID_HEALBLOCKEDNOMORE,
+    [B_MSG_MENTALHERBCURE_DISABLE]     = STRINGID_PKMNMOVEDISABLEDNOMORE,
 };
 
 const u16 gStartingStatusStringIds[B_MSG_STARTING_STATUS_COUNT] =
-    {
-        [B_MSG_TERRAIN_SET_MISTY] = STRINGID_TERRAINBECOMESMISTY,
-        [B_MSG_TERRAIN_SET_ELECTRIC] = STRINGID_TERRAINBECOMESELECTRIC,
-        [B_MSG_TERRAIN_SET_PSYCHIC] = STRINGID_TERRAINBECOMESPSYCHIC,
-        [B_MSG_TERRAIN_SET_GRASSY] = STRINGID_TERRAINBECOMESGRASSY,
-        [B_MSG_SET_TRICK_ROOM] = STRINGID_DIMENSIONSWERETWISTED,
-        [B_MSG_SET_MAGIC_ROOM] = STRINGID_BIZARREARENACREATED,
-        [B_MSG_SET_WONDER_ROOM] = STRINGID_BIZARREAREACREATED,
-        [B_MSG_SET_TAILWIND_PLAYER] = STRINGID_TAILWINDBLEW,
-        [B_MSG_SET_TAILWIND_OPPONENT] = STRINGID_TAILWINDBLEW,
+{
+    [B_MSG_TERRAIN_SET_MISTY]       = STRINGID_TERRAINBECOMESMISTY,
+    [B_MSG_TERRAIN_SET_ELECTRIC]    = STRINGID_TERRAINBECOMESELECTRIC,
+    [B_MSG_TERRAIN_SET_PSYCHIC]     = STRINGID_TERRAINBECOMESPSYCHIC,
+    [B_MSG_TERRAIN_SET_GRASSY]      = STRINGID_TERRAINBECOMESGRASSY,
+    [B_MSG_SET_TRICK_ROOM]          = STRINGID_DIMENSIONSWERETWISTED,
+    [B_MSG_SET_MAGIC_ROOM]          = STRINGID_BIZARREARENACREATED,
+    [B_MSG_SET_WONDER_ROOM]         = STRINGID_BIZARREAREACREATED,
+    [B_MSG_SET_TAILWIND_PLAYER]     = STRINGID_TAILWINDBLEW,
+    [B_MSG_SET_TAILWIND_OPPONENT]   = STRINGID_TAILWINDBLEW,
 };
 
 const u16 gTerrainStringIds[B_MSG_TERRAIN_COUNT] =
-    {
-        [B_MSG_TERRAIN_SET_MISTY] = STRINGID_TERRAINBECOMESMISTY,
-        [B_MSG_TERRAIN_SET_ELECTRIC] = STRINGID_TERRAINBECOMESELECTRIC,
-        [B_MSG_TERRAIN_SET_PSYCHIC] = STRINGID_TERRAINBECOMESPSYCHIC,
-        [B_MSG_TERRAIN_SET_GRASSY] = STRINGID_TERRAINBECOMESGRASSY,
-        [B_MSG_TERRAIN_END_MISTY] = STRINGID_MISTYTERRAINENDS,
-        [B_MSG_TERRAIN_END_ELECTRIC] = STRINGID_ELECTRICTERRAINENDS,
-        [B_MSG_TERRAIN_END_PSYCHIC] = STRINGID_PSYCHICTERRAINENDS,
-        [B_MSG_TERRAIN_END_GRASSY] = STRINGID_GRASSYTERRAINENDS,
+{
+    [B_MSG_TERRAIN_SET_MISTY] = STRINGID_TERRAINBECOMESMISTY,
+    [B_MSG_TERRAIN_SET_ELECTRIC] = STRINGID_TERRAINBECOMESELECTRIC,
+    [B_MSG_TERRAIN_SET_PSYCHIC] = STRINGID_TERRAINBECOMESPSYCHIC,
+    [B_MSG_TERRAIN_SET_GRASSY] = STRINGID_TERRAINBECOMESGRASSY,
+    [B_MSG_TERRAIN_END_MISTY] = STRINGID_MISTYTERRAINENDS,
+    [B_MSG_TERRAIN_END_ELECTRIC] = STRINGID_ELECTRICTERRAINENDS,
+    [B_MSG_TERRAIN_END_PSYCHIC] = STRINGID_PSYCHICTERRAINENDS,
+    [B_MSG_TERRAIN_END_GRASSY] = STRINGID_GRASSYTERRAINENDS,
 };
 
 const u16 gTerrainPreventsStringIds[] =
@@ -1611,1100 +946,1111 @@ const u16 gTerrainPreventsStringIds[] =
 };
 
 const u16 gHealingWishStringIds[] =
-    {
-        STRINGID_HEALINGWISHCAMETRUE, STRINGID_LUNARDANCECAMETRUE};
+{
+    STRINGID_HEALINGWISHCAMETRUE, STRINGID_LUNARDANCECAMETRUE
+};
 
 const u16 gDmgHazardsStringIds[] =
-    {
-        [B_MSG_PKMNHURTBYSPIKES] = STRINGID_PKMNHURTBYSPIKES,
-        [B_MSG_STEALTHROCKDMG] = STRINGID_STEALTHROCKDMG,
-        [B_MSG_SHARPSTEELDMG] = STRINGID_SHARPSTEELDMG,
-        [B_MSG_POINTEDSTONESFLOAT] = STRINGID_POINTEDSTONESFLOAT,
-        [B_MSG_SPIKESSCATTERED] = STRINGID_SPIKESSCATTERED,
-        [B_MSG_SHARPSTEELFLOATS] = STRINGID_SHARPSTEELFLOATS,
+{
+    [B_MSG_PKMNHURTBYSPIKES]   = STRINGID_PKMNHURTBYSPIKES,
+    [B_MSG_STEALTHROCKDMG]     = STRINGID_STEALTHROCKDMG,
+    [B_MSG_SHARPSTEELDMG]      = STRINGID_SHARPSTEELDMG,
+    [B_MSG_POINTEDSTONESFLOAT] = STRINGID_POINTEDSTONESFLOAT,
+    [B_MSG_SPIKESSCATTERED]    = STRINGID_SPIKESSCATTERED,
+    [B_MSG_SHARPSTEELFLOATS]   = STRINGID_SHARPSTEELFLOATS,
 };
 
 const u16 gSwitchInAbilityStringIds[] =
-    {
-        [B_MSG_SWITCHIN_MOLDBREAKER] = STRINGID_MOLDBREAKERENTERS,
-        [B_MSG_SWITCHIN_TERAVOLT] = STRINGID_TERAVOLTENTERS,
-        [B_MSG_SWITCHIN_TURBOBLAZE] = STRINGID_TURBOBLAZEENTERS,
-        [B_MSG_SWITCHIN_SLOWSTART] = STRINGID_SLOWSTARTENTERS,
-        [B_MSG_SWITCHIN_UNNERVE] = STRINGID_UNNERVEENTERS,
-        [B_MSG_SWITCHIN_ANTICIPATION] = STRINGID_ANTICIPATIONACTIVATES,
-        [B_MSG_SWITCHIN_FOREWARN] = STRINGID_FOREWARNACTIVATES,
-        [B_MSG_SWITCHIN_PRESSURE] = STRINGID_PRESSUREENTERS,
-        [B_MSG_SWITCHIN_DARKAURA] = STRINGID_DARKAURAENTERS,
-        [B_MSG_SWITCHIN_FAIRYAURA] = STRINGID_FAIRYAURAENTERS,
-        [B_MSG_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS,
-        [B_MSG_SWITCHIN_COMATOSE] = STRINGID_COMATOSEENTERS,
-        [B_MSG_SWITCHIN_SCREENCLEANER] = STRINGID_SCREENCLEANERENTERS,
-        [B_MSG_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
-        [B_MSG_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
-        [B_MSG_SWITCHIN_PASTEL_VEIL] = STRINGID_PASTELVEILENTERS,
-        [B_MSG_SWITCHIN_NEUTRALIZING_GAS] = STRINGID_NEUTRALIZINGGASENTERS,
+{
+    [B_MSG_SWITCHIN_MOLDBREAKER] = STRINGID_MOLDBREAKERENTERS,
+    [B_MSG_SWITCHIN_TERAVOLT] = STRINGID_TERAVOLTENTERS,
+    [B_MSG_SWITCHIN_TURBOBLAZE] = STRINGID_TURBOBLAZEENTERS,
+    [B_MSG_SWITCHIN_SLOWSTART] = STRINGID_SLOWSTARTENTERS,
+    [B_MSG_SWITCHIN_UNNERVE] = STRINGID_UNNERVEENTERS,
+    [B_MSG_SWITCHIN_ANTICIPATION] = STRINGID_ANTICIPATIONACTIVATES,
+    [B_MSG_SWITCHIN_FOREWARN] = STRINGID_FOREWARNACTIVATES,
+    [B_MSG_SWITCHIN_PRESSURE] = STRINGID_PRESSUREENTERS,
+    [B_MSG_SWITCHIN_DARKAURA] = STRINGID_DARKAURAENTERS,
+    [B_MSG_SWITCHIN_FAIRYAURA] = STRINGID_FAIRYAURAENTERS,
+    [B_MSG_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS,
+    [B_MSG_SWITCHIN_COMATOSE] = STRINGID_COMATOSEENTERS,
+    [B_MSG_SWITCHIN_SCREENCLEANER] = STRINGID_SCREENCLEANERENTERS,
+    [B_MSG_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
+    [B_MSG_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
+    [B_MSG_SWITCHIN_PASTEL_VEIL] = STRINGID_PASTELVEILENTERS,
+    [B_MSG_SWITCHIN_NEUTRALIZING_GAS] = STRINGID_NEUTRALIZINGGASENTERS,
 };
 
 const u16 gMissStringIds[] =
-    {
-        [B_MSG_MISSED] = STRINGID_ATTACKMISSED,
-        [B_MSG_PROTECTED] = STRINGID_PKMNPROTECTEDITSELF,
-        [B_MSG_AVOIDED_ATK] = STRINGID_PKMNAVOIDEDATTACK,
-        [B_MSG_AVOIDED_DMG] = STRINGID_AVOIDEDDAMAGE,
-        [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS};
+{
+    [B_MSG_MISSED]      = STRINGID_ATTACKMISSED,
+    [B_MSG_PROTECTED]   = STRINGID_PKMNPROTECTEDITSELF,
+    [B_MSG_AVOIDED_ATK] = STRINGID_PKMNAVOIDEDATTACK,
+    [B_MSG_AVOIDED_DMG] = STRINGID_AVOIDEDDAMAGE,
+    [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS
+};
 
 const u16 gNoEscapeStringIds[] =
-    {
-        [B_MSG_CANT_ESCAPE] = STRINGID_CANTESCAPE,
-        [B_MSG_DONT_LEAVE_BIRCH] = STRINGID_DONTLEAVEBIRCH,
-        [B_MSG_PREVENTS_ESCAPE] = STRINGID_PREVENTSESCAPE,
-        [B_MSG_CANT_ESCAPE_2] = STRINGID_CANTESCAPE2,
-        [B_MSG_ATTACKER_CANT_ESCAPE] = STRINGID_ATTACKERCANTESCAPE};
+{
+    [B_MSG_CANT_ESCAPE]          = STRINGID_CANTESCAPE,
+    [B_MSG_DONT_LEAVE_BIRCH]     = STRINGID_DONTLEAVEBIRCH,
+    [B_MSG_PREVENTS_ESCAPE]      = STRINGID_PREVENTSESCAPE,
+    [B_MSG_CANT_ESCAPE_2]        = STRINGID_CANTESCAPE2,
+    [B_MSG_ATTACKER_CANT_ESCAPE] = STRINGID_ATTACKERCANTESCAPE
+};
 
 const u16 gMoveWeatherChangeStringIds[] =
-    {
-        [B_MSG_STARTED_RAIN] = STRINGID_STARTEDTORAIN,
-        [B_MSG_STARTED_DOWNPOUR] = STRINGID_DOWNPOURSTARTED, // Unused
-        [B_MSG_WEATHER_FAILED] = STRINGID_BUTITFAILED,
-        [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
-        [B_MSG_STARTED_SUNLIGHT] = STRINGID_SUNLIGHTGOTBRIGHT,
-        [B_MSG_STARTED_HAIL] = STRINGID_STARTEDHAIL,
-        [B_MSG_STARTED_SNOW] = STRINGID_STARTEDSNOW,
-        [B_MSG_STARTED_FOG] = STRINGID_FOGCREPTUP, // Unused, can use for custom moves that set fog
+{
+    [B_MSG_STARTED_RAIN]      = STRINGID_STARTEDTORAIN,
+    [B_MSG_STARTED_DOWNPOUR]  = STRINGID_DOWNPOURSTARTED, // Unused
+    [B_MSG_WEATHER_FAILED]    = STRINGID_BUTITFAILED,
+    [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
+    [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
+    [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
+    [B_MSG_STARTED_SNOW]      = STRINGID_STARTEDSNOW,
+    [B_MSG_STARTED_FOG]       = STRINGID_FOGCREPTUP, // Unused, can use for custom moves that set fog
 };
 
 const u16 gWeatherEndsStringIds[B_MSG_WEATHER_END_COUNT] =
-    {
-        [B_MSG_WEATHER_END_RAIN] = STRINGID_RAINSTOPPED,
-        [B_MSG_WEATHER_END_SANDSTORM] = STRINGID_SANDSTORMSUBSIDED,
-        [B_MSG_WEATHER_END_SUN] = STRINGID_SUNLIGHTFADED,
-        [B_MSG_WEATHER_END_HAIL] = STRINGID_HAILSTOPPED,
-        [B_MSG_WEATHER_END_STRONG_WINDS] = STRINGID_STRONGWINDSDISSIPATED,
-        [B_MSG_WEATHER_END_SNOW] = STRINGID_SNOWSTOPPED,
-        [B_MSG_WEATHER_END_FOG] = STRINGID_FOGLIFTED,
+{
+    [B_MSG_WEATHER_END_RAIN] = STRINGID_RAINSTOPPED,
+    [B_MSG_WEATHER_END_SANDSTORM] = STRINGID_SANDSTORMSUBSIDED,
+    [B_MSG_WEATHER_END_SUN] = STRINGID_SUNLIGHTFADED,
+    [B_MSG_WEATHER_END_HAIL] = STRINGID_HAILSTOPPED,
+    [B_MSG_WEATHER_END_STRONG_WINDS] = STRINGID_STRONGWINDSDISSIPATED,
+    [B_MSG_WEATHER_END_SNOW] = STRINGID_SNOWSTOPPED,
+    [B_MSG_WEATHER_END_FOG] = STRINGID_FOGLIFTED,
 };
 
 const u16 gSandStormHailSnowContinuesStringIds[] =
-    {
-        [B_MSG_SANDSTORM] = STRINGID_SANDSTORMRAGES,
-        [B_MSG_HAIL] = STRINGID_HAILCONTINUES,
-        [B_MSG_SNOW] = STRINGID_SNOWCONTINUES,
+{
+    [B_MSG_SANDSTORM] = STRINGID_SANDSTORMRAGES,
+    [B_MSG_HAIL]      = STRINGID_HAILCONTINUES,
+    [B_MSG_SNOW]      = STRINGID_SNOWCONTINUES,
 };
 
 const u16 gSandStormHailDmgStringIds[] =
-    {
-        [B_MSG_SANDSTORM] = STRINGID_PKMNBUFFETEDBYSANDSTORM,
-        [B_MSG_HAIL] = STRINGID_PKMNPELTEDBYHAIL};
+{
+    [B_MSG_SANDSTORM] = STRINGID_PKMNBUFFETEDBYSANDSTORM,
+    [B_MSG_HAIL]      = STRINGID_PKMNPELTEDBYHAIL
+};
 
 const u16 gSandStormHailSnowEndStringIds[] =
-    {
-        [B_MSG_SANDSTORM] = STRINGID_SANDSTORMSUBSIDED,
-        [B_MSG_HAIL] = STRINGID_HAILSTOPPED,
-        [B_MSG_SNOW] = STRINGID_SNOWSTOPPED,
+{
+    [B_MSG_SANDSTORM] = STRINGID_SANDSTORMSUBSIDED,
+    [B_MSG_HAIL]      = STRINGID_HAILSTOPPED,
+    [B_MSG_SNOW]      = STRINGID_SNOWSTOPPED,
 };
 
 const u16 gRainContinuesStringIds[] =
-    {
-        [B_MSG_RAIN_CONTINUES] = STRINGID_RAINCONTINUES,
-        [B_MSG_DOWNPOUR_CONTINUES] = STRINGID_DOWNPOURCONTINUES,
-        [B_MSG_RAIN_STOPPED] = STRINGID_RAINSTOPPED};
+{
+    [B_MSG_RAIN_CONTINUES]     = STRINGID_RAINCONTINUES,
+    [B_MSG_DOWNPOUR_CONTINUES] = STRINGID_DOWNPOURCONTINUES,
+    [B_MSG_RAIN_STOPPED]       = STRINGID_RAINSTOPPED
+};
 
 const u16 gProtectLikeUsedStringIds[] =
-    {
-        [B_MSG_PROTECTED_ITSELF] = STRINGID_PKMNPROTECTEDITSELF2,
-        [B_MSG_BRACED_ITSELF] = STRINGID_PKMNBRACEDITSELF,
-        [B_MSG_PROTECT_FAILED] = STRINGID_BUTITFAILED,
-        [B_MSG_PROTECTED_TEAM] = STRINGID_PROTECTEDTEAM,
+{
+    [B_MSG_PROTECTED_ITSELF] = STRINGID_PKMNPROTECTEDITSELF2,
+    [B_MSG_BRACED_ITSELF]    = STRINGID_PKMNBRACEDITSELF,
+    [B_MSG_PROTECT_FAILED]   = STRINGID_BUTITFAILED,
+    [B_MSG_PROTECTED_TEAM]   = STRINGID_PROTECTEDTEAM,
 };
 
 const u16 gReflectLightScreenSafeguardStringIds[] =
-    {
-        [B_MSG_SIDE_STATUS_FAILED] = STRINGID_BUTITFAILED,
-        [B_MSG_SET_REFLECT_SINGLE] = STRINGID_PKMNRAISEDDEF,
-        [B_MSG_SET_REFLECT_DOUBLE] = STRINGID_PKMNRAISEDDEFALITTLE,
-        [B_MSG_SET_LIGHTSCREEN_SINGLE] = STRINGID_PKMNRAISEDSPDEF,
-        [B_MSG_SET_LIGHTSCREEN_DOUBLE] = STRINGID_PKMNRAISEDSPDEFALITTLE,
-        [B_MSG_SET_SAFEGUARD] = STRINGID_PKMNCOVEREDBYVEIL,
+{
+    [B_MSG_SIDE_STATUS_FAILED]     = STRINGID_BUTITFAILED,
+    [B_MSG_SET_REFLECT_SINGLE]     = STRINGID_PKMNRAISEDDEF,
+    [B_MSG_SET_REFLECT_DOUBLE]     = STRINGID_PKMNRAISEDDEF,
+    [B_MSG_SET_LIGHTSCREEN_SINGLE] = STRINGID_PKMNRAISEDSPDEF,
+    [B_MSG_SET_LIGHTSCREEN_DOUBLE] = STRINGID_PKMNRAISEDSPDEF,
+    [B_MSG_SET_SAFEGUARD]          = STRINGID_PKMNCOVEREDBYVEIL,
 };
 
 const u16 gLeechSeedStringIds[] =
-    {
-        [B_MSG_LEECH_SEED_SET] = STRINGID_PKMNSEEDED,
-        [B_MSG_LEECH_SEED_MISS] = STRINGID_PKMNEVADEDATTACK,
-        [B_MSG_LEECH_SEED_FAIL] = STRINGID_ITDOESNTAFFECT,
-        [B_MSG_LEECH_SEED_DRAIN] = STRINGID_PKMNSAPPEDBYLEECHSEED,
-        [B_MSG_LEECH_SEED_OOZE] = STRINGID_ITSUCKEDLIQUIDOOZE,
+{
+    [B_MSG_LEECH_SEED_SET]   = STRINGID_PKMNSEEDED,
+    [B_MSG_LEECH_SEED_MISS]  = STRINGID_PKMNEVADEDATTACK,
+    [B_MSG_LEECH_SEED_FAIL]  = STRINGID_ITDOESNTAFFECT,
+    [B_MSG_LEECH_SEED_DRAIN] = STRINGID_PKMNSAPPEDBYLEECHSEED,
+    [B_MSG_LEECH_SEED_OOZE]  = STRINGID_ITSUCKEDLIQUIDOOZE,
 };
 
 const u16 gRestUsedStringIds[] =
-    {
-        [B_MSG_REST] = STRINGID_PKMNWENTTOSLEEP,
-        [B_MSG_REST_STATUSED] = STRINGID_PKMNSLEPTHEALTHY};
+{
+    [B_MSG_REST]          = STRINGID_PKMNWENTTOSLEEP,
+    [B_MSG_REST_STATUSED] = STRINGID_PKMNSLEPTHEALTHY
+};
 
 const u16 gUproarOverTurnStringIds[] =
-    {
-        [B_MSG_UPROAR_CONTINUES] = STRINGID_PKMNMAKINGUPROAR,
-        [B_MSG_UPROAR_ENDS] = STRINGID_PKMNCALMEDDOWN};
+{
+    [B_MSG_UPROAR_CONTINUES] = STRINGID_PKMNMAKINGUPROAR,
+    [B_MSG_UPROAR_ENDS]      = STRINGID_PKMNCALMEDDOWN
+};
 
 const u16 gStockpileUsedStringIds[] =
-    {
-        [B_MSG_STOCKPILED] = STRINGID_PKMNSTOCKPILED,
-        [B_MSG_CANT_STOCKPILE] = STRINGID_PKMNCANTSTOCKPILE,
+{
+    [B_MSG_STOCKPILED]     = STRINGID_PKMNSTOCKPILED,
+    [B_MSG_CANT_STOCKPILE] = STRINGID_PKMNCANTSTOCKPILE,
 };
 
 const u16 gWokeUpStringIds[] =
-    {
-        [B_MSG_WOKE_UP] = STRINGID_PKMNWOKEUP,
-        [B_MSG_WOKE_UP_UPROAR] = STRINGID_PKMNWOKEUPINUPROAR};
+{
+    [B_MSG_WOKE_UP]        = STRINGID_PKMNWOKEUP,
+    [B_MSG_WOKE_UP_UPROAR] = STRINGID_PKMNWOKEUPINUPROAR
+};
 
 const u16 gSwallowFailStringIds[] =
-    {
-        [B_MSG_SWALLOW_FAILED] = STRINGID_FAILEDTOSWALLOW,
-        [B_MSG_SWALLOW_FULL_HP] = STRINGID_PKMNHPFULL};
+{
+    [B_MSG_SWALLOW_FAILED]  = STRINGID_FAILEDTOSWALLOW,
+    [B_MSG_SWALLOW_FULL_HP] = STRINGID_PKMNHPFULL
+};
 
 const u16 gUproarAwakeStringIds[] =
-    {
-        [B_MSG_CANT_SLEEP_UPROAR] = STRINGID_PKMNCANTSLEEPINUPROAR2,
-        [B_MSG_UPROAR_KEPT_AWAKE] = STRINGID_UPROARKEPTPKMNAWAKE,
+{
+    [B_MSG_CANT_SLEEP_UPROAR]  = STRINGID_PKMNCANTSLEEPINUPROAR2,
+    [B_MSG_UPROAR_KEPT_AWAKE]  = STRINGID_UPROARKEPTPKMNAWAKE,
 };
 
 const u16 gStatUpStringIds[] =
-    {
-        [B_MSG_ATTACKER_STAT_ROSE] = STRINGID_ATTACKERSSTATROSE,
-        [B_MSG_DEFENDER_STAT_ROSE] = STRINGID_DEFENDERSSTATROSE,
-        [B_MSG_STAT_WONT_INCREASE] = STRINGID_STATSWONTINCREASE,
-        [B_MSG_STAT_ROSE_EMPTY] = STRINGID_EMPTYSTRING3,
-        [B_MSG_STAT_ROSE_ITEM] = STRINGID_USINGITEMSTATOFPKMNROSE,
-        [B_MSG_USED_DIRE_HIT] = STRINGID_PKMNUSEDXTOGETPUMPED,
+{
+    [B_MSG_ATTACKER_STAT_ROSE] = STRINGID_ATTACKERSSTATROSE,
+    [B_MSG_DEFENDER_STAT_ROSE] = STRINGID_DEFENDERSSTATROSE,
+    [B_MSG_STAT_WONT_INCREASE] = STRINGID_STATSWONTINCREASE,
+    [B_MSG_STAT_ROSE_EMPTY]    = STRINGID_EMPTYSTRING3,
+    [B_MSG_STAT_ROSE_ITEM]     = STRINGID_USINGITEMSTATOFPKMNROSE,
+    [B_MSG_USED_DIRE_HIT]      = STRINGID_PKMNUSEDXTOGETPUMPED,
 };
 
 const u16 gStatDownStringIds[] =
-    {
-        [B_MSG_ATTACKER_STAT_FELL] = STRINGID_ATTACKERSSTATFELL,
-        [B_MSG_DEFENDER_STAT_FELL] = STRINGID_DEFENDERSSTATFELL,
-        [B_MSG_STAT_WONT_DECREASE] = STRINGID_STATSWONTDECREASE,
-        [B_MSG_STAT_FELL_EMPTY] = STRINGID_EMPTYSTRING3,
+{
+    [B_MSG_ATTACKER_STAT_FELL] = STRINGID_ATTACKERSSTATFELL,
+    [B_MSG_DEFENDER_STAT_FELL] = STRINGID_DEFENDERSSTATFELL,
+    [B_MSG_STAT_WONT_DECREASE] = STRINGID_STATSWONTDECREASE,
+    [B_MSG_STAT_FELL_EMPTY]    = STRINGID_EMPTYSTRING3,
 };
 
 // Index copied from move's index in sTrappingMoves
 const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
-    {
-        [B_MSG_WRAPPED_BIND] = STRINGID_PKMNSQUEEZEDBYBIND,            // MOVE_BIND
-        [B_MSG_WRAPPED_WRAP] = STRINGID_PKMNWRAPPEDBY,                 // MOVE_WRAP
-        [B_MSG_WRAPPED_FIRE_SPIN] = STRINGID_PKMNTRAPPEDINVORTEX,      // MOVE_FIRE_SPIN
-        [B_MSG_WRAPPED_CLAMP] = STRINGID_PKMNCLAMPED,                  // MOVE_CLAMP
-        [B_MSG_WRAPPED_WHIRLPOOL] = STRINGID_PKMNTRAPPEDINVORTEX,      // MOVE_WHIRLPOOL
-        [B_MSG_WRAPPED_SAND_TOMB] = STRINGID_PKMNTRAPPEDBYSANDTOMB,    // MOVE_SAND_TOMB
-        [B_MSG_WRAPPED_MAGMA_STORM] = STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
-        [B_MSG_WRAPPED_INFESTATION] = STRINGID_INFESTATION,            // MOVE_INFESTATION
-        [B_MSG_WRAPPED_SNAP_TRAP] = STRINGID_PKMNINSNAPTRAP,           // MOVE_SNAP_TRAP
-        [B_MSG_WRAPPED_THUNDER_CAGE] = STRINGID_THUNDERCAGETRAPPED,    // MOVE_THUNDER_CAGE
+{
+    [B_MSG_WRAPPED_BIND]        = STRINGID_PKMNSQUEEZEDBYBIND,     // MOVE_BIND
+    [B_MSG_WRAPPED_WRAP]        = STRINGID_PKMNWRAPPEDBY,          // MOVE_WRAP
+    [B_MSG_WRAPPED_FIRE_SPIN]   = STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_FIRE_SPIN
+    [B_MSG_WRAPPED_CLAMP]       = STRINGID_PKMNCLAMPED,            // MOVE_CLAMP
+    [B_MSG_WRAPPED_WHIRLPOOL]   = STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_WHIRLPOOL
+    [B_MSG_WRAPPED_SAND_TOMB]   = STRINGID_PKMNTRAPPEDBYSANDTOMB,  // MOVE_SAND_TOMB
+    [B_MSG_WRAPPED_MAGMA_STORM] = STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
+    [B_MSG_WRAPPED_INFESTATION] = STRINGID_INFESTATION,            // MOVE_INFESTATION
+    [B_MSG_WRAPPED_SNAP_TRAP]   = STRINGID_PKMNINSNAPTRAP,         // MOVE_SNAP_TRAP
+    [B_MSG_WRAPPED_THUNDER_CAGE]= STRINGID_THUNDERCAGETRAPPED,     // MOVE_THUNDER_CAGE
 };
 
 const u16 gMistUsedStringIds[] =
-    {
-        [B_MSG_SET_MIST] = STRINGID_PKMNSHROUDEDINMIST,
-        [B_MSG_MIST_FAILED] = STRINGID_BUTITFAILED};
+{
+    [B_MSG_SET_MIST]    = STRINGID_PKMNSHROUDEDINMIST,
+    [B_MSG_MIST_FAILED] = STRINGID_BUTITFAILED
+};
 
 const u16 gFocusEnergyUsedStringIds[] =
-    {
-        [B_MSG_GETTING_PUMPED] = STRINGID_PKMNGETTINGPUMPED,
-        [B_MSG_FOCUS_ENERGY_FAILED] = STRINGID_BUTITFAILED};
+{
+    [B_MSG_GETTING_PUMPED]      = STRINGID_PKMNGETTINGPUMPED,
+    [B_MSG_FOCUS_ENERGY_FAILED] = STRINGID_BUTITFAILED
+};
 
 const u16 gTransformUsedStringIds[] =
-    {
-        [B_MSG_TRANSFORMED] = STRINGID_PKMNTRANSFORMEDINTO,
-        [B_MSG_TRANSFORM_FAILED] = STRINGID_BUTITFAILED};
+{
+    [B_MSG_TRANSFORMED]      = STRINGID_PKMNTRANSFORMEDINTO,
+    [B_MSG_TRANSFORM_FAILED] = STRINGID_BUTITFAILED
+};
 
 const u16 gSubstituteUsedStringIds[] =
-    {
-        [B_MSG_SET_SUBSTITUTE] = STRINGID_PKMNMADESUBSTITUTE,
-        [B_MSG_SUBSTITUTE_FAILED] = STRINGID_TOOWEAKFORSUBSTITUTE};
+{
+    [B_MSG_SET_SUBSTITUTE]    = STRINGID_PKMNMADESUBSTITUTE,
+    [B_MSG_SUBSTITUTE_FAILED] = STRINGID_TOOWEAKFORSUBSTITUTE
+};
 
 const u16 gGotPoisonedStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNWASPOISONED,
-        [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNPOISONEDBY};
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNWASPOISONED,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNPOISONEDBY
+};
 
 const u16 gGotParalyzedStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNWASPARALYZED,
-        [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNWASPARALYZEDBY};
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNWASPARALYZED,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNWASPARALYZEDBY
+};
 
 const u16 gFellAsleepStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNFELLASLEEP,
-        [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNMADESLEEP,
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNFELLASLEEP,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNMADESLEEP,
 };
 
 const u16 gGotBurnedStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNWASBURNED,
-        [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNBURNEDBY};
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNWASBURNED,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNBURNEDBY
+};
 
 const u16 gGotFrostbiteStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNGOTFROSTBITE};
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNGOTFROSTBITE
+};
 
 const u16 gFrostbiteHealedStringIds[] =
-    {
-        [B_MSG_FROSTBITE_HEALED] = STRINGID_PKMNFROSTBITEHEALED2,
-        [B_MSG_FROSTBITE_HEALED_BY_MOVE] = STRINGID_PKMNFROSTBITEHEALEDBY};
+{
+    [B_MSG_FROSTBITE_HEALED]         = STRINGID_PKMNFROSTBITEHEALED2,
+    [B_MSG_FROSTBITE_HEALED_BY_MOVE] = STRINGID_PKMNFROSTBITEHEALEDBY
+};
 
 const u16 gGotFrozenStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNWASFROZEN,
-        [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNFROZENBY};
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNWASFROZEN,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNFROZENBY
+};
 
 const u16 gGotDefrostedStringIds[] =
-    {
-        [B_MSG_DEFROSTED] = STRINGID_PKMNWASDEFROSTED2,
-        [B_MSG_DEFROSTED_BY_MOVE] = STRINGID_PKMNWASDEFROSTEDBY};
+{
+    [B_MSG_DEFROSTED]         = STRINGID_PKMNWASDEFROSTED2,
+    [B_MSG_DEFROSTED_BY_MOVE] = STRINGID_PKMNWASDEFROSTEDBY
+};
 
 const u16 gKOFailedStringIds[] =
-    {
-        [B_MSG_KO_MISS] = STRINGID_ATTACKMISSED,
-        [B_MSG_KO_UNAFFECTED] = STRINGID_PKMNUNAFFECTED};
+{
+    [B_MSG_KO_MISS]       = STRINGID_ATTACKMISSED,
+    [B_MSG_KO_UNAFFECTED] = STRINGID_PKMNUNAFFECTED
+};
 
 const u16 gAttractUsedStringIds[] =
-    {
-        [B_MSG_STATUSED] = STRINGID_PKMNFELLINLOVE,
-        [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNSXINFATUATEDY};
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNFELLINLOVE,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNSXINFATUATEDY
+};
 
 const u16 gAbsorbDrainStringIds[] =
-    {
-        [B_MSG_ABSORB] = STRINGID_PKMNENERGYDRAINED,
-        [B_MSG_ABSORB_OOZE] = STRINGID_ITSUCKEDLIQUIDOOZE};
+{
+    [B_MSG_ABSORB]      = STRINGID_PKMNENERGYDRAINED,
+    [B_MSG_ABSORB_OOZE] = STRINGID_ITSUCKEDLIQUIDOOZE
+};
 
 const u16 gSportsUsedStringIds[] =
-    {
-        [B_MSG_WEAKEN_ELECTRIC] = STRINGID_ELECTRICITYWEAKENED,
-        [B_MSG_WEAKEN_FIRE] = STRINGID_FIREWEAKENED};
+{
+    [B_MSG_WEAKEN_ELECTRIC] = STRINGID_ELECTRICITYWEAKENED,
+    [B_MSG_WEAKEN_FIRE]     = STRINGID_FIREWEAKENED
+};
 
 const u16 gPartyStatusHealStringIds[] =
-    {
-        [B_MSG_BELL] = STRINGID_BELLCHIMED,
-        [B_MSG_BELL_SOUNDPROOF_ATTACKER] = STRINGID_BELLCHIMED,
-        [B_MSG_BELL_SOUNDPROOF_PARTNER] = STRINGID_BELLCHIMED,
-        [B_MSG_BELL_BOTH_SOUNDPROOF] = STRINGID_BELLCHIMED,
-        [B_MSG_SOOTHING_AROMA] = STRINGID_SOOTHINGAROMA};
+{
+    [B_MSG_BELL]                     = STRINGID_BELLCHIMED,
+    [B_MSG_BELL_SOUNDPROOF_ATTACKER] = STRINGID_BELLCHIMED,
+    [B_MSG_BELL_SOUNDPROOF_PARTNER]  = STRINGID_BELLCHIMED,
+    [B_MSG_BELL_BOTH_SOUNDPROOF]     = STRINGID_BELLCHIMED,
+    [B_MSG_SOOTHING_AROMA]           = STRINGID_SOOTHINGAROMA
+};
 
 const u16 gFutureMoveUsedStringIds[] =
-    {
-        [B_MSG_FUTURE_SIGHT] = STRINGID_PKMNFORESAWATTACK,
-        [B_MSG_DOOM_DESIRE] = STRINGID_PKMNCHOSEXASDESTINY};
+{
+    [B_MSG_FUTURE_SIGHT] = STRINGID_PKMNFORESAWATTACK,
+    [B_MSG_DOOM_DESIRE]  = STRINGID_PKMNCHOSEXASDESTINY
+};
 
 const u16 gBallEscapeStringIds[] =
-    {
-        [BALL_NO_SHAKES] = STRINGID_PKMNBROKEFREE,
-        [BALL_1_SHAKE] = STRINGID_ITAPPEAREDCAUGHT,
-        [BALL_2_SHAKES] = STRINGID_AARGHALMOSTHADIT,
-        [BALL_3_SHAKES_FAIL] = STRINGID_SHOOTSOCLOSE};
+{
+    [BALL_NO_SHAKES]     = STRINGID_PKMNBROKEFREE,
+    [BALL_1_SHAKE]       = STRINGID_ITAPPEAREDCAUGHT,
+    [BALL_2_SHAKES]      = STRINGID_AARGHALMOSTHADIT,
+    [BALL_3_SHAKES_FAIL] = STRINGID_SHOOTSOCLOSE
+};
 
 // Overworld weathers that don't have an associated battle weather default to "It is raining."
 const u16 gWeatherStartsStringIds[] =
-    {
-        [WEATHER_NONE] = STRINGID_ITISRAINING,
-        [WEATHER_SUNNY_CLOUDS] = STRINGID_ITISRAINING,
-        [WEATHER_SUNNY] = STRINGID_ITISRAINING,
-        [WEATHER_RAIN] = STRINGID_ITISRAINING,
-        [WEATHER_SNOW] = (B_OVERWORLD_SNOW >= GEN_9 ? STRINGID_STARTEDSNOW : STRINGID_STARTEDHAIL),
-        [WEATHER_RAIN_THUNDERSTORM] = STRINGID_ITISRAINING,
-        [WEATHER_FOG_HORIZONTAL] = STRINGID_FOGISDEEP,
-        [WEATHER_VOLCANIC_ASH] = STRINGID_ITISRAINING,
-        [WEATHER_SANDSTORM] = STRINGID_SANDSTORMISRAGING,
-        [WEATHER_FOG_DIAGONAL] = STRINGID_FOGISDEEP,
-        [WEATHER_UNDERWATER] = STRINGID_ITISRAINING,
-        [WEATHER_SHADE] = STRINGID_ITISRAINING,
-        [WEATHER_DROUGHT] = STRINGID_SUNLIGHTSTRONG,
-        [WEATHER_DOWNPOUR] = STRINGID_ITISRAINING,
-        [WEATHER_UNDERWATER_BUBBLES] = STRINGID_ITISRAINING,
-        [WEATHER_ABNORMAL] = STRINGID_ITISRAINING};
+{
+    [WEATHER_NONE]               = STRINGID_ITISRAINING,
+    [WEATHER_SUNNY_CLOUDS]       = STRINGID_ITISRAINING,
+    [WEATHER_SUNNY]              = STRINGID_ITISRAINING,
+    [WEATHER_RAIN]               = STRINGID_ITISRAINING,
+    [WEATHER_SNOW]               = (B_OVERWORLD_SNOW >= GEN_9 ? STRINGID_ITISSNOWING : STRINGID_ITISHAILING),
+    [WEATHER_RAIN_THUNDERSTORM]  = STRINGID_ITISRAINING,
+    [WEATHER_FOG_HORIZONTAL]     = STRINGID_FOGISDEEP,
+    [WEATHER_VOLCANIC_ASH]       = STRINGID_ITISRAINING,
+    [WEATHER_SANDSTORM]          = STRINGID_SANDSTORMISRAGING,
+    [WEATHER_FOG_DIAGONAL]       = STRINGID_FOGISDEEP,
+    [WEATHER_UNDERWATER]         = STRINGID_ITISRAINING,
+    [WEATHER_SHADE]              = STRINGID_ITISRAINING,
+    [WEATHER_DROUGHT]            = STRINGID_SUNLIGHTISHARSH,
+    [WEATHER_DOWNPOUR]           = STRINGID_ITISRAINING,
+    [WEATHER_UNDERWATER_BUBBLES] = STRINGID_ITISRAINING,
+    [WEATHER_ABNORMAL]           = STRINGID_ITISRAINING
+};
+
+const u16 gTerrainStartsStringIds[] =
+{
+    STRINGID_MISTSWIRLSAROUND, STRINGID_ELECTRICCURRENTISRUNNING, STRINGID_ISCOVEREDWITHGRASS, STRINGID_SEEMSWEIRD,
+};
 
 const u16 gPrimalWeatherBlocksStringIds[] =
-    {
-        [B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN] = STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN,
-        [B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN] = STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT,
+{
+    [B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN]      = STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN,
+    [B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN]    = STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT,
 };
 
 const u16 gInobedientStringIds[] =
-    {
-        [B_MSG_LOAFING] = STRINGID_PKMNLOAFING,
-        [B_MSG_WONT_OBEY] = STRINGID_PKMNWONTOBEY,
-        [B_MSG_TURNED_AWAY] = STRINGID_PKMNTURNEDAWAY,
-        [B_MSG_PRETEND_NOT_NOTICE] = STRINGID_PKMNPRETENDNOTNOTICE,
-        [B_MSG_INCAPABLE_OF_POWER] = STRINGID_PKMNINCAPABLEOFPOWER};
+{
+    [B_MSG_LOAFING]            = STRINGID_PKMNLOAFING,
+    [B_MSG_WONT_OBEY]          = STRINGID_PKMNWONTOBEY,
+    [B_MSG_TURNED_AWAY]        = STRINGID_PKMNTURNEDAWAY,
+    [B_MSG_PRETEND_NOT_NOTICE] = STRINGID_PKMNPRETENDNOTNOTICE,
+    [B_MSG_INCAPABLE_OF_POWER] = STRINGID_PKMNINCAPABLEOFPOWER
+};
 
 const u16 gSafariGetNearStringIds[] =
-    {
-        [B_MSG_CREPT_CLOSER] = STRINGID_CREPTCLOSER,
-        [B_MSG_CANT_GET_CLOSER] = STRINGID_CANTGETCLOSER};
+{
+    [B_MSG_CREPT_CLOSER]    = STRINGID_CREPTCLOSER,
+    [B_MSG_CANT_GET_CLOSER] = STRINGID_CANTGETCLOSER
+};
 
 const u16 gSafariPokeblockResultStringIds[] =
-    {
-        [B_MSG_MON_CURIOUS] = STRINGID_PKMNCURIOUSABOUTX,
-        [B_MSG_MON_ENTHRALLED] = STRINGID_PKMNENTHRALLEDBYX,
-        [B_MSG_MON_IGNORED] = STRINGID_PKMNIGNOREDX};
+{
+    [B_MSG_MON_CURIOUS]    = STRINGID_PKMNCURIOUSABOUTX,
+    [B_MSG_MON_ENTHRALLED] = STRINGID_PKMNENTHRALLEDBYX,
+    [B_MSG_MON_IGNORED]    = STRINGID_PKMNIGNOREDX
+};
 
 const u16 gBerryEffectStringIds[] =
-    {
-        [B_MSG_CURED_PROBLEM] = STRINGID_PKMNSITEMCUREDPROBLEM,
-        [B_MSG_NORMALIZED_STATUS] = STRINGID_PKMNSITEMNORMALIZEDSTATUS};
+{
+    [B_MSG_CURED_PROBLEM]     = STRINGID_PKMNSITEMCUREDPROBLEM,
+    [B_MSG_NORMALIZED_STATUS] = STRINGID_PKMNSITEMNORMALIZEDSTATUS
+};
 
 const u16 gBRNPreventionStringIds[] =
-    {
-        [B_MSG_ABILITY_PREVENTS_MOVE_STATUS] = STRINGID_PKMNSXPREVENTSBURNS,
-        [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
-        [B_MSG_STATUS_HAD_NO_EFFECT] = STRINGID_PKMNSXHADNOEFFECTONY};
+{
+    [B_MSG_ABILITY_PREVENTS_MOVE_STATUS]    = STRINGID_PKMNSXPREVENTSBURNS,
+    [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
+    [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY
+};
 
 const u16 gPRLZPreventionStringIds[] =
-    {
-        [B_MSG_ABILITY_PREVENTS_MOVE_STATUS] = STRINGID_PKMNPREVENTSPARALYSISWITH,
-        [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
-        [B_MSG_STATUS_HAD_NO_EFFECT] = STRINGID_PKMNSXHADNOEFFECTONY};
+{
+    [B_MSG_ABILITY_PREVENTS_MOVE_STATUS]    = STRINGID_PKMNPREVENTSPARALYSISWITH,
+    [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
+    [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY
+};
 
 const u16 gPSNPreventionStringIds[] =
-    {
-        [B_MSG_ABILITY_PREVENTS_MOVE_STATUS] = STRINGID_PKMNPREVENTSPOISONINGWITH,
-        [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
-        [B_MSG_STATUS_HAD_NO_EFFECT] = STRINGID_PKMNSXHADNOEFFECTONY};
+{
+    [B_MSG_ABILITY_PREVENTS_MOVE_STATUS]    = STRINGID_PKMNPREVENTSPOISONINGWITH,
+    [B_MSG_ABILITY_PREVENTS_ABILITY_STATUS] = STRINGID_PKMNSXPREVENTSYSZ,
+    [B_MSG_STATUS_HAD_NO_EFFECT]            = STRINGID_PKMNSXHADNOEFFECTONY
+};
 
 const u16 gItemSwapStringIds[] =
-    {
-        [B_MSG_ITEM_SWAP_TAKEN] = STRINGID_PKMNOBTAINEDX,
-        [B_MSG_ITEM_SWAP_GIVEN] = STRINGID_PKMNOBTAINEDX2,
-        [B_MSG_ITEM_SWAP_BOTH] = STRINGID_PKMNOBTAINEDXYOBTAINEDZ};
+{
+    [B_MSG_ITEM_SWAP_TAKEN] = STRINGID_PKMNOBTAINEDX,
+    [B_MSG_ITEM_SWAP_GIVEN] = STRINGID_PKMNOBTAINEDX2,
+    [B_MSG_ITEM_SWAP_BOTH]  = STRINGID_PKMNOBTAINEDXYOBTAINEDZ
+};
 
 const u16 gFlashFireStringIds[] =
-    {
-        [B_MSG_FLASH_FIRE_BOOST] = STRINGID_PKMNRAISEDFIREPOWERWITH,
-        [B_MSG_FLASH_FIRE_NO_BOOST] = STRINGID_PKMNSXMADEYINEFFECTIVE};
+{
+    [B_MSG_FLASH_FIRE_BOOST]    = STRINGID_PKMNRAISEDFIREPOWERWITH,
+    [B_MSG_FLASH_FIRE_NO_BOOST] = STRINGID_PKMNSXMADEYINEFFECTIVE
+};
 
 const u16 gCaughtMonStringIds[] =
-    {
-        [B_MSG_SENT_SOMEONES_PC] = STRINGID_PKMNTRANSFERREDSOMEONESPC,
-        [B_MSG_SENT_LANETTES_PC] = STRINGID_PKMNTRANSFERREDLANETTESPC,
-        [B_MSG_SOMEONES_BOX_FULL] = STRINGID_PKMNBOXSOMEONESPCFULL,
-        [B_MSG_LANETTES_BOX_FULL] = STRINGID_PKMNBOXLANETTESPCFULL,
+{
+    [B_MSG_SENT_SOMEONES_PC]  = STRINGID_PKMNTRANSFERREDSOMEONESPC,
+    [B_MSG_SENT_LANETTES_PC]  = STRINGID_PKMNTRANSFERREDLANETTESPC,
+    [B_MSG_SOMEONES_BOX_FULL] = STRINGID_PKMNBOXSOMEONESPCFULL,
+    [B_MSG_LANETTES_BOX_FULL] = STRINGID_PKMNBOXLANETTESPCFULL,
 };
 
 const u16 gRoomsStringIds[] =
-    {
-        STRINGID_PKMNTWISTEDDIMENSIONS, STRINGID_TRICKROOMENDS,
-        STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON, STRINGID_WONDERROOMENDS,
-        STRINGID_HELDITEMSLOSEEFFECTS, STRINGID_MAGICROOMENDS,
-        STRINGID_EMPTYSTRING3};
+{
+    STRINGID_PKMNTWISTEDDIMENSIONS, STRINGID_TRICKROOMENDS,
+    STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON, STRINGID_WONDERROOMENDS,
+    STRINGID_HELDITEMSLOSEEFFECTS, STRINGID_MAGICROOMENDS,
+    STRINGID_EMPTYSTRING3
+};
 
 const u16 gStatusConditionsStringIds[] =
-    {
-        STRINGID_PKMNWASPOISONED, STRINGID_PKMNBADLYPOISONED, STRINGID_PKMNWASBURNED, STRINGID_PKMNWASPARALYZED, STRINGID_PKMNFELLASLEEP, STRINGID_PKMNGOTFROSTBITE};
+{
+    STRINGID_PKMNWASPOISONED, STRINGID_PKMNBADLYPOISONED, STRINGID_PKMNWASBURNED, STRINGID_PKMNWASPARALYZED, STRINGID_PKMNFELLASLEEP, STRINGID_PKMNGOTFROSTBITE
+};
 
 const u16 gStatus2StringIds[] =
-    {
-        STRINGID_PKMNWASCONFUSED, STRINGID_PKMNFELLINLOVE, STRINGID_TARGETCANTESCAPENOW, STRINGID_PKMNSUBJECTEDTOTORMENT};
+{
+    STRINGID_PKMNWASCONFUSED, STRINGID_PKMNFELLINLOVE, STRINGID_TARGETCANTESCAPENOW, STRINGID_PKMNSUBJECTEDTOTORMENT
+};
 
 const u16 gDamageNonTypesStartStringIds[] =
-    {
-        [B_MSG_TRAPPED_WITH_VINES] = STRINGID_TEAMTRAPPEDWITHVINES,
-        [B_MSG_CAUGHT_IN_VORTEX] = STRINGID_TEAMCAUGHTINVORTEX,
-        [B_MSG_SURROUNDED_BY_FIRE] = STRINGID_TEAMSURROUNDEDBYFIRE,
-        [B_MSG_SURROUNDED_BY_ROCKS] = STRINGID_TEAMSURROUNDEDBYROCKS,
+{
+    [B_MSG_TRAPPED_WITH_VINES]  = STRINGID_TEAMTRAPPEDWITHVINES,
+    [B_MSG_CAUGHT_IN_VORTEX]    = STRINGID_TEAMCAUGHTINVORTEX,
+    [B_MSG_SURROUNDED_BY_FIRE]  = STRINGID_TEAMSURROUNDEDBYFIRE,
+    [B_MSG_SURROUNDED_BY_ROCKS] = STRINGID_TEAMSURROUNDEDBYROCKS,
 };
 
 const u16 gDamageNonTypesDmgStringIds[] =
-    {
-        [B_MSG_HURT_BY_VINES] = STRINGID_PKMNHURTBYVINES,
-        [B_MSG_HURT_BY_VORTEX] = STRINGID_PKMNHURTBYVORTEX,
-        [B_MSG_BURNING_UP] = STRINGID_PKMNBURNINGUP,
-        [B_MSG_HURT_BY_ROCKS_THROWN] = STRINGID_PKMNHURTBYROCKSTHROWN,
+{
+    [B_MSG_HURT_BY_VINES]        = STRINGID_PKMNHURTBYVINES,
+    [B_MSG_HURT_BY_VORTEX]       = STRINGID_PKMNHURTBYVORTEX,
+    [B_MSG_BURNING_UP]           = STRINGID_PKMNBURNINGUP,
+    [B_MSG_HURT_BY_ROCKS_THROWN] = STRINGID_PKMNHURTBYROCKSTHROWN,
 };
 
-const u8 gText_PkmnIsEvolving[] = _("咦？\n{STR_VAR_1}开始进化了！");
-const u8 gText_CongratsPkmnEvolved[] = _("恭喜！你的{STR_VAR_1}\n进化成{STR_VAR_2}！{WAIT_SE}A\p");
-const u8 gText_PkmnStoppedEvolving[] = _("嗯？{STR_VAR_1}\n停止进化了！\p");
+const u8 gText_PkmnIsEvolving[] = _("什么？\n{STR_VAR_1}正在进化！");
+const u8 gText_CongratsPkmnEvolved[] = _("恭喜！你的{STR_VAR_1}\n进化成了{STR_VAR_2}！{WAIT_SE}\p");
+const u8 gText_PkmnStoppedEvolving[] = _("嗯？{STR_VAR_1}\n停止了进化！\p");
 const u8 gText_EllipsisQuestionMark[] = _("……？\p");
-const u8 gText_WhatWillPkmnDo[] = _("想要\n{B_BUFF1}做什么？");
-const u8 gText_WhatWillPkmnDo2[] = _("想要\n{B_PLAYER_NAME}做什么？");
-const u8 gText_WhatWillWallyDo[] = _("满充要做\n什么？");
-const u8 gText_LinkStandby[] = _("{PAUSE 16}准备连线中…");
+const u8 gText_WhatWillPkmnDo[] = _("{B_BUFF1}会怎么做？");
+const u8 gText_WhatWillPkmnDo2[] = _("{B_PLAYER_NAME}会怎么做？");
+const u8 gText_WhatWillWallyDo[] = _("WALLY会怎么做？");
+const u8 gText_LinkStandby[] = _("{PAUSE 16}链接待机…");
 const u8 gText_BattleMenu[] = _("战斗{CLEAR_TO 56}背包\n宝可梦{CLEAR_TO 56}逃跑");
-const u8 gText_SafariZoneMenu[] = _("精灵球{CLEAR_TO 56}{POKEBLOCK}\n靠近{CLEAR_TO 56}逃跑");
+const u8 gText_SafariZoneMenu[] = _("球{CLEAR_TO 56}{POKEBLOCK}\n靠近{CLEAR_TO 56}逃跑");
 const u8 gText_MoveInterfacePP[] = _("PP ");
-const u8 gText_MoveInterfaceType[] = _("属性/");
-const u8 gText_MoveInterfacePpType[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}PP\n属性/");
+const u8 gText_MoveInterfaceType[] = _("类型/");
+const u8 gText_MoveInterfacePpType[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}PP\n类型/");
 const u8 gText_MoveInterfaceDynamicColors[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
-const u8 gText_WhichMoveToForget4[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}要忘记\n哪个技能？");
+const u8 gText_WhichMoveToForget4[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}应该忘记哪个招式？");
 const u8 gText_BattleYesNoChoice[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}是\n否");
-const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}与哪个\n换位？");
+const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}切换\n哪一个？");
 const u8 gText_BattleSwitchWhich2[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
 const u8 gText_BattleSwitchWhich3[] = _("{UP_ARROW}");
 const u8 gText_BattleSwitchWhich4[] = _("{ESCAPE 4}");
 const u8 gText_BattleSwitchWhich5[] = _("-");
-
-// Unused
-static const u8 *const sStatNamesTable2[] =
-    {
-        gText_HP3, gText_SpAtk, gText_Attack,
-        gText_SpDef, gText_Defense, gText_Speed};
-
 const u8 gText_SafariBalls[] = _("{HIGHLIGHT DARK_GRAY}狩猎球");
-const u8 gText_SafariBallLeft[] = _("{HIGHLIGHT DARK_GRAY}左边: $"
-                                    "{HIGHLIGHT DARK_GRAY}");
+const u8 gText_SafariBallLeft[] = _("{HIGHLIGHT DARK_GRAY}剩余：$" "{HIGHLIGHT DARK_GRAY}");
 const u8 gText_Sleep[] = _("睡眠");
 const u8 gText_Poison[] = _("中毒");
-const u8 gText_Burn[] = _("灼烧");
+const u8 gText_Burn[] = _("烧伤");
 const u8 gText_Paralysis[] = _("麻痹");
 const u8 gText_Ice[] = _("冰冻");
 const u8 gText_Confusion[] = _("混乱");
 const u8 gText_Love[] = _("着迷");
-const u8 gText_SpaceAndSpace[] = _("和");
-const u8 gText_CommaSpace[] = _("，");
+const u8 gText_SpaceAndSpace[] = _(" 和 ");
+const u8 gText_CommaSpace[] = _(", ");
 const u8 gText_Space2[] = _(" ");
 const u8 gText_LineBreak[] = _("\l");
 const u8 gText_NewLine[] = _("\n");
 const u8 gText_Are[] = _("是");
 const u8 gText_Are2[] = _("是");
 const u8 gText_BadEgg[] = _("坏蛋");
-const u8 gText_BattleWallyName[] = _("满充");
-const u8 gText_Win[] = _("{HIGHLIGHT TRANSPARENT}胜");
-const u8 gText_Loss[] = _("{HIGHLIGHT TRANSPARENT}败");
-const u8 gText_Draw[] = _("{HIGHLIGHT TRANSPARENT}和");
-static const u8 sText_SpaceIs[] = _("是");
+const u8 gText_BattleWallyName[] = _("WALLY");
+const u8 gText_Win[] = _("{HIGHLIGHT TRANSPARENT}胜利");
+const u8 gText_Loss[] = _("{HIGHLIGHT TRANSPARENT}失败");
+const u8 gText_Draw[] = _("{HIGHLIGHT TRANSPARENT}平局");
+static const u8 sText_SpaceIs[] = _(" 是");
 static const u8 sText_ApostropheS[] = _("的");
-
-const u8 gText_BattleTourney[] = _("战斗巡回赛");
-static const u8 sText_Round1[] = _("第1回合");
-static const u8 sText_Round2[] = _("第2回合");
-static const u8 sText_Semifinal[] = _("半决赛");
-static const u8 sText_Final[] = _("决赛");
+const u8 gText_BattleTourney[] = _("战斗锦标赛");
 
 const u8 *const gRoundsStringTable[DOME_ROUNDS_COUNT] =
-    {
-        [DOME_ROUND1] = sText_Round1,
-        [DOME_ROUND2] = sText_Round2,
-        [DOME_SEMIFINAL] = sText_Semifinal,
-        [DOME_FINAL] = sText_Final};
+{
+    [DOME_ROUND1]    = COMPOUND_STRING("第一轮"),
+    [DOME_ROUND2]    = COMPOUND_STRING("第二轮"),
+    [DOME_SEMIFINAL] = COMPOUND_STRING("半决赛"),
+    [DOME_FINAL]     = COMPOUND_STRING("决赛"),
+};
 
-const u8 gText_TheGreatNewHope[] = _("伟大的新希望!\p");
-const u8 gText_WillChampionshipDreamComeTrue[] = _("冠军梦会实现吗？！\p");
-const u8 gText_AFormerChampion[] = _("曾经的冠军！\p");
+const u8 gText_TheGreatNewHope[] = _("新的希望！\p");
+const u8 gText_WillChampionshipDreamComeTrue[] = _("冠军梦能否成真？！\p");
+const u8 gText_AFormerChampion[] = _("前冠军！\p");
 const u8 gText_ThePreviousChampion[] = _("上届冠军！\p");
 const u8 gText_TheUnbeatenChampion[] = _("不败的冠军！\p");
 const u8 gText_PlayerMon1Name[] = _("{B_PLAYER_MON1_NAME}");
-const u8 gText_Vs[] = _("对决");
+const u8 gText_Vs[] = _("VS");
 const u8 gText_OpponentMon1Name[] = _("{B_OPPONENT_MON1_NAME}");
-const u8 gText_Mind[] = _("头脑");
+const u8 gText_Mind[] = _("意志");
 const u8 gText_Skill[] = _("技巧");
 const u8 gText_Body[] = _("身体");
 const u8 gText_Judgment[] = _("{B_BUFF1}{CLEAR 13}判定{CLEAR 13}{B_BUFF2}");
-static const u8 sText_TwoTrainersSentPkmn[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}派出了\n{B_OPPONENT_MON1_NAME}！\p{B_TRAINER2_CLASS}{B_TRAINER2_NAME}派出了\n{B_OPPONENT_MON2_NAME}！");
-static const u8 sText_Trainer2SentOutPkmn[] = _("{B_TRAINER2_CLASS}{B_TRAINER2_NAME}派出了\n{B_BUFF1}！");
-static const u8 sText_TwoTrainersWantToBattle[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}和\n{B_TRAINER2_CLASS}{B_TRAINER2_NAME}\l想要对战！\p");
-static const u8 sText_InGamePartnerSentOutZGoN[] = _("{B_PARTNER_CLASS}{B_PARTNER_NAME}派出了\n{B_PLAYER_MON2_NAME}！\l去吧，{B_PLAYER_MON1_NAME}！");
-static const u8 sText_TwoInGameTrainersDefeated[] = _("{B_TRAINER1_CLASS}{B_TRAINER1_NAME}和\n{B_TRAINER2_CLASS}{B_TRAINER2_NAME}\l被打败了！\p");
-static const u8 sText_Trainer2LoseText[] = _("{B_TRAINER2_LOSE_TEXT}");
-static const u8 sText_PkmnIncapableOfPower[] = _("{B_ATK_NAME_WITH_PREFIX}似乎无法\n使出力量！");
-static const u8 sText_GlintAppearsInEye[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}眼中闪烁\n着亮光！");
-static const u8 sText_PkmnGettingIntoPosition[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}准备\n就位！");
-static const u8 sText_PkmnBeganGrowlingDeeply[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}发出了咆哮！");
-static const u8 sText_PkmnEagerForMore[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}想要更多！");
+static const u8 sText_TwoTrainersSentPkmn[] = _("{B_TRAINER1_NAME_WITH_CLASS}放出了{B_OPPONENT_MON1_NAME}！\p{B_TRAINER2_NAME_WITH_CLASS}放出了{B_OPPONENT_MON2_NAME}！");
+static const u8 sText_Trainer2SentOutPkmn[] = _("{B_TRAINER2_NAME_WITH_CLASS}放出了{B_BUFF1}！");
+static const u8 sText_TwoTrainersWantToBattle[] = _("你被{B_TRAINER1_NAME_WITH_CLASS}和{B_TRAINER2_NAME_WITH_CLASS}挑战了！\p");
+static const u8 sText_InGamePartnerSentOutZGoN[] = _("{B_PARTNER_NAME_WITH_CLASS}放出了{B_PLAYER_MON2_NAME}！去吧，{B_PLAYER_MON1_NAME}！");
 
 const u16 gBattlePalaceFlavorTextTable[] =
-    {
-        [B_MSG_GLINT_IN_EYE] = STRINGID_GLINTAPPEARSINEYE,
-        [B_MSG_GETTING_IN_POS] = STRINGID_PKMNGETTINGINTOPOSITION,
-        [B_MSG_GROWL_DEEPLY] = STRINGID_PKMNBEGANGROWLINGDEEPLY,
-        [B_MSG_EAGER_FOR_MORE] = STRINGID_PKMNEAGERFORMORE,
+{
+    [B_MSG_GLINT_IN_EYE]   = STRINGID_GLINTAPPEARSINEYE,
+    [B_MSG_GETTING_IN_POS] = STRINGID_PKMNGETTINGINTOPOSITION,
+    [B_MSG_GROWL_DEEPLY]   = STRINGID_PKMNBEGANGROWLINGDEEPLY,
+    [B_MSG_EAGER_FOR_MORE] = STRINGID_PKMNEAGERFORMORE,
 };
-
-static const u8 sText_RefIfNothingIsDecided[] = _("裁判：如果3回合无法决出胜负，\n将由我们来裁定结果！");
-static const u8 sText_RefThatsIt[] = _("裁判：到此为止！现在将由我们\n裁定谁是胜利者！");
-static const u8 sText_RefJudgeMind[] = _("裁判：判定类别 1，头脑！\n宝可梦展示出最大勇气！\p");
-static const u8 sText_RefJudgeSkill[] = _("裁判：判定类别 2，技巧！\n宝可梦最优化使用技能！\p");
-static const u8 sText_RefJudgeBody[] = _("裁判：判定类别 3，身体！\n宝可梦拥有最强生命力！\p");
-static const u8 sText_RefPlayerWon[] = _("裁判：裁定结果：{B_BUFF1}与{B_BUFF2}！\n胜利者是{B_PLAYER_NAME}的{B_PLAYER_MON1_NAME}！\p");
-static const u8 sText_RefOpponentWon[] = _("裁判：裁定结果：{B_BUFF1}与{B_BUFF2}！\n胜利者是{B_TRAINER1_NAME}的{B_OPPONENT_MON1_NAME}！\p");
-static const u8 sText_RefDraw[] = _("裁判：裁定结果：3比3！\n你们打成了平手！\p");
-static const u8 sText_DefeatedOpponentByReferee[] = _("裁判裁定{B_PLAYER_MON1_NAME}击败了\n对手{B_OPPONENT_MON1_NAME}！");
-static const u8 sText_LostToOpponentByReferee[] = _("裁判裁定{B_PLAYER_MON1_NAME}输给了\n对手{B_OPPONENT_MON1_NAME}！");
-static const u8 sText_TiedOpponentByReferee[] = _("裁判裁定{B_PLAYER_MON1_NAME}与\n{B_OPPONENT_MON1_NAME}打成了平手！");
-static const u8 sText_RefCommenceBattle[] = _("裁判：{B_PLAYER_MON1_NAME}对抗{B_OPPONENT_MON1_NAME}！\n战斗开始！");
 
 const u8 *const gRefereeStringsTable[] =
-    {
-        [B_MSG_REF_NOTHING_IS_DECIDED] = sText_RefIfNothingIsDecided,
-        [B_MSG_REF_THATS_IT] = sText_RefThatsIt,
-        [B_MSG_REF_JUDGE_MIND] = sText_RefJudgeMind,
-        [B_MSG_REF_JUDGE_SKILL] = sText_RefJudgeSkill,
-        [B_MSG_REF_JUDGE_BODY] = sText_RefJudgeBody,
-        [B_MSG_REF_PLAYER_WON] = sText_RefPlayerWon,
-        [B_MSG_REF_OPPONENT_WON] = sText_RefOpponentWon,
-        [B_MSG_REF_DRAW] = sText_RefDraw,
-        [B_MSG_REF_COMMENCE_BATTLE] = sText_RefCommenceBattle,
+{
+    [B_MSG_REF_NOTHING_IS_DECIDED] = COMPOUND_STRING("裁判：如果在3回合内没有决定结果，我们将进行评分！"),
+    [B_MSG_REF_THATS_IT]           = COMPOUND_STRING("裁判：就是这样！现在我们将进行评分来确定胜者！"),
+    [B_MSG_REF_JUDGE_MIND]         = COMPOUND_STRING("裁判：评分类别1，意志！展现出最强毅力的宝可梦！\p"),
+    [B_MSG_REF_JUDGE_SKILL]        = COMPOUND_STRING("裁判：评分类别2，技巧！使用招式最棒的宝可梦！\p"),
+    [B_MSG_REF_JUDGE_BODY]         = COMPOUND_STRING("裁判：评分类别3，身体！最具活力的宝可梦！\p"),
+    [B_MSG_REF_PLAYER_WON]         = COMPOUND_STRING("裁判：评分结果：{B_BUFF1}对{B_BUFF2}！胜者是{B_PLAYER_NAME}的{B_PLAYER_MON1_NAME}！\p"),
+    [B_MSG_REF_OPPONENT_WON]       = COMPOUND_STRING("裁判：评分结果：{B_BUFF1}对{B_BUFF2}！胜者是{B_TRAINER1_NAME}的{B_OPPONENT_MON1_NAME}！\p"),
+    [B_MSG_REF_DRAW]               = COMPOUND_STRING("裁判：评分结果：3对3！我们有了一场平局！\p"),
+    [B_MSG_REF_COMMENCE_BATTLE]    = COMPOUND_STRING("裁判：{B_PLAYER_MON1_NAME}对{B_OPPONENT_MON1_NAME}！开始对战！"),
 };
 
-static const u8 sText_QuestionForfeitMatch[] = _("想放弃参赛资格，\n并退出比赛吗？");
-static const u8 sText_ForfeitedMatch[] = _("{B_PLAYER_NAME}放弃了参赛资格！");
-static const u8 sText_Trainer1WinText[] = _("{B_TRAINER1_WIN_TEXT}");
-static const u8 sText_Trainer2WinText[] = _("{B_TRAINER2_WIN_TEXT}");
-static const u8 sText_Trainer1Fled[] = _("{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS}{B_TRAINER1_NAME}逃跑了！");
-static const u8 sText_PlayerLostAgainstTrainer1[] = _("你输给了\n{B_TRAINER1_CLASS}{B_TRAINER1_NAME}！");
-static const u8 sText_PlayerBattledToDrawTrainer1[] = _("你跟\n{B_TRAINER1_CLASS}{B_TRAINER1_NAME}打成了平手！");
-const u8 gText_RecordBattleToPass[] = _("你想将这场对战记录\n在你的开拓区通行证上吗？");
-const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}的对战结果\n已经记录在开拓区通行证上了。");
-static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_LINK_OPPONENT1_NAME}\n想要对战！{PAUSE 49}");
-static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_LINK_OPPONENT1_NAME}和{B_LINK_OPPONENT2_NAME}\n想要对战！{PAUSE 49}");
-static const u8 sText_Your1[] = _("我方");
-static const u8 sText_Opposing1[] = _("对方");
-static const u8 sText_Your2[] = _("我方");
-static const u8 sText_Opposing2[] = _("对方");
+static const u8 sText_Trainer1Fled[] = _( "{PLAY_SE SE_FLEE}{B_TRAINER1_NAME_WITH_CLASS}逃跑了！");
+static const u8 sText_PlayerLostAgainstTrainer1[] = _("你输给了{B_TRAINER1_NAME_WITH_CLASS}！");
+static const u8 sText_PlayerBattledToDrawTrainer1[] = _("你与{B_TRAINER1_NAME_WITH_CLASS}战成了平局！");
+const u8 gText_RecordBattleToPass[] = _("你想在你的边疆通行证上记录这场战斗吗？");
+const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}的战斗结果被记录在边疆通行证上。");
+static const u8 sText_LinkTrainerWantsToBattlePause[] = _("你被{B_LINK_OPPONENT1_NAME}挑战了！\p");
+static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("你被{B_LINK_OPPONENT1_NAME}和{B_LINK_OPPONENT2_NAME}挑战了！\p");
+static const u8 sText_Your1[] = _("你的");
+static const u8 sText_Opposing1[] = _("对手的");
+static const u8 sText_Your2[] = _("你的");
+static const u8 sText_Opposing2[] = _("对手的");
 
 // This is four lists of moves which use a different attack string in Japanese
 // to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
 static const u16 sGrammarMoveUsedTable[] =
-    {
-        MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_GROWTH,
-        MOVE_HARDEN, MOVE_MINIMIZE, MOVE_SMOKESCREEN,
-        MOVE_WITHDRAW, MOVE_DEFENSE_CURL, MOVE_EGG_BOMB,
-        MOVE_SMOG, MOVE_BONE_CLUB, MOVE_FLASH, MOVE_SPLASH,
-        MOVE_ACID_ARMOR, MOVE_BONEMERANG, MOVE_REST, MOVE_SHARPEN,
-        MOVE_SUBSTITUTE, MOVE_MIND_READER, MOVE_SNORE,
-        MOVE_PROTECT, MOVE_SPIKES, MOVE_ENDURE, MOVE_ROLLOUT,
-        MOVE_SWAGGER, MOVE_SLEEP_TALK, MOVE_HIDDEN_POWER,
-        MOVE_PSYCH_UP, MOVE_EXTREME_SPEED, MOVE_FOLLOW_ME,
-        MOVE_TRICK, MOVE_ASSIST, MOVE_INGRAIN, MOVE_KNOCK_OFF,
-        MOVE_CAMOUFLAGE, MOVE_ASTONISH, MOVE_ODOR_SLEUTH,
-        MOVE_GRASS_WHISTLE, MOVE_SHEER_COLD, MOVE_MUDDY_WATER,
-        MOVE_IRON_DEFENSE, MOVE_BOUNCE, 0,
+{
+    MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_GROWTH,
+    MOVE_HARDEN, MOVE_MINIMIZE, MOVE_SMOKESCREEN,
+    MOVE_WITHDRAW, MOVE_DEFENSE_CURL, MOVE_EGG_BOMB,
+    MOVE_SMOG, MOVE_BONE_CLUB, MOVE_FLASH, MOVE_SPLASH,
+    MOVE_ACID_ARMOR, MOVE_BONEMERANG, MOVE_REST, MOVE_SHARPEN,
+    MOVE_SUBSTITUTE, MOVE_MIND_READER, MOVE_SNORE,
+    MOVE_PROTECT, MOVE_SPIKES, MOVE_ENDURE, MOVE_ROLLOUT,
+    MOVE_SWAGGER, MOVE_SLEEP_TALK, MOVE_HIDDEN_POWER,
+    MOVE_PSYCH_UP, MOVE_EXTREME_SPEED, MOVE_FOLLOW_ME,
+    MOVE_TRICK, MOVE_ASSIST, MOVE_INGRAIN, MOVE_KNOCK_OFF,
+    MOVE_CAMOUFLAGE, MOVE_ASTONISH, MOVE_ODOR_SLEUTH,
+    MOVE_GRASS_WHISTLE, MOVE_SHEER_COLD, MOVE_MUDDY_WATER,
+    MOVE_IRON_DEFENSE, MOVE_BOUNCE, 0,
 
-        MOVE_TELEPORT, MOVE_RECOVER, MOVE_BIDE, MOVE_AMNESIA,
-        MOVE_FLAIL, MOVE_TAUNT, MOVE_BULK_UP, 0,
+    MOVE_TELEPORT, MOVE_RECOVER, MOVE_BIDE, MOVE_AMNESIA,
+    MOVE_FLAIL, MOVE_TAUNT, MOVE_BULK_UP, 0,
 
-        MOVE_MEDITATE, MOVE_AGILITY, MOVE_MIMIC, MOVE_DOUBLE_TEAM,
-        MOVE_BARRAGE, MOVE_TRANSFORM, MOVE_STRUGGLE, MOVE_SCARY_FACE,
-        MOVE_CHARGE, MOVE_WISH, MOVE_BRICK_BREAK, MOVE_YAWN,
-        MOVE_FEATHER_DANCE, MOVE_TEETER_DANCE, MOVE_MUD_SPORT,
-        MOVE_FAKE_TEARS, MOVE_WATER_SPORT, MOVE_CALM_MIND, 0,
+    MOVE_MEDITATE, MOVE_AGILITY, MOVE_MIMIC, MOVE_DOUBLE_TEAM,
+    MOVE_BARRAGE, MOVE_TRANSFORM, MOVE_STRUGGLE, MOVE_SCARY_FACE,
+    MOVE_CHARGE, MOVE_WISH, MOVE_BRICK_BREAK, MOVE_YAWN,
+    MOVE_FEATHER_DANCE, MOVE_TEETER_DANCE, MOVE_MUD_SPORT,
+    MOVE_FAKE_TEARS, MOVE_WATER_SPORT, MOVE_CALM_MIND, 0,
 
-        MOVE_POUND, MOVE_SCRATCH, MOVE_VISE_GRIP,
-        MOVE_WING_ATTACK, MOVE_FLY, MOVE_BIND, MOVE_SLAM,
-        MOVE_HORN_ATTACK, MOVE_WRAP, MOVE_THRASH, MOVE_TAIL_WHIP,
-        MOVE_LEER, MOVE_BITE, MOVE_GROWL, MOVE_ROAR,
-        MOVE_SING, MOVE_PECK, MOVE_ABSORB, MOVE_STRING_SHOT,
-        MOVE_EARTHQUAKE, MOVE_FISSURE, MOVE_DIG, MOVE_TOXIC,
-        MOVE_SCREECH, MOVE_METRONOME, MOVE_LICK, MOVE_CLAMP,
-        MOVE_CONSTRICT, MOVE_POISON_GAS, MOVE_BUBBLE,
-        MOVE_SLASH, MOVE_SPIDER_WEB, MOVE_NIGHTMARE, MOVE_CURSE,
-        MOVE_FORESIGHT, MOVE_CHARM, MOVE_ATTRACT, MOVE_ROCK_SMASH,
-        MOVE_UPROAR, MOVE_SPIT_UP, MOVE_SWALLOW, MOVE_TORMENT,
-        MOVE_FLATTER, MOVE_ROLE_PLAY, MOVE_ENDEAVOR, MOVE_TICKLE,
-        MOVE_COVET, 0};
+    MOVE_POUND, MOVE_SCRATCH, MOVE_VISE_GRIP,
+    MOVE_WING_ATTACK, MOVE_FLY, MOVE_BIND, MOVE_SLAM,
+    MOVE_HORN_ATTACK, MOVE_WRAP, MOVE_THRASH, MOVE_TAIL_WHIP,
+    MOVE_LEER, MOVE_BITE, MOVE_GROWL, MOVE_ROAR,
+    MOVE_SING, MOVE_PECK, MOVE_ABSORB, MOVE_STRING_SHOT,
+    MOVE_EARTHQUAKE, MOVE_FISSURE, MOVE_DIG, MOVE_TOXIC,
+    MOVE_SCREECH, MOVE_METRONOME, MOVE_LICK, MOVE_CLAMP,
+    MOVE_CONSTRICT, MOVE_POISON_GAS, MOVE_BUBBLE,
+    MOVE_SLASH, MOVE_SPIDER_WEB, MOVE_NIGHTMARE, MOVE_CURSE,
+    MOVE_FORESIGHT, MOVE_CHARM, MOVE_ATTRACT, MOVE_ROCK_SMASH,
+    MOVE_UPROAR, MOVE_SPIT_UP, MOVE_SWALLOW, MOVE_TORMENT,
+    MOVE_FLATTER, MOVE_ROLE_PLAY, MOVE_ENDEAVOR, MOVE_TICKLE,
+    MOVE_COVET, 0
+};
 
 static const u8 sText_EmptyStatus[] = _("$$$$$$$");
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
-    {
-        [B_WIN_MSG] ={
-            .fillValue = PIXEL_FILL(0xF),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 1,
-            .fgColor = 1,
-            .bgColor = 15,
-            .shadowColor = 6,
-        },
-        [B_WIN_ACTION_PROMPT] ={
-            .fillValue = PIXEL_FILL(0xF),
-            .fontId = FONT_NORMAL,
-            .x = 1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .bgColor = 15,
-            .shadowColor = 6,
-        },
-        [B_WIN_ACTION_MENU] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_1] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_2] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_3] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_4] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_PP] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 12,
-            .bgColor = 14,
-            .shadowColor = 11,
-        },
-        [B_WIN_DUMMY] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_PP_REMAINING] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 2,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 12,
-            .bgColor = 14,
-            .shadowColor = 11,
-        },
-        [B_WIN_MOVE_TYPE] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_SWITCH_PROMPT] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_YESNO] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_LEVEL_UP_BOX] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_LEVEL_UP_BANNER] ={
-            .fillValue = PIXEL_FILL(0),
-            .fontId = FONT_NORMAL,
-            .x = 32,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .shadowColor = 2,
-        },
-        [B_WIN_VS_PLAYER] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_VS_OPPONENT] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_VS_MULTI_PLAYER_1] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_VS_MULTI_PLAYER_2] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_VS_MULTI_PLAYER_3] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_VS_MULTI_PLAYER_4] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_VS_OUTCOME_DRAW] ={
-            .fillValue = PIXEL_FILL(0),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .shadowColor = 6,
-        },
-        [B_WIN_VS_OUTCOME_LEFT] ={
-            .fillValue = PIXEL_FILL(0),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .shadowColor = 6,
-        },
-        [B_WIN_VS_OUTCOME_RIGHT] ={
-            .fillValue = PIXEL_FILL(0x0),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .shadowColor = 6,
-        },
-        [B_WIN_MOVE_DESCRIPTION] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .speed = 0,
-            .fgColor = TEXT_DYNAMIC_COLOR_4,
-            .bgColor = TEXT_DYNAMIC_COLOR_5,
-            .shadowColor = TEXT_DYNAMIC_COLOR_6,
-        },
+{
+    [B_WIN_MSG] = {
+        .fillValue = PIXEL_FILL(0xF),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 1,
+        .fgColor = 1,
+        .bgColor = 15,
+        .shadowColor = 6,
+    },
+    [B_WIN_ACTION_PROMPT] = {
+        .fillValue = PIXEL_FILL(0xF),
+        .fontId = FONT_NORMAL,
+        .x = 1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 15,
+        .shadowColor = 6,
+    },
+    [B_WIN_ACTION_MENU] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_1] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_2] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_3] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_4] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_PP] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 12,
+        .bgColor = 14,
+        .shadowColor = 11,
+    },
+    [B_WIN_DUMMY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_PP_REMAINING] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 2,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 12,
+        .bgColor = 14,
+        .shadowColor = 11,
+    },
+    [B_WIN_MOVE_TYPE] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_SWITCH_PROMPT] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_YESNO] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_LEVEL_UP_BOX] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_LEVEL_UP_BANNER] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = FONT_NORMAL,
+        .x = 32,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .shadowColor = 2,
+    },
+    [B_WIN_VS_PLAYER] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_VS_OPPONENT] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_VS_MULTI_PLAYER_1] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_VS_MULTI_PLAYER_2] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_VS_MULTI_PLAYER_3] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_VS_MULTI_PLAYER_4] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_VS_OUTCOME_DRAW] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .shadowColor = 6,
+    },
+    [B_WIN_VS_OUTCOME_LEFT] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .shadowColor = 6,
+    },
+    [B_WIN_VS_OUTCOME_RIGHT] = {
+        .fillValue = PIXEL_FILL(0x0),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .shadowColor = 6,
+    },
+    [B_WIN_MOVE_DESCRIPTION] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
+    },
 };
 
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
-    {
-        [B_WIN_MSG] ={
-            .fillValue = PIXEL_FILL(0xF),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 1,
-            .fgColor = 1,
-            .bgColor = 15,
-            .shadowColor = 6,
-        },
-        [B_WIN_ACTION_PROMPT] ={
-            .fillValue = PIXEL_FILL(0xF),
-            .fontId = FONT_NORMAL,
-            .x = 1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .bgColor = 15,
-            .shadowColor = 6,
-        },
-        [B_WIN_ACTION_MENU] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_1] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_2] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_3] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_MOVE_NAME_4] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_PP] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 12,
-            .bgColor = 14,
-            .shadowColor = 11,
-        },
-        [B_WIN_DUMMY] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_PP_REMAINING] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 2,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 12,
-            .bgColor = 14,
-            .shadowColor = 11,
-        },
-        [B_WIN_MOVE_TYPE] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_SWITCH_PROMPT] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_YESNO] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_LEVEL_UP_BOX] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [B_WIN_LEVEL_UP_BANNER] ={
-            .fillValue = PIXEL_FILL(0),
-            .fontId = FONT_NORMAL,
-            .x = 32,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .shadowColor = 2,
-        },
-        [ARENA_WIN_PLAYER_NAME] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 1,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_VS] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_OPPONENT_NAME] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_MIND] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_SKILL] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_BODY] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_JUDGMENT_TITLE] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NORMAL,
-            .x = -1,
-            .y = 1,
-            .speed = 0,
-            .fgColor = 13,
-            .bgColor = 14,
-            .shadowColor = 15,
-        },
-        [ARENA_WIN_JUDGMENT_TEXT] ={
-            .fillValue = PIXEL_FILL(0x1),
-            .fontId = FONT_NORMAL,
-            .x = 0,
-            .y = 1,
-            .speed = 1,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [B_WIN_MOVE_DESCRIPTION] ={
-            .fillValue = PIXEL_FILL(0xE),
-            .fontId = FONT_NARROW,
-            .x = 0,
-            .y = 1,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .speed = 0,
-            .fgColor = TEXT_DYNAMIC_COLOR_4,
-            .bgColor = TEXT_DYNAMIC_COLOR_5,
-            .shadowColor = TEXT_DYNAMIC_COLOR_6,
-        },
+{
+    [B_WIN_MSG] = {
+        .fillValue = PIXEL_FILL(0xF),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 1,
+        .fgColor = 1,
+        .bgColor = 15,
+        .shadowColor = 6,
+    },
+    [B_WIN_ACTION_PROMPT] = {
+        .fillValue = PIXEL_FILL(0xF),
+        .fontId = FONT_NORMAL,
+        .x = 1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 15,
+        .shadowColor = 6,
+    },
+    [B_WIN_ACTION_MENU] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_1] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_2] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_3] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_NAME_4] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_PP] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 12,
+        .bgColor = 14,
+        .shadowColor = 11,
+    },
+    [B_WIN_DUMMY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_PP_REMAINING] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 2,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 12,
+        .bgColor = 14,
+        .shadowColor = 11,
+    },
+    [B_WIN_MOVE_TYPE] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_SWITCH_PROMPT] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_YESNO] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_LEVEL_UP_BOX] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_LEVEL_UP_BANNER] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = FONT_NORMAL,
+        .x = 32,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .shadowColor = 2,
+    },
+    [ARENA_WIN_PLAYER_NAME] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_VS] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_OPPONENT_NAME] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_MIND] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_SKILL] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_BODY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_JUDGMENT_TITLE] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [ARENA_WIN_JUDGMENT_TEXT] = {
+        .fillValue = PIXEL_FILL(0x1),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 1,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [B_WIN_MOVE_DESCRIPTION] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = TEXT_DYNAMIC_COLOR_4,
+        .bgColor = TEXT_DYNAMIC_COLOR_5,
+        .shadowColor = TEXT_DYNAMIC_COLOR_6,
+    },
 };
 
 static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
-    {
-        [B_WIN_TYPE_NORMAL] = sTextOnWindowsInfo_Normal,
-        [B_WIN_TYPE_ARENA] = sTextOnWindowsInfo_Arena};
+{
+    [B_WIN_TYPE_NORMAL] = sTextOnWindowsInfo_Normal,
+    [B_WIN_TYPE_ARENA]  = sTextOnWindowsInfo_Arena
+};
 
-static const u8 sRecordedBattleTextSpeeds[] ={8, 4, 1, 0};
+static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
 void BufferStringBattle(u16 stringID, u32 battler)
 {
@@ -2775,7 +2121,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
                 stringPtr = sText_LegendaryPkmnAppeared;
-            else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]]))
+            else if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]]))
                 stringPtr = sText_TwoWildPkmnAppeared;
             else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
                 stringPtr = sText_WildPkmnAppearedPause;
@@ -2786,7 +2132,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
     case STRINGID_INTROSENDOUT: // poke first send-out
         if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
+            if (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
                     stringPtr = sText_InGamePartnerSentOutZGoN;
@@ -2804,7 +2150,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
+            if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
                 if (BATTLE_TWO_VS_ONE_OPPONENT)
                     stringPtr = sText_Trainer1SentOutTwoPkmn;
@@ -2835,7 +2181,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (*(&gBattleStruct->hpScale) == 0)
                 stringPtr = sText_PkmnThatsEnough;
-            else if (*(&gBattleStruct->hpScale) == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            else if (*(&gBattleStruct->hpScale) == 1 || IsDoubleBattle())
                 stringPtr = sText_PkmnComeBack;
             else if (*(&gBattleStruct->hpScale) == 2)
                 stringPtr = sText_PkmnOkComeBack;
@@ -2860,7 +2206,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
     case STRINGID_SWITCHINMON: // switch-in msg
         if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
         {
-            if (*(&gBattleStruct->hpScale) == 0 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (*(&gBattleStruct->hpScale) == 0 || IsDoubleBattle())
                 stringPtr = sText_GoPkmn2;
             else if (*(&gBattleStruct->hpScale) == 1)
                 stringPtr = sText_DoItPkmn;
@@ -2907,7 +2253,9 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         break;
     case STRINGID_USEDMOVE: // Pokémon used a move msg
-        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT && !IsZMove(gBattleMsgDataPtr->currentMove) && !IsMaxMove(gBattleMsgDataPtr->currentMove))
+        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT
+         && !IsZMove(gBattleMsgDataPtr->currentMove)
+         && !IsMaxMove(gBattleMsgDataPtr->currentMove))
             StringCopy(gBattleTextBuff3, gTypesInfo[*(&gBattleStruct->stringMoveType)].generic);
         else
             StringCopy(gBattleTextBuff3, GetMoveName(gBattleMsgDataPtr->currentMove));
@@ -2993,7 +2341,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         else
         {
-            stringPtr = gBattleStringsTable[stringID - BATTLESTRINGS_TABLE_START];
+            stringPtr = gBattleStringsTable[stringID];
         }
         break;
     }
@@ -3003,7 +2351,19 @@ void BufferStringBattle(u16 stringID, u32 battler)
 
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 {
-    return BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
+#ifndef NDEBUG
+    u32 j, strWidth;
+    u32 dstID = BattleStringExpandPlaceholders(src, gDisplayedStringBattle, sizeof(gDisplayedStringBattle));
+    for (j = 1;; j++)
+    {
+        strWidth = GetStringLineWidth(0, gDisplayedStringBattle, 0, j, sizeof(gDisplayedStringBattle));
+        if (strWidth == 0)
+            break;
+    }
+    return dstID;
+#else
+    return BattleStringExpandPlaceholders(src, gDisplayedStringBattle, sizeof(gDisplayedStringBattle));
+#endif
 }
 
 static const u8 *TryGetStatusString(u8 *src)
@@ -3018,8 +2378,7 @@ static const u8 *TryGetStatusString(u8 *src)
     statusPtr = status;
     for (i = 0; i < ARRAY_COUNT(status); i++)
     {
-        if (*src == EOS)
-            break; // one line required to match -g
+        if (*src == EOS) break; // one line required to match -g
         *statusPtr = *src;
         src++;
         statusPtr++;
@@ -3030,7 +2389,8 @@ static const u8 *TryGetStatusString(u8 *src)
 
     for (i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
     {
-        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0]) && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
+        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
+            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
             return gStatusConditionStringsTable[i][1];
     }
     return NULL;
@@ -3038,35 +2398,47 @@ static const u8 *TryGetStatusString(u8 *src)
 
 static void GetBattlerNick(u32 battler, u8 *dst)
 {
-    struct Pokemon *mon, *illusionMon;
+    struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
+    struct Pokemon *mon = GetPartyBattlerData(battler);
 
-    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
-    else
-        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
-
-    illusionMon = GetIllusionMonPtr(battler);
     if (illusionMon != NULL)
         mon = illusionMon;
     GetMonData(mon, MON_DATA_NICKNAME, dst);
     StringGet_Nickname(dst);
 }
 
-#define HANDLE_NICKNAME_STRING_CASE(battler)        \
-    if (GetBattlerSide(battler) != B_SIDE_PLAYER)   \
-    {                                               \
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER) \
-            toCpy = sText_FoePkmnPrefix;            \
-        else                                        \
-            toCpy = sText_WildPkmnPrefix;           \
-        while (*toCpy != EOS)                       \
-        {                                           \
-            dst[dstID] = *toCpy;                    \
-            dstID++;                                \
-            toCpy++;                                \
-        }                                          \
-    }                                              \
-    GetBattlerNick(battler, text);                  \
+#define HANDLE_NICKNAME_STRING_CASE(battler)                            \
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)                       \
+    {                                                                   \
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
+            toCpy = sText_FoePkmnPrefix;                                \
+        else                                                            \
+            toCpy = sText_WildPkmnPrefix;                               \
+        while (*toCpy != EOS)                                           \
+        {                                                               \
+            dst[dstID] = *toCpy;                                        \
+            dstID++;                                                    \
+            toCpy++;                                                    \
+        }                                                               \
+    }                                                                   \
+    GetBattlerNick(battler, text);                                      \
+    toCpy = text;
+
+#define HANDLE_NICKNAME_STRING_LOWERCASE(battler)                       \
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)                       \
+    {                                                                   \
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
+            toCpy = sText_FoePkmnPrefixLower;                           \
+        else                                                            \
+            toCpy = sText_WildPkmnPrefixLower;                          \
+        while (*toCpy != EOS)                                           \
+        {                                                               \
+            dst[dstID] = *toCpy;                                        \
+            dstID++;                                                    \
+            toCpy++;                                                    \
+        }                                                               \
+    }                                                                   \
+    GetBattlerNick(battler, text);                                      \
     toCpy = text;
 
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
@@ -3154,7 +2526,8 @@ static const u8 *BattleStringGetPlayerName(u8 *text, u8 battler)
             toCpy = gSaveBlock2Ptr->playerName;
         break;
     case B_POSITION_PLAYER_RIGHT:
-        if (((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))) || gTestRunnerEnabled)
+        if (((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)))
+            || gTestRunnerEnabled)
         {
             toCpy = gLinkPlayers[0].name;
         }
@@ -3211,25 +2584,39 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
 // This ensures that custom Enigma Berry names will fit in the text buffer at the top of BattleStringExpandPlaceholders.
 STATIC_ASSERT(BERRY_NAME_LENGTH + ARRAY_COUNT(sText_BerrySuffix) <= ITEM_NAME_LENGTH, BerryNameTooLong);
 
-u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
+u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
 {
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
     const u8 *toCpy = NULL;
-    // This buffer may hold either the name of a trainer, Pokémon, or item.
     u8 text[max(max(max(32, TRAINER_NAME_LENGTH + 1), POKEMON_NAME_LENGTH + 1), ITEM_NAME_LENGTH)];
+    u8 *textStart = &text[0];
     u8 multiplayerId;
+    u8 fontId = FONT_NORMAL;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
         multiplayerId = gRecordedBattleMultiplayerId;
     else
         multiplayerId = GetMultiplayerId();
 
+    // Clear destination first
+    while (dstID < dstSize)
+    {
+        dst[dstID] = EOS;
+        dstID++;
+    }
+
+    dstID = 0;
     while (*src != EOS)
     {
         toCpy = NULL;
+
         if (*src == PLACEHOLDER_BEGIN)
         {
             src++;
+            u32 classLength = 0;
+            u32 nameLength = 0;
+            const u8 *classString;
+            const u8 *nameString;
             switch (*src)
             {
             case B_TXT_BUFF1:
@@ -3327,13 +2714,17 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler)
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
-                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT && !IsZMove(gBattleMsgDataPtr->currentMove) && !IsMaxMove(gBattleMsgDataPtr->currentMove))
+                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT
+                 && !IsZMove(gBattleMsgDataPtr->currentMove)
+                 && !IsMaxMove(gBattleMsgDataPtr->currentMove))
                     toCpy = gTypesInfo[gBattleStruct->stringMoveType].generic;
                 else
                     toCpy = GetMoveName(gBattleMsgDataPtr->currentMove);
                 break;
             case B_TXT_LAST_MOVE: // originally used move name
-                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT && !IsZMove(gBattleMsgDataPtr->currentMove) && !IsMaxMove(gBattleMsgDataPtr->currentMove))
+                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT
+                 && !IsZMove(gBattleMsgDataPtr->currentMove)
+                 && !IsMaxMove(gBattleMsgDataPtr->currentMove))
                     toCpy = gTypesInfo[gBattleStruct->stringMoveType].generic;
                 else
                     toCpy = GetMoveName(gBattleMsgDataPtr->originallyUsedMove);
@@ -3345,7 +2736,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     {
                         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
                         {
-                            if ((gBattleScripting.multiplayerId != 0 && (gPotentialItemEffectBattler & BIT_SIDE)) || (gBattleScripting.multiplayerId == 0 && !(gPotentialItemEffectBattler & BIT_SIDE)))
+                            if ((gBattleScripting.multiplayerId != 0 && (gPotentialItemEffectBattler & BIT_SIDE))
+                                || (gBattleScripting.multiplayerId == 0 && !(gPotentialItemEffectBattler & BIT_SIDE)))
                             {
                                 StringCopy(text, gEnigmaBerries[gPotentialItemEffectBattler].name);
                                 StringAppend(text, sText_BerrySuffix);
@@ -3400,6 +2792,27 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_TRAINER1_NAME: // trainer1 name
                 toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+                break;
+            case B_TXT_TRAINER1_NAME_WITH_CLASS: // trainer1 name with trainer class
+                toCpy = textStart;
+                classString = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                while (classString[classLength] != EOS)
+                {
+                    textStart[classLength] = classString[classLength];
+                    classLength++;
+                }
+                textStart[classLength] = CHAR_SPACE;
+                textStart += classLength + 1;
+                nameString = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, textStart, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+                if (nameString != textStart)
+                {
+                    while (nameString[nameLength] != EOS)
+                    {
+                        textStart[nameLength] = nameString[nameLength];
+                        nameLength++;
+                    }
+                    textStart[nameLength] = EOS;
+                }
                 break;
             case B_TXT_LINK_PLAYER_NAME: // link player name
                 toCpy = gLinkPlayers[multiplayerId].name;
@@ -3517,6 +2930,27 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_NAME:
                 toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
                 break;
+            case B_TXT_TRAINER2_NAME_WITH_CLASS:
+                toCpy = textStart;
+                classString = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
+                while (classString[classLength] != EOS)
+                {
+                    textStart[classLength] = classString[classLength];
+                    classLength++;
+                }
+                textStart[classLength] = CHAR_SPACE;
+                textStart += classLength + 1;
+                nameString = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, textStart, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
+                if (nameString != textStart)
+                {
+                    while (nameString[nameLength] != EOS)
+                    {
+                        textStart[nameLength] = nameString[nameLength];
+                        nameLength++;
+                    }
+                    textStart[nameLength] = EOS;
+                }
+                break;
             case B_TXT_TRAINER2_LOSE_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
@@ -3551,6 +2985,27 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_PARTNER_NAME:
                 toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
                 break;
+            case B_TXT_PARTNER_NAME_WITH_CLASS:
+                toCpy = textStart;
+                classString = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
+                while (classString[classLength] != EOS)
+                {
+                    textStart[classLength] = classString[classLength];
+                    classLength++;
+                }
+                textStart[classLength] = CHAR_SPACE;
+                textStart += classLength + 1;
+                nameString = BattleStringGetPlayerName(textStart, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
+                if (nameString != textStart)
+                {
+                    while (nameString[nameLength] != EOS)
+                    {
+                        textStart[nameLength] = nameString[nameLength];
+                        nameLength++;
+                    }
+                    textStart[nameLength] = EOS;
+                }
+                break;
             case B_TXT_ATK_TRAINER_NAME:
                 toCpy = BattleStringGetTrainerName(text, multiplayerId, gBattlerAttacker);
                 break;
@@ -3570,6 +3025,52 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     else
                         toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
                     break;
+                }
+                break;
+            case B_TXT_ATK_TRAINER_NAME_WITH_CLASS:
+                toCpy = textStart;
+                if (GetBattlerPosition(gBattlerAttacker) == B_POSITION_PLAYER_LEFT)
+                {
+                    textStart = StringCopy(textStart, BattleStringGetTrainerName(textStart, multiplayerId, gBattlerAttacker));
+                }
+                else
+                {
+                    classString = NULL;
+                    switch (GetBattlerPosition(gBattlerAttacker))
+                    {
+                    case B_POSITION_PLAYER_RIGHT:
+                        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                            classString = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
+                        break;
+                    case B_POSITION_OPPONENT_LEFT:
+                        classString = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                        break;
+                    case B_POSITION_OPPONENT_RIGHT:
+                        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+                            classString = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
+                        else
+                            classString = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                        break;
+                    }
+                    classLength = 0;
+                    nameLength = 0;
+                    while (classString[classLength] != EOS)
+                    {
+                        textStart[classLength] = classString[classLength];
+                        classLength++;
+                    }
+                    textStart[classLength] = CHAR_SPACE;
+                    textStart += 1 + classLength;
+                    nameString = BattleStringGetTrainerName(textStart, multiplayerId, gBattlerAttacker);
+                    if (nameString != textStart)
+                    {
+                        while (nameString[nameLength] != EOS)
+                        {
+                            textStart[nameLength] = nameString[nameLength];
+                            nameLength++;
+                        }
+                        textStart[nameLength] = EOS;
+                    }
                 }
                 break;
             case B_TXT_ATK_TEAM1:
@@ -3596,19 +3097,35 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 else
                     toCpy = sText_Opposing2;
                 break;
+            case B_TXT_ATK_NAME_WITH_PREFIX2:
+                HANDLE_NICKNAME_STRING_LOWERCASE(gBattlerAttacker)
+                break;
+            case B_TXT_DEF_NAME_WITH_PREFIX2:
+                HANDLE_NICKNAME_STRING_LOWERCASE(gBattlerTarget)
+                break;
+            case B_TXT_EFF_NAME_WITH_PREFIX2:
+                HANDLE_NICKNAME_STRING_LOWERCASE(gEffectBattler)
+                break;
+            case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX2:
+                HANDLE_NICKNAME_STRING_LOWERCASE(gBattleScripting.battler)
+                break;
             }
 
             if (toCpy != NULL)
             {
                 while (*toCpy != EOS)
                 {
-                    dst[dstID] = *toCpy;
+                    if (*toCpy == CHAR_SPACE)
+                        dst[dstID] = CHAR_NBSP;
+                    else
+                        dst[dstID] = *toCpy;
                     dstID++;
                     toCpy++;
                 }
             }
 
-            if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER2_LOSE_TEXT || *src == B_TXT_TRAINER1_WIN_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
+            if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER2_LOSE_TEXT
+                || *src == B_TXT_TRAINER1_WIN_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
             {
                 dst[dstID] = EXT_CTRL_CODE_BEGIN;
                 dstID++;
@@ -3626,6 +3143,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 
     dst[dstID] = *src;
     dstID++;
+
+    BreakStringAutomatic(dst, BATTLE_MSG_MAX_WIDTH, BATTLE_MSG_MAX_WIDTH, fontId);
 
     return dstID;
 }
@@ -3647,7 +3166,10 @@ static void IllusionNickHack(u32 battler, u32 partyId, u8 *dst)
         for (i = PARTY_SIZE - 1; i >= 0; i--)
         {
             id = i;
-            if (GetMonData(&gEnemyParty[id], MON_DATA_SANITY_HAS_SPECIES) && GetMonData(&gEnemyParty[id], MON_DATA_HP) && &gEnemyParty[id] != mon && &gEnemyParty[id] != partnerMon)
+            if (GetMonData(&gEnemyParty[id], MON_DATA_SANITY_HAS_SPECIES)
+                && GetMonData(&gEnemyParty[id], MON_DATA_HP)
+                && &gEnemyParty[id] != mon
+                && &gEnemyParty[id] != partnerMon)
             {
                 GetMonData(&gEnemyParty[id], MON_DATA_NICKNAME, dst);
                 return;
@@ -3672,7 +3194,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
         {
         case B_BUFF_STRING: // battle string
             hword = T1_READ_16(&src[srcID + 1]);
-            StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_TABLE_START]);
+            StringAppend(dst, gBattleStringsTable[hword]);
             srcID += 3;
             break;
         case B_BUFF_NUMBER: // int to string
@@ -3700,16 +3222,27 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             srcID += 2;
             break;
         case B_BUFF_MON_NICK_WITH_PREFIX: // poke nick with prefix
+        case B_BUFF_MON_NICK_WITH_PREFIX_LOWER: // poke nick with lowercase prefix
             if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
             {
                 GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, nickname);
             }
             else
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                    StringAppend(dst, sText_FoePkmnPrefix);
+                if (src[srcID] == B_BUFF_MON_NICK_WITH_PREFIX_LOWER)
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                        StringAppend(dst, sText_FoePkmnPrefixLower);
+                    else
+                        StringAppend(dst, sText_WildPkmnPrefixLower);
+                }
                 else
-                    StringAppend(dst, sText_WildPkmnPrefix);
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                        StringAppend(dst, sText_FoePkmnPrefix);
+                    else
+                        StringAppend(dst, sText_WildPkmnPrefix);
+                }
 
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, nickname);
             }
@@ -3959,7 +3492,7 @@ void SetPpNumbersPaletteInMoveSelection(u32 battler)
 
     if (!gBattleStruct->zmove.viewing)
         var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[battler]],
-                                       chooseMoveStruct->maxPp[gMoveSelectionCursor[battler]]);
+                         chooseMoveStruct->maxPp[gMoveSelectionCursor[battler]]);
     else
         var = 3;
 
@@ -4022,26 +3555,26 @@ struct TrainerSlide
 };
 
 static const struct TrainerSlide sTrainerSlides[] =
+{
+    /* Put any trainer slide-in messages inside this array.
+    Example:
     {
-        /* Put any trainer slide-in messages inside this array.
-        Example:
-        {
-            .trainerId = TRAINER_WALLY_VR_2,
-            .isFrontierTrainer = FALSE,
-            .msgLastSwitchIn = sText_AarghAlmostHadIt,
-            .msgLastLowHp = sText_BoxIsFull,
-            .msgFirstDown = sText_123Poof,
-            .msgLastHalfHp = sText_ShootSoClose,
-            .msgFirstCriticalHit = sText_CriticalHit,
-            .msgFirstSuperEffectiveHit = sText_SuperEffective,
-            .msgFirstSTABMove = sText_ABoosted,
-            .msgPlayerMonUnaffected = sText_ButNoEffect,
-            .msgMegaEvolution = sText_PowderExplodes,
-            .msgZMove = sText_Electromagnetism,
-            .msgBeforeFirstTurn = sText_GravityIntensified,
-            .msgDynamax = sText_TargetWokeUp,
-        },
-        */
+        .trainerId = TRAINER_WALLY_VR_2,
+        .isFrontierTrainer = FALSE,
+        .msgLastSwitchIn = sText_AarghAlmostHadIt,
+        .msgLastLowHp = sText_BoxIsFull,
+        .msgFirstDown = sText_123Poof,
+        .msgLastHalfHp = sText_ShootSoClose,
+        .msgFirstCriticalHit = sText_CriticalHit,
+        .msgFirstSuperEffectiveHit = sText_SuperEffective,
+        .msgFirstSTABMove = sText_ABoosted,
+        .msgPlayerMonUnaffected = sText_ButNoEffect,
+        .msgMegaEvolution = sText_PowderExplodes,
+        .msgZMove = sText_Electromagnetism,
+        .msgBeforeFirstTurn = sText_GravityIntensified,
+        .msgDynamax = sText_TargetWokeUp,
+    },
+    */
 };
 
 static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
@@ -4051,7 +3584,9 @@ static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
     for (i = firstId; i < lastId; i++)
     {
         u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
-        if (species != SPECIES_NONE && species != SPECIES_EGG && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
+        if (species != SPECIES_NONE
+            && species != SPECIES_EGG
+            && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
             count++;
     }
 
@@ -4118,7 +3653,9 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
 
     for (i = 0; i < ARRAY_COUNT(sTrainerSlides); i++)
     {
-        if (trainerId == sTrainerSlides[i].trainerId && (((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && sTrainerSlides[i].isFrontierTrainer) || (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && !sTrainerSlides[i].isFrontierTrainer)))
+        if (trainerId == sTrainerSlides[i].trainerId
+            && (((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && sTrainerSlides[i].isFrontierTrainer)
+                || (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && !sTrainerSlides[i].isFrontierTrainer)))
         {
             gBattleScripting.battler = battler;
             switch (which)
@@ -4131,7 +3668,10 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
                 }
                 break;
             case TRAINER_SLIDE_LAST_LOW_HP:
-                if (sTrainerSlides[i].msgLastLowHp != NULL && GetEnemyMonCount(firstId, lastId, TRUE) == 1 && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 4) && !gBattleStruct->trainerSlideLowHpMsgDone)
+                if (sTrainerSlides[i].msgLastLowHp != NULL
+                    && GetEnemyMonCount(firstId, lastId, TRUE) == 1
+                    && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 4)
+                    && !gBattleStruct->trainerSlideLowHpMsgDone)
                 {
                     gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastLowHp;
@@ -4146,7 +3686,10 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
                 }
                 break;
             case TRAINER_SLIDE_LAST_HALF_HP:
-                if (sTrainerSlides[i].msgLastHalfHp != NULL && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1 && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 2) && BattlerHPPercentage(battler, GREATER_THAN, 4) && !gBattleStruct->trainerSlideHalfHpMsgDone)
+                if (sTrainerSlides[i].msgLastHalfHp != NULL
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1
+                 && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 2) && BattlerHPPercentage(battler, GREATER_THAN, 4)
+                 && !gBattleStruct->trainerSlideHalfHpMsgDone)
                 {
                     gBattleStruct->trainerSlideHalfHpMsgDone = TRUE;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastHalfHp;
@@ -4162,7 +3705,9 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
                 }
                 break;
             case TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT:
-                if (sTrainerSlides[i].msgFirstSuperEffectiveHit != NULL && gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState == 1 && gBattleMons[battler].hp)
+                if (sTrainerSlides[i].msgFirstSuperEffectiveHit != NULL
+                    && gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState == 1
+                    && gBattleMons[battler].hp)
                 {
                     gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState = 2;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSuperEffectiveHit;
@@ -4170,7 +3715,9 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
                 }
                 break;
             case TRAINER_SLIDE_FIRST_STAB_MOVE:
-                if (sTrainerSlides[i].msgFirstSTABMove != NULL && gBattleStruct->trainerSlideFirstSTABMoveMsgState == 1 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
+                if (sTrainerSlides[i].msgFirstSTABMove != NULL
+                 && gBattleStruct->trainerSlideFirstSTABMoveMsgState == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
                 {
                     gBattleStruct->trainerSlideFirstSTABMoveMsgState = 2;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSTABMove;
@@ -4178,7 +3725,9 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
                 }
                 break;
             case TRAINER_SLIDE_PLAYER_MON_UNAFFECTED:
-                if (sTrainerSlides[i].msgPlayerMonUnaffected != NULL && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState == 1 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
+                if (sTrainerSlides[i].msgPlayerMonUnaffected != NULL
+                 && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
                 {
                     gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState = 2;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgPlayerMonUnaffected;

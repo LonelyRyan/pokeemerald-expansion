@@ -47,6 +47,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Grookey,
         .iconSprite = gMonIcon_Grookey,
         .iconPalIndex = 1,
+        SHADOW(1, 1, SHADOW_SIZE_S)
         FOOTPRINT(Grookey)
         OVERWORLD(
             sPicTable_Grookey,
@@ -105,6 +106,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Thwackey,
         .iconSprite = gMonIcon_Thwackey,
         .iconPalIndex = 1,
+        SHADOW(5, 6, SHADOW_SIZE_M)
         FOOTPRINT(Thwackey)
         OVERWORLD(
             sPicTable_Thwackey,
@@ -162,6 +164,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Rillaboom,
         .iconSprite = gMonIcon_Rillaboom,
         .iconPalIndex = 1,
+        SHADOW(2, 8, SHADOW_SIZE_L)
         FOOTPRINT(Rillaboom)
         OVERWORLD(
             sPicTable_Rillaboom,
@@ -178,7 +181,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_RILLABOOM_GIGANTAMAX] =
+    [SPECIES_RILLABOOM_GMAX] =
     {
         .baseHP        = 100,
         .baseAttack    = 125,
@@ -208,19 +211,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 0,
         .trainerScale = 365,
         .trainerOffset = 7,
-        .frontPic = gMonFrontPic_RillaboomGigantamax,
+        .frontPic = gMonFrontPic_RillaboomGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_RillaboomGigantamax,
+        .frontAnimFrames = sAnims_RillaboomGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_RillaboomGigantamax,
+        .backPic = gMonBackPic_RillaboomGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_RillaboomGigantamax,
-        .shinyPalette = gMonShinyPalette_RillaboomGigantamax,
-        .iconSprite = gMonIcon_RillaboomGigantamax,
+        .palette = gMonPalette_RillaboomGmax,
+        .shinyPalette = gMonShinyPalette_RillaboomGmax,
+        .iconSprite = gMonIcon_RillaboomGmax,
         .iconPalIndex = 1,
+        SHADOW(0, 8, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Rillaboom)
         .isGigantamax = TRUE,
         .levelUpLearnset = sRillaboomLevelUpLearnset,
@@ -275,6 +279,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Scorbunny,
         .iconSprite = gMonIcon_Scorbunny,
         .iconPalIndex = 0,
+        SHADOW(-1, 6, SHADOW_SIZE_S)
         FOOTPRINT(Scorbunny)
         OVERWORLD(
             sPicTable_Scorbunny,
@@ -333,6 +338,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Raboot,
         .iconSprite = gMonIcon_Raboot,
         .iconPalIndex = 0,
+        SHADOW(-4, 5, SHADOW_SIZE_S)
         FOOTPRINT(Raboot)
         OVERWORLD(
             sPicTable_Raboot,
@@ -390,6 +396,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Cinderace,
         .iconSprite = gMonIcon_Cinderace,
         .iconPalIndex = 0,
+        SHADOW(0, 14, SHADOW_SIZE_M)
         FOOTPRINT(Cinderace)
         OVERWORLD(
             sPicTable_Cinderace,
@@ -406,7 +413,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_CINDERACE_GIGANTAMAX] =
+    [SPECIES_CINDERACE_GMAX] =
     {
         .baseHP        = 80,
         .baseAttack    = 116,
@@ -436,19 +443,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 2,
         .trainerScale = 262,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_CinderaceGigantamax,
+        .frontPic = gMonFrontPic_CinderaceGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CinderaceGigantamax,
+        .frontAnimFrames = sAnims_CinderaceGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CinderaceGigantamax,
+        .backPic = gMonBackPic_CinderaceGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CinderaceGigantamax,
-        .shinyPalette = gMonShinyPalette_CinderaceGigantamax,
-        .iconSprite = gMonIcon_CinderaceGigantamax,
+        .palette = gMonPalette_CinderaceGmax,
+        .shinyPalette = gMonShinyPalette_CinderaceGmax,
+        .iconSprite = gMonIcon_CinderaceGmax,
         .iconPalIndex = 0,
+        SHADOW(-3, 13, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Cinderace)
         .isGigantamax = TRUE,
         .levelUpLearnset = sCinderaceLevelUpLearnset,
@@ -504,6 +512,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Sobble,
         .iconSprite = gMonIcon_Sobble,
         .iconPalIndex = 2,
+        SHADOW(-3, 3, SHADOW_SIZE_S)
         FOOTPRINT(Sobble)
         OVERWORLD(
             sPicTable_Sobble,
@@ -562,6 +571,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Drizzile,
         .iconSprite = gMonIcon_Drizzile,
         .iconPalIndex = 2,
+        SHADOW(2, 5, SHADOW_SIZE_M)
         FOOTPRINT(Drizzile)
         OVERWORLD(
             sPicTable_Drizzile,
@@ -619,6 +629,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Inteleon,
         .iconSprite = gMonIcon_Inteleon,
         .iconPalIndex = 0,
+        SHADOW(-5, 12, SHADOW_SIZE_S)
         FOOTPRINT(Inteleon)
         OVERWORLD(
             sPicTable_Inteleon,
@@ -635,7 +646,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_INTELEON_GIGANTAMAX] =
+    [SPECIES_INTELEON_GMAX] =
     {
         .baseHP        = 70,
         .baseAttack    = 85,
@@ -665,19 +676,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 326,
         .trainerOffset = 4,
-        .frontPic = gMonFrontPic_InteleonGigantamax,
+        .frontPic = gMonFrontPic_InteleonGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_InteleonGigantamax,
+        .frontAnimFrames = sAnims_InteleonGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_InteleonGigantamax,
+        .backPic = gMonBackPic_InteleonGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_InteleonGigantamax,
-        .shinyPalette = gMonShinyPalette_InteleonGigantamax,
-        .iconSprite = gMonIcon_InteleonGigantamax,
+        .palette = gMonPalette_InteleonGmax,
+        .shinyPalette = gMonShinyPalette_InteleonGmax,
+        .iconSprite = gMonIcon_InteleonGmax,
         .iconPalIndex = 0,
+        SHADOW(-5, 12, SHADOW_SIZE_L)
         FOOTPRINT(Inteleon)
         .isGigantamax = TRUE,
         .levelUpLearnset = sInteleonLevelUpLearnset,
@@ -733,6 +745,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Skwovet,
         .iconSprite = gMonIcon_Skwovet,
         .iconPalIndex = 2,
+        SHADOW(-7, 5, SHADOW_SIZE_S)
         FOOTPRINT(Skwovet)
         OVERWORLD(
             sPicTable_Skwovet,
@@ -792,6 +805,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Greedent,
         .iconSprite = gMonIcon_Greedent,
         .iconPalIndex = 0,
+        SHADOW(-11, 10, SHADOW_SIZE_M)
         FOOTPRINT(Greedent)
         OVERWORLD(
             sPicTable_Greedent,
@@ -850,6 +864,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Rookidee,
         .iconSprite = gMonIcon_Rookidee,
         .iconPalIndex = 0,
+        SHADOW(-1, -3, SHADOW_SIZE_S)
         FOOTPRINT(Rookidee)
         OVERWORLD(
             sPicTable_Rookidee,
@@ -909,6 +924,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Corvisquire,
         .iconSprite = gMonIcon_Corvisquire,
         .iconPalIndex = 0,
+        SHADOW(2, 16, SHADOW_SIZE_S)
         FOOTPRINT(Corvisquire)
         OVERWORLD(
             sPicTable_Corvisquire,
@@ -966,6 +982,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Corviknight,
         .iconSprite = gMonIcon_Corviknight,
         .iconPalIndex = 0,
+        SHADOW(-1, 9, SHADOW_SIZE_L)
         FOOTPRINT(Corviknight)
         OVERWORLD(
             sPicTable_Corviknight,
@@ -982,7 +999,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_CORVIKNIGHT_GIGANTAMAX] =
+    [SPECIES_CORVIKNIGHT_GMAX] =
     {
         .baseHP        = 98,
         .baseAttack    = 87,
@@ -1012,19 +1029,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 0,
         .trainerScale = 348,
         .trainerOffset = 6,
-        .frontPic = gMonFrontPic_CorviknightGigantamax,
+        .frontPic = gMonFrontPic_CorviknightGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_CorviknightGigantamax,
+        .frontAnimFrames = sAnims_CorviknightGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CorviknightGigantamax,
+        .backPic = gMonBackPic_CorviknightGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 3,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CorviknightGigantamax,
-        .shinyPalette = gMonShinyPalette_CorviknightGigantamax,
-        .iconSprite = gMonIcon_CorviknightGigantamax,
+        .palette = gMonPalette_CorviknightGmax,
+        .shinyPalette = gMonShinyPalette_CorviknightGmax,
+        .iconSprite = gMonIcon_CorviknightGmax,
         .iconPalIndex = 0,
+        SHADOW(2, 8, SHADOW_SIZE_L)
         FOOTPRINT(Corviknight)
         .isGigantamax = TRUE,
         .levelUpLearnset = sCorviknightLevelUpLearnset,
@@ -1079,6 +1097,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Blipbug,
         .iconSprite = gMonIcon_Blipbug,
         .iconPalIndex = 0,
+        SHADOW(2, 1, SHADOW_SIZE_S)
         FOOTPRINT(Blipbug)
         OVERWORLD(
             sPicTable_Blipbug,
@@ -1139,6 +1158,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dottler,
         .iconSprite = gMonIcon_Dottler,
         .iconPalIndex = 2,
+        SHADOW(-1, 0, SHADOW_SIZE_M)
         FOOTPRINT(Dottler)
         OVERWORLD(
             sPicTable_Dottler,
@@ -1198,6 +1218,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Orbeetle,
         .iconSprite = gMonIcon_Orbeetle,
         .iconPalIndex = 0,
+        SHADOW(0, 15, SHADOW_SIZE_M)
         FOOTPRINT(Orbeetle)
         OVERWORLD(
             sPicTable_Orbeetle,
@@ -1214,7 +1235,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_ORBEETLE_GIGANTAMAX] =
+    [SPECIES_ORBEETLE_GMAX] =
     {
         .baseHP        = 60,
         .baseAttack    = 45,
@@ -1245,19 +1266,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_OrbeetleGigantamax,
+        .frontPic = gMonFrontPic_OrbeetleGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_OrbeetleGigantamax,
+        .frontAnimFrames = sAnims_OrbeetleGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_OrbeetleGigantamax,
+        .backPic = gMonBackPic_OrbeetleGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_OrbeetleGigantamax,
-        .shinyPalette = gMonShinyPalette_OrbeetleGigantamax,
-        .iconSprite = gMonIcon_OrbeetleGigantamax,
+        .palette = gMonPalette_OrbeetleGmax,
+        .shinyPalette = gMonShinyPalette_OrbeetleGmax,
+        .iconSprite = gMonIcon_OrbeetleGmax,
         .iconPalIndex = 0,
+        SHADOW(0, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Orbeetle)
         .isGigantamax = TRUE,
         .levelUpLearnset = sOrbeetleLevelUpLearnset,
@@ -1312,6 +1334,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Nickit,
         .iconSprite = gMonIcon_Nickit,
         .iconPalIndex = 2,
+        SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Nickit)
         OVERWORLD(
             sPicTable_Nickit,
@@ -1370,6 +1393,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Thievul,
         .iconSprite = gMonIcon_Thievul,
         .iconPalIndex = 2,
+        SHADOW(-9, 7, SHADOW_SIZE_M)
         FOOTPRINT(Thievul)
         OVERWORLD(
             sPicTable_Thievul,
@@ -1428,6 +1452,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Gossifleur,
         .iconSprite = gMonIcon_Gossifleur,
         .iconPalIndex = 1,
+        SHADOW(0, 2, SHADOW_SIZE_S)
         FOOTPRINT(Gossifleur)
         OVERWORLD(
             sPicTable_Gossifleur,
@@ -1486,6 +1511,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Eldegoss,
         .iconSprite = gMonIcon_Eldegoss,
         .iconPalIndex = 1,
+        SHADOW(-2, 8, SHADOW_SIZE_S)
         FOOTPRINT(Eldegoss)
         OVERWORLD(
             sPicTable_Eldegoss,
@@ -1544,6 +1570,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Wooloo,
         .iconSprite = gMonIcon_Wooloo,
         .iconPalIndex = 0,
+        SHADOW(1, 1, SHADOW_SIZE_S)
         FOOTPRINT(Wooloo)
         OVERWORLD(
             sPicTable_Wooloo,
@@ -1602,6 +1629,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dubwool,
         .iconSprite = gMonIcon_Dubwool,
         .iconPalIndex = 2,
+        SHADOW(2, 8, SHADOW_SIZE_M)
         FOOTPRINT(Dubwool)
         OVERWORLD(
             sPicTable_Dubwool,
@@ -1660,6 +1688,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Chewtle,
         .iconSprite = gMonIcon_Chewtle,
         .iconPalIndex = 0,
+        SHADOW(3, 1, SHADOW_SIZE_S)
         FOOTPRINT(Chewtle)
         OVERWORLD(
             sPicTable_Chewtle,
@@ -1718,6 +1747,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Drednaw,
         .iconSprite = gMonIcon_Drednaw,
         .iconPalIndex = 0,
+        SHADOW(-2, 4, SHADOW_SIZE_L)
         FOOTPRINT(Drednaw)
         OVERWORLD(
             sPicTable_Drednaw,
@@ -1734,7 +1764,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_DREDNAW_GIGANTAMAX] =
+    [SPECIES_DREDNAW_GMAX] =
     {
         .baseHP        = 90,
         .baseAttack    = 115,
@@ -1764,19 +1794,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 257,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_DrednawGigantamax,
+        .frontPic = gMonFrontPic_DrednawGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_DrednawGigantamax,
+        .frontAnimFrames = sAnims_DrednawGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_DrednawGigantamax,
+        .backPic = gMonBackPic_DrednawGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 12,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_DrednawGigantamax,
-        .shinyPalette = gMonShinyPalette_DrednawGigantamax,
-        .iconSprite = gMonIcon_DrednawGigantamax,
+        .palette = gMonPalette_DrednawGmax,
+        .shinyPalette = gMonShinyPalette_DrednawGmax,
+        .iconSprite = gMonIcon_DrednawGmax,
         .iconPalIndex = 0,
+        SHADOW(2, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Drednaw)
         .isGigantamax = TRUE,
         .levelUpLearnset = sDrednawLevelUpLearnset,
@@ -1831,6 +1862,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Yamper,
         .iconSprite = gMonIcon_Yamper,
         .iconPalIndex = 1,
+        SHADOW(-1, 2, SHADOW_SIZE_M)
         FOOTPRINT(Yamper)
         OVERWORLD(
             sPicTable_Yamper,
@@ -1889,6 +1921,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Boltund,
         .iconSprite = gMonIcon_Boltund,
         .iconPalIndex = 1,
+        SHADOW(0, 7, SHADOW_SIZE_M)
         FOOTPRINT(Boltund)
         OVERWORLD(
             sPicTable_Boltund,
@@ -1947,6 +1980,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Rolycoly,
         .iconSprite = gMonIcon_Rolycoly,
         .iconPalIndex = 0,
+        SHADOW(0, -3, SHADOW_SIZE_S)
         FOOTPRINT(Rolycoly)
         OVERWORLD(
             sPicTable_Rolycoly,
@@ -2005,6 +2039,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Carkol,
         .iconSprite = gMonIcon_Carkol,
         .iconPalIndex = 0,
+        SHADOW(0, 3, SHADOW_SIZE_M)
         FOOTPRINT(Carkol)
         OVERWORLD(
             sPicTable_Carkol,
@@ -2062,6 +2097,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Coalossal,
         .iconSprite = gMonIcon_Coalossal,
         .iconPalIndex = 0,
+        SHADOW(1, 12, SHADOW_SIZE_L)
         FOOTPRINT(Coalossal)
         OVERWORLD(
             sPicTable_Coalossal,
@@ -2078,7 +2114,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_COALOSSAL_GIGANTAMAX] =
+    [SPECIES_COALOSSAL_GMAX] =
     {
         .baseHP        = 110,
         .baseAttack    = 80,
@@ -2108,19 +2144,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_CoalossalGigantamax,
+        .frontPic = gMonFrontPic_CoalossalGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CoalossalGigantamax,
+        .frontAnimFrames = sAnims_CoalossalGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CoalossalGigantamax,
+        .backPic = gMonBackPic_CoalossalGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 8,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CoalossalGigantamax,
-        .shinyPalette = gMonShinyPalette_CoalossalGigantamax,
-        .iconSprite = gMonIcon_CoalossalGigantamax,
+        .palette = gMonPalette_CoalossalGmax,
+        .shinyPalette = gMonShinyPalette_CoalossalGmax,
+        .iconSprite = gMonIcon_CoalossalGmax,
         .iconPalIndex = 0,
+        SHADOW(1, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Coalossal)
         .isGigantamax = TRUE,
         .levelUpLearnset = sCoalossalLevelUpLearnset,
@@ -2175,6 +2212,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Applin,
         .iconSprite = gMonIcon_Applin,
         .iconPalIndex = 1,
+        SHADOW(-1, -3, SHADOW_SIZE_S)
         FOOTPRINT(Applin)
         OVERWORLD(
             sPicTable_Applin,
@@ -2237,6 +2275,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Flapple,
         .iconSprite = gMonIcon_Flapple,
         .iconPalIndex = 1,
+        SHADOW(-6, 11, SHADOW_SIZE_S)
         FOOTPRINT(Flapple)
         OVERWORLD(
             sPicTable_Flapple,
@@ -2253,7 +2292,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_FLAPPLE_GIGANTAMAX] =
+    [SPECIES_FLAPPLE_GMAX] =
     {
         .baseHP        = 70,
         .baseAttack    = 110,
@@ -2283,19 +2322,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_FlappleGigantamax,
+        .frontPic = gMonFrontPic_FlappleGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_FlappleGigantamax,
+        .frontAnimFrames = sAnims_FlappleGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_FlappleGigantamax,
+        .backPic = gMonBackPic_FlappleGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 2,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_FlappleGigantamax,
-        .shinyPalette = gMonShinyPalette_FlappleGigantamax,
-        .iconSprite = gMonIcon_FlappleGigantamax,
+        .palette = gMonPalette_FlappleGmax,
+        .shinyPalette = gMonShinyPalette_FlappleGmax,
+        .iconSprite = gMonIcon_FlappleGmax,
         .iconPalIndex = 1,
+        SHADOW(0, 10, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Flapple)
         .isGigantamax = TRUE,
         .levelUpLearnset = sFlappleLevelUpLearnset,
@@ -2348,6 +2388,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Appletun,
         .iconSprite = gMonIcon_Appletun,
         .iconPalIndex = 1,
+        SHADOW(5, 6, SHADOW_SIZE_L)
         FOOTPRINT(Appletun)
         OVERWORLD(
             sPicTable_Appletun,
@@ -2364,7 +2405,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_APPLETUN_GIGANTAMAX] =
+    [SPECIES_APPLETUN_GMAX] =
     {
         .baseHP        = 110,
         .baseAttack    = 85,
@@ -2394,19 +2435,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_AppletunGigantamax,
+        .frontPic = gMonFrontPic_AppletunGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_AppletunGigantamax,
+        .frontAnimFrames = sAnims_AppletunGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_AppletunGigantamax,
+        .backPic = gMonBackPic_AppletunGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 2,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_AppletunGigantamax,
-        .shinyPalette = gMonShinyPalette_AppletunGigantamax,
-        .iconSprite = gMonIcon_AppletunGigantamax,
+        .palette = gMonPalette_AppletunGmax,
+        .shinyPalette = gMonShinyPalette_AppletunGmax,
+        .iconSprite = gMonIcon_AppletunGmax,
         .iconPalIndex = 1,
+        SHADOW(0, 10, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Appletun)
         .isGigantamax = TRUE,
         .levelUpLearnset = sAppletunLevelUpLearnset,
@@ -2460,6 +2502,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dipplin,
         .iconSprite = gMonIcon_Dipplin,
         .iconPalIndex = 1,
+        SHADOW(-4, 8, SHADOW_SIZE_S)
         FOOTPRINT(Dipplin)
         OVERWORLD(
             sPicTable_Dipplin,
@@ -2517,6 +2560,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Hydrapple,
         .iconSprite = gMonIcon_Hydrapple,
         .iconPalIndex = 5,
+        SHADOW(1, 12, SHADOW_SIZE_L)
         FOOTPRINT(Hydrapple)
         OVERWORLD(
             sPicTable_Hydrapple,
@@ -2576,6 +2620,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Silicobra,
         .iconSprite = gMonIcon_Silicobra,
         .iconPalIndex = 1,
+        SHADOW(3, 1, SHADOW_SIZE_M)
         FOOTPRINT(Silicobra)
         OVERWORLD(
             sPicTable_Silicobra,
@@ -2634,6 +2679,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Sandaconda,
         .iconSprite = gMonIcon_Sandaconda,
         .iconPalIndex = 1,
+        SHADOW(2, -1, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Sandaconda)
         OVERWORLD(
             sPicTable_Sandaconda,
@@ -2650,7 +2696,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_SANDACONDA_GIGANTAMAX] =
+    [SPECIES_SANDACONDA_GMAX] =
     {
         .baseHP        = 72,
         .baseAttack    = 107,
@@ -2680,19 +2726,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 0,
         .trainerScale = 610,
         .trainerOffset = 17,
-        .frontPic = gMonFrontPic_SandacondaGigantamax,
+        .frontPic = gMonFrontPic_SandacondaGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_SandacondaGigantamax,
+        .frontAnimFrames = sAnims_SandacondaGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_SandacondaGigantamax,
+        .backPic = gMonBackPic_SandacondaGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 5,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_SandacondaGigantamax,
-        .shinyPalette = gMonShinyPalette_SandacondaGigantamax,
-        .iconSprite = gMonIcon_SandacondaGigantamax,
+        .palette = gMonPalette_SandacondaGmax,
+        .shinyPalette = gMonShinyPalette_SandacondaGmax,
+        .iconSprite = gMonIcon_SandacondaGmax,
         .iconPalIndex = 1,
+        SHADOW(0, 14, SHADOW_SIZE_M)
         FOOTPRINT(Sandaconda)
         .isGigantamax = TRUE,
         .levelUpLearnset = sSandacondaLevelUpLearnset,
@@ -2747,6 +2794,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Cramorant,
         .iconSprite = gMonIcon_Cramorant,
         .iconPalIndex = 0,
+        SHADOW(5, 14, SHADOW_SIZE_M)
         FOOTPRINT(Cramorant)
         OVERWORLD(
             sPicTable_Cramorant,
@@ -2806,6 +2854,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_CramorantGulping,
         .iconSprite = gMonIcon_CramorantGulping,
         .iconPalIndex = 0,
+        SHADOW(5, 14, SHADOW_SIZE_M)
         FOOTPRINT(Cramorant)
         .levelUpLearnset = sCramorantLevelUpLearnset,
         .teachableLearnset = sCramorantTeachableLearnset,
@@ -2857,6 +2906,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_CramorantGorging,
         .iconSprite = gMonIcon_CramorantGorging,
         .iconPalIndex = 0,
+        SHADOW(5, 14, SHADOW_SIZE_M)
         FOOTPRINT(Cramorant)
         .levelUpLearnset = sCramorantLevelUpLearnset,
         .teachableLearnset = sCramorantTeachableLearnset,
@@ -2910,6 +2960,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Arrokuda,
         .iconSprite = gMonIcon_Arrokuda,
         .iconPalIndex = 2,
+        SHADOW(-1, -5, SHADOW_SIZE_S)
         FOOTPRINT(Arrokuda)
         OVERWORLD(
             sPicTable_Arrokuda,
@@ -2968,6 +3019,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Barraskewda,
         .iconSprite = gMonIcon_Barraskewda,
         .iconPalIndex = 2,
+        SHADOW(4, 5, SHADOW_SIZE_M)
         FOOTPRINT(Barraskewda)
         OVERWORLD(
             sPicTable_Barraskewda,
@@ -3026,6 +3078,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Toxel,
         .iconSprite = gMonIcon_Toxel,
         .iconPalIndex = 2,
+        SHADOW(-2, 1, SHADOW_SIZE_M)
         FOOTPRINT(Toxel)
         OVERWORLD(
             sPicTable_Toxel,
@@ -3085,6 +3138,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_ToxtricityAmped,
         .iconSprite = gMonIcon_ToxtricityAmped,
         .iconPalIndex = 2,
+        SHADOW(-6, 13, SHADOW_SIZE_M)
         FOOTPRINT(Toxtricity)
         OVERWORLD(
             sPicTable_ToxtricityAmped,
@@ -3101,7 +3155,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_TOXTRICITY_AMPED_GIGANTAMAX] =
+    [SPECIES_TOXTRICITY_AMPED_GMAX] =
     {
         .baseHP        = 75,
         .baseAttack    = 98,
@@ -3131,19 +3185,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 296,
         .trainerOffset = 1,
-        .frontPic = gMonFrontPic_ToxtricityGigantamax,
+        .frontPic = gMonFrontPic_ToxtricityGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_ToxtricityGigantamax,
+        .frontAnimFrames = sAnims_ToxtricityGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_ToxtricityGigantamax,
+        .backPic = gMonBackPic_ToxtricityGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_ToxtricityGigantamax,
-        .shinyPalette = gMonShinyPalette_ToxtricityGigantamax,
-        .iconSprite = gMonIcon_ToxtricityGigantamax,
+        .palette = gMonPalette_ToxtricityGmax,
+        .shinyPalette = gMonShinyPalette_ToxtricityGmax,
+        .iconSprite = gMonIcon_ToxtricityGmax,
         .iconPalIndex = 0,
+        SHADOW(1, 10, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Toxtricity)
         .isGigantamax = TRUE,
         .levelUpLearnset = sToxtricityAmpedLevelUpLearnset,
@@ -3196,6 +3251,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_ToxtricityLowKey,
         .iconSprite = gMonIcon_ToxtricityLowKey,
         .iconPalIndex = 2,
+        SHADOW(1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Toxtricity)
         OVERWORLD(
             sPicTable_ToxtricityLowKey,
@@ -3212,7 +3268,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_TOXTRICITY_LOW_KEY_GIGANTAMAX] =
+    [SPECIES_TOXTRICITY_LOW_KEY_GMAX] =
     {
         .baseHP        = 75,
         .baseAttack    = 98,
@@ -3242,19 +3298,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 296,
         .trainerOffset = 1,
-        .frontPic = gMonFrontPic_ToxtricityGigantamax,
+        .frontPic = gMonFrontPic_ToxtricityGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_ToxtricityGigantamax,
+        .frontAnimFrames = sAnims_ToxtricityGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_ToxtricityGigantamax,
+        .backPic = gMonBackPic_ToxtricityGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_ToxtricityGigantamax,
-        .shinyPalette = gMonShinyPalette_ToxtricityGigantamax,
-        .iconSprite = gMonIcon_ToxtricityGigantamax,
+        .palette = gMonPalette_ToxtricityGmax,
+        .shinyPalette = gMonShinyPalette_ToxtricityGmax,
+        .iconSprite = gMonIcon_ToxtricityGmax,
         .iconPalIndex = 0,
+        SHADOW(1, 10, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Toxtricity)
         .isGigantamax = TRUE,
         .levelUpLearnset = sToxtricityLowKeyLevelUpLearnset,
@@ -3309,6 +3366,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Sizzlipede,
         .iconSprite = gMonIcon_Sizzlipede,
         .iconPalIndex = 0,
+        SHADOW(6, -4, SHADOW_SIZE_S)
         FOOTPRINT(Sizzlipede)
         OVERWORLD(
             sPicTable_Sizzlipede,
@@ -3367,6 +3425,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Centiskorch,
         .iconSprite = gMonIcon_Centiskorch,
         .iconPalIndex = 0,
+        SHADOW(-3, 7, SHADOW_SIZE_M)
         FOOTPRINT(Centiskorch)
         OVERWORLD(
             sPicTable_Centiskorch,
@@ -3383,7 +3442,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_CENTISKORCH_GIGANTAMAX] =
+    [SPECIES_CENTISKORCH_GMAX] =
     {
         .baseHP        = 100,
         .baseAttack    = 115,
@@ -3413,19 +3472,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_CentiskorchGigantamax,
+        .frontPic = gMonFrontPic_CentiskorchGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 5,
-        .frontAnimFrames = sAnims_CentiskorchGigantamax,
+        .frontAnimFrames = sAnims_CentiskorchGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CentiskorchGigantamax,
+        .backPic = gMonBackPic_CentiskorchGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 1,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CentiskorchGigantamax,
-        .shinyPalette = gMonShinyPalette_CentiskorchGigantamax,
-        .iconSprite = gMonIcon_CentiskorchGigantamax,
+        .palette = gMonPalette_CentiskorchGmax,
+        .shinyPalette = gMonShinyPalette_CentiskorchGmax,
+        .iconSprite = gMonIcon_CentiskorchGmax,
         .iconPalIndex = 0,
+        SHADOW(6, 9, SHADOW_SIZE_L)
         FOOTPRINT(Centiskorch)
         .isGigantamax = TRUE,
         .levelUpLearnset = sCentiskorchLevelUpLearnset,
@@ -3480,6 +3540,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Clobbopus,
         .iconSprite = gMonIcon_Clobbopus,
         .iconPalIndex = 0,
+        SHADOW(1, -2, SHADOW_SIZE_S)
         FOOTPRINT(Clobbopus)
         OVERWORLD(
             sPicTable_Clobbopus,
@@ -3538,6 +3599,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Grapploct,
         .iconSprite = gMonIcon_Grapploct,
         .iconPalIndex = 2,
+        SHADOW(4, 9, SHADOW_SIZE_M)
         FOOTPRINT(Grapploct)
         OVERWORLD(
             sPicTable_Grapploct,
@@ -3597,6 +3659,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Sinistea,
         .iconSprite = gMonIcon_Sinistea,
         .iconPalIndex = 2,
+        SHADOW(3, 3, SHADOW_SIZE_S)
         FOOTPRINT(Sinistea)
         OVERWORLD(
             sPicTable_Sinistea,
@@ -3656,6 +3719,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Sinistea,
         .iconSprite = gMonIcon_Sinistea,
         .iconPalIndex = 2,
+        SHADOW(3, 4, SHADOW_SIZE_S)
         FOOTPRINT(Sinistea)
         OVERWORLD(
             sPicTable_Sinistea,
@@ -3715,6 +3779,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Polteageist,
         .iconSprite = gMonIcon_Polteageist,
         .iconPalIndex = 2,
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Polteageist)
         OVERWORLD(
             sPicTable_Polteageist,
@@ -3773,6 +3838,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Polteageist,
         .iconSprite = gMonIcon_Polteageist,
         .iconPalIndex = 2,
+        SHADOW(0, 11, SHADOW_SIZE_S)
         FOOTPRINT(Polteageist)
         OVERWORLD(
             sPicTable_Polteageist,
@@ -3832,6 +3898,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Hatenna,
         .iconSprite = gMonIcon_Hatenna,
         .iconPalIndex = 0,
+        SHADOW(0, 1, SHADOW_SIZE_M)
         FOOTPRINT(Hatenna)
         OVERWORLD(
             sPicTable_Hatenna,
@@ -3890,6 +3957,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Hattrem,
         .iconSprite = gMonIcon_Hattrem,
         .iconPalIndex = 0,
+        SHADOW(0, 5, SHADOW_SIZE_M)
         FOOTPRINT(Hattrem)
         OVERWORLD(
             sPicTable_Hattrem,
@@ -3947,6 +4015,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Hatterene,
         .iconSprite = gMonIcon_Hatterene,
         .iconPalIndex = 0,
+        SHADOW(6, 13, SHADOW_SIZE_S)
         FOOTPRINT(Hatterene)
         OVERWORLD(
             sPicTable_Hatterene,
@@ -3963,7 +4032,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_HATTERENE_GIGANTAMAX] =
+    [SPECIES_HATTERENE_GMAX] =
     {
         .baseHP        = 57,
         .baseAttack    = 90,
@@ -3993,19 +4062,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 0,
         .trainerScale = 365,
         .trainerOffset = 7,
-        .frontPic = gMonFrontPic_HattereneGigantamax,
+        .frontPic = gMonFrontPic_HattereneGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_HattereneGigantamax,
+        .frontAnimFrames = sAnims_HattereneGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_HattereneGigantamax,
+        .backPic = gMonBackPic_HattereneGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 3,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_HattereneGigantamax,
-        .shinyPalette = gMonShinyPalette_HattereneGigantamax,
-        .iconSprite = gMonIcon_HattereneGigantamax,
+        .palette = gMonPalette_HattereneGmax,
+        .shinyPalette = gMonShinyPalette_HattereneGmax,
+        .iconSprite = gMonIcon_HattereneGmax,
         .iconPalIndex = 0,
+        SHADOW(-3, 13, SHADOW_SIZE_S)
         FOOTPRINT(Hatterene)
         .isGigantamax = TRUE,
         .levelUpLearnset = sHattereneLevelUpLearnset,
@@ -4060,6 +4130,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Impidimp,
         .iconSprite = gMonIcon_Impidimp,
         .iconPalIndex = 0,
+        SHADOW(0, 2, SHADOW_SIZE_S)
         FOOTPRINT(Impidimp)
         OVERWORLD(
             sPicTable_Impidimp,
@@ -4117,6 +4188,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Morgrem,
         .iconSprite = gMonIcon_Morgrem,
         .iconPalIndex = 0,
+        SHADOW(0, 7, SHADOW_SIZE_M)
         FOOTPRINT(Morgrem)
         OVERWORLD(
             sPicTable_Morgrem,
@@ -4175,6 +4247,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Grimmsnarl,
         .iconSprite = gMonIcon_Grimmsnarl,
         .iconPalIndex = 0,
+        SHADOW(1, 11, SHADOW_SIZE_L)
         FOOTPRINT(Grimmsnarl)
         OVERWORLD(
             sPicTable_Grimmsnarl,
@@ -4191,7 +4264,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_GRIMMSNARL_GIGANTAMAX] =
+    [SPECIES_GRIMMSNARL_GMAX] =
     {
         .baseHP        = 95,
         .baseAttack    = 120,
@@ -4221,19 +4294,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 2,
         .trainerScale = 271,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_GrimmsnarlGigantamax,
+        .frontPic = gMonFrontPic_GrimmsnarlGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_GrimmsnarlGigantamax,
+        .frontAnimFrames = sAnims_GrimmsnarlGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_GrimmsnarlGigantamax,
+        .backPic = gMonBackPic_GrimmsnarlGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 10,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_GrimmsnarlGigantamax,
-        .shinyPalette = gMonShinyPalette_GrimmsnarlGigantamax,
-        .iconSprite = gMonIcon_GrimmsnarlGigantamax,
+        .palette = gMonPalette_GrimmsnarlGmax,
+        .shinyPalette = gMonShinyPalette_GrimmsnarlGmax,
+        .iconSprite = gMonIcon_GrimmsnarlGmax,
         .iconPalIndex = 0,
+        SHADOW(0, 14, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Grimmsnarl)
         .isGigantamax = TRUE,
         .levelUpLearnset = sGrimmsnarlLevelUpLearnset,
@@ -4289,6 +4363,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Milcery,
         .iconSprite = gMonIcon_Milcery,
         .iconPalIndex = 1,
+        SHADOW(0, 6, SHADOW_SIZE_S)
         FOOTPRINT(Milcery)
         OVERWORLD(
             sPicTable_Milcery,
@@ -4358,6 +4433,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Alcremie ##sweet,                                      \
         .iconSprite = gMonIcon_AlcremieStrawberryVanillaCream, /*AlcremieStrawberry##cream##*/  \
         .iconPalIndex = 1,                                                                      \
+        SHADOW(0, 5, SHADOW_SIZE_S)                                                                            \
         FOOTPRINT(Alcremie)                                                                     \
         OVERWORLD(                                                                              \
             sPicTable_AlcremieStrawberry, /*Alcremie ##sweet*/                                  \
@@ -4437,7 +4513,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     [SPECIES_ALCREMIE_RIBBON_CARAMEL_SWIRL]     = ALCREMIE_REGULAR_SPECIES_INFO(Ribbon,     CaramelSwirl, BODY_COLOR_BROWN),
     [SPECIES_ALCREMIE_RIBBON_RAINBOW_SWIRL]     = ALCREMIE_REGULAR_SPECIES_INFO(Ribbon,     RainbowSwirl, BODY_COLOR_YELLOW),
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_ALCREMIE_GIGANTAMAX] =
+    [SPECIES_ALCREMIE_GMAX] =
     {
         ALCREMIE_MISC_INFO(BODY_COLOR_YELLOW),
         .speciesName = _("霜奶仙"),
@@ -4451,19 +4527,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_AlcremieGigantamax,
+        .frontPic = gMonFrontPic_AlcremieGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_AlcremieGigantamax,
+        .frontAnimFrames = sAnims_AlcremieGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_AlcremieGigantamax,
+        .backPic = gMonBackPic_AlcremieGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 9,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_AlcremieGigantamax,
-        .shinyPalette = gMonShinyPalette_AlcremieGigantamax,
-        .iconSprite = gMonIcon_AlcremieGigantamax,
+        .palette = gMonPalette_AlcremieGmax,
+        .shinyPalette = gMonShinyPalette_AlcremieGmax,
+        .iconSprite = gMonIcon_AlcremieGmax,
         .iconPalIndex = 1,
+        SHADOW(0, 10, SHADOW_SIZE_L)
         FOOTPRINT(Alcremie)
         .isGigantamax = TRUE,
         .levelUpLearnset = sAlcremieLevelUpLearnset,
@@ -4519,6 +4596,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Falinks,
         .iconSprite = gMonIcon_Falinks,
         .iconPalIndex = 0,
+        SHADOW(-7, 5, SHADOW_SIZE_S)
         FOOTPRINT(Falinks)
         OVERWORLD(
             sPicTable_Falinks,
@@ -4577,6 +4655,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Pincurchin,
         .iconSprite = gMonIcon_Pincurchin,
         .iconPalIndex = 2,
+        SHADOW(-1, -4, SHADOW_SIZE_S)
         FOOTPRINT(Pincurchin)
         OVERWORLD(
             sPicTable_Pincurchin,
@@ -4637,6 +4716,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Snom,
         .iconSprite = gMonIcon_Snom,
         .iconPalIndex = 0,
+        SHADOW(-2, -7, SHADOW_SIZE_S)
         FOOTPRINT(Snom)
         OVERWORLD(
             sPicTable_Snom,
@@ -4696,6 +4776,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Frosmoth,
         .iconSprite = gMonIcon_Frosmoth,
         .iconPalIndex = 0,
+        SHADOW(-7, 13, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Frosmoth)
         OVERWORLD(
             sPicTable_Frosmoth,
@@ -4754,6 +4835,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Stonjourner,
         .iconSprite = gMonIcon_Stonjourner,
         .iconPalIndex = 2,
+        SHADOW(0, 10, SHADOW_SIZE_L)
         FOOTPRINT(Stonjourner)
         OVERWORLD(
             sPicTable_Stonjourner,
@@ -4770,7 +4852,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #endif //P_FAMILY_STONJOURNER
 
 #if P_FAMILY_EISCUE
-    [SPECIES_EISCUE_ICE_FACE] =
+    [SPECIES_EISCUE_ICE] =
     {
         .baseHP        = 75,
         .baseAttack    = 80,
@@ -4790,7 +4872,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_ICE_FACE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("冰砌鹅"),
-        .cryId = CRY_EISCUE_ICE_FACE,
+        .cryId = CRY_EISCUE_ICE,
         .natDexNum = NATIONAL_DEX_EISCUE,
         .categoryName = _("企鹅"),
         .height = 14,
@@ -4800,27 +4882,28 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 2,
         .trainerScale = 262,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_EiscueIceFace,
+        .frontPic = gMonFrontPic_EiscueIce,
         .frontPicSize = MON_COORDS_SIZE(40, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Eiscue,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_EiscueIceFace,
+        .backPic = gMonBackPic_EiscueIce,
         .backPicSize = MON_COORDS_SIZE(48, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_EiscueIceFace,
-        .shinyPalette = gMonShinyPalette_EiscueIceFace,
-        .iconSprite = gMonIcon_EiscueIceFace,
+        .palette = gMonPalette_EiscueIce,
+        .shinyPalette = gMonShinyPalette_EiscueIce,
+        .iconSprite = gMonIcon_EiscueIce,
         .iconPalIndex = 0,
+        SHADOW(-1, 13, SHADOW_SIZE_S)
         FOOTPRINT(Eiscue)
         OVERWORLD(
-            sPicTable_EiscueIceFace,
+            sPicTable_EiscueIce,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_EiscueIceFace,
-            gShinyOverworldPalette_EiscueIceFace
+            gOverworldPalette_EiscueIce,
+            gShinyOverworldPalette_EiscueIce
         )
         .levelUpLearnset = sEiscueLevelUpLearnset,
         .teachableLearnset = sEiscueTeachableLearnset,
@@ -4829,7 +4912,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sEiscueFormChangeTable,
     },
 
-    [SPECIES_EISCUE_NOICE_FACE] =
+    [SPECIES_EISCUE_NOICE] =
     {
         .baseHP        = 75,
         .baseAttack    = 80,
@@ -4859,19 +4942,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 2,
         .trainerScale = 262,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_EiscueNoiceFace,
+        .frontPic = gMonFrontPic_EiscueNoice,
         .frontPicSize = MON_COORDS_SIZE(40, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Eiscue,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_EiscueNoiceFace,
+        .backPic = gMonBackPic_EiscueNoice,
         .backPicSize = MON_COORDS_SIZE(40, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_EiscueNoiceFace,
-        .shinyPalette = gMonShinyPalette_EiscueNoiceFace,
-        .iconSprite = gMonIcon_EiscueNoiceFace,
+        .palette = gMonPalette_EiscueNoice,
+        .shinyPalette = gMonShinyPalette_EiscueNoice,
+        .iconSprite = gMonIcon_EiscueNoice,
         .iconPalIndex = 0,
+        SHADOW(-1, 13, SHADOW_SIZE_S)
         FOOTPRINT(Eiscue)
         .levelUpLearnset = sEiscueLevelUpLearnset,
         .teachableLearnset = sEiscueTeachableLearnset,
@@ -4882,7 +4966,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #endif //P_FAMILY_EISCUE
 
 #if P_FAMILY_INDEEDEE
-    [SPECIES_INDEEDEE_MALE] =
+    [SPECIES_INDEEDEE_M] =
     {
         .baseHP        = 60,
         .baseAttack    = 65,
@@ -4902,7 +4986,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_INNER_FOCUS, ABILITY_SYNCHRONIZE, ABILITY_PSYCHIC_SURGE },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("爱管侍"),
-        .cryId = CRY_INDEEDEE_MALE,
+        .cryId = CRY_INDEEDEE_M,
         .natDexNum = NATIONAL_DEX_INDEEDEE,
         .categoryName = _("感情"),
         .height = 9,
@@ -4912,34 +4996,35 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_IndeedeeMale,
+        .frontPic = gMonFrontPic_IndeedeeM,
         .frontPicSize = MON_COORDS_SIZE(40, 56),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Indeedee,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_IndeedeeMale,
+        .backPic = gMonBackPic_IndeedeeM,
         .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_IndeedeeMale,
-        .shinyPalette = gMonShinyPalette_IndeedeeMale,
-        .iconSprite = gMonIcon_IndeedeeMale,
+        .palette = gMonPalette_IndeedeeM,
+        .shinyPalette = gMonShinyPalette_IndeedeeM,
+        .iconSprite = gMonIcon_IndeedeeM,
         .iconPalIndex = 2,
+        SHADOW(2, 4, SHADOW_SIZE_S)
         FOOTPRINT(Indeedee)
         OVERWORLD(
-            sPicTable_IndeedeeMale,
+            sPicTable_IndeedeeM,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_IndeedeeMale,
-            gShinyOverworldPalette_IndeedeeMale
+            gOverworldPalette_IndeedeeM,
+            gShinyOverworldPalette_IndeedeeM
         )
-        .levelUpLearnset = sIndeedeeMaleLevelUpLearnset,
-        .teachableLearnset = sIndeedeeMaleTeachableLearnset,
+        .levelUpLearnset = sIndeedeeMLevelUpLearnset,
+        .teachableLearnset = sIndeedeeMTeachableLearnset,
         .formSpeciesIdTable = sIndeedeeFormSpeciesIdTable,
     },
 
-    [SPECIES_INDEEDEE_FEMALE] =
+    [SPECIES_INDEEDEE_F] =
     {
         .baseHP        = 70,
         .baseAttack    = 55,
@@ -4959,7 +5044,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_OWN_TEMPO, ABILITY_SYNCHRONIZE, ABILITY_PSYCHIC_SURGE },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("爱管侍"),
-        .cryId = CRY_INDEEDEE_FEMALE,
+        .cryId = CRY_INDEEDEE_F,
         .natDexNum = NATIONAL_DEX_INDEEDEE,
         .categoryName = _("感情"),
         .height = 9,
@@ -4969,31 +5054,32 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_IndeedeeFemale,
+        .frontPic = gMonFrontPic_IndeedeeF,
         .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Indeedee,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_IndeedeeFemale,
+        .backPic = gMonBackPic_IndeedeeF,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_IndeedeeFemale,
-        .shinyPalette = gMonShinyPalette_IndeedeeFemale,
-        .iconSprite = gMonIcon_IndeedeeFemale,
+        .palette = gMonPalette_IndeedeeF,
+        .shinyPalette = gMonShinyPalette_IndeedeeF,
+        .iconSprite = gMonIcon_IndeedeeF,
         .iconPalIndex = 2,
+        SHADOW(2, 4, SHADOW_SIZE_S)
         FOOTPRINT(Indeedee)
         OVERWORLD(
-            sPicTable_IndeedeeFemale,
+            sPicTable_IndeedeeF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_IndeedeeFemale,
-            gShinyOverworldPalette_IndeedeeFemale
+            gOverworldPalette_IndeedeeF,
+            gShinyOverworldPalette_IndeedeeF
         )
-        .levelUpLearnset = sIndeedeeFemaleLevelUpLearnset,
-        .teachableLearnset = sIndeedeeFemaleTeachableLearnset,
-        .eggMoveLearnset = sIndeedeeFemaleEggMoveLearnset,
+        .levelUpLearnset = sIndeedeeFLevelUpLearnset,
+        .teachableLearnset = sIndeedeeFTeachableLearnset,
+        .eggMoveLearnset = sIndeedeeFEggMoveLearnset,
         .formSpeciesIdTable = sIndeedeeFormSpeciesIdTable,
     },
 #endif //P_FAMILY_INDEEDEE
@@ -5042,6 +5128,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_MorpekoFullBelly,
         .iconSprite = gMonIcon_MorpekoFullBelly,
         .iconPalIndex = 2,
+        SHADOW(0, 0, SHADOW_SIZE_S)
         FOOTPRINT(Morpeko)
         OVERWORLD(
             sPicTable_MorpekoFullBelly,
@@ -5101,6 +5188,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_MorpekoHangry,
         .iconSprite = gMonIcon_MorpekoHangry,
         .iconPalIndex = 2,
+        SHADOW(0, 0, SHADOW_SIZE_S)
         FOOTPRINT(Morpeko)
         .levelUpLearnset = sMorpekoLevelUpLearnset,
         .teachableLearnset = sMorpekoTeachableLearnset,
@@ -5155,6 +5243,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Cufant,
         .iconSprite = gMonIcon_Cufant,
         .iconPalIndex = 0,
+        SHADOW(5, 2, SHADOW_SIZE_M)
         FOOTPRINT(Cufant)
         OVERWORLD(
             sPicTable_Cufant,
@@ -5214,6 +5303,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Copperajah,
         .iconSprite = gMonIcon_Copperajah,
         .iconPalIndex = 0,
+        SHADOW(6, 7, SHADOW_SIZE_L)
         FOOTPRINT(Copperajah)
         OVERWORLD(
             sPicTable_Copperajah,
@@ -5230,7 +5320,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_COPPERAJAH_GIGANTAMAX] =
+    [SPECIES_COPPERAJAH_GMAX] =
     {
         .baseHP        = 122,
         .baseAttack    = 130,
@@ -5261,19 +5351,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_CopperajahGigantamax,
+        .frontPic = gMonFrontPic_CopperajahGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_CopperajahGigantamax,
+        .frontAnimFrames = sAnims_CopperajahGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CopperajahGigantamax,
+        .backPic = gMonBackPic_CopperajahGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CopperajahGigantamax,
-        .shinyPalette = gMonShinyPalette_CopperajahGigantamax,
-        .iconSprite = gMonIcon_CopperajahGigantamax,
+        .palette = gMonPalette_CopperajahGmax,
+        .shinyPalette = gMonShinyPalette_CopperajahGmax,
+        .iconSprite = gMonIcon_CopperajahGmax,
         .iconPalIndex = 0,
+        SHADOW(0, 11, SHADOW_SIZE_L)
         FOOTPRINT(Copperajah)
         .isGigantamax = TRUE,
         .levelUpLearnset = sCopperajahLevelUpLearnset,
@@ -5328,6 +5419,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dracozolt,
         .iconSprite = gMonIcon_Dracozolt,
         .iconPalIndex = 1,
+        SHADOW(-4, 10, SHADOW_SIZE_L)
         FOOTPRINT(Dracozolt)
         OVERWORLD(
             sPicTable_Dracozolt,
@@ -5386,6 +5478,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Arctozolt,
         .iconSprite = gMonIcon_Arctozolt,
         .iconPalIndex = 0,
+        SHADOW(-2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Arctozolt)
         OVERWORLD(
             sPicTable_Arctozolt,
@@ -5444,6 +5537,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dracovish,
         .iconSprite = gMonIcon_Dracovish,
         .iconPalIndex = 0,
+        SHADOW(2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Dracovish)
         OVERWORLD(
             sPicTable_Dracovish,
@@ -5502,6 +5596,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Arctovish,
         .iconSprite = gMonIcon_Arctovish,
         .iconPalIndex = 0,
+        SHADOW(0, 11, SHADOW_SIZE_L)
         FOOTPRINT(Arctovish)
         OVERWORLD(
             sPicTable_Arctovish,
@@ -5560,6 +5655,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Duraludon,
         .iconSprite = gMonIcon_Duraludon,
         .iconPalIndex = 0,
+        SHADOW(2, 11, SHADOW_SIZE_L)
         FOOTPRINT(Duraludon)
         OVERWORLD(
             sPicTable_Duraludon,
@@ -5578,7 +5674,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_DURALUDON_GIGANTAMAX] =
+    [SPECIES_DURALUDON_GMAX] =
     {
         .baseHP        = 70,
         .baseAttack    = 95,
@@ -5608,19 +5704,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 2,
         .trainerScale = 286,
         .trainerOffset = 1,
-        .frontPic = gMonFrontPic_DuraludonGigantamax,
+        .frontPic = gMonFrontPic_DuraludonGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_DuraludonGigantamax,
+        .frontAnimFrames = sAnims_DuraludonGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_DuraludonGigantamax,
+        .backPic = gMonBackPic_DuraludonGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_DuraludonGigantamax,
-        .shinyPalette = gMonShinyPalette_DuraludonGigantamax,
-        .iconSprite = gMonIcon_DuraludonGigantamax,
+        .palette = gMonPalette_DuraludonGmax,
+        .shinyPalette = gMonShinyPalette_DuraludonGmax,
+        .iconSprite = gMonIcon_DuraludonGmax,
         .iconPalIndex = 0,
+        SHADOW(3, 12, SHADOW_SIZE_L)
         FOOTPRINT(Duraludon)
         .isGigantamax = TRUE,
         .levelUpLearnset = sDuraludonLevelUpLearnset,
@@ -5675,6 +5772,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Archaludon,
         .iconSprite = gMonIcon_Archaludon,
         .iconPalIndex = 0,
+        SHADOW(4, 14, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Archaludon)
         OVERWORLD(
             sPicTable_Archaludon,
@@ -5735,6 +5833,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dreepy,
         .iconSprite = gMonIcon_Dreepy,
         .iconPalIndex = 0,
+        SHADOW(0, 2, SHADOW_SIZE_S)
         FOOTPRINT(Dreepy)
         OVERWORLD(
             sPicTable_Dreepy,
@@ -5794,6 +5893,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Drakloak,
         .iconSprite = gMonIcon_Drakloak,
         .iconPalIndex = 0,
+        SHADOW(0, 9, SHADOW_SIZE_M)
         FOOTPRINT(Drakloak)
         OVERWORLD(
             sPicTable_Drakloak,
@@ -5852,6 +5952,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Dragapult,
         .iconSprite = gMonIcon_Dragapult,
         .iconPalIndex = 0,
+        SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Dragapult)
         OVERWORLD(
             sPicTable_Dragapult,
@@ -5867,7 +5968,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #endif //P_FAMILY_DREEPY
 
 #if P_FAMILY_ZACIAN
-    [SPECIES_ZACIAN_HERO_OF_MANY_BATTLES] =
+    [SPECIES_ZACIAN_HERO] =
     {
         .baseHP        = 92,
         .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
@@ -5887,7 +5988,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_INTREPID_SWORD, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("苍响"),
-        .cryId = CRY_ZACIAN_HERO_OF_MANY_BATTLES,
+        .cryId = CRY_ZACIAN_HERO,
         .natDexNum = NATIONAL_DEX_ZACIAN,
         .categoryName = _("强者"),
         .height = 28,
@@ -5897,37 +5998,39 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_ZacianHeroOfManyBattles,
+        .frontPic = gMonFrontPic_ZacianHero,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Zacian,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_ZacianHeroOfManyBattles,
+        .backPic = gMonBackPic_ZacianHero,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_ZacianHeroOfManyBattles,
-        .shinyPalette = gMonShinyPalette_ZacianHeroOfManyBattles,
-        .iconSprite = gMonIcon_ZacianHeroOfManyBattles,
+        .palette = gMonPalette_ZacianHero,
+        .shinyPalette = gMonShinyPalette_ZacianHero,
+        .iconSprite = gMonIcon_ZacianHero,
         .iconPalIndex = 2,
+        SHADOW(-1, 9, SHADOW_SIZE_L)
         FOOTPRINT(Zacian)
         OVERWORLD(
-            sPicTable_ZacianHeroOfManyBattles,
+            sPicTable_ZacianHero,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_ZacianHeroOfManyBattles,
-            gShinyOverworldPalette_ZacianHeroOfManyBattles
+            gOverworldPalette_ZacianHero,
+            gShinyOverworldPalette_ZacianHero
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZacianLevelUpLearnset,
         .teachableLearnset = sZacianTeachableLearnset,
         .formSpeciesIdTable = sZacianFormSpeciesIdTable,
         .formChangeTable = sZacianFormChangeTable,
     },
 
-    [SPECIES_ZACIAN_CROWNED_SWORD] =
+    [SPECIES_ZACIAN_CROWNED] =
     {
         .baseHP        = 92,
         .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 150 : 170,
@@ -5947,7 +6050,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_INTREPID_SWORD, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("苍响"),
-        .cryId = CRY_ZACIAN_CROWNED_SWORD,
+        .cryId = CRY_ZACIAN_CROWNED,
         .natDexNum = NATIONAL_DEX_ZACIAN,
         .categoryName = _("强者"),
         .height = 28,
@@ -5957,30 +6060,32 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_ZacianCrownedSword,
+        .frontPic = gMonFrontPic_ZacianCrowned,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Zacian,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_ZacianCrownedSword,
+        .backPic = gMonBackPic_ZacianCrowned,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_ZacianCrownedSword,
-        .shinyPalette = gMonShinyPalette_ZacianCrownedSword,
-        .iconSprite = gMonIcon_ZacianCrownedSword,
+        .palette = gMonPalette_ZacianCrowned,
+        .shinyPalette = gMonShinyPalette_ZacianCrowned,
+        .iconSprite = gMonIcon_ZacianCrowned,
         .iconPalIndex = 2,
+        SHADOW(-3, 12, SHADOW_SIZE_L)
         FOOTPRINT(Zacian)
         OVERWORLD(
-            sPicTable_ZacianCrownedSword,
+            sPicTable_ZacianCrowned,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_ZacianCrownedSword,
-            gShinyOverworldPalette_ZacianCrownedSword
+            gOverworldPalette_ZacianCrowned,
+            gShinyOverworldPalette_ZacianCrowned
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZacianLevelUpLearnset,
         .teachableLearnset = sZacianTeachableLearnset,
         .formSpeciesIdTable = sZacianFormSpeciesIdTable,
@@ -5989,7 +6094,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #endif //P_FAMILY_ZACIAN
 
 #if P_FAMILY_ZAMAZENTA
-    [SPECIES_ZAMAZENTA_HERO_OF_MANY_BATTLES] =
+    [SPECIES_ZAMAZENTA_HERO] =
     {
         .baseHP        = 92,
         .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
@@ -6009,7 +6114,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_DAUNTLESS_SHIELD, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("藏玛然特"),
-        .cryId = CRY_ZAMAZENTA_HERO_OF_MANY_BATTLES,
+        .cryId = CRY_ZAMAZENTA_HERO,
         .natDexNum = NATIONAL_DEX_ZAMAZENTA,
         .categoryName = _("强者"),
         .height = 29,
@@ -6019,37 +6124,39 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_ZamazentaHeroOfManyBattles,
+        .frontPic = gMonFrontPic_ZamazentaHero,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Zamazenta,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_ZamazentaHeroOfManyBattles,
+        .backPic = gMonBackPic_ZamazentaHero,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 5,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_ZamazentaHeroOfManyBattles,
-        .shinyPalette = gMonShinyPalette_ZamazentaHeroOfManyBattles,
-        .iconSprite = gMonIcon_ZamazentaHeroOfManyBattles,
+        .palette = gMonPalette_ZamazentaHero,
+        .shinyPalette = gMonShinyPalette_ZamazentaHero,
+        .iconSprite = gMonIcon_ZamazentaHero,
         .iconPalIndex = 2,
+        SHADOW(-1, 12, SHADOW_SIZE_L)
         FOOTPRINT(Zamazenta)
         OVERWORLD(
-            sPicTable_ZamazentaHeroOfManyBattles,
+            sPicTable_ZamazentaHero,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_ZamazentaHeroOfManyBattles,
-            gShinyOverworldPalette_ZamazentaHeroOfManyBattles
+            gOverworldPalette_ZamazentaHero,
+            gShinyOverworldPalette_ZamazentaHero
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZamazentaLevelUpLearnset,
         .teachableLearnset = sZamazentaTeachableLearnset,
         .formSpeciesIdTable = sZamazentaFormSpeciesIdTable,
         .formChangeTable = sZamazentaFormChangeTable,
     },
 
-    [SPECIES_ZAMAZENTA_CROWNED_SHIELD] =
+    [SPECIES_ZAMAZENTA_CROWNED] =
     {
         .baseHP        = 92,
         .baseAttack    = P_UPDATED_STATS >= GEN_9 ? 120 : 130,
@@ -6069,7 +6176,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_DAUNTLESS_SHIELD, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("藏玛然特"),
-        .cryId = CRY_ZAMAZENTA_CROWNED_SHIELD,
+        .cryId = CRY_ZAMAZENTA_CROWNED,
         .natDexNum = NATIONAL_DEX_ZAMAZENTA,
         .categoryName = _("强者"),
         .height = 29,
@@ -6079,30 +6186,32 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_ZamazentaCrownedShield,
+        .frontPic = gMonFrontPic_ZamazentaCrowned,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Zamazenta,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_ZamazentaCrownedShield,
+        .backPic = gMonBackPic_ZamazentaCrowned,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 3,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_ZamazentaCrownedShield,
-        .shinyPalette = gMonShinyPalette_ZamazentaCrownedShield,
-        .iconSprite = gMonIcon_ZamazentaCrownedShield,
+        .palette = gMonPalette_ZamazentaCrowned,
+        .shinyPalette = gMonShinyPalette_ZamazentaCrowned,
+        .iconSprite = gMonIcon_ZamazentaCrowned,
         .iconPalIndex = 2,
+        SHADOW(0, 12, SHADOW_SIZE_L)
         FOOTPRINT(Zamazenta)
         OVERWORLD(
-            sPicTable_ZamazentaCrownedShield,
+            sPicTable_ZamazentaCrowned,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_ZamazentaCrownedShield,
-            gShinyOverworldPalette_ZamazentaCrownedShield
+            gOverworldPalette_ZamazentaCrowned,
+            gShinyOverworldPalette_ZamazentaCrowned
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZamazentaLevelUpLearnset,
         .teachableLearnset = sZamazentaTeachableLearnset,
         .formSpeciesIdTable = sZamazentaFormSpeciesIdTable,
@@ -6155,6 +6264,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Eternatus,
         .iconSprite = gMonIcon_Eternatus,
         .iconPalIndex = 0,
+        SHADOW(0, 14, SHADOW_SIZE_L)
         FOOTPRINT(Eternatus)
         OVERWORLD(
             sPicTable_Eternatus,
@@ -6166,6 +6276,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sEternatusLevelUpLearnset,
         .teachableLearnset = sEternatusTeachableLearnset,
         .formSpeciesIdTable = sEternatusFormSpeciesIdTable,
@@ -6215,9 +6326,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_EternatusEternamax,
         .iconSprite = gMonIcon_EternatusEternamax,
         .iconPalIndex = 0,
+        SHADOW(-3, 20, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Eternatus)
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sEternatusLevelUpLearnset,
         .teachableLearnset = sEternatusTeachableLearnset,
         .formSpeciesIdTable = sEternatusFormSpeciesIdTable,
@@ -6268,6 +6381,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Kubfu,
         .iconSprite = gMonIcon_Kubfu,
         .iconPalIndex = 1,
+        SHADOW(-2, 5, SHADOW_SIZE_S)
         FOOTPRINT(Kubfu)
         OVERWORLD(
             sPicTable_Kubfu,
@@ -6278,15 +6392,16 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Kubfu
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sKubfuLevelUpLearnset,
         .teachableLearnset = sKubfuTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_DARK_SCROLL, 0, SPECIES_URSHIFU_SINGLE_STRIKE_STYLE},
-                                {EVO_ITEM, ITEM_SCROLL_OF_DARKNESS, SPECIES_URSHIFU_SINGLE_STRIKE_STYLE},
-                                {EVO_WATER_SCROLL, 0, SPECIES_URSHIFU_RAPID_STRIKE_STYLE},
-                                {EVO_ITEM, ITEM_SCROLL_OF_WATERS, SPECIES_URSHIFU_RAPID_STRIKE_STYLE}),
+        .evolutions = EVOLUTION({EVO_DARK_SCROLL, 0, SPECIES_URSHIFU_SINGLE_STRIKE},
+                                {EVO_ITEM, ITEM_SCROLL_OF_DARKNESS, SPECIES_URSHIFU_SINGLE_STRIKE},
+                                {EVO_WATER_SCROLL, 0, SPECIES_URSHIFU_RAPID_STRIKE},
+                                {EVO_ITEM, ITEM_SCROLL_OF_WATERS, SPECIES_URSHIFU_RAPID_STRIKE}),
     },
 
-    [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE] =
+    [SPECIES_URSHIFU_SINGLE_STRIKE] =
     {
         .baseHP        = 100,
         .baseAttack    = 130,
@@ -6306,7 +6421,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_UNSEEN_FIST, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("武道熊师"),
-        .cryId = CRY_URSHIFU_SINGLE_STRIKE_STYLE,
+        .cryId = CRY_URSHIFU_SINGLE_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
         .categoryName = _("拳法"),
         .height = 19,
@@ -6316,19 +6431,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 326,
         .trainerOffset = 4,
-        .frontPic = gMonFrontPic_UrshifuSingleStrikeStyle,
+        .frontPic = gMonFrontPic_UrshifuSingleStrike,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Urshifu,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_UrshifuSingleStrikeStyle,
+        .backPic = gMonBackPic_UrshifuSingleStrike,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_UrshifuSingleStrikeStyle,
-        .shinyPalette = gMonShinyPalette_UrshifuSingleStrikeStyle,
+        .palette = gMonPalette_UrshifuSingleStrike,
+        .shinyPalette = gMonShinyPalette_UrshifuSingleStrike,
         .iconSprite = gMonIcon_Urshifu,
         .iconPalIndex = 2,
+        SHADOW(0, 14, SHADOW_SIZE_L)
         FOOTPRINT(Urshifu)
         OVERWORLD(
             sPicTable_Urshifu,
@@ -6339,14 +6455,15 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Urshifu
         )
         .isLegendary = TRUE,
-        .levelUpLearnset = sUrshifuSingleStrikeStyleLevelUpLearnset,
-        .teachableLearnset = sUrshifuSingleStrikeStyleTeachableLearnset,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+        .levelUpLearnset = sUrshifuSingleStrikeLevelUpLearnset,
+        .teachableLearnset = sUrshifuSingleStrikeTeachableLearnset,
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
         .formChangeTable = sUrshifuSingleStrikeFormChangeTable,
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX] =
+    [SPECIES_URSHIFU_SINGLE_STRIKE_GMAX] =
     {
         .baseHP        = 100,
         .baseAttack    = 130,
@@ -6366,7 +6483,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_UNSEEN_FIST, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("武道熊师"),
-        .cryId = CRY_URSHIFU_SINGLE_STRIKE_STYLE,
+        .cryId = CRY_URSHIFU_SINGLE_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
         .categoryName = _("拳法"),
         .height = 290,
@@ -6376,29 +6493,31 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 326,
         .trainerOffset = 4,
-        .frontPic = gMonFrontPic_UrshifuSingleStrikeStyleGigantamax,
+        .frontPic = gMonFrontPic_UrshifuSingleStrikeGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_UrshifuSingleStrikeStyleGigantamax,
+        .frontAnimFrames = sAnims_UrshifuSingleStrikeGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_UrshifuSingleStrikeStyleGigantamax,
+        .backPic = gMonBackPic_UrshifuSingleStrikeGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_UrshifuSingleStrikeStyleGigantamax,
-        .shinyPalette = gMonShinyPalette_UrshifuSingleStrikeStyleGigantamax,
-        .iconSprite = gMonIcon_UrshifuSingleStrikeStyleGigantamax,
+        .palette = gMonPalette_UrshifuSingleStrikeGmax,
+        .shinyPalette = gMonShinyPalette_UrshifuSingleStrikeGmax,
+        .iconSprite = gMonIcon_UrshifuSingleStrikeGmax,
         .iconPalIndex = 0,
+        SHADOW(1, 13, SHADOW_SIZE_L)
         FOOTPRINT(Urshifu)
         .isLegendary = TRUE,
         .isGigantamax = TRUE,
-        .levelUpLearnset = sUrshifuSingleStrikeStyleLevelUpLearnset,
-        .teachableLearnset = sUrshifuSingleStrikeStyleTeachableLearnset,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+        .levelUpLearnset = sUrshifuSingleStrikeLevelUpLearnset,
+        .teachableLearnset = sUrshifuSingleStrikeTeachableLearnset,
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
     },
 #endif //P_GIGANTAMAX_FORMS
 
-    [SPECIES_URSHIFU_RAPID_STRIKE_STYLE] =
+    [SPECIES_URSHIFU_RAPID_STRIKE] =
     {
         .baseHP        = 100,
         .baseAttack    = 130,
@@ -6418,7 +6537,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_UNSEEN_FIST, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("武道熊师"),
-        .cryId = CRY_URSHIFU_RAPID_STRIKE_STYLE,
+        .cryId = CRY_URSHIFU_RAPID_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
         .categoryName = _("拳法"),
         .height = 19,
@@ -6428,19 +6547,20 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 326,
         .trainerOffset = 4,
-        .frontPic = gMonFrontPic_UrshifuRapidStrikeStyle,
+        .frontPic = gMonFrontPic_UrshifuRapidStrike,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Urshifu,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_UrshifuRapidStrikeStyle,
+        .backPic = gMonBackPic_UrshifuRapidStrike,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_UrshifuRapidStrikeStyle,
-        .shinyPalette = gMonShinyPalette_UrshifuRapidStrikeStyle,
+        .palette = gMonPalette_UrshifuRapidStrike,
+        .shinyPalette = gMonShinyPalette_UrshifuRapidStrike,
         .iconSprite = gMonIcon_Urshifu,
         .iconPalIndex = 2,
+        SHADOW(4, 14, SHADOW_SIZE_M)
         FOOTPRINT(Urshifu)
         OVERWORLD(
             sPicTable_Urshifu,
@@ -6451,14 +6571,15 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Urshifu
         )
         .isLegendary = TRUE,
-        .levelUpLearnset = sUrshifuRapidStrikeStyleLevelUpLearnset,
-        .teachableLearnset = sUrshifuRapidStrikeStyleTeachableLearnset,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+        .levelUpLearnset = sUrshifuRapidStrikeLevelUpLearnset,
+        .teachableLearnset = sUrshifuRapidStrikeTeachableLearnset,
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
         .formChangeTable = sUrshifuRapidStrikeFormChangeTable,
     },
 
 #if P_GIGANTAMAX_FORMS
-    [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] =
+    [SPECIES_URSHIFU_RAPID_STRIKE_GMAX] =
     {
         .baseHP        = 100,
         .baseAttack    = 130,
@@ -6478,7 +6599,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_UNSEEN_FIST, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("武道熊师"),
-        .cryId = CRY_URSHIFU_RAPID_STRIKE_STYLE,
+        .cryId = CRY_URSHIFU_RAPID_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
         .categoryName = _("拳法"),
         .height = 260,
@@ -6488,24 +6609,26 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 1,
         .trainerScale = 326,
         .trainerOffset = 4,
-        .frontPic = gMonFrontPic_UrshifuRapidStrikeStyleGigantamax,
+        .frontPic = gMonFrontPic_UrshifuRapidStrikeGmax,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_UrshifuRapidStrikeStyleGigantamax,
+        .frontAnimFrames = sAnims_UrshifuRapidStrikeGmax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_UrshifuRapidStrikeStyleGigantamax,
+        .backPic = gMonBackPic_UrshifuRapidStrikeGmax,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_UrshifuRapidStrikeStyleGigantamax,
-        .shinyPalette = gMonShinyPalette_UrshifuRapidStrikeStyleGigantamax,
-        .iconSprite = gMonIcon_UrshifuRapidStrikeStyleGigantamax,
+        .palette = gMonPalette_UrshifuRapidStrikeGmax,
+        .shinyPalette = gMonShinyPalette_UrshifuRapidStrikeGmax,
+        .iconSprite = gMonIcon_UrshifuRapidStrikeGmax,
         .iconPalIndex = 0,
+        SHADOW(2, 13, SHADOW_SIZE_M)
         FOOTPRINT(Urshifu)
         .isLegendary = TRUE,
         .isGigantamax = TRUE,
-        .levelUpLearnset = sUrshifuRapidStrikeStyleLevelUpLearnset,
-        .teachableLearnset = sUrshifuRapidStrikeStyleTeachableLearnset,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+        .levelUpLearnset = sUrshifuRapidStrikeLevelUpLearnset,
+        .teachableLearnset = sUrshifuRapidStrikeTeachableLearnset,
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -6556,6 +6679,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Zarude,
         .iconSprite = gMonIcon_Zarude,
         .iconPalIndex = 1,
+        SHADOW(5, 11, SHADOW_SIZE_L)
         FOOTPRINT(Zarude)
         OVERWORLD(
             sPicTable_Zarude,
@@ -6567,6 +6691,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         )
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZarudeLevelUpLearnset,
         .teachableLearnset = sZarudeTeachableLearnset,
         .formSpeciesIdTable = sZarudeFormSpeciesIdTable,
@@ -6614,9 +6739,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_ZarudeDada,
         .iconSprite = gMonIcon_ZarudeDada,
         .iconPalIndex = 1,
+        SHADOW(5, 11, SHADOW_SIZE_L)
         FOOTPRINT(Zarude)
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZarudeLevelUpLearnset,
         .teachableLearnset = sZarudeTeachableLearnset,
         .formSpeciesIdTable = sZarudeFormSpeciesIdTable,
@@ -6668,6 +6795,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Regieleki,
         .iconSprite = gMonIcon_Regieleki,
         .iconPalIndex = 0,
+        SHADOW(-3, 14, SHADOW_SIZE_S)
         FOOTPRINT(Regieleki)
         OVERWORLD(
             sPicTable_Regieleki,
@@ -6678,6 +6806,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Regieleki
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sRegielekiLevelUpLearnset,
         .teachableLearnset = sRegielekiTeachableLearnset,
     },
@@ -6728,6 +6857,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Regidrago,
         .iconSprite = gMonIcon_Regidrago,
         .iconPalIndex = 0,
+        SHADOW(0, 13, SHADOW_SIZE_M)
         FOOTPRINT(Regidrago)
         OVERWORLD(
             sPicTable_Regidrago,
@@ -6738,6 +6868,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Regidrago
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sRegidragoLevelUpLearnset,
         .teachableLearnset = sRegidragoTeachableLearnset,
     },
@@ -6787,6 +6918,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Glastrier,
         .iconSprite = gMonIcon_Glastrier,
         .iconPalIndex = 0,
+        SHADOW(-5, 11, SHADOW_SIZE_L)
         FOOTPRINT(Glastrier)
         OVERWORLD(
             sPicTable_Glastrier,
@@ -6797,6 +6929,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Glastrier
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sGlastrierLevelUpLearnset,
         .teachableLearnset = sGlastrierTeachableLearnset,
     },
@@ -6846,6 +6979,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Spectrier,
         .iconSprite = gMonIcon_Spectrier,
         .iconPalIndex = 0,
+        SHADOW(-6, 12, SHADOW_SIZE_L)
         FOOTPRINT(Spectrier)
         OVERWORLD(
             sPicTable_Spectrier,
@@ -6856,6 +6990,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_Spectrier
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sSpectrierLevelUpLearnset,
         .teachableLearnset = sSpectrierTeachableLearnset,
     },
@@ -6905,6 +7040,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_Calyrex,
         .iconSprite = gMonIcon_Calyrex,
         .iconPalIndex = 0,
+        SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Calyrex)
         OVERWORLD(
             sPicTable_Calyrex,
@@ -6916,13 +7052,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sCalyrexLevelUpLearnset,
         .teachableLearnset = sCalyrexTeachableLearnset,
         .formSpeciesIdTable = sCalyrexFormSpeciesIdTable,
     },
 
 #if P_FUSION_FORMS
-    [SPECIES_CALYREX_ICE_RIDER] =
+    [SPECIES_CALYREX_ICE] =
     {
         .baseHP        = 100,
         .baseAttack    = 165,
@@ -6942,7 +7079,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_AS_ONE_ICE_RIDER, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("蕾冠王"),
-        .cryId = CRY_CALYREX_ICE_RIDER,
+        .cryId = CRY_CALYREX_ICE,
         .natDexNum = NATIONAL_DEX_CALYREX,
         .categoryName = _("帝皇"),
         .height = 24,
@@ -6952,37 +7089,39 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_CalyrexIceRider,
+        .frontPic = gMonFrontPic_CalyrexIce,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Calyrex,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CalyrexIceRider,
+        .backPic = gMonBackPic_CalyrexIce,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CalyrexIceRider,
-        .shinyPalette = gMonShinyPalette_CalyrexIceRider,
-        .iconSprite = gMonIcon_CalyrexIceRider,
+        .palette = gMonPalette_CalyrexIce,
+        .shinyPalette = gMonShinyPalette_CalyrexIce,
+        .iconSprite = gMonIcon_CalyrexIce,
         .iconPalIndex = 0,
+        SHADOW(-5, 11, SHADOW_SIZE_L)
         FOOTPRINT(Calyrex)
         OVERWORLD(
-            sPicTable_CalyrexIceRider,
+            sPicTable_CalyrexIce,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_CalyrexIceRider,
-            gShinyOverworldPalette_CalyrexIceRider
+            gOverworldPalette_CalyrexIce,
+            gShinyOverworldPalette_CalyrexIce
         )
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
         .isFrontierBanned = TRUE,
-        .levelUpLearnset = sCalyrexIceRiderLevelUpLearnset,
-        .teachableLearnset = sCalyrexIceRiderTeachableLearnset,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+        .levelUpLearnset = sCalyrexIceLevelUpLearnset,
+        .teachableLearnset = sCalyrexIceTeachableLearnset,
         .formSpeciesIdTable = sCalyrexFormSpeciesIdTable,
     },
 
-    [SPECIES_CALYREX_SHADOW_RIDER] =
+    [SPECIES_CALYREX_SHADOW] =
     {
         .baseHP        = 100,
         .baseAttack    = 85,
@@ -7002,7 +7141,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .abilities = { ABILITY_AS_ONE_SHADOW_RIDER, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("蕾冠王"),
-        .cryId = CRY_CALYREX_SHADOW_RIDER,
+        .cryId = CRY_CALYREX_SHADOW,
         .natDexNum = NATIONAL_DEX_CALYREX,
         .categoryName = _("帝皇"),
         .height = 24,
@@ -7012,33 +7151,35 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
-        .frontPic = gMonFrontPic_CalyrexShadowRider,
+        .frontPic = gMonFrontPic_CalyrexShadow,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Calyrex,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_CalyrexShadowRider,
+        .backPic = gMonBackPic_CalyrexShadow,
         .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_CalyrexShadowRider,
-        .shinyPalette = gMonShinyPalette_CalyrexShadowRider,
-        .iconSprite = gMonIcon_CalyrexShadowRider,
+        .palette = gMonPalette_CalyrexShadow,
+        .shinyPalette = gMonShinyPalette_CalyrexShadow,
+        .iconSprite = gMonIcon_CalyrexShadow,
         .iconPalIndex = 0,
+        SHADOW(-5, 12, SHADOW_SIZE_L)
         FOOTPRINT(Calyrex)
         OVERWORLD(
-            sPicTable_CalyrexShadowRider,
+            sPicTable_CalyrexShadow,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gOverworldPalette_CalyrexShadowRider,
-            gShinyOverworldPalette_CalyrexShadowRider
+            gOverworldPalette_CalyrexShadow,
+            gShinyOverworldPalette_CalyrexShadow
         )
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
         .isFrontierBanned = TRUE,
-        .levelUpLearnset = sCalyrexShadowRiderLevelUpLearnset,
-        .teachableLearnset = sCalyrexShadowRiderTeachableLearnset,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+        .levelUpLearnset = sCalyrexShadowLevelUpLearnset,
+        .teachableLearnset = sCalyrexShadowTeachableLearnset,
         .formSpeciesIdTable = sCalyrexFormSpeciesIdTable,
     },
 #endif //P_FUSION_FORMS
@@ -7089,6 +7230,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_EnamorusIncarnate,
         .iconSprite = gMonIcon_EnamorusIncarnate,
         .iconPalIndex = 1,
+        SHADOW(0, 17, SHADOW_SIZE_M)
         FOOTPRINT(Enamorus)
         OVERWORLD(
             sPicTable_EnamorusIncarnate,
@@ -7099,6 +7241,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_EnamorusIncarnate
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sEnamorusLevelUpLearnset,
         .teachableLearnset = sEnamorusTeachableLearnset,
         .formSpeciesIdTable = sEnamorusFormSpeciesIdTable,
@@ -7147,6 +7290,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_EnamorusTherian,
         .iconSprite = gMonIcon_EnamorusTherian,
         .iconPalIndex = 1,
+        SHADOW(2, 8, SHADOW_SIZE_L)
         FOOTPRINT(Enamorus)
         OVERWORLD(
             sPicTable_EnamorusTherian,
@@ -7157,6 +7301,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             gShinyOverworldPalette_EnamorusTherian
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sEnamorusLevelUpLearnset,
         .teachableLearnset = sEnamorusTeachableLearnset,
         .formSpeciesIdTable = sEnamorusFormSpeciesIdTable,
