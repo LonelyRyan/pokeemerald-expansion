@@ -1,23 +1,24 @@
 #ifndef GUARD_CONFIG_SAVE_H
 #define GUARD_CONFIG_SAVE_H
 
-// SaveBlock1 configs
-#define FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1    FALSE   // Free up unused Pokédex seen flags (52 bytes).
-#define FREE_TRAINER_HILL                   FALSE   // Frees up Trainer Hill data (28 bytes).
-#define FREE_MYSTERY_EVENT_BUFFERS          FALSE   // Frees up ramScript (1104 bytes).
-#define FREE_MATCH_CALL                     FALSE   // Frees up match call and rematch / VS Seeker data. (104 bytes).
-#define FREE_UNION_ROOM_CHAT                FALSE   // Frees up union room chat (212 bytes).
-#define FREE_ENIGMA_BERRY                   FALSE   // Frees up E-Reader Enigma Berry data (52 bytes).
-#define FREE_LINK_BATTLE_RECORDS            FALSE   // Frees up link battle record data (88 bytes).
-#define FREE_MYSTERY_GIFT                   FALSE   // Frees up Mystery Gift data (876 bytes).
-                                            // SaveBlock1 total: 2516 bytes
-// SaveBlock2 configs
-#define FREE_BATTLE_TOWER_E_READER          FALSE   // Frees up Battle Tower E-Reader data (188 bytes).
-#define FREE_POKEMON_JUMP                   FALSE   // Frees up Pokémon Jump data (16 bytes).
-#define FREE_RECORD_MIXING_HALL_RECORDS     FALSE   // Frees up hall records for record mixing (1032 bytes).
-#define FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2    FALSE   // Free up unused Pokédex seen flags (108 bytes).
-                                            // SaveBlock2 total: 1274 bytes
+// 存档块1配置
+#define FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1    FALSE   // 释放未使用的宝可梦图鉴已遇到标志（52字节）。
+#define FREE_TRAINER_HILL                   FALSE   // 释放训练师之丘数据（28字节）。
+#define FREE_MYSTERY_EVENT_BUFFERS          FALSE   // 释放神秘事件缓冲区（1104字节）。
+#define FREE_MATCH_CALL                     FALSE   // 释放对战呼叫和再次对战/对战搜索器数据（104字节）。
+#define FREE_UNION_ROOM_CHAT                FALSE   // 释放联合室聊天数据（212字节）。
+#define FREE_ENIGMA_BERRY                   FALSE   // 释放E-Reader谜题树果数据（52字节）。
+#define FREE_LINK_BATTLE_RECORDS            FALSE   // 释放链接对战记录数据（88字节）。
+#define FREE_MYSTERY_GIFT                   FALSE   // 释放神秘礼物数据（876字节）。
+                                                    // 存档块1总计：2516字节
 
-                                            // Grand Total: 3790
+// 存档块2配置
+#define FREE_BATTLE_TOWER_E_READER          FALSE   // 释放对战塔E-Reader数据（188字节）。
+#define FREE_POKEMON_JUMP                   FALSE   // 释放宝可梦跳跳数据（16字节）。
+#define FREE_RECORD_MIXING_HALL_RECORDS     FALSE   // 释放记录混合大厅记录（1032字节）。
+#define FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2    FALSE   // 释放未使用的宝可梦图鉴已遇到标志（108字节）。
+                                                    // 存档块2总计：1274字节
+
+                                                    // 总计：3790字节
 
 #endif // GUARD_CONFIG_SAVE_H

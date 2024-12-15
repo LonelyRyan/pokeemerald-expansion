@@ -1,292 +1,290 @@
 #ifndef GUARD_CONFIG_BATTLE_H
 #define GUARD_CONFIG_BATTLE_H
 
-// Calculation settings
-#define B_CRIT_CHANCE               GEN_LATEST // Chances of a critical hit landing. See CalcCritChanceStage. Gen6+ chances guarantee that Farfetch'd and Sirfetch'd always get critical hits while holding a Leek and using high-crit ratio moves.
-#define B_CRIT_MULTIPLIER           GEN_LATEST // In Gen6+, critical hits multiply damage by 1.5 instead of 2.
-#define B_PARALYSIS_SPEED           GEN_LATEST // In Gen7+, Speed is decreased by 50% instead of 75%.
-#define B_CONFUSION_SELF_DMG_CHANCE GEN_LATEST // In Gen7+, confusion has a 33.3% of self-damage, instead of 50%.
-#define B_MULTI_HIT_CHANCE          GEN_LATEST // In Gen5+, multi-hit moves have different %. See SetRandomMultiHitCounter for values.
-#define B_WHITEOUT_MONEY            GEN_LATEST // In Gen4+, the amount of money lost by losing a battle is determined by the amount of badges earned. Previously, it would cut the current money by half. (While this change was also in FRLG, for the sake of simplicity, setting this to GEN_3 will result in RSE behavior.)
-#define B_LIGHT_BALL_ATTACK_BOOST   GEN_LATEST // In Gen4+, Light Ball doubles the power of physical moves in addition to special moves.
-#define B_SANDSTORM_SPDEF_BOOST     GEN_LATEST // In Gen4+, Sandstorm weather multiplies the Sp. Defense of Rock-type Pokémon by x1.5.
+// 计算设置
+#define B_CRIT_CHANCE               GEN_LATEST // 致命一击的几率。参见CalcCritChanceStage。第六世代及以上的几率保证拿着菜种并使用高致命比率招式的大葱鸭总是能造成致命一击。
+#define B_CRIT_MULTIPLIER           GEN_LATEST // 在第六世代及以上，致命一击将伤害乘以1.5而不是2。
+#define B_PARALYSIS_SPEED           GEN_LATEST // 在第七世代及以上，速度降低50%而不是75%。
+#define B_CONFUSION_SELF_DMG_CHANCE GEN_LATEST // 在第七世代及以上，混乱状态下自伤的几率是33.3%，而不是50%。
+#define B_MULTI_HIT_CHANCE          GEN_LATEST // 在第五世代及以上，多hits招式有不同的百分比。参见SetRandomMultiHitCounter了解具体数值。
+#define B_WHITEOUT_MONEY            GEN_LATEST // 在第四世代及以上，战斗失败失去的金钱由获得的徽章数量决定。之前，会将当前金钱减半。（虽然这个变化也在FRLG中，但为了简单起见，设置为GEN_3会导致RSE的行为。）
+#define B_LIGHT_BALL_ATTACK_BOOST   GEN_LATEST // 在第四世代及以上，光之球除了特殊招式外，还会使物理招式的威力加倍。
+#define B_SANDSTORM_SPDEF_BOOST     GEN_LATEST // 在第四世代及以上，沙暴天气会使岩石属性宝可梦的特防乘以1.5倍。
 
-// Experience settings
-#define B_EXP_CATCH                 GEN_LATEST // In Gen6+, Pokémon get experience from catching.
-#define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, trainer battles no longer give a 1.5 multiplier to EXP gain.
-#define B_SPLIT_EXP                 GEN_LATEST // In Gen6+, all participating mon get full experience.
-#define B_SCALED_EXP                GEN_LATEST // In Gen5 and Gen7+, experience is weighted by level difference.
-#define B_UNEVOLVED_EXP_MULTIPLIER  GEN_LATEST // In Gen6+, if the Pokémon is at or past the level where it would be able to evolve, but it has not, it gets a ~1.2 multiplier to EXP gain. Only applies to Pokémon with EVO_LEVEL method.
+// 经验设置
+#define B_EXP_CATCH                 GEN_LATEST // 在第六世代及以上，捕捉宝可梦可以获得经验。
+#define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // 在第七世代及以上，训练师战斗不再提供1.5倍的经验值加成。
+#define B_SPLIT_EXP                 GEN_LATEST // 在第六世代及以上，所有参与的宝可梦都能获得完整的经验。
+#define B_SCALED_EXP                GEN_LATEST // 在第五世代和第七世代及以上，经验会根据等级差异加权。
+#define B_UNEVOLVED_EXP_MULTIPLIER  GEN_LATEST // 在第六世代及以上，如果宝可梦处于或超过它能够进化的等级，但没有进化，它将获得约1.2倍的经验值加成。只适用于使用EVO_LEVEL方法进化的宝可梦。
 
-// Stat settings
-#define B_BADGE_BOOST               GEN_LATEST // In Gen4+, Gym Badges no longer boost a Pokémon's stats.
-#define B_FRIENDSHIP_BOOST          FALSE      // In LGPE only, all stats except HP are boosted up to 10% based on Friendship. Unlike B_BADGE_BOOST, these boosts are accounted when calculating base stats.
-#define B_MAX_LEVEL_EV_GAINS        GEN_LATEST // In Gen5+, Lv100 Pokémon can obtain Effort Values normally.
-#define B_RECALCULATE_STATS         GEN_LATEST // In Gen5+, the stats of the Pokémon who participate in battle are recalculated at the end of each battle.
+// 属性设置
+#define B_BADGE_BOOST               GEN_LATEST // 在第四世代及以上，道馆徽章不再提升宝可梦的属性。
+#define B_FRIENDSHIP_BOOST          FALSE      // 只在LGPE中，除了HP外的所有属性根据亲密度提升最多10%。与B_BADGE_BOOST不同，这些提升在计算基础属性时会考虑。
+#define B_MAX_LEVEL_EV_GAINS        GEN_LATEST // 在第五世代及以上，100级的宝可梦可以正常获得努力值。
+#define B_RECALCULATE_STATS         GEN_LATEST // 在第五世代及以上，参与战斗的宝可梦在每次战斗结束后重新计算属性。
 
-// Damage settings
-#define B_BURN_DAMAGE               GEN_LATEST // In Gen7+, burn damage is 1/16th of max HP instead of 1/8th. Also applies to Frostbite.
-#define B_BURN_FACADE_DMG           GEN_LATEST // In Gen6+, burn's effect of lowering the Attack stat no longer applies to Facade.
-#define B_BINDING_DAMAGE            GEN_LATEST // In Gen6+, binding damage is 1/8 of max HP instead of 1/16. (With Binding Band, 1/6 and 1/8 respectively.)
-#define B_PSYWAVE_DMG               GEN_LATEST // Psywave's damage formula. See Cmd_psywavedamageeffect.
-#define B_PAYBACK_SWITCH_BOOST      GEN_LATEST // In Gen5+, if the opponent switches out, Payback's damage will no longer be doubled.
-#define B_HIDDEN_POWER_DMG          GEN_LATEST // In Gen6+, Hidden Power's base power was set to always be 60. Before, it was determined by the mon's IVs.
-#define B_ROUGH_SKIN_DMG            GEN_LATEST // In Gen4+, Rough Skin contact damage is 1/8th of max HP instead of 1/16th. This will also affect Iron Barbs.
-#define B_KNOCK_OFF_DMG             GEN_LATEST // In Gen6+, Knock Off deals 50% more damage when knocking off an item.
-#define B_SPORT_DMG_REDUCTION       GEN_LATEST // In Gen5+, Water/Mud Sport reduce Fire/Electric Damage by 67% instead of 50%.
-#define B_EXPLOSION_DEFENSE         GEN_LATEST // In Gen5+, Self-Destruct and Explosion don't halve the targets' defense.
-#define B_PARENTAL_BOND_DMG         GEN_LATEST // In Gen7+, Parental Bond's second hit does 25% of the initial hits damage. Before, it did 50%.
-#define B_MULTIPLE_TARGETS_DMG      GEN_LATEST // In Gen4+, damage dealt by moves that hit multiple targets at once is reduced to 75%. Before, it was 50%.
+// 伤害设置
+#define B_BURN_DAMAGE               GEN_LATEST // 在第七世代及以上，烧伤伤害是最大HP的1/16，而不是1/8。同样适用于冻伤。
+#define B_BURN_FACADE_DMG           GEN_LATEST // 在第六世代及以上，烧伤降低攻击属性的效果不再适用于近身打。
+#define B_BINDING_DAMAGE            GEN_LATEST // 在第六世代及以上，束缚伤害是最大HP的1/8，而不是1/16。（使用束缚带时，分别是1/6和1/8。）
+#define B_PSYWAVE_DMG               GEN_LATEST // 精神波动的伤害公式。参见Cmd_psywavedamageeffect。
+#define B_PAYBACK_SWITCH_BOOST      GEN_LATEST // 在第五世代及以上，如果对手换下宝可梦，报复的伤害不再加倍。
+#define B_HIDDEN_POWER_DMG          GEN_LATEST // 在第六世代及以上，隐藏力量的基础威力被设定为总是60。之前，它是由宝可梦的个体值决定的。
+#define B_ROUGH_SKIN_DMG            GEN_LATEST // 在第四世代及以上，粗糙皮肤接触伤害是最大HP的1/8，而不是1/16。这也会影响铁刺。
+#define B_KNOCK_OFF_DMG             GEN_LATEST // 在第六世代及以上，击落物品时抢夺造成的伤害增加50%。
+#define B_SPORT_DMG_REDUCTION       GEN_LATEST // 在第五世代及以上，水域/泥浆场地使火焰/电系伤害减少67%，而不是50%。
+#define B_EXPLOSION_DEFENSE         GEN_LATEST // 在第五世代及以上，自爆和大爆炸不会减半目标的防御。
+#define B_PARENTAL_BOND_DMG         GEN_LATEST // 在第七世代及以上，亲子爱第二击造成的伤害是最初伤害的25%。之前它是50%。
+#define B_MULTIPLE_TARGETS_DMG      GEN_LATEST // 在第四世代及以上，一次性打击多个目标的伤害减少到75%。之前是50%。
 
-// Type settings
-#define B_GHOSTS_ESCAPE             GEN_LATEST // In Gen6+, abilities like Shadow Tag or moves like Mean Look fail on Ghost-type Pokémon. They can also escape any Wild Battle.
-#define B_PARALYZE_ELECTRIC         GEN_LATEST // In Gen6+, Electric-type Pokémon can't be paralyzed.
-#define B_POWDER_GRASS              GEN_LATEST // In Gen6+, Grass-type Pokémon are immune to powder and spore moves.
-#define B_UPDATED_TYPE_MATCHUPS     GEN_LATEST // Updates Type matchups. src/data/types_info.h for details.
-#define B_PRANKSTER_DARK_TYPES      GEN_LATEST // In Gen7+, Prankster-elevated status moves do not affect Dark type Pokémon.
-#define B_SHEER_COLD_IMMUNITY       GEN_LATEST // In Gen7+, Ice-types are immune to Sheer Cold
-#define B_ROOST_PURE_FLYING         GEN_LATEST // In Gen5+, Roost makes pure Flying-types into Normal-type.
-#define B_STATUS_TYPE_IMMUNITY      GEN_LATEST // In Gen1, Pokémon were immune to paralysis/freeze/burn side effects of attacking moves, if they shared a type with the move.
+// 类型设置
+#define B_GHOSTS_ESCAPE             GEN_LATEST // 在第六世代及以上，幽灵属性的宝可梦不受影子钩子或恶颜等能力或招式影响。它们还可以逃离任何野生战斗。
+#define B_PARALYZE_ELECTRIC         GEN_LATEST // 在第六世代及以上，电属性宝可梦不能被麻痹。
+#define B_POWDER_GRASS              GEN_LATEST // 在第六世代及以上，草属性宝可梦对粉末和孢子类招式免疫。
+#define B_UPDATED_TYPE_MATCHUPS     GEN_LATEST // 更新类型相性。详细信息见src/data/types_info.h。
+#define B_PRANKSTER_DARK_TYPES      GEN_LATEST // 在第七世代及以上，恶作剧之心提升的状态招式不影响恶属性宝可梦。
+#define B_SHEER_COLD_IMMUNITY       GEN_LATEST // 在第七世代及以上，冰属性宝可梦对绝对零度免疫。
+#define B_ROOST_PURE_FLYING         GEN_LATEST // 在第五世代及以上，羽栖使纯飞行属性宝可梦变为普通属性。
+#define B_STATUS_TYPE_IMMUNITY      GEN_LATEST // 在第一世代，如果宝可梦与招式共享属性，则它们对攻击招式的麻痹/冻结/烧伤副作用免疫。
 
-// Turn settings
-#define B_BINDING_TURNS             GEN_LATEST // In Gen5+, binding moves last for 4-5 turns instead of 2-5 turns. (With Grip Claw, 7 and 5 turns respectively.)
-#define B_UPROAR_TURNS              GEN_LATEST // In Gen5+, Uproar lasts for 3 turns instead of 2-5 turns.
-#define B_UPROAR_IGNORE_SOUNDPROOF  GEN_LATEST // In Gen5+, Uproar status ignores Soundproof.
-#define B_DISABLE_TURNS             GEN_LATEST // Disable's turns. See Cmd_disablelastusedattack.
-#define B_TAILWIND_TURNS            GEN_LATEST // In Gen5+, Tailwind lasts 4 turns instead of 3.
-#define B_SLEEP_TURNS               GEN_LATEST // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
-#define B_TAUNT_TURNS               GEN_LATEST // In Gen5+, Taunt lasts 3 turns if the user acts before the target, or 4 turns if the target acted before the user. In Gen3, taunt lasts 2 turns and in Gen 4, 3-5 turns.
-#define B_SPORT_TURNS               GEN_LATEST // In Gen6+, Water/Mud Sport last 5 turns, even if the user switches out.
-#define B_MEGA_EVO_TURN_ORDER       GEN_LATEST // In Gen7, a Pokémon's Speed after Mega Evolution is used to determine turn order, not its Speed before.
-#define B_RECALC_TURN_AFTER_ACTIONS GEN_LATEST // In Gen8, switching/using a move affects the current turn's order of actions, better known as dynamic speed.
-#define B_FAINT_SWITCH_IN           GEN_LATEST // In Gen4+, sending out a new Pokémon after the previous one fainted happens at the end of the turn. Before, it would happen after each action.
+// 回合设置
+#define B_BINDING_TURNS             GEN_LATEST // 在第五世代及以上，束缚招式持续4-5回合，而不是2-5回合。（使用握力爪时，分别为7回合和5回合。）
+#define B_UPROAR_TURNS              GEN_LATEST // 在第五世代及以上，吵闹持续3回合，而不是2-5回合。
+#define B_UPROAR_IGNORE_SOUNDPROOF  GEN_LATEST // 在第五世代及以上，吵闹状态无视隔音特性。
+#define B_DISABLE_TURNS             GEN_LATEST // 禁用的回合数。参见Cmd_disablelastusedattack。
+#define B_TAILWIND_TURNS            GEN_LATEST // 在第五世代及以上，顺风持续4回合，而不是3回合。
+#define B_SLEEP_TURNS               GEN_LATEST // 在第五世代及以上，睡眠持续1-3回合，而不是2-5回合。
+#define B_TAUNT_TURNS               GEN_LATEST // 在第五世代及以上，挑衅如果使用者在目标之前行动，则持续3回合；如果目标先行动，则持续4回合。在第三世代，挑衅持续2回合；在第四世代，持续3-5回合。
+#define B_SPORT_TURNS               GEN_LATEST // 在第六世代及以上，水域/泥浆场地持续5回合，即使使用者换下。
+#define B_MEGA_EVO_TURN_ORDER       GEN_LATEST // 在第七世代，宝可梦超级进化后的速度用于决定回合顺序，而不是进化前的速度。
+#define B_RECALC_TURN_AFTER_ACTIONS GEN_LATEST // 在第八世代，换下/使用招式会影响当前回合的行动顺序，即动态速度。
+#define B_FAINT_SWITCH_IN           GEN_LATEST // 在第四世代及以上，前一只宝可梦倒下后派出新宝可梦发生在回合结束时。之前，每执行一个动作后就会换下。
 
-// Move data settings
-#define B_UPDATED_MOVE_DATA         GEN_LATEST // Updates move data in gMovesInfo, including Power, Accuracy, PP, stat changes, targets and chances of secondary effects.
-#define B_UPDATED_MOVE_TYPES        GEN_LATEST // Updates move types.
-#define B_UPDATED_MOVE_FLAGS        GEN_LATEST // Updates move flags.
-#define B_PHYSICAL_SPECIAL_SPLIT    GEN_LATEST // In Gen3, the move's type determines if it will do physical or special damage. The split icon in the summary will reflect this.
-#define B_RECOIL_IF_MISS_DMG        GEN_LATEST // In Gen5+, Jump Kick and High Jump Kick will always do half of the user's max HP when missing.
-#define B_KLUTZ_FLING_INTERACTION   GEN_LATEST // In Gen5+, Pokémon with the Klutz ability can't use Fling.
-#define B_UPDATED_CONVERSION        GEN_LATEST // In Gen6+, Conversion changes the user's type to match their first move's. Before, it would choose a move at random.
-#define B_UPDATED_CONVERSION_2      GEN_LATEST // In Gen5+, Conversion 2 changes the user's type to a type that resists the last move used by the selected target. Before, it would consider the last move being successfully hit by. Additionally, Struggle is considered Normal type before Gen 5.
-#define B_PP_REDUCED_BY_SPITE       GEN_LATEST // In Gen4+, Spite reduces the foe's last move's PP by 4, instead of 2 to 5.
-#define B_EXTRAPOLATED_MOVE_FLAGS   TRUE       // Adds move flags to moves that they don't officially have but would likely have if they were in the latest core series game.
+// 招式数据设置
+#define B_UPDATED_MOVE_DATA         GEN_LATEST // 更新gMovesInfo中的招式数据，包括威力、命中率、PP值、属性变化、目标和次要效果的几率。
+#define B_UPDATED_MOVE_TYPES        GEN_LATEST // 更新招式类型。
+#define B_UPDATED_MOVE_FLAGS        GEN_LATEST // 更新招式标志。
+#define B_PHYSICAL_SPECIAL_SPLIT    GEN_LATEST // 在第三世代，招式的类型决定它会造成物理伤害还是特殊伤害。总结中的分裂图标将反映这一点。
+#define B_RECOIL_IF_MISS_DMG        GEN_LATEST // 在第五世代及以上，飞膝踢和飞跃踢如果未击中，总是对使用者造成最大HP的一半伤害。
+#define B_KLUTZ_FLING_INTERACTION   GEN_LATEST // 在第五世代及以上，笨拙特性的宝可梦不能使用投掷。
+#define B_UPDATED_CONVERSION        GEN_LATEST // 在第六世代及以上，特性互换会将使用者的属性变为其第一个招式的属性。之前，它会随机选择一个招式。
+#define B_UPDATED_CONVERSION_2      GEN_LATEST // 在第五世代及以上，特性互换2会将使用者的属性变为抵抗目标最后使用的招式的属性。之前，它会考虑最后成功击中的招式。此外，第五世代之前挣扎被视为普通类型。
+#define B_PP_REDUCED_BY_SPITE       GEN_LATEST // 在第四世代及以上，恶意减少对手最后使用的招式的PP值4点，而不是2到5点。
+#define B_EXTRAPOLATED_MOVE_FLAGS   TRUE       // 为招式添加它们在最新核心系列游戏中可能拥有但官方没有的招式标志。
 
-// Ability data settings
-#define B_UPDATED_ABILITY_DATA      GEN_LATEST // Affects flags
+// 特性数据设置
+#define B_UPDATED_ABILITY_DATA      GEN_LATEST // 影响标志
 
-// Move accuracy settings
-#define B_TOXIC_NEVER_MISS          GEN_LATEST // In Gen6+, if Toxic is used by a Poison-type Pokémon, it will never miss.
-#define B_MINIMIZE_DMG_ACC          GEN_LATEST // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
-#define B_BLIZZARD_HAIL             GEN_LATEST // In Gen4+, Blizzard bypasses accuracy checks if it's hailing.
-#define B_SHEER_COLD_ACC            GEN_LATEST // In Gen7+, Sheer Cold's base chance of hitting is reduced to 20% if the user isn't Ice-typed.
+// 招式命中率设置
+#define B_TOXIC_NEVER_MISS          GEN_LATEST // 在第六世代及以上，如果剧毒由毒属性宝可梦使用，它将永远不会失误。
+#define B_MINIMIZE_DMG_ACC          GEN_LATEST // 在第六世代及以上，对极小化宝可梦造成双倍伤害的招式也会跳过命中率检查。
+#define B_BLIZZARD_HAIL             GEN_LATEST // 在第四世代及以上，如果正在降雪，暴雪会绕过命中率检查。
+#define B_SHEER_COLD_ACC            GEN_LATEST // 在第七世代及以上，如果使用者不是冰属性，绝对零度的基础命中率降低至20%。
 
-// Move stat change settings
-#define B_FELL_STINGER_STAT_RAISE   GEN_LATEST // In Gen7+, it raises Atk by 3 stages instead of 2 if it causes the target to faint.
-#define B_KINGS_SHIELD_LOWER_ATK    GEN_LATEST // In Gen8+, it lowers Atk by 1 stage instead of 2 of opponents that hit it.
-#define B_SPEED_BUFFING_RAPID_SPIN  GEN_LATEST // In Gen8, Rapid Spin raises the user's Speed by 1 stage.
-#define B_CHARGE_SPDEF_RAISE        GEN_LATEST // In Gen5+, Charge raises the user's Special Defense by 1 stage.
-#define B_MINIMIZE_EVASION          GEN_LATEST // In Gen5+, Minimize raises evasion by 2 stages instead of 1.
-#define B_GROWTH_STAT_RAISE         GEN_LATEST // In Gen5+, Growth raises Attack in addition to Special Attack by 1 stage each. Under the effects of the sun, it raises them by 2 stages each instead.
+// 招式属性变化设置
+#define B_FELL_STINGER_STAT_RAISE   GEN_LATEST // 在第七世代及以上，如果造成目标倒下， Fell Stinger 会提升攻击3级而不是2级。
+#define B_KINGS_SHIELD_LOWER_ATK    GEN_LATEST // 在第八世代及以上，王者盾牌会降低击中它的对手的攻击1级而不是2级。
+#define B_SPEED_BUFFING_RAPID_SPIN  GEN_LATEST // 在第八世代，急速旋转会提升使用者的速度1级。
+#define B_CHARGE_SPDEF_RAISE        GEN_LATEST // 在第五世代及以上，充电会提升使用者的特防1级。
+#define B_MINIMIZE_EVASION          GEN_LATEST // 在第五世代及以上，极小化会提升回避率2级而不是1级。
+#define B_GROWTH_STAT_RAISE         GEN_LATEST // 在第五世代及以上，成长除了提升特攻外，还会提升攻击1级。在阳光照射下，每项提升2级。
 
-// Other move settings
-#define B_INCINERATE_GEMS           GEN_LATEST // In Gen6+, Incinerate can destroy Gems.
-#define B_CAN_SPITE_FAIL            GEN_LATEST // In Gen4+, Spite can no longer fail if the foe's last move only has 1 remaining PP.
-#define B_CRASH_IF_TARGET_IMMUNE    GEN_LATEST // In Gen4+, The user of Jump Kick or High Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
-#define B_MEMENTO_FAIL              GEN_LATEST // In Gen4+, Memento fails if there is no target or if the target is protected or behind substitute. But not if Atk/Sp. Atk are at -6.
-#define B_GLARE_GHOST               GEN_LATEST // In Gen4+, Glare can hit Ghost-type Pokémon normally.
-#define B_SKILL_SWAP                GEN_LATEST // In Gen4+, Skill Swap triggers switch-in abilities after use.
-#define B_BRICK_BREAK               GEN_LATEST // In Gen4+, you can destroy your own side's screens. In Gen 5+, screens are not removed if the target is immune.
-#define B_WISH_HP_SOURCE            GEN_LATEST // In Gen5+, Wish heals half of the user's max HP instead of the target's.
-#define B_RAMPAGE_CANCELLING        GEN_LATEST // In Gen5+, a failed Thrash, etc, will cancel except on its last turn.
-#define B_HEAL_BLOCKING             GEN_LATEST // In Gen5+, Heal Block prevents healing by Black Sludge, Leftovers, Shell Bell. Affected Pokémon will not consume held HP-restoring Berries or Berry Juice.
-                                               // Draining abilities will not heal but will prevent damage. In Gen6+, Heal Block prevents the use of most HP-draining moves.
-#define B_ROOTED_GROUNDING          GEN_LATEST // In Gen4+, Ingrain causes the affected Pokémon to become grounded.
-#define B_METRONOME_MOVES           GEN_LATEST // This config will determine up to which generation will Metronome pull moves from.
-#define B_TELEPORT_BEHAVIOR         GEN_LATEST // In LGPE onwards (Gen8+ here), Teleport allows the user to swap out with another party member.
-#define B_BEAT_UP                   GEN_LATEST // In Gen5+, Beat Up uses a different formula to calculate its damage, and deals Dark-type damage. Prior to Gen 5, each hit also announces the party member's name.
-#define B_DARK_VOID_FAIL            GEN_LATEST // In Gen7+, only Darkrai can use Dark Void.
-#define B_BURN_HIT_THAW             GEN_LATEST // In Gen6+, damaging moves with a chance of burn will thaw the target, regardless if they're fire-type moves or not.
-#define B_HEALING_WISH_SWITCH       GEN_LATEST // In Gen5+, the mon receiving Healing Wish is sent out at the end of the turn.
-                                               // Additionally, in gen8+ the Healing Wish's effect will be stored until the user switches into a statused or hurt mon.
-#define B_DEFOG_EFFECT_CLEARING     GEN_LATEST // In Gen6+, Defog clears Spikes, Toxic Spikes, Stealth Rock and Sticky Web from both sides. In Gen8+, Defog also clears active Terrain.
-#define B_STOCKPILE_RAISES_DEFS     GEN_LATEST // In Gen4+, Stockpile also raises Defense and Sp. Defense stats. Once Spit Up / Swallow is used, these stat changes are lost.
-#define B_TRANSFORM_SHINY           GEN_LATEST // In Gen4+, Transform will copy the shiny state of the opponent instead of maintaining its own shiny state.
-#define B_TRANSFORM_FORM_CHANGES    GEN_LATEST // In Gen5+, Transformed Pokemon cannot change forms.
-#define B_WIDE_GUARD                GEN_LATEST // In Gen5 only, Wide Guard has a chance to fail if used consecutively.
-#define B_QUICK_GUARD               GEN_LATEST // In Gen5 only, Quick Guard has a chance to fail if used consecutively.
-#define B_IMPRISON                  GEN_LATEST // In Gen5+, Imprison doesn't fail if opposing pokemon don't have any moves the user knows.
-#define B_ALLY_SWITCH_FAIL_CHANCE   GEN_LATEST // In Gen9, using Ally Switch consecutively decreases the chance of success for each consecutive use.
-#define B_SKETCH_BANS               GEN_LATEST // In Gen9+, Sketch is unable to copy more moves than in previous generations.
-#define B_KNOCK_OFF_REMOVAL         GEN_LATEST // In Gen5+, Knock Off removes the foe's item instead of rendering it unusable.
-#define B_HEAL_BELL_SOUNDPROOF      GEN_LATEST // In Gen5, Heal Bell affects all mons with Soundproof.  In Gen6-8 it affects inactive mons, but not battlers. In Gen9 it always affects the user.
-#define B_CHARGE                    GEN_LATEST // In Gen8-, Charge status is lost regardless of the typing of the next move.
-#define B_POWDER_RAIN               GEN_LATEST // In Gen7+, Powder doesn't damage the user of a Fire type move in heavy rain.
-#define B_AFTER_YOU_TURN_ORDER      GEN_LATEST // In Gen8+, After You doesn't fail if the turn order wouldn't change after use.
-#define B_QUASH_TURN_ORDER          GEN_LATEST // In Gen8+, Quash-affected battlers move according to speed order. Before Gen8, Quash-affected battlers move in the order they were affected by Quash.
+// 其他招式设置
+#define B_INCINERATE_GEMS           GEN_LATEST // 在第六世代及以上，熔岩风暴可以破坏宝石。
+#define B_CAN_SPITE_FAIL            GEN_LATEST // 在第四世代及以上，如果对手最后使用的招式只剩下1点PP，恶意不能失败。
+#define B_CRASH_IF_TARGET_IMMUNE    GEN_LATEST // 在第四世代及以上，如果飞膝踢或飞跃踢攻击免疫该招式的目标，使用者会“继续前进并坠落”。
+#define B_MEMENTO_FAIL              GEN_LATEST // 在第四世代及以上，如果无目标或目标受到保护或在替身后面，报复会失败。但如果攻击/特攻处于-6，则不会失败。
+#define B_GLARE_GHOST               GEN_LATEST // 在第四世代及以上，石化之眼可以正常击中幽灵属性宝可梦。
+#define B_SKILL_SWAP                GEN_LATEST // 在第四世代及以上，技能互换在使用后会触发换入宝可梦的能力。
+#define B_BRICK_BREAK               GEN_LATEST // 在第四世代及以上，你可以破坏自己一方的屏幕。在第五世代及以上，如果目标免疫，则屏幕不会被移除。
+#define B_WISH_HP_SOURCE            GEN_LATEST // 在第五世代及以上，许愿治愈使用者最大HP的一半，而不是目标的。
+#define B_RAMPAGE_CANCELLING        GEN_LATEST // 在第五世代及以上，失败的蛮力等招式会在最后一回合之前取消。
+#define B_HEAL_BLOCKING             GEN_LATEST // 在第五世代及以上，治愈封锁阻止通过黑色污泥、剩饭、贝壳铃恢复HP。受影响的宝可梦不会消耗持有的HP恢复树果或树果汁。吸取能力的招式不会治愈但会防止伤害。在第六世代及以上，治愈封锁阻止使用大多数吸取HP的招式。
+#define B_ROOTED_GROUNDING          GEN_LATEST // 在第四世代及以上，扎根使受影响的宝可梦落地。
+#define B_METRONOME_MOVES           GEN_LATEST // 此配置将决定模仿大师将从哪个世代抽取招式。
+#define B_TELEPORT_BEHAVIOR         GEN_LATEST // 在LGPE起（这里为第八世代），瞬间移动允许使用者与队伍中的另一只宝可梦交换。
+#define B_BEAT_UP                   GEN_LATEST // 在第五世代及以上，围攻使用不同的公式计算伤害，并造成恶属性伤害。在第五世代之前，每次攻击还会宣布队伍成员的名字。
+#define B_DARK_VOID_FAIL            GEN_LATEST // 在第七世代及以上，只有达克莱伊可以使用黑洞。
+#define B_BURN_HIT_THAW             GEN_LATEST // 在第六世代及以上，有机会造成烧伤的伤害招式会融化目标，无论它们是否是火属性招式。
+#define B_HEALING_WISH_SWITCH       GEN_LATEST // 在第五世代及以上，接受治愈之愿的宝可梦在回合结束时被派出。此外，在第八世代及以上，治愈之愿的效果会存储起来，直到使用者换入一个处于异常状态或受伤的宝可梦。
+#define B_DEFOG_EFFECT_CLEARING     GEN_LATEST // 在第六世代及以上，清除之烟清除了双方的尖刺、剧毒尖刺、隐形岩和黏网。在第八世代及以上，清除之烟还会清除活动场地。
+#define B_STOCKPILE_RAISES_DEFS     GEN_LATEST // 在第四世代及以上，囤积也会提升防御和特防属性。一旦使用吐出/吞下，这些属性变化就会消失。
+#define B_TRANSFORM_SHINY           GEN_LATEST // 在第四世代及以上，变身会复制对手的闪光状态，而不是保持自己的闪光状态。
+#define B_TRANSFORM_FORM_CHANGES    GEN_LATEST // 在第五世代及以上，变身的宝可梦不能改变形态。
+#define B_WIDE_GUARD                GEN_LATEST // 仅在第五世代，连续使用广域防守有机会失败。
+#define B_QUICK_GUARD               GEN_LATEST // 仅在第五世代，连续使用急速防守有机会失败。
+#define B_IMPRISON                  GEN_LATEST // 在第五世代及以上，如果对方宝可梦没有任何使用者知道的招式，封印不会失败。
+#define B_ALLY_SWITCH_FAIL_CHANCE   GEN_LATEST // 在第九世代，连续使用友情防守会降低每次连续使用的成功几率。
+#define B_SKETCH_BANS               GEN_LATEST // 在第九世代及以上，素描无法复制比前几代更多的招式。
+#define B_KNOCK_OFF_REMOVAL         GEN_LATEST // 在第五世代及以上，击落会移除对手的物品，而不是使其无法使用。
+#define B_HEAL_BELL_SOUNDPROOF      GEN_LATEST // 在第五世代，治愈铃铛影响所有具有隔音特性的宝可梦。在第六至八世代，它影响非战斗中的宝可梦，但不会影响战斗中的宝可梦。在第九世代，它总是影响使用者。
+#define B_CHARGE                    GEN_LATEST // 在第八世代及以上，无论下一个招式的属性如何，充电状态都会丢失。
+#define B_POWDER_RAIN               GEN_LATEST // 在第七世代及以上，在大雨中，粉末不会对使用火属性招式的宝可梦造成伤害。
+#define B_AFTER_YOU_TURN_ORDER      GEN_LATEST // 在第八世代及以上，如果你先请不会在使用后失败，如果回合顺序不会在使用后改变。
+#define B_QUASH_TURN_ORDER          GEN_LATEST // 在第八世代及以上，受到压制影响的战斗者会根据速度顺序行动。在第八世代之前，受到压制影响的战斗者会按照他们受到压制影响的顺序行动。
 
-// Ability settings
-#define B_ABILITY_WEATHER           GEN_LATEST // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.
-#define B_GALE_WINGS                GEN_LATEST // In Gen7+ requires full HP to trigger.
-#define B_STANCE_CHANGE_FAIL        GEN_LATEST // In Gen7+, Stance Change fails if the Pokémon is unable to use a move because of confusion, paralysis, etc. In Gen6, it doesn't.
-#define B_SHADOW_TAG_ESCAPE         GEN_LATEST // In Gen4+, if both sides have a Pokémon with Shadow Tag, all battlers can escape. Before, neither side could escape this situation.
-#define B_MOODY_ACC_EVASION         GEN_LATEST // In Gen8, Moody CANNOT raise Accuracy and Evasion anymore.
-#define B_FLASH_FIRE_FROZEN         GEN_LATEST // In Gen5+, Flash Fire can trigger even when frozen, when it couldn't before.
-#define B_SYNCHRONIZE_TOXIC         GEN_LATEST // In Gen5+, if a Pokémon with Synchronize is badly poisoned, the opponent will also become badly poisoned. Previously, the opponent would become regular poisoned.
-#define B_UPDATED_INTIMIDATE        GEN_LATEST // In Gen8, Intimidate doesn't work on opponents with the Inner Focus, Scrappy, Own Tempo or Oblivious abilities. It also activates Rattled.
-#define B_OBLIVIOUS_TAUNT           GEN_LATEST // In Gen6+, Pokémon with Oblivious can't be taunted.
-#define B_STURDY                    GEN_LATEST // In Gen5+, Sturdy causes the Pokémon to have 1 HP remaining if another Pokémon's attack or confusion damage would have brought it from full health to 0 HP.
-#define B_PLUS_MINUS_INTERACTION    GEN_LATEST // In Gen5+, Plus and Minus can be activated with themselves and the opposite ability. Before, only the opposing ability could activate it.
-#define B_WEATHER_FORMS             GEN_LATEST // In Gen5+, Castform and Cherrim revert to their base form upon losing their respective ability. Cherrim needs Flower Gift to swap forms.
-#define B_SYMBIOSIS_GEMS            GEN_LATEST // In Gen7+, Symbiosis passes an item after a gem-boosted attack. Previously, items are passed before the gem-boosted attack hits, making the item effect apply.
-#define B_ABSORBING_ABILITY_STRING  GEN_LATEST // In Gen5+, the abilities that absorb moves of a certain type use a generic string for stat increases and decreases.
-#define B_REDIRECT_ABILITY_IMMUNITY GEN_LATEST // In Gen5+, Pokémon with Lightning Rod/Storm Drain become immune to Electric/Water-type moves and increase their Sp. Attack by 1 stage on top of the redirecting effect.
-#define B_LEAF_GUARD_PREVENTS_REST  GEN_LATEST // In Gen5+, Leaf Guard prevents the use of Rest in harsh sunlight.
-#define B_SNOW_WARNING              GEN_LATEST // In Gen9+, Snow Warning will summon snow instead of hail.
-#define B_TRANSISTOR_BOOST          GEN_LATEST // In Gen9+, Transistor will only boost Electric-type moves by 1.3x as opposed to 1.5x.
-#define B_ILLUMINATE_EFFECT         GEN_LATEST // In Gen9+, Illuminate prevents accuracy reductions and ignores the target's evasion.
-#define B_WEAK_ARMOR_SPEED          GEN_LATEST // In Gen7+, Weak Armor raises Speed by 2 stages instead of 1 when hit by a physical move.
-#define B_PROTEAN_LIBERO            GEN_LATEST // In Gen9+, Protean and Libero change the user's type only once per Battle.
-#define B_INTREPID_SWORD            GEN_LATEST // In Gen9+, Intrepid Sword raises Attack by one stage only once per Battle.
-#define B_DAUNTLESS_SHIELD          GEN_LATEST // In Gen9+, Dauntless Shield raises Defense by one stage only once per Battle.
-#define B_DISGUISE_HP_LOSS          GEN_LATEST // In Gen8+, when a Disguised Mimikyu's Disguise is busted, upon changing to its Busted Form it loses HP equal to 1/8 of its maximum HP.
-#define B_ABILITY_TRIGGER_CHANCE    GEN_LATEST // In Gen3, Shed Skin, Cute Charm, Flame Body, Static and Poison Point have a 1/3 chance to trigger. In Gen 4+ it's 30%.
-                                               // In Gen3, Effect Spore has a 10% chance to sleep, poison or paralyze, with an equal chance.
-                                               // In Gen4, it's 30%. In Gen5+ it has 11% to sleep, 9% chance to poison and 10% chance to paralyze.
+// 特性设置
+#define B_ABILITY_WEATHER           GEN_LATEST // 在第六世代及以上，特性引发的天气持续5回合。之前，它持续到战斗结束或被招式或不同影响天气的特性改变。
+#define B_GALE_WINGS                GEN_LATEST // 在第七世代及以上，需要满HP才能触发疾风之翼。
+#define B_STANCE_CHANGE_FAIL        GEN_LATEST // 在第七世代及以上，如果宝可梦因混乱、麻痹等无法使用招式，战斗切换会失败。在第六世代，它不会。
+#define B_SHADOW_TAG_ESCAPE         GEN_LATEST // 在第四世代及以上，如果双方都有持有影子钩子的宝可梦，所有战斗者都可以逃跑。之前，任何一方都无法逃脱这种情况。
+#define B_MOODY_ACC_EVASION         GEN_LATEST // 在第八世代，反复无常不再能提升命中率和回避率。
+#define B_FLASH_FIRE_FROZEN         GEN_LATEST // 在第五世代及以上，即使被冻结，也能触发火焰之躯，之前不能。
+#define B_SYNCHRONIZE_TOXIC         GEN_LATEST // 在第五世代及以上，如果持有同步特性的宝可梦剧毒，对手也会剧毒。之前，对手会常规中毒。
+#define B_UPDATED_INTIMIDATE        GEN_LATEST // 在第八世代，威吓对具有集中、好胜、我行我素或无防守特性的对手无效。它还会激活胆怯。
+#define B_OBLIVIOUS_TAUNT           GEN_LATEST // 在第六世代及以上，无防守特性的宝可梦不能被挑衅。
+#define B_STURDY                    GEN_LATEST // 在第五世代及以上，结实特性会在其他宝可梦的攻击或混乱伤害将其从满HP降至0HP时，使其保留1HP。
+#define B_PLUS_MINUS_INTERACTION    GEN_LATEST // 在第五世代及以上，正电和负电特性可以与自身和相反特性激活。之前，只有相反特性能激活它。
+#define B_WEATHER_FORMS             GEN_LATEST // 在第五世代及以上，当天气改变时，随风球和樱花鱼会变回基础形态。樱花鱼需要花之礼来变换形态。
+#define B_SYMBIOSIS_GEMS            GEN_LATEST // 在第七世代及以上，共生特性在宝石增强攻击后传递物品。之前，物品在宝石增强攻击命中前传递，使得物品效果适用。
+#define B_ABSORBING_ABILITY_STRING  GEN_LATEST // 在第五世代及以上，吸收特定类型招式的特性使用通用字符串来表示属性提升和下降。
+#define B_REDIRECT_ABILITY_IMMUNITY GEN_LATEST // 在第五世代及以上，避电和引水特性的宝可梦对电/水属性招式免疫，并额外提升特攻1级。
+#define B_LEAF_GUARD_PREVENTS_REST  GEN_LATEST // 在第五世代及以上，叶子防守阻止在强烈阳光下使用休息。
+#define B_SNOW_WARNING              GEN_LATEST // 在第九世代及以上，雪隐会召唤雪天，而不是冰雹。
+#define B_TRANSISTOR_BOOST          GEN_LATEST // 在第九世代及以上，电晶体特性提升电属性招式的威力为1.3倍，而不是1.5倍。
+#define B_ILLUMINATE_EFFECT         GEN_LATEST // 在第九世代及以上，照亮特性防止命中率下降，并忽略目标的回避。
+#define B_WEAK_ARMOR_SPEED          GEN_LATEST // 在第七世代及以上，弱甲特性在受到物理招式击中时，速度提升2级，而不是1级。
+#define B_PROTEAN_LIBERO            GEN_LATEST // 在第九世代及以上，变幻自如和自由者特性每场战斗只会改变宝可梦的属性一次。
+#define B_INTREPID_SWORD            GEN_LATEST // 在第九世代及以上，胆怯剑特性每场战斗只会提升攻击1级。
+#define B_DAUNTLESS_SHIELD          GEN_LATEST // 在第九世代及以上，坚毅盾墙特性每场战斗只会提升防御1级。
+#define B_DISGUISE_HP_LOSS          GEN_LATEST // 在第八世代及以上，当伪装的魔尼尼的伪装被识破时，在变为破碎形态时会损失相当于其最大HP的1/8的HP。
+#define B_ABILITY_TRIGGER_CHANCE    GEN_LATEST // 在第三世代，脱皮、可爱、火焰之躯、静电和毒针有1/3的几率触发。在第四世代及以上是30%。
+                                               // 在第三世代，效果孢子有10%的几率睡眠、中毒或麻痹，几率相等。
+                                               // 在第四世代，它是30%。在第五世代及以上，睡眠的几率是11%，中毒的几率是9%，麻痹的几率是10%。
 
-// Item settings
-#define B_HP_BERRIES                GEN_LATEST // In Gen4+, berries which restore HP activate immediately after HP drops to half. In Gen3, the effect occurs at the end of the turn.
-#define B_BERRIES_INSTANT           GEN_LATEST // In Gen4+, most berries activate on battle start/switch-in if applicable. In Gen3, they only activate either at the move end or turn end.
-#define B_CONFUSE_BERRIES_HEAL      GEN_LATEST // Before Gen7, Figy and similar berries restore 1/8th of HP and trigger at half HP. In Gen7 they restore half HP, triggering at 25% HP. In Gen8 they heal 1/3rd of HP.
-#define B_X_ITEMS_BUFF              GEN_LATEST // In Gen7+, the X Items raise a stat by 2 stages instead of 1.
-#define B_MENTAL_HERB               GEN_LATEST // In Gen5+, the Mental Herb cures Taunt, Encore, Torment, Heal Block, and Disable in addition to Infatuation from before.
-#define B_TRAINERS_KNOCK_OFF_ITEMS  TRUE       // If TRUE, trainers can steal/swap your items (non-berries are restored after battle). In vanilla games trainers cannot steal items.
-#define B_RETURN_STOLEN_NPC_ITEMS   GEN_LATEST // In Gen5+, Thief and Covet no longer steal items from NPCs.
-#define B_RESTORE_HELD_BATTLE_ITEMS GEN_LATEST // In Gen9, all non-berry items are restored after battle.
-#define B_SOUL_DEW_BOOST            GEN_LATEST // In Gens3-6, Soul Dew boosts Latis' Sp. Atk and Sp. Def. In Gen7+ it boosts the power of their Psychic and Dragon type moves instead.
-#define B_NET_BALL_MODIFIER         GEN_LATEST // In Gen7+, Net Ball's catch multiplier is x5 instead of x3.
-#define B_DIVE_BALL_MODIFIER        GEN_LATEST // In Gen4+, Dive Ball's effectiveness increases by x3.5 when Surfing or Fishing.
-#define B_NEST_BALL_MODIFIER        GEN_LATEST // Nest Ball's formula varies depending on the Gen. See Cmd_handleballthrow.
-#define B_REPEAT_BALL_MODIFIER      GEN_LATEST // In Gen7+, Repeat Ball's catch multiplier is x3.5 instead of x3.
-#define B_TIMER_BALL_MODIFIER       GEN_LATEST // In Gen5+, Timer Ball's effectiveness increases by x0.3 per turn instead of x0.1
-#define B_DUSK_BALL_MODIFIER        GEN_LATEST // In Gen7+, Dusk Ball's catch multiplier is x3 instead of x3.5.
-#define B_QUICK_BALL_MODIFIER       GEN_LATEST // In Gen5+, Quick Ball's catch multiplier is x5 instead of x4.
-#define B_LURE_BALL_MODIFIER        GEN_LATEST // In Gen8+, Lure Ball's catch multiplier is x4. In Gen7, it's x5. In Gen6 and earlier, it's x3.
-#define B_HEAVY_BALL_MODIFIER       GEN_LATEST // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
-#define B_DREAM_BALL_MODIFIER       GEN_LATEST // In Gen8+, Dream Ball's catch multiplier is x4 when the target is asleep or has the ability Comatose.
-#define B_SPORT_BALL_MODIFIER       GEN_LATEST // In Gen8+, Sport Ball's catch multiplier was reduced from x1.5 to x1.
-#define B_SAFARI_BALL_MODIFIER      GEN_LATEST // In Gen8+, Safari Ball's catch multiplier was reduced from x1.5 to x1.
-#define B_SERENE_GRACE_BOOST        GEN_LATEST // In Gen5+, Serene Grace boosts the added flinch chance of King's Rock and Razor Fang.
+// 物品设置
+#define B_HP_BERRIES                GEN_LATEST // 在第四世代及以上，恢复HP的树果在HP降至一半后立即激活。在第三世代，效果在回合结束时发生。
+#define B_BERRIES_INSTANT           GEN_LATEST // 在第四世代及以上，大多数树果在战斗开始/换入时（如果适用）立即激活。在第三世代，它们只在招式结束或回合结束时激活。
+#define B_CONFUSE_BERRIES_HEAL      GEN_LATEST // 在第七世代之前，柿子和类似的树果恢复1/8的HP，并在HP降至一半时触发。在第七世代，它们恢复一半的HP，触发点在25%的HP。在第八世代，它们恢复1/3的HP。
+#define B_X_ITEMS_BUFF              GEN_LATEST // 在第七世代及以上，X物品将属性提升2级，而不是1级。
+#define B_MENTAL_HERB               GEN_LATEST // 在第五世代及以上，心智香草除了之前的爱情香草外，还可以治愈挑衅、 encore、折磨、治愈封锁和禁用。
+#define B_TRAINERS_KNOCK_OFF_ITEMS  TRUE       // 如果为TRUE，训练师可以偷取/交换你的物品（非树果在战斗后恢复）。在原版游戏中，训练师不能偷取物品。
+#define B_RETURN_STOLEN_NPC_ITEMS   GEN_LATEST // 在第五世代及以上，小偷和强夺不再从NPC那里偷取物品。
+#define B_RESTORE_HELD_BATTLE_ITEMS GEN_LATEST // 在第九世代，所有非树果物品在战斗后恢复。
+#define B_SOUL_DEW_BOOST            GEN_LATEST // 在第三至六世代，灵魂水滴提升拉帝亚斯/拉帝欧斯的特攻和特防。在第七世代及以上，它改为提升它们的超能力和龙属性招式的威力。
+#define B_NET_BALL_MODIFIER         GEN_LATEST // 在第七世代及以上，网球的捕捉倍数是x5，而不是x3。
+#define B_DIVE_BALL_MODIFIER        GEN_LATEST // 在第四世代及以上，潜水球在冲浪或钓鱼时的效率提高x3.5。
+#define B_NEST_BALL_MODIFIER        GEN_LATEST // 巢穴球的公式根据不同的世代有所不同。参见Cmd_handleballthrow。
+#define B_REPEAT_BALL_MODIFIER      GEN_LATEST // 在第七世代及以上，重复球的捕捉倍数是x3.5，而不是x3。
+#define B_TIMER_BALL_MODIFIER       GEN_LATEST // 在第五世代及以上，时间球的效率每回合提高x0.3，而不是x0.1
+#define B_DUSK_BALL_MODIFIER        GEN_LATEST // 在第七世代及以上，黄昏球的捕捉倍数是x3，而不是x3.5。
+#define B_QUICK_BALL_MODIFIER       GEN_LATEST // 在第五世代及以上，快速球的捕捉倍数是x5，而不是x4。
+#define B_LURE_BALL_MODIFIER        GEN_LATEST // 在第八世代及以上，诱饵球的捕捉倍数是x4。在第七世代，它是x5。在第六世代及以前，它是x3。
+#define B_HEAVY_BALL_MODIFIER       GEN_LATEST // 在第七世代及以上，沉重球的范围有所变化。参见Cmd_handleballthrow。
+#define B_DREAM_BALL_MODIFIER       GEN_LATEST // 在第八世代及以上，梦境球在目标处于睡眠状态或具有睡眠特性时的捕捉倍数是x4。
+#define B_SPORT_BALL_MODIFIER       GEN_LATEST // 在第八世代及以上，运动球的捕捉倍数从x1.5降低到x1。
+#define B_SAFARI_BALL_MODIFIER      GEN_LATEST // 在第八世代及以上，狩猎球的捕捉倍数从x1.5降低到x1。
+#define B_SERENE_GRACE_BOOST        GEN_LATEST // 在第五世代及以上，庄严之赐提升王者之岩和锐利之牙的附加退缩几率。
 
-// Flag settings
-// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
-// Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
-#define B_FLAG_FORCE_DOUBLE_WILD    0     // If this flag is set, all land and surfing wild battles will be double battles.
-#define B_SMART_WILD_AI_FLAG        0     // If not 0, you can set this flag in a script to enable smart wild pokemon
-#define B_FLAG_NO_BAG_USE           0     // If this flag is set, the ability to use the bag in battle is disabled.
-#define B_FLAG_NO_CATCHING          0     // If this flag is set, the ability to catch wild Pokémon is disabled.
-#define B_FLAG_NO_RUNNING           0     // If this flag is set, the ability to escape from wild battles is disabled. Also makes Roar/Whirlwind and Teleport (under Gen8) fail.
-#define B_FLAG_AI_VS_AI_BATTLE      0     // If this flag is set, the player's mons will be controlled by the ai next battles.
-#define B_FLAG_DYNAMAX_BATTLE       0     // If this flag is set, the ability to Dynamax in battle is enabled for all trainers.
-#define B_FLAG_TERA_ORB_CHARGED     0     // If this flag is set, the Tera Orb is charged. It is automatically set upon healing and cleared upon Terastallizing once configured.
-#define B_FLAG_TERA_ORB_NO_COST     0     // If this flag is set, the Tera Orb does not use up its charge upon Terastallization. In S/V, this occurs after an event with Terapagos.
+// 旗帜设置
+// 在脚本中使用以下功能时，将0替换为您分配给它的标志ID。
+// 例如：替换为FLAG_UNUSED_0x264，以便您可以使用该标志来切换功能。
+#define B_FLAG_INVERSE_BATTLE       0     // 如果设置了此标志，则战斗的类型效果被反转。例如，火对水非常有效。
+#define B_FLAG_FORCE_DOUBLE_WILD    0     // 如果设置了此标志，则所有陆地和冲浪野生战斗都将是双打战斗。
+#define B_SMART_WILD_AI_FLAG        0     // 如果不为0，则可以在脚本中设置此标志以启用智能野生宝可梦AI。
+#define B_FLAG_NO_BAG_USE           0     // 如果设置了此标志，则禁用在战斗中使用背包的功能。
+#define B_FLAG_NO_CATCHING          0     // 如果设置了此标志，则禁用捕获野生宝可梦的功能。
+#define B_FLAG_NO_RUNNING           0     // 如果设置了此标志，则禁用从野生战斗中逃跑的功能。同样会使吼叫/旋风和瞬间移动（在第八世代之前）失败。
+#define B_FLAG_AI_VS_AI_BATTLE      0     // 如果设置了此标志，则玩家的宝可梦在下一场战斗中将由AI控制。
+#define B_FLAG_DYNAMAX_BATTLE       0     // 如果设置了此标志，则为所有训练师启用战斗中的巨大化功能。
+#define B_FLAG_TERA_ORB_CHARGED     0     // 如果设置了此标志，则太晶珠已充电。它在治疗时自动设置，并在配置后太晶化一次后清除。
+#define B_FLAG_TERA_ORB_NO_COST     0     // 如果设置了此标志，则太晶珠在太晶化时不会消耗其电荷。在S/V中，这发生在与太古羽虫的事件之后。
 
-// Var Settings
-// To use the following features in scripting, replace the 0s with the var ID you're assigning it to.
-// Eg: Replace with VAR_UNUSED_0x40F7 so you can use B_VAR_STARTING_STATUS for that feature.
-#define B_VAR_STARTING_STATUS       0     // If this var has a value, assigning a STATUS_FIELD_xx_TERRAIN to it before battle causes the battle to start with that terrain active.
-#define B_VAR_STARTING_STATUS_TIMER 0     // If this var has a value greater or equal than 1 field terrains will last that number of turns, otherwise they will last until they're overwritten.
-#define B_VAR_WILD_AI_FLAGS         0     // If not 0, you can use this var to add to default wild AI flags. NOT usable with flags above (1 << 15)
+// Var设置
+// 在脚本中使用以下功能时，将0替换为您分配给它的变量ID。
+// 例如：替换为VAR_UNUSED_0x40F7，以便您可以使用B_VAR_STARTING_STATUS进行该功能。
+#define B_VAR_STARTING_STATUS       0     // 如果此变量有值，在战斗前将STATUS_FIELD_xx_TERRAIN赋值给它会导致战斗以该场地激活开始。
+#define B_VAR_STARTING_STATUS_TIMER 0     // 如果此变量的值大于或等于1，场地将持续该回合数，否则将持续直到被覆盖。
+#define B_VAR_WILD_AI_FLAGS         0     // 如果不为0，可以使用此变量添加默认野生AI标志。不适用于上述标志（1 << 15）
 
-// Sky Battles
-#define B_FLAG_SKY_BATTLE                 0     // If this flag has a value, the player will be able to engage in scripted Sky Battles.
-#define B_VAR_SKY_BATTLE                  0     // If this var has a value, the game will remember the positions of Pokémon used in Sky Battles.
-#define B_SKY_BATTLE_STRICT_ELIGIBILITY   FALSE // If TRUE, Sky Battles will use the eligibility from Pokémon XY. If FALSE, all Flying-types or Pokémon with Levitate are allowed.
+// 天空战斗
+#define B_FLAG_SKY_BATTLE                 0     // 如果此标志有值，玩家将能够参与脚本天空战斗。
+#define B_VAR_SKY_BATTLE                  0     // 如果此变量有值，游戏将记住在天空战斗中使用的宝可梦的位置。
+#define B_SKY_BATTLE_STRICT_ELIGIBILITY   FALSE // 如果为TRUE，天空战斗将使用宝可梦XY的资格。如果为FALSE，则允许所有飞行属性或具有飘浮特性的宝可梦。
 
-// Flag and Var settings
-#define B_RESET_FLAGS_VARS_AFTER_WHITEOUT TRUE // If TRUE, Overworld_ResetBattleFlagsAndVars will reset battle-related Flags and Vars when the player whites out.
+// 旗帜和变量设置
+#define B_RESET_FLAGS_VARS_AFTER_WHITEOUT TRUE // 如果为TRUE，Overworld_ResetBattleFlagsAndVars将在玩家白化时重置与战斗相关的旗帜和变量。
 
-// Ingame partner flag
-#define B_SHOW_PARTNER_TARGET             FALSE // Shows the battler partner will target.
+// 游戏内伙伴旗帜
+#define B_SHOW_PARTNER_TARGET             FALSE // 显示战斗伙伴将目标。
 
-// Terrain settings
-#define B_TERRAIN_BG_CHANGE         TRUE       // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.
-#define B_THUNDERSTORM_TERRAIN      TRUE       // If TRUE, overworld Thunderstorm generates Rain and Electric Terrain as in Gen 8.
-#define B_TERRAIN_TYPE_BOOST        GEN_LATEST // In Gen8, damage is boosted by 30% instead of 50%.
-#define B_SECRET_POWER_EFFECT       GEN_LATEST // Secret Power's effects change depending on terrain and generation. See MOVE_EFFECT_SECRET_POWER's case in `SetMoveEffect`.
-#define B_SECRET_POWER_ANIMATION    GEN_LATEST // Secret Power's animations change depending on terrain and generation.
-#define B_NATURE_POWER_MOVES        GEN_LATEST // Nature Power calls different moves depending on terrain and generation. See sNaturePowerMoves.
-#define B_CAMOUFLAGE_TYPES          GEN_LATEST // Camouflage changes the user to different types depending on terrain and generation. See sTerrainToType.
-#define B_NEW_TERRAIN_BACKGROUNDS   FALSE      // If set to TRUE, uses new terrain backgrounds for Electric, Misty, Grassy and Psychic Terrain.
+// 地形设置
+#define B_TERRAIN_BG_CHANGE         TRUE       // 如果设置为TRUE，则地形招式会永久改变默认战斗背景，直到效果消失。
+#define B_THUNDERSTORM_TERRAIN      TRUE       // 如果为TRUE，则野外雷暴会像第八世代一样生成雨和电场地。
+#define B_TERRAIN_TYPE_BOOST        GEN_LATEST // 在第八世代，伤害增加30%而不是50%。
+#define B_SECRET_POWER_EFFECT       GEN_LATEST // 秘密之力的效果根据地形和世代变化。参见`SetMoveEffect`中的MOVE_EFFECT_SECRET_POWER案例。
+#define B_SECRET_POWER_ANIMATION    GEN_LATEST // 秘密之力的动画根据地形和世代变化。
+#define B_NATURE_POWER_MOVES        GEN_LATEST // 自然之力根据不同的地形和世代召唤不同的招式。参见sNaturePowerMoves。
+#define B_CAMOUFLAGE_TYPES          GEN_LATEST // 保护色根据地形和世代改变使用者的不同类型。参见sTerrainToType。
+#define B_NEW_TERRAIN_BACKGROUNDS   FALSE      // 如果设置为TRUE，将为电、迷雾、草地和超能场地使用新的地形背景。
 
-// Interface settings
-#define B_ABILITY_POP_UP            TRUE  // In Gen5+, the Pokémon abilities are displayed in a pop-up, when they activate in battle.
-#define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
-#define B_FAST_HP_DRAIN             TRUE  // If set to TRUE, HP bars will move faster.
-#define B_FAST_EXP_GROW             TRUE  // If set to TRUE, EXP bars will move faster.
-#define B_SHOW_TARGETS              TRUE  // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
-#define B_SHOW_CATEGORY_ICON        TRUE  // If set to TRUE, it will show an icon in the summary and move relearner showing the move's category.
-#define B_HIDE_HEALTHBOX_IN_ANIMS   TRUE  // If set to TRUE, hides healthboxes during move animations.
-#define B_WAIT_TIME_MULTIPLIER      16    // This determines how long text pauses in battle last. Vanilla is 16. Lower values result in faster battles.
-#define B_QUICK_MOVE_CURSOR_TO_RUN  FALSE // If set to TRUE, pushing B in the battle options against a wild encounter will move the cursor to the run option
-#define B_MOVE_DESCRIPTION_BUTTON   L_BUTTON // If set to a button other than B_LAST_USED_BALL_BUTTON, pressing this button will open the move description menu
+// 界面设置
+#define B_ABILITY_POP_UP            TRUE  // 在第五世代及以上，宝可梦的特性在战斗中激活时会以弹出窗口显示。
+#define B_FAST_INTRO                TRUE  // 如果设置为TRUE，战斗开场文本会与宝可梦的动画同时显示，而不是等待动画结束。
+#define B_FAST_HP_DRAIN             TRUE  // 如果设置为TRUE，HP条的移动速度会更快。
+#define B_FAST_EXP_GROW             TRUE  // 如果设置为TRUE，EXP条的移动速度会更快。
+#define B_SHOW_TARGETS              TRUE  // 如果设置为TRUE，在选取招式前会显示所有可用的目标，对于击中2个或3个宝可梦的招式。
+#define B_SHOW_CATEGORY_ICON        TRUE  // 如果设置为TRUE，在总结和招式重学者中会显示招式的分类图标。
+#define B_HIDE_HEALTHBOX_IN_ANIMS   TRUE  // 如果设置为TRUE，在招式动画期间隐藏健康框。
+#define B_WAIT_TIME_MULTIPLIER      16    // 这决定了战斗中文本暂停的持续时间。原版是16。较低的值会导致战斗速度更快。
+#define B_QUICK_MOVE_CURSOR_TO_RUN  FALSE // 如果设置为TRUE，在战斗选项中对野生遭遇按下B键会将光标移动到逃跑选项。
+#define B_MOVE_DESCRIPTION_BUTTON   L_BUTTON // 如果设置为除B_LAST_USED_BALL_BUTTON之外的按钮，按下此按钮将打开招式描述菜单。
 
-// Catching settings
-#define B_SEMI_INVULNERABLE_CATCH   GEN_LATEST // In Gen4+, you cannot throw a ball against a Pokemon that is in a semi-invulnerable state (dig/fly/etc)
-#define B_CATCHING_CHARM_BOOST      20         // % boost in Critical Capture odds if player has the Catching Charm.
-#define B_CRITICAL_CAPTURE          TRUE       // If set to TRUE, Critical Capture will be enabled.
-#define B_LAST_USED_BALL            TRUE       // If TRUE, the "last used ball" feature from Gen 7 will be implemented
-#define B_LAST_USED_BALL_BUTTON     R_BUTTON   // If last used ball is implemented, this button (or button combo) will trigger throwing the last used ball.
-#define B_LAST_USED_BALL_CYCLE      TRUE       // If TRUE, then holding B_LAST_USED_BALL_BUTTON while pressing the D-Pad cycles through the balls
+// 捕捉设置
+#define B_SEMI_INVULNERABLE_CATCH   GEN_LATEST // 在第四世代及以上，你不能对处于半无敌状态（挖洞/飞天等）的宝可梦投掷球。
+#define B_CATCHING_CHARM_BOOST      20         // 如果玩家拥有捕捉魅力，捕捉率提升的百分比。
+#define B_CRITICAL_CAPTURE          TRUE       // 如果设置为TRUE，将启用临界捕捉。
+#define B_LAST_USED_BALL            TRUE       // 如果为TRUE，将实现第七世代的“最近使用的球”功能。
+#define B_LAST_USED_BALL_BUTTON     R_BUTTON   // 如果实现了最近使用的球，这个按钮（或按钮组合）将触发投掷最近使用的球。
+#define B_LAST_USED_BALL_CYCLE      TRUE       // 如果为TRUE，那么按住B_LAST_USED_BALL_BUTTON同时按D-Pad可以循环浏览球。
 
-// Other settings
-#define B_DOUBLE_WILD_CHANCE            0          // % chance of encountering two Pokémon in a Wild Encounter.
-#define B_DOUBLE_WILD_REQUIRE_2_MONS    FALSE      // If set to TRUE, Wild Double Battles will default to Single Battles when the player only has 1 usable Pokémon, ignoring B_DOUBLE_WILD_CHANCE and B_FLAG_FORCE_DOUBLE_WILD.
-#define B_MULTI_BATTLE_WHITEOUT         GEN_LATEST // In Gen4+, multi battles end when the Player and also their Partner don't have any more Pokémon to fight.
-#define B_EVOLUTION_AFTER_WHITEOUT      GEN_LATEST // In Gen6+, Pokemon that qualify for evolution after battle will evolve even if the player loses.
-#define B_WILD_NATURAL_ENEMIES          TRUE       // If set to TRUE, certain wild mon species will attack other species when partnered in double wild battles (eg. Zangoose vs Seviper)
-#define B_AFFECTION_MECHANICS           TRUE       // In Gen6+, there's a stat called affection that can trigger different effects in battle. From LGPE onwards, those effects use friendship instead.
-#define B_TRAINER_CLASS_POKE_BALLS      GEN_LATEST // In Gen7+, trainers will use certain types of Poké Balls depending on their trainer class.
-#define B_TRAINER_MON_RANDOM_ABILITY    FALSE      // If this is set to TRUE a random legal ability will be generated for a trainer mon
-#define B_OBEDIENCE_MECHANICS           GEN_LATEST // In PLA+ (here Gen8+), obedience restrictions also apply to non-outsider Pokémon, albeit based on their level met rather than actual level
-#define B_USE_FROSTBITE                 FALSE      // In PLA, Frostbite replaces Freeze. Enabling this flag does the same here. Moves can still be cherry-picked to either Freeze or Frostbite. Freeze-Dry, Secret Power & Tri Attack depend on this config.
-#define B_OVERWORLD_SNOW                GEN_LATEST // In Gen9+, overworld Snow will summon snow instead of hail in battle.
-#define B_OVERWORLD_FOG                 GEN_LATEST // In Gen8+, overworld Fog summons Misty Terrain in battle. In Gen4 only, overworld Fog summons the unique fog weather condition in battle.
-#define B_TOXIC_REVERSAL                GEN_LATEST // In Gen5+, bad poison will change to regular poison at the end of battles.
-#define B_TRY_CATCH_TRAINER_BALL        GEN_LATEST // In Gen4+, trying to catch a Trainer's Pokémon does not consume the Poké Ball.
+// 其他设置
+#define B_DOUBLE_WILD_CHANCE            0          // 在野生遭遇中遇到两只宝可梦的百分比几率。
+#define B_DOUBLE_WILD_REQUIRE_2_MONS    FALSE      // 如果设置为TRUE，当玩家只有1个可用的宝可梦时，默认进行单对单战斗，忽略B_DOUBLE_WILD_CHANCE和B_FLAG_FORCE_DOUBLE_WILD。
+#define B_MULTI_BATTLE_WHITEOUT         GEN_LATEST // 在第四世代及以上，多人战斗在玩家和伙伴都没有更多的宝可梦战斗时结束。
+#define B_EVOLUTION_AFTER_WHITEOUT      GEN_LATEST // 在第六世代及以上，战斗结束后，符合条件的宝可梦将进化，即使玩家输了。
+#define B_WILD_NATURAL_ENEMIES          TRUE       // 如果设置为TRUE，在双对双野生战斗中，某些野生宝可梦物种会攻击其他物种（例如，猫鼬斩对沙罗蛇）。
+#define B_AFFECTION_MECHANICS           TRUE       // 在第六世代及以上，有一个称为亲密度的统计数据，可以在战斗中触发不同的效果。从LGPE起，这些效果使用亲密度代替。
+#define B_TRAINER_CLASS_POKE_BALLS      GEN_LATEST // 在第七世代及以上，训练师会根据他们的训练师类别使用特定类型的精灵球。
+#define B_TRAINER_MON_RANDOM_ABILITY    FALSE      // 如果设置为TRUE，将为训练师的宝可梦随机生成一个合法的特性。
+#define B_OBEDIENCE_MECHANICS           GEN_LATEST // 在PLA+（这里为第八世代及以上），服从限制也适用于非外敌宝可梦，尽管是基于它们遇到的等级而不是实际等级。
+#define B_USE_FROSTBITE                 FALSE      // 在PLA中，冻伤取代了冻结。在这里启用这个标志会做同样的事情。招式仍然可以选择冻结或冻伤。冻结干燥、秘密之力和三重攻击取决于此配置。
+#define B_OVERWORLD_SNOW                GEN_LATEST // 在第九世代及以上，野外的雪会召唤雪而不是冰雹。
+#define B_OVERWORLD_FOG                 GEN_LATEST // 在第八世代及以上，野外的雾会在战斗中召唤雾气场地。在第四世代中，野外的雾会在战斗中召唤独特的雾天气条件。
+#define B_TOXIC_REVERSAL                GEN_LATEST // 在第五世代及以上，剧毒会在战斗结束时变为常规中毒。
+#define B_TRY_CATCH_TRAINER_BALL        GEN_LATEST // 在第四世代及以上，尝试捕捉训练师的宝可梦不会消耗精灵球。
 
-// Animation Settings
-#define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.
-#define B_NEW_LEECH_SEED_PARTICLE       FALSE    // If set to TRUE, it updates Leech Seed's animation particle.
-#define B_NEW_HORN_ATTACK_PARTICLE      FALSE    // If set to TRUE, it updates Horn Attack's horn particle.
-#define B_NEW_ROCKS_PARTICLE            FALSE    // If set to TRUE, it updates rock particles.
-#define B_NEW_LEAF_PARTICLE             FALSE    // If set to TRUE, it updates leaf particle.
-#define B_NEW_EMBER_PARTICLES           FALSE    // If set to TRUE, it updates Ember's fire particle.
-#define B_NEW_MEAN_LOOK_PARTICLE        FALSE    // If set to TRUE, it updates Mean Look's eye particle.
-#define B_NEW_TEETH_PARTICLE            FALSE    // If set to TRUE, it updates Bite/Crunch teeth particle.
-#define B_NEW_HANDS_FEET_PARTICLE       FALSE    // If set to TRUE, it updates chop/kick/punch particles.
-#define B_NEW_SPIKES_PARTICLE           FALSE    // If set to TRUE, it updates Spikes particle.
-#define B_NEW_FLY_BUBBLE_PARTICLE       FALSE    // If set to TRUE, it updates Fly's 'bubble' particle.
-#define B_NEW_CURSE_NAIL_PARTICLE       FALSE    // If set to TRUE, it updates Curse's nail.
-#define B_NEW_BATON_PASS_BALL_PARTICLE  FALSE    // If set to TRUE, it updates Baton Pass' Poké Ball sprite.
-#define B_NEW_MORNING_SUN_STAR_PARTICLE FALSE    // If set to TRUE, it updates Morning Sun's star particles.
-#define B_NEW_IMPACT_PALETTE            FALSE    // If set to TRUE, it updates the basic 'hit' palette.
-#define B_NEW_SURF_PARTICLE_PALETTE     FALSE    // If set to TRUE, it updates Surf's wave palette.
+// 动画设置
+#define B_NEW_SWORD_PARTICLE            FALSE    // 如果设置为TRUE，更新剑舞的粒子效果。
+#define B_NEW_LEECH_SEED_PARTICLE       FALSE    // 如果设置为TRUE，更新吸取种子的动画粒子。
+#define B_NEW_HORN_ATTACK_PARTICLE      FALSE    // 如果设置为TRUE，更新角攻击的角粒子。
+#define B_NEW_ROCKS_PARTICLE            FALSE    // 如果设置为TRUE，更新岩石粒子。
+#define B_NEW_LEAF_PARTICLE             FALSE    // 如果设置为TRUE，更新叶子粒子。
+#define B_NEW_EMBER_PARTICLES           FALSE    // 如果设置为TRUE，更新火花的火粒子。
+#define B_NEW_MEAN_LOOK_PARTICLE        FALSE    // 如果设置为TRUE，更新恶颜的眼睛粒子。
+#define B_NEW_TEETH_PARTICLE            FALSE    // 如果设置为TRUE，更新咬/猛咬的牙齿粒子。
+#define B_NEW_HANDS_FEET_PARTICLE       FALSE    // 如果设置为TRUE，更新手/脚攻击粒子。
+#define B_NEW_SPIKES_PARTICLE           FALSE    // 如果设置为TRUE，更新撒菱粒子。
+#define B_NEW_FLY_BUBBLE_PARTICLE       FALSE    // 如果设置为TRUE，更新飞翔的“泡泡”粒子。
+#define B_NEW_CURSE_NAIL_PARTICLE       FALSE    // 如果设置为TRUE，更新诅咒的指甲。
+#define B_NEW_BATON_PASS_BALL_PARTICLE  FALSE    // 如果设置为TRUE，更新接力棒的精灵球精灵。
+#define B_NEW_MORNING_SUN_STAR_PARTICLE FALSE    // 如果设置为TRUE，更新晨光的星星粒子。
+#define B_NEW_IMPACT_PALETTE            FALSE    // 如果设置为TRUE，更新基本的“击中”调色板。
+#define B_NEW_SURF_PARTICLE_PALETTE     FALSE    // 如果设置为TRUE，更新冲浪的波浪调色板。
 
-// Poké Ball animation and sounds
-#define B_ENEMY_THROW_BALLS          GEN_LATEST  // In GEN_6+, enemy Trainers throw Poké Balls into battle instead of them just appearing on the ground and opening.
-#define B_ENEMY_THROW_BALLS_SOUND    GEN_LATEST  // In GEN_5+, enemy Trainer's Poké Balls make a sound when thrown to send out a Pokémon. This can only be used when B_ENEMY_THROW_BALLS is set to GEN_6 or later.
-#define B_PLAYER_THROW_BALLS_SOUND   GEN_LATEST  // In GEN_5+, the player's Poké Balls make a sound when thrown to send out a Pokémon.
+// 精灵球动画和音效
+#define B_ENEMY_THROW_BALLS          GEN_LATEST  // 在第六世代及以上，敌方训练师将精灵球投入战斗，而不是它们直接出现在地面上并打开。
+#define B_ENEMY_THROW_BALLS_SOUND    GEN_LATEST  // 在第五世代及以上，敌方训练师的精灵球在投掷以派出宝可梦时会发出声音。这只能在B_ENEMY_THROW_BALLS设置为第六世代或更高时使用。
+#define B_PLAYER_THROW_BALLS_SOUND   GEN_LATEST  // 在第五世代及以上，玩家的精灵球在投掷以派出宝可梦时会发出声音。
 
 #define SHOW_TYPES_NEVER    0
 #define SHOW_TYPES_ALWAYS   1
 #define SHOW_TYPES_CAUGHT   2
-#define B_SHOW_TYPES        SHOW_TYPES_NEVER // When defined as SHOW_TYPES_ALWAYS, after selecting "Fight" in battle, the types of all Pokemon are revealed. Whe defined as SHOW_TYPES_OWN, types are only revealed if the player owns the mon in question.
+#define B_SHOW_TYPES        SHOW_TYPES_NEVER // 当定义为SHOW_TYPES_ALWAYS时，在战斗中选择“战斗”后，所有宝可梦的类型都会显示。当定义为SHOW_TYPES_CAUGHT时，只有玩家拥有该宝可梦时才会显示类型。
 
-// Pokémon battle sprite settings
-#define B_ENEMY_MON_SHADOW_STYLE        GEN_3 // In Gen4+, all enemy Pokemon will have a shadow drawn beneath them.
-                                              // Currently Gen4+ shadows don't properly work with Trainerslides
+// 宝可梦战斗精灵设置
+#define B_ENEMY_MON_SHADOW_STYLE        GEN_3 // 在第四世代及以上，所有敌方宝可梦将在它们下方绘制阴影。
+                                              // 目前第四世代及以上的阴影与训练师幻灯片不完全兼容
 
 #endif // GUARD_CONFIG_BATTLE_H
