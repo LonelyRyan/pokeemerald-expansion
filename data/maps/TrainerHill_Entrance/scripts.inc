@@ -267,9 +267,7 @@ TrainerHill_Entrance_Pokemart_Basic:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 TrainerHill_Entrance_EventScript_ExpandedPokemart::
 	pokemart TrainerHill_Entrance_Pokemart_Expanded
@@ -291,9 +289,7 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 TrainerHill_Entrance_Text_StillGettingReady:
     .string "这里是训练师之山，\n你可以在这里与许多其他训练师\l组队战斗。\p不过很抱歉，我们正在进行准备，\n请您下次再来！$"
