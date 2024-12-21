@@ -152,6 +152,7 @@
 #define B_ABILITY_TRIGGER_CHANCE    GEN_LATEST // 在第三世代，脱皮、可爱、火焰之躯、静电和毒针有1/3的几率触发。在第四世代及以上是30%。
                                                // 在第三世代，效果孢子有10%的几率睡眠、中毒或麻痹，几率相等。
                                                // 在第四世代，它是30%。在第五世代及以上，睡眠的几率是11%，中毒的几率是9%，麻痹的几率是10%。
+#define B_PICKUP_WILD               GEN_LATEST // In Gen9+, Pickup allows its user to pickup its own used item at the end of the turn in wild battles.
 
 // 物品设置
 #define B_HP_BERRIES                GEN_LATEST // 在第四世代及以上，恢复HP的树果在HP降至一半后立即激活。在第三世代，效果在回合结束时发生。
@@ -161,6 +162,7 @@
 #define B_MENTAL_HERB               GEN_LATEST // 在第五世代及以上，心智香草除了之前的爱情香草外，还可以治愈挑衅、 encore、折磨、治愈封锁和禁用。
 #define B_TRAINERS_KNOCK_OFF_ITEMS  TRUE       // 如果为TRUE，训练师可以偷取/交换你的物品（非树果在战斗后恢复）。在原版游戏中，训练师不能偷取物品。
 #define B_RETURN_STOLEN_NPC_ITEMS   GEN_LATEST // 在第五世代及以上，小偷和强夺不再从NPC那里偷取物品。
+#define B_STEAL_WILD_ITEMS          GEN_LATEST // In Gen9, Thief and Covet steal a wild pokemon's item and send it to the bag. Before Gen9, the stolen item would be held by the Thief/Covet user.
 #define B_RESTORE_HELD_BATTLE_ITEMS GEN_LATEST // 在第九世代，所有非树果物品在战斗后恢复。
 #define B_SOUL_DEW_BOOST            GEN_LATEST // 在第三至六世代，灵魂水滴提升拉帝亚斯/拉帝欧斯的特攻和特防。在第七世代及以上，它改为提升它们的超能力和龙属性招式的威力。
 #define B_NET_BALL_MODIFIER         GEN_LATEST // 在第七世代及以上，网球的捕捉倍数是x5，而不是x3。

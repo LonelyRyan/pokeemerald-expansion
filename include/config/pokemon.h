@@ -55,7 +55,7 @@
 #define P_SHOW_TERA_TYPE                 GEN_8       // 从第九世代起，在总结屏幕上显示太晶类型。
 #define P_TM_LITERACY                    GEN_LATEST  // 从第六世代起，原本不能学习技能机的宝可梦可以学习在其等级提升学习招式集中的技能机所教授的招式。
 #define P_CAN_FORGET_HIDDEN_MOVE         FALSE       // 如果为TRUE，宝可梦可以忘记任何招式，即使是隐藏招式。
-#define P_EGG_CYCLE_LENGTH               GEN_LATEST  // 从第八世代起，蛋的孵化步数减半。
+#define P_EGG_CYCLE_LENGTH               GEN_LATEST  // 从第八世代起，蛋的孵化步数减半。 Previous Gens have some varied step counts around 255.
 #define P_ONLY_OBTAINABLE_SHINIES        FALSE       // 如果为TRUE，在战斗金字塔中遇到的宝可梦不会是闪光的。
 #define P_NO_SHINIES_WITHOUT_POKEBALLS   FALSE       // 如果为TRUE，当玩家没有精灵球时遇到的宝可梦不会是闪光的。
 #define P_SHOW_DYNAMIC_TYPES             FALSE       // 如果为TRUE，在战斗/总结屏幕上显示所有具有动态类型变化的招式的当前类型，而不仅仅是原版中的特定招式。
