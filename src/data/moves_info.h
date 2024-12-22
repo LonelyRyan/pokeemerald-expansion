@@ -15646,7 +15646,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .name = COMPOUND_STRING("等离子闪电拳"),
             .description = COMPOUND_STRING("用覆盖着电流拳头攻击。使\n"
                                            "一般属性招式变成电属性。"),
-            .effect = EFFECT_PLASMA_FISTS,
+            .effect = EFFECT_HIT,
             .power = 100,
             .type = TYPE_ELECTRIC,
             .accuracy = 100,
@@ -15661,6 +15661,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .contestCategory = CONTEST_CATEGORY_COOL,
             .contestComboStarterId = 0,
             .contestComboMoves = {0},
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ION_DELUGE,
+            .chance = 100,
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,
+        }),
             .battleAnimScript = gBattleAnimMove_PlasmaFists,
         },
 
@@ -15703,7 +15708,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .additionalEffects = ADDITIONAL_EFFECTS({
                 .moveEffect = MOVE_EFFECT_EVS_PLUS_1,
                 .chance = 100,
-            }),
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,}),
 #endif
             .battleAnimScript = gBattleAnimMove_ZippyZap,
         },
@@ -15747,7 +15752,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .additionalEffects = ADDITIONAL_EFFECTS({
                 .moveEffect = MOVE_EFFECT_FLINCH,
                 .chance = 30,
-            }),
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,}),
             .battleAnimScript = gBattleAnimMove_FloatyFall,
         },
 
@@ -15807,7 +15812,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .additionalEffects = ADDITIONAL_EFFECTS({
                 .moveEffect = MOVE_EFFECT_PARALYSIS,
                 .chance = 100,
-            }),
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,}),
             .battleAnimScript = gBattleAnimMove_BuzzyBuzz,
         },
 
@@ -15830,14 +15835,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .additionalEffects = ADDITIONAL_EFFECTS({
                 .moveEffect = MOVE_EFFECT_BURN,
                 .chance = 100,
-            }),
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,}),
             .battleAnimScript = gBattleAnimMove_SizzlySlide,
         },
 
         [MOVE_GLITZY_GLOW] = {
             .name = COMPOUND_STRING("哗哗气场"),
             .description = COMPOUND_STRING("利用念力强攻粉碎对方信心。\n制造能减弱特殊攻击的墙壁。"),
-            .effect = EFFECT_GLITZY_GLOW,
+            .effect = EFFECT_HIT,
             .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 80 : 90,
             .type = TYPE_PSYCHIC,
             .accuracy = B_UPDATED_MOVE_DATA >= GEN_8 ? 95 : 100,
@@ -15847,13 +15852,18 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .category = DAMAGE_CATEGORY_SPECIAL,
             .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
             .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_LIGHT_SCREEN,
+            .chance = 100,
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,
+        }),
             .battleAnimScript = gBattleAnimMove_GlitzyGlow,
         },
 
         [MOVE_BADDY_BAD] = {
             .name = COMPOUND_STRING("坏坏领域"),
             .description = COMPOUND_STRING("恶行恶相地进行攻击。\n制造能减弱物理攻击的墙壁。"),
-            .effect = EFFECT_BADDY_BAD,
+            .effect = EFFECT_HIT,
             .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 80 : 90,
             .type = TYPE_DARK,
             .accuracy = B_UPDATED_MOVE_DATA >= GEN_8 ? 95 : 100,
@@ -15863,13 +15873,18 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .category = DAMAGE_CATEGORY_SPECIAL,
             .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
             .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_REFLECT,
+            .chance = 100,
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,
+        }),
             .battleAnimScript = gBattleAnimMove_BaddyBad,
         },
 
         [MOVE_SAPPY_SEED] = {
             .name = COMPOUND_STRING("茁茁轰炸"),
             .description = COMPOUND_STRING("长出巨大藤蔓播撒种子攻击。\n种子会每回合吸取对手 HP。"),
-            .effect = EFFECT_SAPPY_SEED,
+            .effect = EFFECT_HIT,
             .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 100 : 90,
             .type = TYPE_GRASS,
             .accuracy = B_UPDATED_MOVE_DATA >= GEN_8 ? 90 : 100,
@@ -15880,6 +15895,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
             .magicCoatAffected = TRUE,
             .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_LEECH_SEED,
+            .chance = 100,
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,
+        }),
             .battleAnimScript = gBattleAnimMove_SappySeed,
         },
 
@@ -15887,7 +15907,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .name = COMPOUND_STRING("冰冰霜冻"),
             .description = COMPOUND_STRING("利用冰冷的黑雾结晶攻击。\n"
                                            "使全体宝可梦能力变回原点。"),
-            .effect = EFFECT_FREEZY_FROST,
+            .effect = EFFECT_HIT,
             .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 100 : 90,
             .type = TYPE_ICE,
             .accuracy = B_UPDATED_MOVE_DATA >= GEN_8 ? 90 : 100,
@@ -15897,6 +15917,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .category = DAMAGE_CATEGORY_SPECIAL,
             .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
             .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_HAZE,
+            .chance = 100,
+            .sheerForceBoost = SHEER_FORCE_NO_BOOST,
+        }),
             .battleAnimScript = gBattleAnimMove_FreezyFrost,
         },
 
@@ -15904,7 +15929,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .name = COMPOUND_STRING("亮亮风暴"),
             .description = COMPOUND_STRING("利用芬芳的龙卷风吞噬对方。\n"
                                            "能治愈我方宝可梦异常状态。"),
-            .effect = EFFECT_SPARKLY_SWIRL,
+            .effect = EFFECT_SPARKLY_SWIRL, // Temprorary
             .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 120 : 90,
             .type = TYPE_FAIRY,
             .accuracy = B_UPDATED_MOVE_DATA >= GEN_8 ? 85 : 100,
@@ -15914,6 +15939,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .category = DAMAGE_CATEGORY_SPECIAL,
             .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
             .metronomeBanned = TRUE,
+        // .additionalEffects = ADDITIONAL_EFFECTS({
+        //     .moveEffect = 0, // MOVE_EFFECT_AROMATHERAPY, Added 0 for Sheer Force boost
+        //     .chance = 100,
+        //     .sheerForceBoost = SHEER_FORCE_NO_BOOST,
+        // }),
             .battleAnimScript = gBattleAnimMove_SparklySwirl,
         },
 
@@ -17373,7 +17403,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .name = COMPOUND_STRING("诡异咒语"),
             .description = COMPOUND_STRING("用强大的精神力量攻击。让\n"
                                            "对手最后用的招式减少3PP。"),
-            .effect = EFFECT_EERIE_SPELL,
+            .effect = EFFECT_HIT,
             .power = 80,
             .type = TYPE_PSYCHIC,
             .accuracy = 100,
@@ -17387,6 +17417,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .contestCategory = CONTEST_CATEGORY_SMART,
             .contestComboStarterId = 0,
             .contestComboMoves = {0},
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_EERIE_SPELL,
+            .chance = 100,
+        }),
             .battleAnimScript = gBattleAnimMove_EerieSpell,
         },
 
@@ -18090,7 +18124,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         [MOVE_SALT_CURE] = {
             .name = COMPOUND_STRING("盐腌"),
             .description = COMPOUND_STRING("使对手陷入盐腌每回合受伤。\n对手为钢或水属性会更痛苦。"),
-            .effect = EFFECT_SALT_CURE,
+            .effect = EFFECT_HIT,
             .power = 40,
             .type = TYPE_ROCK,
             .accuracy = 100,
@@ -18099,6 +18133,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .priority = 0,
             .category = DAMAGE_CATEGORY_PHYSICAL,
             .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SALT_CURE,
+            .chance = 100,
+        }),
             .battleAnimScript = gBattleAnimMove_SaltCure,
         },
 
@@ -18901,7 +18939,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
             .self = TRUE,
             .onChargeTurnOnly = TRUE,
-        }, SHEER_FORCE_HACK),
+            .sheerForceBoost = SHEER_FORCE_BOOST,
+        }),
         .battleAnimScript = gBattleAnimMove_ElectroShot,
     },
 
@@ -19145,7 +19184,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .additionalEffects = ADDITIONAL_EFFECTS({
                 .moveEffect = MOVE_EFFECT_TOXIC,
                 .chance = 50,
-            }),
+            .sheerForceBoost = SHEER_FORCE_BOOST,}),
             .battleAnimScript = gBattleAnimMove_MalignantChain,
         },
 
