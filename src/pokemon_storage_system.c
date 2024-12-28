@@ -892,20 +892,20 @@ static void UnkUtil_DmaRun(struct UnkUtilData *);
 void SetMonFormPSS(struct BoxPokemon *boxMon);
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
 
-static const u8 gText_JustOnePkmn[] = _("There is just one POKéMON with you.");
-static const u8 gText_PartyFull[] = _("Your party is full!");
-static const u8 gText_Box[] = _("BOX");
+static const u8 gText_JustOnePkmn[] = _("你身上只剩一只精灵了。");
+static const u8 gText_PartyFull[] = _("你的队伍已经满了！");
+static const u8 gText_Box[] = _("箱子");
 
 struct {
     const u8 *text;
     const u8 *desc;
 } static const sMainMenuTexts[OPTIONS_COUNT] =
 {
-    [OPTION_WITHDRAW]   = {COMPOUND_STRING("WITHDRAW POKéMON"), COMPOUND_STRING("Move POKéMON stored in BOXES to\nyour party.")},
-    [OPTION_DEPOSIT]    = {COMPOUND_STRING("DEPOSIT POKéMON"),  COMPOUND_STRING("Store POKéMON in your party in BOXES.")},
-    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("MOVE POKéMON"),     COMPOUND_STRING("Organize the POKéMON in BOXES and\nin your party.")},
-    [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("MOVE ITEMS"),       COMPOUND_STRING("Move items held by any POKéMON\nin a BOX or your party.")},
-    [OPTION_EXIT]       = {COMPOUND_STRING("SEE YA!"),          COMPOUND_STRING("Return to the previous menu.")}
+    [OPTION_WITHDRAW]   = {COMPOUND_STRING("取出宝可梦"), COMPOUND_STRING("把存放到箱子里的宝可梦带在身上。")},
+    [OPTION_DEPOSIT]    = {COMPOUND_STRING("存放宝可梦"),  COMPOUND_STRING("把身上的宝可梦存放在箱子里。")},
+    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("移动宝可梦"),     COMPOUND_STRING("整理箱子或队伍中的宝可梦。")},
+    [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("移动道具"),       COMPOUND_STRING("整理宝可梦带着的道具")},
+    [OPTION_EXIT]       = {COMPOUND_STRING("再见"),          COMPOUND_STRING("返回上一级菜单")}
 };
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =
@@ -8051,49 +8051,49 @@ static void InitMenu(void)
     sStorage->menuWindow.baseBlock = 92;
 }
 
-static const u8 gPCText_Give[] = _("GIVE");
+static const u8 gPCText_Give[] = _("给予");
 
 static const u8 *const sMenuTexts[] =
 {
-    [MENU_CANCEL]     = COMPOUND_STRING("CANCEL"),
-    [MENU_STORE]      = COMPOUND_STRING("STORE"),
-    [MENU_WITHDRAW]   = COMPOUND_STRING("WITHDRAW"),
-    [MENU_MOVE]       = COMPOUND_STRING("MOVE"),
-    [MENU_SHIFT]      = COMPOUND_STRING("SHIFT"),
-    [MENU_PLACE]      = COMPOUND_STRING("PLACE"),
-    [MENU_SUMMARY]    = COMPOUND_STRING("SUMMARY"),
-    [MENU_RELEASE]    = COMPOUND_STRING("RELEASE"),
-    [MENU_MARK]       = COMPOUND_STRING("MARK"),
-    [MENU_JUMP]       = COMPOUND_STRING("JUMP"),
-    [MENU_WALLPAPER]  = COMPOUND_STRING("WALLPAPER"),
-    [MENU_NAME]       = COMPOUND_STRING("NAME"),
-    [MENU_TAKE]       = COMPOUND_STRING("TAKE"),
+    [MENU_CANCEL]     = COMPOUND_STRING("取消"),
+    [MENU_STORE]      = COMPOUND_STRING("存放"),
+    [MENU_WITHDRAW]   = COMPOUND_STRING("拿出"),
+    [MENU_MOVE]       = COMPOUND_STRING("移动"),
+    [MENU_SHIFT]      = COMPOUND_STRING("放置"),
+    [MENU_PLACE]      = COMPOUND_STRING("替换"),
+    [MENU_SUMMARY]    = COMPOUND_STRING("概况"),
+    [MENU_RELEASE]    = COMPOUND_STRING("放生"),
+    [MENU_MARK]       = COMPOUND_STRING("标记"),
+    [MENU_JUMP]       = COMPOUND_STRING("跳转"),
+    [MENU_WALLPAPER]  = COMPOUND_STRING("壁纸"),
+    [MENU_NAME]       = COMPOUND_STRING("命名"),
+    [MENU_TAKE]       = COMPOUND_STRING("取下"),
     [MENU_GIVE]       = gPCText_Give,
     [MENU_GIVE_2]     = gPCText_Give,
-    [MENU_SWITCH]     = COMPOUND_STRING("SWITCH"),
-    [MENU_BAG]        = COMPOUND_STRING("BAG"),
-    [MENU_INFO]       = COMPOUND_STRING("INFO"),
-    [MENU_SCENERY_1]  = COMPOUND_STRING("SCENERY 1"),
-    [MENU_SCENERY_2]  = COMPOUND_STRING("SCENERY 2"),
-    [MENU_SCENERY_3]  = COMPOUND_STRING("SCENERY 3"),
-    [MENU_ETCETERA]   = COMPOUND_STRING("ETCETERA"),
-    [MENU_FRIENDS]    = COMPOUND_STRING("FRIENDS"),
-    [MENU_FOREST]     = COMPOUND_STRING("FOREST"),
-    [MENU_CITY]       = COMPOUND_STRING("CITY"),
-    [MENU_DESERT]     = COMPOUND_STRING("DESERT"),
-    [MENU_SAVANNA]    = COMPOUND_STRING("SAVANNA"),
-    [MENU_CRAG]       = COMPOUND_STRING("CRAG"),
-    [MENU_VOLCANO]    = COMPOUND_STRING("VOLCANO"),
-    [MENU_SNOW]       = COMPOUND_STRING("SNOW"),
-    [MENU_CAVE]       = COMPOUND_STRING("CAVE"),
-    [MENU_BEACH]      = COMPOUND_STRING("BEACH"),
-    [MENU_SEAFLOOR]   = COMPOUND_STRING("SEAFLOOR"),
-    [MENU_RIVER]      = COMPOUND_STRING("RIVER"),
-    [MENU_SKY]        = COMPOUND_STRING("SKY"),
-    [MENU_POLKADOT]   = COMPOUND_STRING("POLKA-DOT"),
-    [MENU_POKECENTER] = COMPOUND_STRING("POKéCENTER"),
-    [MENU_MACHINE]    = COMPOUND_STRING("MACHINE"),
-    [MENU_SIMPLE]     = COMPOUND_STRING("SIMPLE"),
+    [MENU_SWITCH]     = COMPOUND_STRING("交换"),
+    [MENU_BAG]        = COMPOUND_STRING("放入背包"),
+    [MENU_INFO]       = COMPOUND_STRING("信息"),
+    [MENU_SCENERY_1]  = COMPOUND_STRING("背景1"),
+    [MENU_SCENERY_2]  = COMPOUND_STRING("背景2"),
+    [MENU_SCENERY_3]  = COMPOUND_STRING("背景3"),
+    [MENU_ETCETERA]   = COMPOUND_STRING("附加"),
+    [MENU_FRIENDS]    = COMPOUND_STRING("友谊"),
+    [MENU_FOREST]     = COMPOUND_STRING("森林"),
+    [MENU_CITY]       = COMPOUND_STRING("城市"),
+    [MENU_DESERT]     = COMPOUND_STRING("沙漠"),
+    [MENU_SAVANNA]    = COMPOUND_STRING("草原"),
+    [MENU_CRAG]       = COMPOUND_STRING("峭壁"),
+    [MENU_VOLCANO]    = COMPOUND_STRING("火山"),
+    [MENU_SNOW]       = COMPOUND_STRING("雪"),
+    [MENU_CAVE]       = COMPOUND_STRING("洞穴"),
+    [MENU_BEACH]      = COMPOUND_STRING("沙滩"),
+    [MENU_SEAFLOOR]   = COMPOUND_STRING("海底"),
+    [MENU_RIVER]      = COMPOUND_STRING("河流"),
+    [MENU_SKY]        = COMPOUND_STRING("天空"),
+    [MENU_POLKADOT]   = COMPOUND_STRING("圆点"),
+    [MENU_POKECENTER] = COMPOUND_STRING("宝可中心"),
+    [MENU_MACHINE]    = COMPOUND_STRING("机械"),
+    [MENU_SIMPLE]     = COMPOUND_STRING("简约"),
 };
 
 static void SetMenuText(u8 textId)
