@@ -10275,9 +10275,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         },
 
         [MOVE_DEFOG] = {
-            .name = COMPOUND_STRING("Defog"),
-            .description = COMPOUND_STRING("Removes obstacles and\n"
-                                           "lowers evasion."),
+            .name = COMPOUND_STRING("清除浓雾"),
+            .description = COMPOUND_STRING("吹开对手的反射壁或者\n光墙等，降低对手回避率。"),
             .effect = EFFECT_DEFOG,
             .power = 0,
             .type = TYPE_FLYING,
@@ -17243,7 +17242,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         },
 
         [MOVE_THUNDER_CAGE] = {
-            .name = COMPOUND_STRING("Thunder Cage"),
+            .name = COMPOUND_STRING("雷电囚笼"),
             .description = COMPOUND_STRING("将对手困在电流四溅囚笼中，\n"
                                            "在 " BINDING_TURNS " 回合内攻击。"),
             .effect = EFFECT_HIT,
