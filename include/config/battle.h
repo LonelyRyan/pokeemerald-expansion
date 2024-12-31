@@ -153,6 +153,7 @@
                                                // 在第三世代，效果孢子有10%的几率睡眠、中毒或麻痹，几率相等。
                                                // 在第四世代，它是30%。在第五世代及以上，睡眠的几率是11%，中毒的几率是9%，麻痹的几率是10%。
 #define B_PICKUP_WILD               GEN_LATEST // In Gen9+, Pickup allows its user to pickup its own used item at the end of the turn in wild battles.
+#define B_MAGIC_GUARD               GEN_LATEST // In Gen4+, Magic Guard ignores immobilization caused by paralysis
 
 // 物品设置
 #define B_HP_BERRIES                GEN_LATEST // 在第四世代及以上，恢复HP的树果在HP降至一半后立即激活。在第三世代，效果在回合结束时发生。
