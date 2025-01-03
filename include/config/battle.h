@@ -224,7 +224,8 @@
 
 // 界面设置
 #define B_ABILITY_POP_UP            TRUE  // 在第五世代及以上，宝可梦的特性在战斗中激活时会以弹出窗口显示。
-#define B_FAST_INTRO                TRUE  // 如果设置为TRUE，战斗开场文本会与宝可梦的动画同时显示，而不是等待动画结束。
+#define B_FAST_INTRO_PKMN_TEXT      TRUE  // 如果设置为TRUE，战斗开场文本会与宝可梦的动画同时显示，而不是等待动画结束。
+#define B_FAST_INTRO_NO_SLIDE       FALSE // If set to TRUE, the slide animation that happens at the beginning of the battle is skipped.
 #define B_FAST_HP_DRAIN             TRUE  // 如果设置为TRUE，HP条的移动速度会更快。
 #define B_FAST_EXP_GROW             TRUE  // 如果设置为TRUE，EXP条的移动速度会更快。
 #define B_SHOW_TARGETS              TRUE  // 如果设置为TRUE，在选取招式前会显示所有可用的目标，对于击中2个或3个宝可梦的招式。
