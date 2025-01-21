@@ -5269,7 +5269,6 @@ static void PrintStatsScreen_Moves_Bottom(u8 taskId)
     }
     else //Appeal + Jam
     {
-        gSprites[sPokedexView->categoryIconSpriteId].invisible = TRUE;
         DestroyCategoryIcon();
         //Appeal
         contest_effectValue = gContestEffects[gMovesInfo[move].contestEffect].appeal;
