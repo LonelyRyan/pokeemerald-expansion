@@ -5730,39 +5730,35 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
                 .battleAnimScript = gBattleAnimMove_Pursuit,
             },
 
-        [MOVE_RAPID_SPIN] =
+    [MOVE_RAPID_SPIN] =
+    {
+        .name = COMPOUND_STRING("高速旋转"),
+        .description = COMPOUND_STRING(
+            "通过旋转攻击。可摆脱绑紧\n紧束等招式并提高速度。"),
+        .effect = EFFECT_RAPID_SPIN,
+        .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 50 : 20,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 40,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS(
+        #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
             {
-                .name = COMPOUND_STRING("高速旋转"),
-                .description = COMPOUND_STRING(
-                    "通过旋转攻击。可摆脱绑紧\n紧束等招式并提高速度。"),
-                .effect = EFFECT_HIT,
-                .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 50 : 20,
-                .type = TYPE_NORMAL,
-                .accuracy = 100,
-                .pp = 40,
-                .target = MOVE_TARGET_SELECTED,
-                .priority = 0,
-                .category = DAMAGE_CATEGORY_PHYSICAL,
-                .makesContact = TRUE,
-                .additionalEffects = ADDITIONAL_EFFECTS({
-                                                            .moveEffect = MOVE_EFFECT_RAPID_SPIN,
-                                                            .self = TRUE,
-                                                        }
-#if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
-                                                        ,
-                                                        {
-                                                            .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
-                                                            .self = TRUE,
-                                                            .chance = 100,
-                                                        }
-#endif
-                                                        ),
-                .contestEffect = CONTEST_EFFECT_AVOID_STARTLE_ONCE,
-                .contestCategory = CONTEST_CATEGORY_COOL,
-                .contestComboStarterId = 0,
-                .contestComboMoves = {0},
-                .battleAnimScript = gBattleAnimMove_RapidSpin,
-            },
+                .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
+                .self = TRUE,
+                .chance = 100,
+            }
+        #endif
+        ),
+        .contestEffect = CONTEST_EFFECT_AVOID_STARTLE_ONCE,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_RapidSpin,
+    },
 
         [MOVE_SWEET_SCENT] = {
             .name = COMPOUND_STRING("甜甜香气"),
@@ -18156,28 +18152,27 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .battleAnimScript = gBattleAnimMove_TripleDive,
         },
 
-        [MOVE_MORTAL_SPIN] = {
-            .name = COMPOUND_STRING("晶光转转"),
-            .description = COMPOUND_STRING("旋转攻击对手。可摆脱绑紧\n类招式。还能让对手中毒。"),
-            .effect = EFFECT_HIT,
-            .power = 30,
-            .type = TYPE_POISON,
-            .accuracy = 100,
-            .pp = 15,
-            .target = MOVE_TARGET_BOTH,
-            .priority = 0,
-            .category = DAMAGE_CATEGORY_PHYSICAL,
-            .makesContact = TRUE,
-            .additionalEffects = ADDITIONAL_EFFECTS({
-                                                        .moveEffect = MOVE_EFFECT_RAPID_SPIN,
-                                                        .self = TRUE,
-                                                    },
-                                                    {
-                                                        .moveEffect = MOVE_EFFECT_POISON,
-                                                        .chance = 100,
-                                                    }),
-            .battleAnimScript = gBattleAnimMove_MortalSpin,
-        },
+    [MOVE_MORTAL_SPIN] =
+    {
+        .name = COMPOUND_STRING("晶光转转"),
+        .description = COMPOUND_STRING(
+            "旋转攻击对手。可摆脱绑紧\n类招式。还能让对手中毒."),
+        .effect = EFFECT_RAPID_SPIN,
+        .power = 30,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS(
+        {
+            .moveEffect = MOVE_EFFECT_POISON,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_MortalSpin,
+    },
 
         [MOVE_DOODLE] = {
             .name = COMPOUND_STRING("描绘"),

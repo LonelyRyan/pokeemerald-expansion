@@ -288,8 +288,7 @@
 #define SHOW_TYPES_CAUGHT   2
 #define B_SHOW_TYPES        SHOW_TYPES_NEVER // 当定义为SHOW_TYPES_ALWAYS时，在战斗中选择“战斗”后，所有宝可梦的类型都会显示。当定义为SHOW_TYPES_CAUGHT时，只有玩家拥有该宝可梦时才会显示类型。
 
-// 宝可梦战斗精灵设置
-#define B_ENEMY_MON_SHADOW_STYLE        GEN_3 // 在第四世代及以上，所有敌方宝可梦将在它们下方绘制阴影。
-                                              // 目前第四世代及以上的阴影与训练师幻灯片不完全兼容
+// Pokémon battle sprite settings
+#define B_ENEMY_MON_SHADOW_STYLE        GEN_LATEST // In Gen4+, all enemy Pokemon will have a shadow drawn beneath them.
 
 #endif // GUARD_CONFIG_BATTLE_H
