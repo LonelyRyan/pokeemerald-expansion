@@ -2408,4 +2408,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_A_0] =
+    {
+        .name = _("风之子"),
+        .description = COMPOUND_STRING("受到风的祝福,得到速度增幅."),
+        .aiRating = 5,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+    },
 };
