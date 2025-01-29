@@ -52,7 +52,7 @@
 #define P_CRIES_ENABLED                  TRUE        // 如果为TRUE，宝可梦将拥有叫声。禁用这个可以节省大量的ROM空间（超过25%！），但我们建议在include/config/species_enabled.h中禁用个别未使用的宝可梦家族。
 #define P_LEGENDARY_PERFECT_IVS          GEN_LATEST  // 从第六世代起，野生的或作为礼物获得的传说、神话和究极异兽至少有3个完美个体值（IV）。
 #define P_EV_CAP                         GEN_LATEST  // 从第六世代起，每项能力的努力值（EV）上限是252，而不是255。
-#define P_SHOW_TERA_TYPE                 GEN_8       // 从第九世代起，在总结屏幕上显示太晶类型。
+#define P_SHOW_TERA_TYPE                 GEN_LATEST  // 从第九世代起，在总结屏幕上显示太晶类型。
 #define P_TM_LITERACY                    GEN_LATEST  // 从第六世代起，原本不能学习技能机的宝可梦可以学习在其等级提升学习招式集中的技能机所教授的招式。
 #define P_CAN_FORGET_HIDDEN_MOVE         FALSE       // 如果为TRUE，宝可梦可以忘记任何招式，即使是隐藏招式。
 #define P_EGG_CYCLE_LENGTH               GEN_LATEST  // 从第八世代起，蛋的孵化步数减半。 Previous Gens have some varied step counts around 255.
