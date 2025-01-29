@@ -105,23 +105,23 @@
 #define DOME_TEXT_SPEED 12
 #define DOME_TEXT_SPATK 14
 
-// Determine Battle Dome trainers battle styles
-#define MOVE_POINTS_COMBO      0   // Moves that work well in combination: moves that cause or are affected by weather/terrain, Stockpile+, entry hazards, sleep inflictions & effects benefiting from it, offensive boosts of a single stat with at least two stages or at least two stats, and several other effects
-#define MOVE_POINTS_STAT_RAISE 1
-#define MOVE_POINTS_STAT_LOWER 2
-#define MOVE_POINTS_RARE       3   // Moves that appear in less than 5% of levelup learnsets
-#define MOVE_POINTS_HEAL       4   // Moves that heal
-#define MOVE_POINTS_RISKY      5   // Move effects deemed risky by the Emerald developers (excluding High Jump Kick and others for some reason)
-#define MOVE_POINTS_STATUS     6   // Moves that cause status effects without dealing damage
-#define MOVE_POINTS_DMG        7   // Moves that deal damage (BP > 0)
-#define MOVE_POINTS_DEF        8   // Moves like screens, accuracy-lowers or evasiveness-raisers, (special) defense raisers, protect etc.
-#define MOVE_POINTS_ACCURATE   9   // Moves with 100% accuracy (or that are guaranteed hits)
-#define MOVE_POINTS_POWERFUL   10  // Moves with 100 BP or more
-#define MOVE_POINTS_POPULAR    11  // TM/HM moves with 90 BP or more or those that raise a single offensive stat by at least 2 stages
-#define MOVE_POINTS_LUCK       12  // Move effects that depend on luck and moves with Accuracy of <= 50%
-#define MOVE_POINTS_STRONG     13  // Moves with 90 BP or more
-#define MOVE_POINTS_LOW_PP     14  // Moves with 5 PP or less
-#define MOVE_POINTS_EFFECT     15  // Moves with additional effects
+// 确定对战圆顶训练家的战斗风格
+#define MOVE_POINTS_COMBO      0   // 组合效果良好的招式：受天气/场地影响或能制造这些效果的招式、积食+、场地障碍、导致睡眠及从中受益的效果、提升单一属性至少两级或至少两个属性的攻击性增益，以及其他一些效果
+#define MOVE_POINTS_STAT_RAISE 1   // 提升状态的招式
+#define MOVE_POINTS_STAT_LOWER 2   // 降低状态的招式
+#define MOVE_POINTS_RARE       3   // 出现率低于5%的升级学习列表中的招式
+#define MOVE_POINTS_HEAL       4   // 治愈的招式
+#define MOVE_POINTS_RISKY      5   // 被翡翠开发者认为是高风险的招式效果（出于某种原因，不包括高跳踢等）
+#define MOVE_POINTS_STATUS     6   // 不造成伤害而引发状态效果的招式
+#define MOVE_POINTS_DMG        7   // 造成伤害的招式（BP > 0）
+#define MOVE_POINTS_DEF        8   // 像屏幕一样的招式、降低准确度或提升闪避率的招式、（特殊）防御提升招式、保护等
+#define MOVE_POINTS_ACCURATE   9   // 准确度为100%的招式（或保证命中的招式）
+#define MOVE_POINTS_POWERFUL   10  // 100 BP或以上的招式
+#define MOVE_POINTS_POPULAR    11  // 90 BP或以上或提升单一攻击属性至少两级的TM/HM招式
+#define MOVE_POINTS_LUCK       12  // 依赖运气的招式效果以及准确度小于或等于50%的招式
+#define MOVE_POINTS_STRONG     13  // 90 BP或以上的招式
+#define MOVE_POINTS_LOW_PP     14  // 5 PP或以下的招式
+#define MOVE_POINTS_EFFECT     15  // 具有额外效果的招式
 #define NUM_MOVE_POINT_TYPES   16
 
 // Battle style IDs for sBattleDomeOpponentStyleTexts
