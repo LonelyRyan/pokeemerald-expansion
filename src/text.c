@@ -295,8 +295,8 @@ static const u8 sMenuCursorDimensions[][2] =
 };
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
-extern const u16 gFont0ChineseGlyphs[]; 
-extern const u16 gFont1ChineseGlyphs[]; 
+extern const u16 gFont0ChineseGlyphs[];
+extern const u16 gFont1ChineseGlyphs[];
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
@@ -1481,9 +1481,9 @@ s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
 
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
-    bool8 isJapanese;
+    bool32 isJapanese;
     int minGlyphWidth;
-    u32 (*func)(u16 glyphId, bool32 isJapanese);
+    u32 (*func)(u16 fontId, bool32 isJapanese);
     int localLetterSpacing;
     u32 lineWidth;
     const u8 *bufferPointer;
@@ -1628,10 +1628,15 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case CHAR_PROMPT_CLEAR:
             break;
         default:
-            if (*str >= 1 && *str <= 0x1E)
+            if (*str >= 1 && *str <= 0x1E && (fontId == 0 || fontId == 8))
             {
                 ++str;
-                glyphWidth = 0xC;//zh
+                glyphWidth = 0xA;
+            }
+            else if (*str >= 1 && *str <= 0x1E && (fontId == 1 || fontId == 2 || fontId == 7))
+            {
+                ++str;
+                glyphWidth = 0xC;
             }
             else
             {
@@ -1879,7 +1884,7 @@ static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000)
+        if (glyphId >= 0x1000) //汉字判定
         {
             glyphs = gFont0ChineseGlyphs + (0x20 * (glyphId - 0x1000));
             gCurGlyph.width = 10;
@@ -1928,7 +1933,7 @@ static void DecompressGlyph_Narrow(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) 
+        if (glyphId >= 0x1000) //汉字判定
         {
             glyphs = gFont1ChineseGlyphs + (0x20 * (glyphId - 0x1000));
             gCurGlyph.width = 12;
@@ -2028,7 +2033,7 @@ static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) 
+        if (glyphId >= 0x1000) //汉字判定
         {
             glyphs = gFont1ChineseGlyphs + (0x20 * (glyphId - 0x1000));
             gCurGlyph.width = 12;
@@ -2077,7 +2082,7 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000)
+        if (glyphId >= 0x1000) //汉字判定
         {
             glyphs = gFont1ChineseGlyphs + (0x20 * (glyphId - 0x1000));
             gCurGlyph.width = 12;
