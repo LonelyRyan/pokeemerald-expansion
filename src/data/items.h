@@ -94,21 +94,20 @@ const struct Item gItemsInfo[] =
 
         // Poké Balls
 
-        [ITEM_STRANGE_BALL] =
-    {
-        .name = _("Strange Ball"),
-        .price = 0,
-        .description = COMPOUND_STRING(
-            "An unusual Ball\n"
-            "warped through\n"
-            "space and time."),
-        .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_USE_BAG_MENU,
-        .battleUsage = EFFECT_ITEM_THROW_BALL,
-        .secondaryId = BALL_STRANGE,
-        .iconPic = gItemIcon_StrangeBall,
-        .iconPalette = gItemIconPalette_StrangeBall,
-    },
+    [ITEM_STRANGE_BALL] =
+            {
+                .name = _("奇异球"),
+                .price = 0,
+                .description = COMPOUND_STRING(
+                    "一个不寻常的球\n"
+                    "穿越了时空."),
+                .pocket = POCKET_POKE_BALLS,
+                .type = ITEM_USE_BAG_MENU,
+                .battleUsage = EFFECT_ITEM_THROW_BALL,
+                .secondaryId = BALL_STRANGE,
+                .iconPic = gItemIcon_StrangeBall,
+                .iconPalette = gItemIconPalette_StrangeBall,
+            },
 
     [ITEM_POKE_BALL] =
             {
@@ -9153,7 +9152,7 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_FOCUS_PUNCH] =
             {
-                .name = _("TM01"),
+                .name = _("真气拳"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
                     "强劲的拳击，但若受到对手攻击，\n"
@@ -9180,7 +9179,7 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_WATER_PULSE] =
             {
-                .name = _("TM03"),
+                .name = _("水之波动"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
                     "发射超声波，可能使对手混乱。"),
@@ -9193,7 +9192,7 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_CALM_MIND] =
             {
-                .name = _("TM04"),
+                .name = _("冥想"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
                     "集中精神力，提高特殊攻击和\n"
@@ -9207,7 +9206,7 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_ROAR] =
             {
-                .name = _("TM05"),
+                .name = _("吼叫"),
                 .price = 1000,
                 .description = COMPOUND_STRING(
                     "发出震撼的咆哮，使对手畏缩，\n"
@@ -9221,12 +9220,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_TOXIC] =
             {
-                .name = _("TM06"),
+                .name = _("剧毒"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Poisons the foe\n"
-                    "with a toxin that\n"
-                    "gradually worsens."),
+                    "让对手陷入剧毒状态。\n中毒伤害会逐渐增加。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9236,12 +9233,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_HAIL] =
             {
-                .name = _("TM07"),
+                .name = _("冰雹"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Creates a hailstorm\n"
-                    "that damages all\n"
-                    "types except Ice."),
+                    "在5回合内降下冰雹，冰属\n性以外的宝可梦会受到伤害。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9251,12 +9246,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_BULK_UP] =
             {
-                .name = _("TM08"),
+                .name = _("健美"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Bulks up the body\n"
-                    "to boost both\n"
-                    "Attack & Defense."),
+                    "使出全身力气绷紧肌肉，\n"
+                    "从而提高自己的攻击和防御。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9266,12 +9260,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_BULLET_SEED] =
             {
-                .name = _("TM09"),
+                .name = _("种子机关枪"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Shoots 2 to 5 seeds\n"
-                    "in a row to strike\n"
-                    "the foe."),
+                    "向对手猛烈地发射种子攻击。\n"
+                    "连续攻击2～5次。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9281,12 +9274,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_HIDDEN_POWER] =
             {
-                .name = _("TM10"),
+                .name = _("觉醒力量"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "The attack power\n"
-                    "varies among\n"
-                    "different Pokémon."),
+                    "招式的属性会随着使用\n此招式的宝可梦而改变."),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9296,12 +9287,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SUNNY_DAY] =
             {
-                .name = _("TM11"),
+                .name = _("大晴天"),
                 .price = 2000,
                 .description = COMPOUND_STRING(
-                    "Raises the power of\n"
-                    "Fire-type moves\n"
-                    "for 5 turns."),
+                    "在5回合内日照强烈，提高火\n招式威力。降低水招式威力。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9311,12 +9300,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_TAUNT] =
             {
-                .name = _("TM12"),
+                .name = _("挑衅"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Enrages the foe so\n"
-                    "it can only use\n"
-                    "attack moves."),
+                    "使对手愤怒。在3回合内让\n"
+                    "对手只能用给予伤害的招式。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9326,15 +9314,14 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_ICE_BEAM] =
             {
-                .name = _("TM13"),
+                .name = _("冰冻光束"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Fires an icy cold\n"
-                    "beam that may\n"
+                    "向对手发射冰冻光束攻击。\n"
 #if B_USE_FROSTBITE == TRUE
-                    "inflict frostbite."),
+                    "可能使对方冰冻。"),
 #else
-                    "freeze the foe."),
+                    "有时会让对手陷入冰冻状态。"),
 #endif
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
@@ -9345,17 +9332,13 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_BLIZZARD] =
             {
-                .name = _("TM14"),
+                .name = _("暴风雪"),
                 .price = 5500,
                 .description = COMPOUND_STRING(
 #if B_USE_FROSTBITE == TRUE
-                    "A snow-and-wind\n"
-                    "attack that may\n"
-                    "inflict frostbite."),
+                    "将猛烈的暴风雪刮向对手攻击。\n可能使对方冰冻。"),
 #else
-                    "A brutal snow-and-\n"
-                    "wind attack that\n"
-                    "may freeze the foe."),
+                    "将猛烈的暴风雪刮向对手攻击。\n有时会让对手陷入冰冻状态。"),
 #endif
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
@@ -9366,12 +9349,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_HYPER_BEAM] =
             {
-                .name = _("TM15"),
+                .name = _("破坏光线"),
                 .price = 7500,
                 .description = COMPOUND_STRING(
-                    "Powerful, but needs\n"
-                    "recharging the\n"
-                    "next turn."),
+                    "使出强力的攻击，但是"
+                    "下一回合自己将无法动弹。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9381,12 +9363,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_LIGHT_SCREEN] =
             {
-                .name = _("TM16"),
+                .name = _("光墙"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Creates a wall of\n"
-                    "light that lowers\n"
-                    "Sp. Atk damage."),
+                    "利用神奇的墙壁，在5回合\n"
+                    "内减弱特殊攻击的伤害。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9396,12 +9377,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_PROTECT] =
             {
-                .name = _("TM17"),
+                .name = _("守住"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Negates all damage,\n"
-                    "but may fail if used\n"
-                    "in succession."),
+                    "完全抵挡对手的攻击。\n"
+                    "连续使出则容易失败。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9411,12 +9391,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_RAIN_DANCE] =
             {
-                .name = _("TM18"),
+                .name = _("求雨"),
                 .price = 2000,
                 .description = COMPOUND_STRING(
-                    "Raises the power of\n"
-                    "Water-type moves\n"
-                    "for 5 turns."),
+                    "在5回合内一直降雨，提高水\n招式威力。降低火招式威力。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9426,12 +9404,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_GIGA_DRAIN] =
             {
-                .name = _("TM19"),
+                .name = _("终极吸取"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Recovers half the\n"
-                    "HP of the damage \n"
-                    "this move inflicts."),
+                    "吸取对手的养分攻击。\n"
+                    "可以回复给予伤害的一半HP。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9441,12 +9418,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SAFEGUARD] =
             {
-                .name = _("TM20"),
+                .name = _("神秘守护"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Prevents status\n"
-                    "abnormality with a\n"
-                    "mystical power."),
+                    "在5回合内被神奇力量守护，\n"
+                    "从而不会陷入异常状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9456,12 +9432,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_FRUSTRATION] =
             {
-                .name = _("TM21"),
+                .name = _("迁怒"),
                 .price = 1000,
                 .description = COMPOUND_STRING(
-                    "The less the user\n"
-                    "likes you, the more\n"
-                    "powerful this move."),
+                    "为了发泄不满而全力攻击。\n亲密度越低，威力越大。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9471,12 +9445,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SOLAR_BEAM] =
             {
-                .name = _("TM22"),
+                .name = _("日光束"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Absorbs sunlight in\n"
-                    "the 1st turn, then\n"
-                    "attacks next turn."),
+                    "第1回合收集满满的日光，\n"
+                    "第2回合发射光束攻击。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9486,12 +9459,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_IRON_TAIL] =
             {
-                .name = _("TM23"),
+                .name = _("铁尾"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Slams the foe with\n"
-                    "a hard tail. It may\n"
-                    "lower Defense."),
+                    "使用坚硬的尾巴摔打对手攻击。\n"
+                    "有时会降低对手的防御。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9501,12 +9473,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_THUNDERBOLT] =
             {
-                .name = _("TM24"),
+                .name = _("十万伏特"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "A powerful electric\n"
-                    "attack that may\n"
-                    "cause paralysis."),
+                    "向对手发出强力电击攻击。\n"
+                    "有时会让对手陷入麻痹状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9516,12 +9487,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_THUNDER] =
             {
-                .name = _("TM25"),
+                .name = _("打雷"),
                 .price = 5500,
                 .description = COMPOUND_STRING(
-                    "Strikes the foe\n"
-                    "with a thunderbolt.\n"
-                    "It may paralyze."),
+                    "向对手劈下暴雷攻击。\n"
+                    "有时会让对手陷入麻痹状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9531,12 +9501,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_EARTHQUAKE] =
             {
-                .name = _("TM26"),
+                .name = _("地震"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Causes a quake\n"
-                    "that has no effect\n"
-                    "on flying foes."),
+                    "利用地震的冲击，\n"
+                    "攻击自己周围所有的宝可梦。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9546,12 +9515,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_RETURN] =
             {
-                .name = _("TM27"),
+                .name = _("报恩"),
                 .price = 1000,
                 .description = COMPOUND_STRING(
-                    "The more the user\n"
-                    "likes you, the more\n"
-                    "powerful this move."),
+                    "为了训练家而全力攻击对手。\n亲密度越高，威力越大。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9561,12 +9528,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_DIG] =
             {
-                .name = _("TM28"),
+                .name = _("挖洞"),
                 .price = 2000,
                 .description = COMPOUND_STRING(
-                    "Digs underground\n"
-                    "the 1st turn, then\n"
-                    "strikes next turn."),
+                    "第1回合钻入地底，\n"
+                    "第2回合攻击对手。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9576,12 +9542,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_PSYCHIC] =
             {
-                .name = _("TM29"),
+                .name = _("精神强念"),
                 .price = 2000,
                 .description = COMPOUND_STRING(
-                    "A powerful psychic\n"
-                    "attack that may\n"
-                    "lower Sp. Def."),
+                    "向对手发送强大的念力攻击。\n"
+                    "有时会降低对手的特防。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9591,12 +9556,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SHADOW_BALL] =
             {
-                .name = _("TM30"),
+                .name = _("暗影球"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Hurls a dark lump\n"
-                    "at the foe. It may\n"
-                    "lower Sp. Def."),
+                    "投掷一团黑影攻击。\n"
+                    "有时会降低对手的特防。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9606,12 +9570,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_BRICK_BREAK] =
             {
-                .name = _("TM31"),
+                .name = _("劈瓦"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Destroys barriers\n"
-                    "like Light Screen\n"
-                    "and causes damage."),
+                    "将手刀猛烈地挥下攻击对手。\n"
+                    "还可以破坏光墙和反射壁等。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9621,12 +9584,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_DOUBLE_TEAM] =
             {
-                .name = _("TM32"),
+                .name = _("影子分身"),
                 .price = 2000,
                 .description = COMPOUND_STRING(
-                    "Creates illusory\n"
-                    "copies to enhance\n"
-                    "elusiveness."),
+                    "通过快速移动来制造分身，\n扰乱对手从而提高闪避率。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9636,12 +9597,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_REFLECT] =
             {
-                .name = _("TM33"),
+                .name = _("反射壁"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Creates a wall of\n"
-                    "light that weakens\n"
-                    "physical attacks."),
+                    "利用神奇的墙壁，在5回合\n"
+                    "内减弱物理攻击的伤害。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9651,12 +9611,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SHOCK_WAVE] =
             {
-                .name = _("TM34"),
+                .name = _("电击波"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Zaps the foe with a\n"
-                    "jolt of electricity\n"
-                    "that never misses."),
+                    "向对手快速发出电击。\n"
+                    "攻击必定会命中。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9666,12 +9625,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_FLAMETHROWER] =
             {
-                .name = _("TM35"),
+                .name = _("喷射火焰"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Looses a stream of\n"
-                    "fire that may burn\n"
-                    "the foe."),
+                    "向对手发射烈焰攻击。\n"
+                    "有时会让对手陷入灼伤状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9681,12 +9639,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SLUDGE_BOMB] =
             {
-                .name = _("TM36"),
+                .name = _("污泥炸弹"),
                 .price = 1000,
                 .description = COMPOUND_STRING(
-                    "Hurls sludge at the\n"
-                    "foe. It may poison\n"
-                    "the foe."),
+                    "用污泥投掷对手攻击。\n"
+                    "有时会让对手陷入中毒状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9696,12 +9653,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SANDSTORM] =
             {
-                .name = _("TM37"),
+                .name = _("沙暴"),
                 .price = 2000,
                 .description = COMPOUND_STRING(
-                    "Causes a sandstorm\n"
-                    "that hits the foe\n"
-                    "over several turns."),
+                    "在5回合内扬起沙暴，除岩石\n地面钢以外宝可梦都会受伤。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9711,12 +9666,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_FIRE_BLAST] =
             {
-                .name = _("TM38"),
+                .name = _("大字爆炎"),
                 .price = 5500,
                 .description = COMPOUND_STRING(
-                    "A powerful fire\n"
-                    "attack that may\n"
-                    "burn the foe."),
+                    "用大字形状的火焰烧尽对手。\n"
+                    "有时会让对手陷入灼伤状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9726,12 +9680,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_ROCK_TOMB] =
             {
-                .name = _("TM39"),
+                .name = _("岩石封锁"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Stops the foe from\n"
-                    "moving with rocks.\n"
-                    "May lower Speed."),
+                    "投掷岩石攻击。封住对手\n的行动，从而降低速度。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9741,12 +9693,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_AERIAL_ACE] =
             {
-                .name = _("TM40"),
+                .name = _("燕返"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "An extremely fast\n"
-                    "attack that can't\n"
-                    "be avoided."),
+                    "以敏捷动作戏弄对手后切斩。\n"
+                    "攻击必定会命中。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9756,12 +9707,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_TORMENT] =
             {
-                .name = _("TM41"),
+                .name = _("无理取闹"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Prevents the foe\n"
-                    "from using the same\n"
-                    "move in a row."),
+                    "向对手无理取闹，\n令其不能"
+                    "连续2次使出相同招式。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9771,12 +9721,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_FACADE] =
             {
-                .name = _("TM42"),
+                .name = _("硬撑"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Raises Attack when\n"
-                    "poisoned, burned,\n"
-                    "or paralyzed."),
+                    "当处于中毒、麻痹、灼伤时，\n招式威力会变成2倍。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9786,12 +9734,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SECRET_POWER] =
             {
-                .name = _("TM43"),
+                .name = _("秘密之力"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Adds an effect to\n"
-                    "attack depending\n"
-                    "on the location."),
+                    "根据使用场所不同，\n"
+                    "招式的追加效果也会改变。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9801,12 +9748,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_REST] =
             {
-                .name = _("TM44"),
+                .name = _("睡觉"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "The user sleeps for\n"
-                    "2 turns to restore\n"
-                    "health and status."),
+                    "连续睡上2回合。回复全部\n"
+                    "HP以及治愈所有异常状态。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9816,12 +9762,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_ATTRACT] =
             {
-                .name = _("TM45"),
+                .name = _("迷人"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Makes it tough to\n"
-                    "attack a foe of the\n"
-                    "opposite gender."),
+                    "诱惑异性，让对手着迷。\n对手将很难使出招式。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9831,12 +9775,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_THIEF] =
             {
-                .name = _("TM46"),
+                .name = _("小偷"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "While attacking,\n"
-                    "it may steal the\n"
-                    "foe's held item."),
+                    "攻击时盗取道具。当自己\n携带道具时，不会去盗取。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9846,12 +9788,11 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_STEEL_WING] =
             {
-                .name = _("TM47"),
+                .name = _("钢翼"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Spreads hard-\n"
-                    "edged wings and\n"
-                    "slams into the foe."),
+                    "用坚硬的翅膀敲打对手攻击。\n"
+                    "有时会提高自己的防御。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9861,12 +9802,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SKILL_SWAP] =
             {
-                .name = _("TM48"),
+                .name = _("特性互换"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Switches abilities\n"
-                    "with the foe on the\n"
-                    "turn this is used."),
+                    "利用超能力互换自己和\n对手的特性。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9876,12 +9815,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_SNATCH] =
             {
-                .name = _("TM49"),
+                .name = _("抢夺"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Steals the effects\n"
-                    "of the move the foe\n"
-                    "is trying to use."),
+                    "将对手要使用的回复招式或\n能力变化招式夺为己用。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
@@ -9891,12 +9828,10 @@ const struct Item gItemsInfo[] =
 
         [ITEM_TM_OVERHEAT] =
             {
-                .name = _("TM50"),
+                .name = _("过热"),
                 .price = 3000,
                 .description = COMPOUND_STRING(
-                    "Enables full-power\n"
-                    "attack, but sharply\n"
-                    "lowers Sp. Atk."),
+                    "使出全部力量攻击对手。\n之后自己的特攻大幅降低。"),
                 .importance = I_REUSABLE_TMS,
                 .pocket = POCKET_TM_HM,
                 .type = ITEM_USE_PARTY_MENU,
