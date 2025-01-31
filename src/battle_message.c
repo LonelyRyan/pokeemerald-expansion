@@ -186,10 +186,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ITDOESNTAFFECT]                       = COMPOUND_STRING("I对于{B_DEF_NAME_WITH_PREFIX2}，\n好像没有效果…"),
     [STRINGID_ATTACKERFAINTED]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}倒下了！\p"),
     [STRINGID_TARGETFAINTED]                        = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}倒下了！\p"),
-    [STRINGID_PLAYERGOTMONEY]                       = COMPOUND_STRING("获得了¥{B_BUFF1}！\p"),
+    [STRINGID_PLAYERGOTMONEY]                       = COMPOUND_STRING("获得了{B_BUFF1}元！\p"),
     [STRINGID_PLAYERWHITEOUT]                       = COMPOUND_STRING("没有可以战斗的宝可梦！\p"),
 #if B_WHITEOUT_MONEY >= GEN_4
-    [STRINGID_PLAYERWHITEOUT2]                      = COMPOUND_STRING("在慌乱中\n丢失了¥{B_BUFF1}…\p眼前变得一片漆黑！{PAUSE_UNTIL_PRESS}"),
+    [STRINGID_PLAYERWHITEOUT2]                      = COMPOUND_STRING("在慌乱中\n丢失了{B_BUFF1}元…\p眼前变得一片漆黑！{PAUSE_UNTIL_PRESS}"),
 #else
     [STRINGID_PLAYERWHITEOUT2]                      = COMPOUND_STRING("眼前变得一片漆黑！{PAUSE_UNTIL_PRESS}"),
 #endif
