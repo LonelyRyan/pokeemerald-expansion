@@ -134,7 +134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("??????????"),
         .cryId = CRY_NONE,
         .natDexNum = NATIONAL_DEX_NONE,
-        .categoryName = _("Unknown"),
+        .categoryName = _("未知"),
         .height = 0,
         .weight = 0,
         .description = gFallbackPokedexText,
@@ -205,7 +205,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .iconPalIndex = 1,
     },
 
-    /* You may add any custom species below this point based on the following structure: */
+    /* 你可以在此处添加任何如以下结构的自定义宝可梦: */
 
     /*
     [SPECIES_NONE] =
