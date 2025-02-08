@@ -348,88 +348,87 @@
 #else
 #define MOVE_EFFECT_FREEZE_OR_FROSTBITE MOVE_EFFECT_FREEZE
 #endif
-#define MOVE_EFFECT_CONFUSION           8  // 使目标混乱
-#define MOVE_EFFECT_FLINCH              9  // 使目标闪避
-#define MOVE_EFFECT_TRI_ATTACK          10 // 三连攻击
-#define MOVE_EFFECT_UPROAR              11  // 引起喧哗
-#define MOVE_EFFECT_PAYDAY              12  // 获得金钱
-#define MOVE_EFFECT_CHARGING            13  // 充电
-#define MOVE_EFFECT_WRAP                14  // 绑缚
-#define MOVE_EFFECT_ATK_PLUS_1          15  // 提升一级攻击力
-#define MOVE_EFFECT_DEF_PLUS_1          16  // 提升一级防御力
-#define MOVE_EFFECT_SPD_PLUS_1          17  // 提升一级速度
-#define MOVE_EFFECT_SP_ATK_PLUS_1       18  // 提升一级特攻
-#define MOVE_EFFECT_SP_DEF_PLUS_1       19  // 提升一级特防
-#define MOVE_EFFECT_ACC_PLUS_1          20  // 提升一级命中率
-#define MOVE_EFFECT_EVS_PLUS_1          21  // 提升一级回避率
-#define MOVE_EFFECT_ATK_MINUS_1         22  // 降低一级攻击力
-#define MOVE_EFFECT_DEF_MINUS_1         23  // 降低一级防御力
-#define MOVE_EFFECT_SPD_MINUS_1         24  // 降低一级速度
-#define MOVE_EFFECT_SP_ATK_MINUS_1      25  // 降低一级特攻
-#define MOVE_EFFECT_SP_DEF_MINUS_1      26  // 降低一级特防
-#define MOVE_EFFECT_ACC_MINUS_1         27  // 降低一级命中率
-#define MOVE_EFFECT_EVS_MINUS_1         28  // 降低一级回避率
-#define MOVE_EFFECT_REMOVE_ARG_TYPE     29  // 移除特定类型
-#define MOVE_EFFECT_RECHARGE            30  // 充电
-#define MOVE_EFFECT_RAGE                31  // 愤怒
-#define MOVE_EFFECT_STEAL_ITEM          32  // 偷取道具
-#define MOVE_EFFECT_PREVENT_ESCAPE      33  // 防止逃跑
-#define MOVE_EFFECT_NIGHTMARE           34  // 恶梦
-#define MOVE_EFFECT_ALL_STATS_UP        35  // 提升所有状态
-#define MOVE_EFFECT_REMOVE_STATUS       36  // 移除状态
-#define MOVE_EFFECT_ATK_DEF_DOWN        37  // 降低攻击力和防御力
-#define MOVE_EFFECT_ATK_PLUS_2          38  // 提升两级攻击力
-#define MOVE_EFFECT_DEF_PLUS_2          39  // 提升两级防御力
-#define MOVE_EFFECT_SPD_PLUS_2          40  // 提升两级速度
-#define MOVE_EFFECT_SP_ATK_PLUS_2       41  // 提升两级特攻
-#define MOVE_EFFECT_SP_DEF_PLUS_2       42  // 提升两级特防
-#define MOVE_EFFECT_ACC_PLUS_2          43  // 提升两级命中率
-#define MOVE_EFFECT_EVS_PLUS_2          44  // 提升两级回避率
-#define MOVE_EFFECT_ATK_MINUS_2         45  // 降低两级攻击力
-#define MOVE_EFFECT_DEF_MINUS_2         46  // 降低两级防御力
-#define MOVE_EFFECT_SPD_MINUS_2         47  // 降低两级速度
-#define MOVE_EFFECT_SP_ATK_MINUS_2      48  // 降低两级特攻
-#define MOVE_EFFECT_SP_DEF_MINUS_2      49  // 降低两级特防
-#define MOVE_EFFECT_ACC_MINUS_2         50  // 降低两级命中率
-#define MOVE_EFFECT_EVS_MINUS_2         51  // 降低两级回避率
-#define MOVE_EFFECT_SCALE_SHOT          52  // 使用鳞射
-#define MOVE_EFFECT_THRASH              53  // 使用狂暴
-#define MOVE_EFFECT_KNOCK_OFF           54  // 使用击落
-#define MOVE_EFFECT_DEF_SPDEF_DOWN      55  // 降低目标的防御力和特防
-#define MOVE_EFFECT_CLEAR_SMOG          56  // 使用烟幕
-#define MOVE_EFFECT_SMACK_DOWN          57  // 使用击落
-#define MOVE_EFFECT_FLAME_BURST         58  // 使用烈焰爆发
-#define MOVE_EFFECT_FEINT               59  // 使用虚张声势
-#define MOVE_EFFECT_SPECTRAL_THIEF      60  // 使用幽灵强盗
-#define MOVE_EFFECT_V_CREATE            61  // 使用V创
-#define MOVE_EFFECT_HAPPY_HOUR          62  // 使用快乐时光
-#define MOVE_EFFECT_CORE_ENFORCER       63  // 使用核心强化
-#define MOVE_EFFECT_THROAT_CHOP         64  // 使用喉切
-#define MOVE_EFFECT_INCINERATE          65  // 使用焚化
-#define MOVE_EFFECT_BUG_BITE            66  // 使用虫咬
-#define MOVE_EFFECT_RECOIL_HP_25        67  // 使用自伤25%的招式
-#define MOVE_EFFECT_TRAP_BOTH           68  // 使用陷阱（双方）
-#define MOVE_EFFECT_ROUND               69  // 使用轮唱
-#define MOVE_EFFECT_STOCKPILE_WORE_OFF  70  // 使用积食效果消失
-#define MOVE_EFFECT_DIRE_CLAW           71  // 使用凶爪
-#define MOVE_EFFECT_STEALTH_ROCK        72  // 使用岩石封锁
-#define MOVE_EFFECT_SPIKES              73  // 使用尖石阵
-#define MOVE_EFFECT_SYRUP_BOMB          74  // 使用糖浆炸弹
-#define MOVE_EFFECT_FLORAL_HEALING      75  // 使用花香治愈
-#define MOVE_EFFECT_SECRET_POWER        76  // 使用秘密力量
-#define MOVE_EFFECT_PSYCHIC_NOISE       77  // 使用超能噪音
-#define MOVE_EFFECT_TERA_BLAST          78  // 使用太晶爆发
-#define MOVE_EFFECT_ORDER_UP            79  // 使用秩序上升
-#define MOVE_EFFECT_ION_DELUGE          80  // 使用离子暴雨
-#define MOVE_EFFECT_AROMATHERAPY        81  // 使用芳香疗法（尚未实现功能）
-#define MOVE_EFFECT_HAZE                82  // 使用雾
-#define MOVE_EFFECT_LEECH_SEED          83  // 使用寄生种子
-#define MOVE_EFFECT_REFLECT             84  // 使用反射盾
-#define MOVE_EFFECT_LIGHT_SCREEN        85  // 使用光墙
-#define MOVE_EFFECT_SALT_CURE           86  // 使用盐疗
-#define MOVE_EFFECT_EERIE_SPELL         87  // 使用诡异咒语
+#define MOVE_EFFECT_CONFUSION           8
+#define MOVE_EFFECT_FLINCH              9
+#define MOVE_EFFECT_TRI_ATTACK          10
+#define MOVE_EFFECT_UPROAR              11
+#define MOVE_EFFECT_PAYDAY              12
+#define MOVE_EFFECT_CHARGING            13
+#define MOVE_EFFECT_WRAP                14
+#define MOVE_EFFECT_ATK_PLUS_1          15
+#define MOVE_EFFECT_DEF_PLUS_1          16
+#define MOVE_EFFECT_SPD_PLUS_1          17
+#define MOVE_EFFECT_SP_ATK_PLUS_1       18
+#define MOVE_EFFECT_SP_DEF_PLUS_1       19
+#define MOVE_EFFECT_ACC_PLUS_1          20
+#define MOVE_EFFECT_EVS_PLUS_1          21
+#define MOVE_EFFECT_ATK_MINUS_1         22
+#define MOVE_EFFECT_DEF_MINUS_1         23
+#define MOVE_EFFECT_SPD_MINUS_1         24
+#define MOVE_EFFECT_SP_ATK_MINUS_1      25
+#define MOVE_EFFECT_SP_DEF_MINUS_1      26
+#define MOVE_EFFECT_ACC_MINUS_1         27
+#define MOVE_EFFECT_EVS_MINUS_1         28
+#define MOVE_EFFECT_REMOVE_ARG_TYPE     29
+#define MOVE_EFFECT_RECHARGE            30
+#define MOVE_EFFECT_RAGE                31
+#define MOVE_EFFECT_STEAL_ITEM          32
+#define MOVE_EFFECT_PREVENT_ESCAPE      33
+#define MOVE_EFFECT_NIGHTMARE           34
+#define MOVE_EFFECT_ALL_STATS_UP        35
+#define MOVE_EFFECT_REMOVE_STATUS       36
+#define MOVE_EFFECT_ATK_DEF_DOWN        37
+#define MOVE_EFFECT_ATK_PLUS_2          38
+#define MOVE_EFFECT_DEF_PLUS_2          39
+#define MOVE_EFFECT_SPD_PLUS_2          40
+#define MOVE_EFFECT_SP_ATK_PLUS_2       41
+#define MOVE_EFFECT_SP_DEF_PLUS_2       42
+#define MOVE_EFFECT_ACC_PLUS_2          43
+#define MOVE_EFFECT_EVS_PLUS_2          44
+#define MOVE_EFFECT_ATK_MINUS_2         45
+#define MOVE_EFFECT_DEF_MINUS_2         46
+#define MOVE_EFFECT_SPD_MINUS_2         47
+#define MOVE_EFFECT_SP_ATK_MINUS_2      48
+#define MOVE_EFFECT_SP_DEF_MINUS_2      49
+#define MOVE_EFFECT_ACC_MINUS_2         50
+#define MOVE_EFFECT_EVS_MINUS_2         51
+#define MOVE_EFFECT_SCALE_SHOT          52
+#define MOVE_EFFECT_THRASH              53
+#define MOVE_EFFECT_KNOCK_OFF           54
+#define MOVE_EFFECT_DEF_SPDEF_DOWN      55
+#define MOVE_EFFECT_CLEAR_SMOG          56
+#define MOVE_EFFECT_SMACK_DOWN          57
+#define MOVE_EFFECT_FLAME_BURST         58
+#define MOVE_EFFECT_FEINT               59
+#define MOVE_EFFECT_V_CREATE            60
+#define MOVE_EFFECT_HAPPY_HOUR          61
+#define MOVE_EFFECT_CORE_ENFORCER       62
+#define MOVE_EFFECT_THROAT_CHOP         63
+#define MOVE_EFFECT_INCINERATE          64
+#define MOVE_EFFECT_BUG_BITE            65
+#define MOVE_EFFECT_RECOIL_HP_25        66
+#define MOVE_EFFECT_TRAP_BOTH           67
+#define MOVE_EFFECT_ROUND               68
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  69
+#define MOVE_EFFECT_DIRE_CLAW           70
+#define MOVE_EFFECT_STEALTH_ROCK        71
+#define MOVE_EFFECT_SPIKES              72
+#define MOVE_EFFECT_SYRUP_BOMB          73
+#define MOVE_EFFECT_FLORAL_HEALING      74
+#define MOVE_EFFECT_SECRET_POWER        75
+#define MOVE_EFFECT_PSYCHIC_NOISE       76
+#define MOVE_EFFECT_TERA_BLAST          77
+#define MOVE_EFFECT_ORDER_UP            78
+#define MOVE_EFFECT_ION_DELUGE          79
+#define MOVE_EFFECT_AROMATHERAPY        80 // No functionality yet
+#define MOVE_EFFECT_HAZE                81
+#define MOVE_EFFECT_LEECH_SEED          82
+#define MOVE_EFFECT_REFLECT             83
+#define MOVE_EFFECT_LIGHT_SCREEN        84
+#define MOVE_EFFECT_SALT_CURE           85
+#define MOVE_EFFECT_EERIE_SPELL         86
 
-#define NUM_MOVE_EFFECTS                88
+#define NUM_MOVE_EFFECTS                87
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000
