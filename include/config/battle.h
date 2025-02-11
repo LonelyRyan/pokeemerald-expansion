@@ -140,6 +140,7 @@
 #define B_SYMBIOSIS_GEMS            GEN_LATEST // 在第七世代及以上，共生特性在宝石增强攻击后传递物品。之前，物品在宝石增强攻击命中前传递，使得物品效果适用。
 #define B_ABSORBING_ABILITY_STRING  GEN_LATEST // 在第五世代及以上，吸收特定类型招式的特性使用通用字符串来表示属性提升和下降。
 #define B_REDIRECT_ABILITY_IMMUNITY GEN_LATEST // 在第五世代及以上，避电和引水特性的宝可梦对电/水属性招式免疫，并额外提升特攻1级。
+#define B_FOCUS_ENERGY_CRIT_RATIO   GEN_LATEST // In Gen3+, Focus Energy increases critical hit ratio by 2 instead of 1.
 #define B_REDIRECT_ABILITY_ALLIES   GEN_LATEST // In Gen4+, Lightning Rod/Storm Drain redirect ally's moves as well.
 #define B_LEAF_GUARD_PREVENTS_REST  GEN_LATEST // 在第五世代及以上，叶子防守阻止在强烈阳光下使用休息。
 #define B_SNOW_WARNING              GEN_LATEST // 在第九世代及以上，雪隐会召唤雪天，而不是冰雹。
