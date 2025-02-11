@@ -54,6 +54,7 @@
 #include "list_menu.h"
 #include "malloc.h"
 #include "constants/event_objects.h"
+#include "qol_field_moves.h" // qol_field_moves
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
@@ -2550,3 +2551,14 @@ bool8 Scrcmd_getobjectfacingdirection(struct ScriptContext *ctx)
 
     return FALSE;
 }
+
+// Start qol_field_moves
+bool8 ScrCmd_checkpartylearnknowsfieldmove(struct ScriptContext *ctx)
+{
+    u16 machine = ScriptReadHalfword(ctx);
+
+    PartyHasMonLearnsKnowsFieldMove(machine);
+
+    return FALSE;
+}
+// End qol_field_moves

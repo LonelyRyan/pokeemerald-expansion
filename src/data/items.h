@@ -14093,4 +14093,138 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    [ITEM_CUT_TOOL] =
+    {
+        .name = _("Cut Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Cut Tool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CutTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_FLY_TOOL] =
+    {
+        .name = _("Fly Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Fly Tool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlyTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_SURF_TOOL] =
+    {
+        .name = _("Surf Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Surf Tool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_SurfTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+
+
+    [ITEM_STRENGTH_TOOL] =
+    {
+        .name = _("Strength Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Strength Tool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_StrengthTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_FLASH_TOOL] =
+    {
+        .name = _("Flash Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Flash Tool"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlashTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+
+    [ITEM_ROCKSMASH_TOOL] =
+    {
+        .name = _("RockSmashTool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "RockSmashTool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_RockSmashTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_WATERFALL_TOOL] =
+    {
+        .name = _("WaterfallTool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "WaterfallTool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_WaterfallTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_DIVE_TOOL] =
+    {
+        .name = _("Dive Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Dive Tool"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_DiveTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+
+    [ITEM_TELEPORT_TOOL] =
+    {
+        .name = _("Teleport Tool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "Teleport Tool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_TeleportTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_SWEETSCENT_TOOL] =
+    {
+        .name = _("SweetScntTool"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "SweetScntTool."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_SweetScentTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
 };

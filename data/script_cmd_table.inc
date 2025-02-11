@@ -246,6 +246,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush                   @ 0xe4
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
+	.4byte ScrCmd_checkpartylearnknowsfieldmove     @ 0xe5 // qol_field_moves
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop
 	.endif
