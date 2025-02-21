@@ -60,6 +60,31 @@
 #define OW_FOLLOWERS_BOBBING           TRUE       // 如果为真，跟随宝可梦在它们的空闲和行走动画中会上下浮动。
 #define OW_FOLLOWERS_POKEBALLS         TRUE       // 跟随宝可梦将从它们存放的精灵球中出现，而不是普通的精灵球。
 
+
+#define OW_FOLLOWERS_SCRIPT_MOVEMENT   TRUE       // TRUE: Script collisions hide follower, FLAG_SAFE_FOLLOWER_MOVEMENT on by default
+                                                  // FALSE: Script collisions unhandled, FLAG_SAFE_FOLLOWER_MOVEMENT off by default
+
+// If set, the only pokemon allowed to follow you
+// will be those matching species, met location,
+// and/or met level;
+// These accept vars, too: VAR_TEMP_1, etc
+#define OW_MON_ALLOWED_SPECIES (0)
+#define OW_MON_ALLOWED_MET_LVL (0)
+#define OW_MON_ALLOWED_MET_LOC (0)
+// Examples:
+// Yellow Pikachu:
+// #define OW_MON_ALLOWED_SPECIES (SPECIES_PIKACHU)
+// #define OW_MON_ALLOWED_MET_LVL (0)
+// #define OW_MON_ALLOWED_MET_LOC (MAPSEC_PALLET_TOWN)
+// Hoenn Starter:
+// #define OW_MON_ALLOWED_SPECIES (0)
+// #define OW_MON_ALLOWED_MET_LVL (5)
+// #define OW_MON_ALLOWED_MET_LOC (MAPSEC_ROUTE_101)
+// Species set in VAR_XXXX:
+// #define OW_MON_ALLOWED_SPECIES (VAR_XXXX)
+// #define OW_MON_ALLOWED_MET_LVL (0)
+// #define OW_MON_ALLOWED_MET_LOC (0)
+
 // 战斗外能力效果
 #define OW_SYNCHRONIZE_NATURE       GEN_LATEST // 在第八世代及以上，如果队伍中首位的宝可梦有同步特性，野生宝可梦将总是具有与它们相同的性格，而不是前代游戏中的50%机会。礼物宝可梦除外。
                                                // 在USUM（这里为GEN_7），如果队伍中首位的宝可梦有同步特性，礼物宝可梦将总是具有与它们相同的性格，无论它们的蛋群是什么。

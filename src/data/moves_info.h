@@ -109,7 +109,7 @@ static const u8 sFeintDescription[] = _(
     "能够攻击使用守住类招式的\n"
     "对手。解除其守护效果。");
 
-const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
+const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         [MOVE_NONE] =
             {
@@ -3507,7 +3507,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
                 .priority = 0,
                 .category = DAMAGE_CATEGORY_SPECIAL,
                 .healingMove = B_HEAL_BLOCKING >= GEN_6,
-                .contestEffect = CONTEST_EFFECT_STARTLE_PREV_MONS,
+                .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_5,
+        .contestEffect = CONTEST_EFFECT_STARTLE_PREV_MONS,
                 .contestCategory = CONTEST_CATEGORY_SMART,
                 .contestComboStarterId = 0,
                 .contestComboMoves = {COMBO_STARTER_CALM_MIND, COMBO_STARTER_HYPNOSIS},
