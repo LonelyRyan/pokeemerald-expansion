@@ -41,6 +41,7 @@
 // 钓鱼
 #define I_FISHING_BITE_ODDS        GEN_LATEST // 在第一和第二世代，旧钓竿有100%的咬钩几率，好钓竿有66%的咬钩几率，超级钓竿有50%的咬钩几率。在第三世代，所有钓竿都有50%的基本咬钩几率。从第四世代起，旧钓竿有25%的基本咬钩几率，好钓竿有50%的咬钩几率，超级钓竿有75%的咬钩几率。
 #define I_FISHING_MINIGAME         GEN_3      // 每个世代使用一种变化的收线小游戏，一旦宝可梦被钩住。注意：目前只实现了第一/二世代和第三世代的小游戏！
+#define I_FISHING_ENVIRONMENT      GEN_LATEST // In Gen 3, the battle environment when fighting a hooked Pokémon is based on the tile the player is standing on. In Gen 4 onwards, the environment is based on tile that is being fished in, resulting in it usually being a water environment.
 #define I_FISHING_STICKY_BOOST     GEN_LATEST // 在第三世代，如果队伍中的第一个位置有宝可梦持有吸盘或粘滞特性，咬钩几率会增加约35%。从第四世代起，它会使基本咬钩几率翻倍。
 #define I_FISHING_FOLLOWER_BOOST   FALSE      // 在HGSS中，钓鱼咬钩几率会根据当前跟随宝可梦的亲密度增加。
 #define I_FISHING_CHAIN            FALSE      // 从XY引入，连续钩住同一只宝可梦会增加该宝可梦闪亮的几率。注意：这个实现是对实际功能的近似，因为XY的功能没有被彻底记录或数据挖掘。

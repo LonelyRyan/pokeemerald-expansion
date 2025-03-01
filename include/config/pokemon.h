@@ -17,6 +17,7 @@
                                                 // GEN_1/2/3/4/5/6/7: 分别对应黄、水晶、红/蓝/绿宝石、心金/魂银、黑白2、太阳/月亮、究极之日/究极之月的学习招式集。
                                                 // GEN_8: 使用以下优先级：BDSP对于Gen1-4宝可梦，然后是LA游戏中引入的种类，然后是剑/盾中出现的种类。否则，使用GEN_7。
                                                 // GEN_9: SV 对于在这些游戏中出现的种类。否则使用GEN_8。
+#define P_EVOLUTION_LEVEL_1_LEARN   GEN_LATEST  // In Gen 8+, Pokémon evolving while at level 1 do not get the chance to learn their level 1 moves, while before they did.
 
 // 进化设置
 #define P_FRIENDSHIP_EVO_THRESHOLD   GEN_LATEST  // 从第八世代起，通过亲密度进化的宝可梦在亲密度达到或超过160时进化，而不是220。
@@ -64,13 +65,13 @@
 #define P_SUMMARY_SCREEN_RENAME          TRUE        // 如果为TRUE，在总结屏幕的信息页面上，更改宝可梦昵称的选项将取代取消提示。
 
 // 学习招式集辅助开关
-#define P_LEARNSET_HELPER_TEACHABLE TRUE        // 如果为TRUE，teachable_learnsets.h将由tools/learnset_helpers/teachable.py使用包含的JSON文件基于可用的技能机和教导招式填充。
+#define P_LEARNSET_HELPER_TEACHABLE      TRUE   // 如果为TRUE，teachable_learnsets.h将由tools/learnset_helpers/teachable.py使用包含的JSON文件基于可用的技能机和教导招式填充。
 
 // 旗帜设置
 // 要在脚本中使用以下功能，请将0替换为您分配给它的标志ID。
 // 例如：替换为FLAG_UNUSED_0x264，以便您可以使用该标志来切换功能。
-#define P_FLAG_FORCE_SHINY      0     // 如果设置了此标志，所有野生和礼物宝可梦将被强制成为闪光。
-#define P_FLAG_FORCE_NO_SHINY   0     // 如果设置了此标志，所有野生和礼物宝可梦将被强制不是闪光。
+#define P_FLAG_FORCE_SHINY               0  // 如果设置了此标志，所有野生和礼物宝可梦将被强制成为闪光。
+#define P_FLAG_FORCE_NO_SHINY            0  // 如果设置了此标志，所有野生和礼物宝可梦将被强制不是闪光。
 
 // 如果您想禁用特定的宝可梦家族，请到这里。
 #include "config/species_enabled.h"

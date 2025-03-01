@@ -43,22 +43,25 @@
 #define OW_BERRY_DRAIN_RATE            GEN_6_ORAS // 如果OW_BERRY_MOISTURE启用，此设置改变了土壤干燥的速度。GEN_4使用依赖树果的排水率，GEN_6_XY在24小时内干燥（使用相关肥料4小时内干燥）GEN_6_ORAS在4小时内干燥。其他值是非法的。
 #define OW_BERRY_IMMORTAL              FALSE      // 如果启用，一旦树果树长出了树果，除非被玩家采摘，否则树木不会消失。
 
-// 野外宝可梦
-#define OW_POKEMON_OBJECT_EVENTS       TRUE       // 为每个宝可梦种类添加对象事件字段。可以使用OBJ_EVENT_GFX_SPECIES宏（例如OBJ_EVENT_GFX_SPECIES(BULBASAUR)）供NPC使用。
-#define OW_SUBSTITUTE_PLACEHOLDER      TRUE       // 对于缺少野外精灵图像的宝可梦，使用替代的野外精灵。
-#define OW_LARGE_OW_SUPPORT            TRUE       // 如果为真，会增加少量开销到野外代码中，以便正确显示大型（48x48, 64x64）野外精灵在桥下等位置。
-#define OW_PKMN_OBJECTS_SHARE_PALETTES FALSE      // [WIP!! 并非所有调色板都已为此调整!!] 如果为TRUE，跟随者的调色板将从对战精灵中获取。
-#define OW_GFX_COMPRESS                TRUE       // 支持压缩的野外精灵图像（同时压缩宝可梦跟随图像）。
-                                                  // 重要提示：图像被加载到VRAM中以避免持续解压缩。如果需要更多VRAM或想要同时使用大量野外宝可梦，应该禁用此配置。
-                                                  // 压缩图像与非二的幂次方精灵尺寸不兼容：
-                                                  // （你不应该为压缩图像使用48x48精灵/表格）
-                                                  // 16x32, 32x32, 64x64等都可以
-#define OW_MON_WANDER_WALK             TRUE       // 如果为真，具有MOVEMENT_TYPE_WANDER的野外宝可梦在步骤之间会原地行走。
-
-// 跟随宝可梦
-#define OW_FOLLOWERS_ENABLED           TRUE      // 启用跟随宝可梦，HGSS风格。需要OW_POKEMON_OBJECT_EVENTS。注意，为了完全支持它们，可能需要额外的脚本！
-#define OW_FOLLOWERS_BOBBING           TRUE       // 如果为真，跟随宝可梦在它们的空闲和行走动画中会上下浮动。
-#define OW_FOLLOWERS_POKEBALLS         TRUE       // 跟随宝可梦将从它们存放的精灵球中出现，而不是普通的精灵球。
+// Overworld Pokémon
+#define OW_POKEMON_OBJECT_EVENTS       TRUE       // Adds Object Event fields for every species. Can be used for NPCs using the OBJ_EVENT_GFX_SPECIES macro (eg. OBJ_EVENT_GFX_SPECIES(BULBASAUR))
+#define OW_SUBSTITUTE_PLACEHOLDER      TRUE       // Use a substitute OW for Pokémon that are missing overworld sprites
+#define OW_LARGE_OW_SUPPORT            TRUE       // If true, adds a small amount of overhead to OW code so that large (48x48, 64x64) OWs will display correctly under bridges, etc.
+#define OW_PKMN_OBJECTS_SHARE_PALETTES FALSE      // [WIP!! NOT ALL PALETTES HAVE BEEN ADJUSTED FOR THIS!!] If TRUE, follower palettes are taken from battle sprites.
+#define OW_GFX_COMPRESS                TRUE       // Adds support for compressed OW graphics, (Also compresses pokemon follower graphics).
+                                                  // IMPORTANT: Gfx are loaded into VRAM to avoid continous decompression. If you require more VRAM or want to use a lot of overworld Pokémon at once, you should disable this config.
+                                                  // Compressed gfx are incompatible with non-power-of-two sprite sizes:
+                                                  // (You should not use 48x48 sprites/tables for compressed gfx)
+                                                  // 16x32, 32x32, 64x64 etc are fine
+#define OW_MON_WANDER_WALK             TRUE       // If true, OW pokemon with MOVEMENT_TYPE_WANDER will walk-in-place in between steps.
+// Follower Pokémon
+#define OW_FOLLOWERS_ENABLED           FALSE      // Enables follower Pokémon, HGSS style. Requires OW_POKEMON_OBJECT_EVENTS. Note that additional scripting may be required for them to be fully supported!
+#define OW_FOLLOWERS_BOBBING           TRUE       // If TRUE, follower Pokémon will bob up and down during their idle & walking animations
+#define OW_FOLLOWERS_POKEBALLS         TRUE       // If TRUE, follower Pokémon will emerge from the Poké Ball they are stored in, instead of a normal Poké Ball
+#define OW_FOLLOWERS_WEATHER_FORMS     FALSE      // If TRUE, Castform and Cherrim gain FORM_CHANGE_OVERWORLD_WEATHER, which will make them transform in the overworld based on the weather.
+#define OW_FOLLOWERS_COPY_WILD_PKMN    FALSE      // If TRUE, follower Pokémon that know Transform or have Illusion/Imposter will copy wild Pokémon at random.
+#define OW_BATTLE_ONLY_FORMS           TRUE       // If TRUE, loads overworld sprites for battle-only forms like Mega Evos. Requires OW_POKEMON_OBJECT_EVENTS.
+#define B_FLAG_FOLLOWERS_DISABLED      0          // Enables / Disables followers by using a flag. Helpful to disable followers for a period of time.
 
 
 #define OW_FOLLOWERS_SCRIPT_MOVEMENT   TRUE       // TRUE: Script collisions hide follower, FLAG_SAFE_FOLLOWER_MOVEMENT on by default
@@ -111,6 +114,7 @@
 #define OW_FLAG_NO_ENCOUNTER        0  // 如果设置了此标志，则禁用野生遭遇。
 #define OW_FLAG_NO_TRAINER_SEE      0  // 如果设置了此标志，则训练师不会主动挑战玩家，除非与他们对话。
 #define OW_FLAG_NO_COLLISION        0  // 如果设置了此标志，则玩家可以走过有碰撞的瓦片。主要用于调试目的。
+#define OW_FLAG_POKE_RIDER          0  // If this flag is set, the player will be able to use fly from the Pokenav Region Map and the Town Map key item by pressing 'R' on a city/location they are able to fly to.
 
 #define BATTLE_PYRAMID_RANDOM_ENCOUNTERS    FALSE    // 如果设置为TRUE，战斗金字塔宝可梦将根据挑战的轮次随机生成，而不是在src/data/battle_frontier/battle_pyramid_level_50_wild_mons.h（或open_level_wild_mons.h）中硬编码。
 
@@ -136,5 +140,8 @@
 #define OW_IGNORE_EGGS_ON_HEAL           GEN_LATEST         // 在第四世代及以上，宝可梦中心的护士在治疗机上不会治愈蛋。
 #define OW_UNION_DISABLE_CHECK           FALSE              // 当为TRUE时，护士不会通知玩家是否有训练师在联合室等待。这加快了宝可梦中心的加载速度。
 #define OW_FLAG_MOVE_UNION_ROOM_CHECK    0                  // 如果设置了此标志，游戏只会在治疗宝可梦时检查是否有玩家在联合室，而不是玩家进入宝可梦中心时。这加快了宝可梦中心的加载速度。如果OW_UNION_DISABLE_CHECK为TRUE，则此设置被忽略。
+
+// Berry Blender
+#define BERRY_BLENDER_THROW_ALL_BERRIES_AT_ONCE TRUE        // This is a small little addition, that basically speeds up the animation where all players' berries are thrown into the blender. Self-explanatory I hope!
 
 #endif // GUARD_CONFIG_OVERWORLD_H

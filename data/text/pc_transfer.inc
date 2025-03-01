@@ -10,6 +10,12 @@ gText_PkmnTransferredSomeonesPCBoxFull::
 gText_PkmnTransferredLanettesPCBoxFull::
 	.string "真弓的电脑上盒子“{STR_VAR_3}”\n已经满了，\p{STR_VAR_2}传到了\n盒子“{STR_VAR_1}”里。$"
 
+gText_PkmnSentToPCAfterCatch::
+	.string "{STR_VAR_2} was sent to\n"
+	.string "{B_PC_CREATOR_NAME} PC.\p"
+	.string "It was placed in \n"
+	.string "BOX “{STR_VAR_1}”.$"
+
 gText_NoMoreRoomForPokemon::
     .string "没有地方装宝可梦了！\p宝可梦盒子都满了，\n再也挤不进什么了！$"
 
