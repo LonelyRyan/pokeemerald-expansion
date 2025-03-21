@@ -272,6 +272,9 @@
 // 游戏内伙伴旗帜
 #define B_SHOW_PARTNER_TARGET             FALSE // 显示战斗伙伴将目标。
 
+// Move description menu
+#define B_SHOW_MOVE_DESCRIPTION     TRUE       // Shows move information in battler
+
 // 地形设置
 #define B_TERRAIN_BG_CHANGE         TRUE       // 如果设置为TRUE，则地形招式会永久改变默认战斗背景，直到效果消失。
 #define B_THUNDERSTORM_TERRAIN      TRUE       // 如果为TRUE，则野外雷暴会像第八世代一样生成雨和电场地。

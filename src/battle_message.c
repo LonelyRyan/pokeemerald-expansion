@@ -636,7 +636,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PROTEANTYPECHANGE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}的{B_ATK_ABILITY}\n使其变成了{B_BUFF1}属性！"),
     [STRINGID_SYMBIOSISITEMPASS]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}通过{B_LAST_ABILITY}\n将{B_LAST_ITEM}传递给了{B_EFF_NAME_WITH_PREFIX2}！"),
     [STRINGID_STEALTHROCKDMG]                       = COMPOUND_STRING("尖锐的岩石扎进了\n{B_SCR_NAME_WITH_PREFIX2}的体内！"),
-    [STRINGID_TOXICSPIKESABSORBED]                  = COMPOUND_STRING("{B_ATK_TEAM2}脚下的\n毒菱消失不见了！"),
+    [STRINGID_TOXICSPIKESABSORBED]                  = COMPOUND_STRING("{B_SCR_TEAM2}脚下的\n毒菱消失不见了！"),
     [STRINGID_TOXICSPIKESPOISONED]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}\n中毒了！"),
     [STRINGID_STICKYWEBSWITCHIN]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}\n被黏黏网粘住了！"),
     [STRINGID_HEALINGWISHCAMETRUE]                  = COMPOUND_STRING("治愈之愿\n在{B_ATK_NAME_WITH_PREFIX2}身上实现了！"),
@@ -3108,6 +3108,18 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 break;
             case B_TXT_DEF_TEAM2:
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+                    toCpy = sText_Your2;
+                else
+                    toCpy = sText_Opposing2;
+                break;
+            case B_TXT_SCR_TEAM1:
+                if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
+                    toCpy = sText_Your1;
+                else
+                    toCpy = sText_Opposing1;
+                break;
+            case B_TXT_SCR_TEAM2:
+                if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
                     toCpy = sText_Your2;
                 else
                     toCpy = sText_Opposing2;
