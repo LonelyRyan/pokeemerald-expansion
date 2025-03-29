@@ -1690,10 +1690,12 @@ static void (*const sDrawTextEntryBoxFuncs[])(void) =
     [NAMING_SCREEN_CODE]       = DrawNormalTextEntryBox,
 };
 
+/*
 static void DrawTextEntryBox(void)
 {
     sDrawTextEntryBoxFuncs[sNamingScreen->templateNum]();
 }
+*/
 
 static void DummyGenderIcon(void);
 static void DrawGenderIcon(void);
