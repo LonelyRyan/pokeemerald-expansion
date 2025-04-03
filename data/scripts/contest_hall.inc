@@ -1660,8 +1660,8 @@ LilycoveCity_ContestLobby_Text_ExplainLinkContest:
 	.string "这是通过无线适配器或GBA连接线连接的二到四名玩家的比赛。\p"
 	.string "参与者首先需要选择他们想要进入的模式。\p"
 	.string "有两种不同的模式。\p"
-	.string "E模式(翡翠模式)适用于二到四名玩家，每人都有《宝可梦翡翠》游戏卡。\p"
-	.string "G模式(全球模式)仅适用于四名玩家，每人都有《宝可梦翡翠》《宝可梦红宝石》或《宝可梦蓝宝石》游戏卡。\p"
+	.string "E模式(翡翠模式)适用于二到四名玩家，每人都有 宝可梦翡翠 游戏卡。\p"
+	.string "G模式(全球模式)仅适用于四名玩家，每人都有 宝可梦翡翠  宝可梦红宝石 或 宝可梦蓝宝石 游戏卡。\p"
 	.string "玩家们应该讨论他们想要的模式，然后选择相同的模式。\p"
 	.string "一旦所有玩家都选择了相同的比赛和相同的模式，\l"
 	.string "报名注册就完成了。\p"
@@ -1669,17 +1669,17 @@ LilycoveCity_ContestLobby_Text_ExplainLinkContest:
 
 LilycoveCity_ContestLobby_Text_ExplainEMode:
 	.string "在E模式(翡翠模式)中，\n"
-	.string "可以举办二到四名玩家的联机比赛。每名玩家都必须有《宝可梦翡翠》游戏卡。\l"
+	.string "可以举办二到四名玩家的联机比赛。每名玩家都必须有 宝可梦翡翠 游戏卡。\l"
 	.string "玩家必须使用无线适配器或GBA连接线相互连接。\p"
 	.string "如果少于四名玩家，\n"
 	.string "大厅中的训练师会加入，补满四人比赛阵容。\p"
-	.string "请注意，《宝可梦红宝石》或《宝可梦蓝宝石》中没有E模式。$"
+	.string "请注意， 宝可梦红宝石 或 宝可梦蓝宝石 中没有E模式。$"
 
 LilycoveCity_ContestLobby_Text_ExplainGMode:
 	.string "G模式(全球模式)是专门为四名玩家设计的，他们使用GBA连接线连接。\p"
-	.string "每名玩家必须有《宝可梦翡翠》《宝可梦红宝石》或《宝可梦蓝宝石》游戏卡。\p"
-	.string "所有玩家选择G模式(《宝可梦翡翠》)或\n"
-	.string "通过四人接待柜台进入(《宝可梦红宝石》或《宝可梦蓝宝石》)后，\l"
+	.string "每名玩家必须有 宝可梦翡翠  宝可梦红宝石 或 宝可梦蓝宝石 游戏卡。\p"
+	.string "所有玩家选择G模式( 宝可梦翡翠 )或\n"
+	.string "通过四人接待柜台进入( 宝可梦红宝石 或 宝可梦蓝宝石 )后，\l"
 	.string "比赛就会开始。$"
 
 LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode:
