@@ -244,7 +244,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .height = 5,
         .weight = 79,
         .description = COMPOUND_STRING(
-            "背上闪耀的火焰能保护自己。\n发怒时，火焰会随之更加旺盛；\n疲倦时，火焰会不完全燃烧。"),
+            "背上闪耀的火焰能保护自己。\n发怒时，火焰会随之更加旺盛。\n疲倦时，火焰会不完全燃烧。"),
         .pokemonScale = 539,
         .pokemonOffset = 21,
         .trainerScale = 256,

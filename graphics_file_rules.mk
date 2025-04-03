@@ -222,10 +222,10 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 
 ### Fonts ###
 
-$（FONTGFXDIR）/chinese_small.latfont： $（FONTGFXDIR）/chinese_small.png
+$(FONTGFXDIR)/chinese_small.latfont: $(FONTGFXDIR)/chinese_small.png
 	$(GFX) $< $@
 
-$（FONTGFXDIR）/chinese_normal.latfont： $（FONTGFXDIR）/chinese_normal.png
+$(FONTGFXDIR)/chinese_normal.latfont: $(FONTGFXDIR)/chinese_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
