@@ -149,7 +149,7 @@ ALIGNED(4) const u8 gFontNormalLatinGlyphWidths[] = {
     3,  6,  6,  6,  6,  6,  6,  6,  6,  6,  3,  6,  6,  6,  6,  6,
     8,  6,  6,  6,  6,  6,  6,  6,  3,  6,  6,  6,  6,  6,  6,  3,
     6,  6,  6,  6,  6,  8,  6,  6,  6,  6,  6,  6,  9,  7,  6,  3,
-    3,  3,  3,  3, 10,  8,  3,  3,  7,  3,  3,  3,  3,  3,  3,  3,
+    3,  3,  3,  3, 10,  12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 3,
     3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,
     6,  6,  4,  8,  8,  8,  7,  8,  8,  4,  6,  6,  4,  4,  3,  3,
     3,  3,  3,  3,  3,  3,  3,  3,  6,  3,  3,  3,  3,  3,  3,  6,
@@ -434,7 +434,3 @@ ALIGNED(4) const u8 gFontShortJapaneseGlyphWidths[] = {
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
 };
-
-ALIGNED(4) const u16 gFont0ChineseGlyphs [] = INCBIN_U16("graphics/fonts/font0_chinese.latfont");
-
-ALIGNED(4) const u16 gFont1ChineseGlyphs [] = INCBIN_U16("graphics/fonts/font1_chinese.latfont");

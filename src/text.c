@@ -12,6 +12,7 @@
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 #include "fonts.h"
+#include "chinese_text.h"
 
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
@@ -295,8 +296,6 @@ static const u8 sMenuCursorDimensions[][2] =
 };
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
-extern const u16 gFont0ChineseGlyphs[];
-extern const u16 gFont1ChineseGlyphs[];
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
@@ -1235,57 +1234,53 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->printerTemplate.currentX += gCurGlyph.width + textPrinter->printerTemplate.letterSpacing;
             return RENDER_PRINT;
         case EOS:
-            return 1;
-        case 0x1 ... 0x1e:
-            if (currChar != 0x6 && currChar != 0x1B)
-            {
-                if (currChar > 0x1B)
-                    currChar -= 2;
-                else if(currChar > 0x6)
-                    currChar--;
-
-                currChar = *textPrinter->printerTemplate.currentChar | ((currChar - 1) << 8);
-                currChar += 0x1000;
-                textPrinter->printerTemplate.currentChar++;
-            }
-            break;
             return RENDER_FINISH;
         }
 
-        switch (subStruct->fontId)
+        if (IsChineseChar(currChar, *textPrinter->printerTemplate.currentChar, subStruct->fontId, textPrinter->japanese))
+        {   
+            //合并字节获取汉字双字节编码
+            currChar = (currChar << 8) | *textPrinter->printerTemplate.currentChar;
+            textPrinter->printerTemplate.currentChar++;
+            DecompressGlyph_Chinese(currChar, subStruct->fontId);
+        }
+        else
         {
-        case FONT_SMALL:
-            DecompressGlyph_Small(currChar, textPrinter->japanese);
-            break;
-        case FONT_NORMAL:
-            DecompressGlyph_Normal(currChar, textPrinter->japanese);
-            break;
-        case FONT_SHORT:
-        case FONT_SHORT_COPY_1:
-        case FONT_SHORT_COPY_2:
-        case FONT_SHORT_COPY_3:
-            DecompressGlyph_Short(currChar, textPrinter->japanese);
-            break;
-        case FONT_NARROW:
-            DecompressGlyph_Narrow(currChar, textPrinter->japanese);
-            break;
-        case FONT_SMALL_NARROW:
-            DecompressGlyph_SmallNarrow(currChar, textPrinter->japanese);
-            break;
-        case FONT_NARROWER:
-            DecompressGlyph_Narrower(currChar, textPrinter->japanese);
-            break;
-        case FONT_SMALL_NARROWER:
-            DecompressGlyph_SmallNarrower(currChar, textPrinter->japanese);
-            break;
-        case FONT_SHORT_NARROW:
-            DecompressGlyph_ShortNarrow(currChar, textPrinter->japanese);
-            break;
-        case FONT_SHORT_NARROWER:
-            DecompressGlyph_ShortNarrower(currChar, textPrinter->japanese);
-            break;
-        case FONT_BRAILLE:
-            break;
+            switch (subStruct->fontId)
+            {
+            case FONT_SMALL:
+                DecompressGlyph_Small(currChar, textPrinter->japanese);
+                break;
+            case FONT_NORMAL:
+                DecompressGlyph_Normal(currChar, textPrinter->japanese);
+                break;
+            case FONT_SHORT:
+            case FONT_SHORT_COPY_1:
+            case FONT_SHORT_COPY_2:
+            case FONT_SHORT_COPY_3:
+                DecompressGlyph_Short(currChar, textPrinter->japanese);
+                break;
+            case FONT_NARROW:
+                DecompressGlyph_Narrow(currChar, textPrinter->japanese);
+                break;
+            case FONT_SMALL_NARROW:
+                DecompressGlyph_SmallNarrow(currChar, textPrinter->japanese);
+                break;
+            case FONT_NARROWER:
+                DecompressGlyph_Narrower(currChar, textPrinter->japanese);
+                break;
+            case FONT_SMALL_NARROWER:
+                DecompressGlyph_SmallNarrower(currChar, textPrinter->japanese);
+                break;
+            case FONT_SHORT_NARROW:
+                DecompressGlyph_ShortNarrow(currChar, textPrinter->japanese);
+                break;
+            case FONT_SHORT_NARROWER:
+                DecompressGlyph_ShortNarrower(currChar, textPrinter->japanese);
+                break;
+            case FONT_BRAILLE:
+                break;
+            }
         }
 
         CopyGlyphToWindow(textPrinter);
@@ -1518,17 +1513,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case PLACEHOLDER_BEGIN:
             switch (*++str)
             {
-                case PLACEHOLDER_ID_STRING_VAR_1:
-                    bufferPointer = gStringVar1;
-                    break;
-                case PLACEHOLDER_ID_STRING_VAR_2:
-                    bufferPointer = gStringVar2;
-                    break;
-                case PLACEHOLDER_ID_STRING_VAR_3:
-                    bufferPointer = gStringVar3;
-                    break;
-                default:
-                    return 0;
+            case PLACEHOLDER_ID_STRING_VAR_1:
+                bufferPointer = gStringVar1;
+                break;
+            case PLACEHOLDER_ID_STRING_VAR_2:
+                bufferPointer = gStringVar2;
+                break;
+            case PLACEHOLDER_ID_STRING_VAR_3:
+                bufferPointer = gStringVar3;
+                break;
+            default:
+                return 0;
             }
         case CHAR_DYNAMIC:
             if (bufferPointer == NULL)
@@ -1628,20 +1623,13 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case CHAR_PROMPT_CLEAR:
             break;
         default:
-            if (*str >= 1 && *str <= 0x1E && (fontId == 0 || fontId == 8))
+            if (IsChineseChar(*str, str[1], fontId, isJapanese))
             {
+                glyphWidth = GetChineseFontWidthFunc(fontId);
                 ++str;
-                glyphWidth = 0xA;
-            }
-            else if (*str >= 1 && *str <= 0x1E && (fontId == 1 || fontId == 2 || fontId == 7))
-            {
-                ++str;
-                glyphWidth = 0xC;
             }
             else
-            {
                 glyphWidth = func(*str, isJapanese);
-            }
             if (minGlyphWidth > 0)
             {
                 if (glyphWidth < minGlyphWidth)
@@ -1661,8 +1649,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 
     if (lineWidth > width)
         return lineWidth;
-    else
-        return width;
+    return width;
 }
 
 s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum, u32 strSize)
@@ -1884,16 +1871,9 @@ static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) //汉字判定
-        {
-            glyphs = gFont0ChineseGlyphs + (0x20 * (glyphId - 0x1000));
-            gCurGlyph.width = 10;
-        }
-        else
-        {
-            glyphs = gFontSmallLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontSmallLatinGlyphWidths[glyphId];
-        }
+        glyphs = gFontSmallLatinGlyphs + (0x20 * glyphId);
+        gCurGlyph.width = gFontSmallLatinGlyphWidths[glyphId];
+
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
@@ -1933,16 +1913,9 @@ static void DecompressGlyph_Narrow(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) //汉字判定
-        {
-            glyphs = gFont1ChineseGlyphs + (0x20 * (glyphId - 0x1000));
-            gCurGlyph.width = 12;
-        }
-        else
-        {
-            glyphs = gFontNarrowLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontNarrowLatinGlyphWidths[glyphId];
-        }
+        glyphs = gFontNarrowLatinGlyphs + (0x20 * glyphId);
+        gCurGlyph.width = gFontNarrowLatinGlyphWidths[glyphId];
+
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
@@ -1982,16 +1955,9 @@ static void DecompressGlyph_SmallNarrow(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) //汉字判定
-        {
-            glyphs = gFont0ChineseGlyphs + (0x20 * (glyphId - 0x1000));
-            gCurGlyph.width = 10;
-        }
-        else
-        {
-            glyphs = gFontSmallNarrowLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontSmallNarrowLatinGlyphWidths[glyphId];
-        }
+        glyphs = gFontSmallNarrowLatinGlyphs + (0x20 * glyphId);
+        gCurGlyph.width = gFontSmallNarrowLatinGlyphWidths[glyphId];
+
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
@@ -2033,16 +1999,9 @@ static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) //汉字判定
-        {
-            glyphs = gFont1ChineseGlyphs + (0x20 * (glyphId - 0x1000));
-            gCurGlyph.width = 12;
-        }
-        else
-        {
-            glyphs = gFontShortLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontShortLatinGlyphWidths[glyphId];
-        }
+        glyphs = gFontShortLatinGlyphs + (0x20 * glyphId);
+        gCurGlyph.width = gFontShortLatinGlyphWidths[glyphId];
+
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
@@ -2082,16 +2041,9 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x1000) //汉字判定
-        {
-            glyphs = gFont1ChineseGlyphs + (0x20 * (glyphId - 0x1000));
-            gCurGlyph.width = 12;
-        }
-        else
-        {
-            glyphs = gFontNormalLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontNormalLatinGlyphWidths[glyphId];
-        }
+        glyphs = gFontNormalLatinGlyphs + (0x20 * glyphId);
+        gCurGlyph.width = gFontNormalLatinGlyphWidths[glyphId];
+
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
