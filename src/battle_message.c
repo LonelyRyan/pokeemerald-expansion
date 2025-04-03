@@ -3145,8 +3145,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     if (*toCpy == CHAR_SPACE)
                         dst[dstID] = CHAR_NBSP;
                     else
-                        if ((*toCpy & 0xFF) == 0x00 && *toCpy >= 0x0100)  // 检查是否以00结尾并且为中文字符
-                            toCpy -= 0x39;          // 修正偏移
                         dst[dstID] = *toCpy;
                     dstID++;
                     toCpy++;
