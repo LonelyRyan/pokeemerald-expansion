@@ -778,7 +778,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_MOLD_BREAKER] =
     {
         .name = _("破格"),
-        .description = COMPOUND_STRING("使用技能不受对手特性影响"),
+        .description = COMPOUND_STRING("使用招式不受对手特性影响"),
         .aiRating = 7,
     },
 
@@ -792,7 +792,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_AFTERMATH] =
     {
         .name = _("引爆"),
-        .description = COMPOUND_STRING("濒死时伤害接触的对手"),
+        .description = COMPOUND_STRING("昏厥时伤害接触的对手"),
         .aiRating = 5,
     },
 
@@ -873,11 +873,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SNOW_WARNING] =
     {
         .name = _("降雪"),
-    #if B_SNOW_WARNING >= GEN_9
         .description = COMPOUND_STRING("出场时会将天气变为下雪"),
-    #else
-        .description = COMPOUND_STRING("出场时会将天气变为下雪"),
-    #endif
         .aiRating = 8,
     },
 
@@ -941,7 +937,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SHEER_FORCE] =
     {
         .name = _("强行"),
-        .description = COMPOUND_STRING("消除追加效果以强化技能"),
+        .description = COMPOUND_STRING("消除追加效果以强化招式"),
         .aiRating = 8,
     },
 
@@ -1227,14 +1223,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TURBOBLAZE] =
     {
         .name = _("涡轮火焰"),
-        .description = COMPOUND_STRING("使用技能不受对手特性影响"),
+        .description = COMPOUND_STRING("使用招式不受对手特性影响"),
         .aiRating = 7,
     },
 
     [ABILITY_TERAVOLT] =
     {
         .name = _("兆级电压"),
-        .description = COMPOUND_STRING("使用技能不受对手特性影响"),
+        .description = COMPOUND_STRING("使用招式不受对手特性影响"),
         .aiRating = 7,
     },
 
@@ -1321,7 +1317,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STANCE_CHANGE] =
     {
         .name = _("战斗切换"),
-        .description = COMPOUND_STRING("根据技能切换刀剑盾牌形态"),
+        .description = COMPOUND_STRING("根据招式切换刀剑盾牌形态"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1670,7 +1666,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SOUL_HEART] =
     {
         .name = _("魂心"),
-        .description = COMPOUND_STRING("有宝可梦濒死时，特攻会提高"),
+        .description = COMPOUND_STRING("有宝可梦昏厥时，特攻会提高"),
         .aiRating = 7,
     },
 
@@ -1770,7 +1766,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_NEUROFORCE] =
     {
         .name = _("脑核之力"),
-        .description = COMPOUND_STRING("增强效果绝佳技能的伤害"),
+        .description = COMPOUND_STRING("增强效果绝佳招式的伤害"),
         .aiRating = 6,
     },
 
@@ -1923,7 +1919,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PERISH_BODY] =
     {
         .name = _("灭亡之躯"),
-        .description = COMPOUND_STRING("受接触攻击双方3回合濒死"),
+        .description = COMPOUND_STRING("受接触攻击双方3回合昏厥"),
         .aiRating = -1,
     },
 
@@ -1944,7 +1940,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_NEUTRALIZING_GAS] =
     {
         .name = _("化学变化气体"),
-        .description = COMPOUND_STRING("在场时，全场特性消失或无效"),
+        .description = COMPOUND_STRING("在场时全场特性消失或无效"),
         .aiRating = 5,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -2009,7 +2005,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_CHILLING_NEIGH] =
     {
         .name = _("苍白嘶鸣"),
-        .description = COMPOUND_STRING("打倒对手时会提高攻击."),
+        .description = COMPOUND_STRING("打倒对手时会提高攻击"),
         .aiRating = 7,
     },
 
@@ -2288,7 +2284,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_MYCELIUM_MIGHT] =
     {
         .name = _("菌丝之力"),
-        .description = COMPOUND_STRING("变化招式变慢，但无视特性."),
+        .description = COMPOUND_STRING("变化招式变慢，但无视特性"),
         .aiRating = 2,
     },
 

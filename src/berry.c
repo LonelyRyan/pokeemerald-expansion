@@ -1573,7 +1573,7 @@ const struct Berry gBerries[] =
 
     [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] =
     {
-        .name = _("香罗果"), // "Maranga" is too long
+        .name = _("香罗果"),
         .firmness = BERRY_FIRMNESS_UNKNOWN,
         .color = BERRY_COLOR_BLUE,
         .size = 0,

@@ -181,19 +181,19 @@ Debug_CheckSaveBlock::
 	end
 
 Debug_SaveBlock1Size::
-	.string "SaveBlock1大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "SaveBlock1 大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_SaveBlock2Size::
-	.string "SaveBlock2大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "SaveBlock2 大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_SaveBlock3Size::
-	.string "SaveBlock3大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "SaveBlock3 大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_PokemonStorageSize::
-	.string "{PKMN}Storage大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "{PKMN}Storage 大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_CheckROMSpace::
@@ -203,7 +203,7 @@ Debug_CheckROMSpace::
 	end
 
 Debug_ROMSize::
-	.string "ROM大小: {STR_VAR_1}MB/32MB.\n"
+	.string "ROM 大小: {STR_VAR_1}MB/32MB.\n"
 	.string "剩余空间: {STR_VAR_2}MB.$"
 
 Debug_HatchAnEgg::
@@ -281,8 +281,8 @@ Debug_BerryPestsDisabled::
 	end
 
 DebugText_BerryPestsDisabled:
-	.string "树果害虫已禁用。\n"
-	.string "无法强制害虫进入树果$"
+	.string "OW_BERRY_PESTS is disabled.\n"
+	.string "Unable to force pests onto berry trees.$"
 
 Debug_BerryWeedsDisabled::
 	msgbox DebugText_BerryWeedsDisabled, MSGBOX_DEFAULT
@@ -290,8 +290,8 @@ Debug_BerryWeedsDisabled::
 	end
 
 DebugText_BerryWeedsDisabled:
-	.string "杂草已被禁用了\n"
-	.string "无法使杂草侵入果树。"
+	.string "OW_BERRY_WEEDS is disabled.\n"
+	.string "Unable to force weeds onto berry trees.$"
 
 Debug_EventScript_InflictStatus1::
 	lockall
@@ -441,7 +441,7 @@ Debug_EventScript_InflictStatus1_Text_Freeze:
     .string "冰冻$"
 
 Debug_EventScript_InflictStatus1_Text_Frostbite:
-    .string "冻伤$"
+	.string "冻伤$"
 
 Debug_EventScript_EWRAMCounters::
 	callnative CheckEWRAMCounters
@@ -450,111 +450,108 @@ Debug_EventScript_EWRAMCounters::
 	end
 
 Debug_EventScript_EWRAMCounters_Text::
-	.string "Follower Steps: {STR_VAR_1}.\n"
-	.string "Fishing Chain: {STR_VAR_2}.$"
+	.string "跟随步数: {STR_VAR_1}.\n"
+	.string "钓鱼次数: {STR_VAR_2}.$"
 
-Debug_EventScript_FontTest_Text_1::
-	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Angel Adept Blind Bodice Clique\n"
-	.string "Coast Dunce Docile Enact Eosin\l"
-	.string "Furlong Focal Gnome Gondola Human\l"
-	.string "Hoist Inlet Iodine Justin Jocose\l"
-	.string "Knoll Koala Linden Loads Milliner\l"
-	.string "Modal Number Nodule Onset Oddball\l"
-	.string "Pneumo Poncho Quanta Qophs Rhone\l"
-	.string "Roman Snout Sodium Tundra Tocsin\l"
-	.string "Uncle Udder Vulcan Vocal Whale\l"
-	.string "Woman Xmas Xenon Yunnan Young\l"
-	.string "Zloty Zodiac.$"
+Debug_EventScript_FontTest_Text_1::               @ Edit this to test your font
+	.string "{FONT_SMALL_NARROWER}"
+	.string "安静 暗影 白云 不语 城堡\n"
+	.string "大地 儿童 飞鸟 风铃 光辉\l"
+	.string "海洋 火焰 高楼 古道 花园\l"
+	.string "欢乐 记忆 静谧 角落 敬仰\l"
+	.string "快乐 狐狸 梨花 旅人 梦境\l"
+	.string "茉莉 宁静 暖阳 欧阳 漂流\l"
+	.string "奇遇 清风 日出 热情 山林\l"
+	.string "世界 希望 小雨 羊群 烟霞\l"
+	.string "永恒 云端 原野 月亮 早晨。$"
 
 Debug_EventScript_FontTest_Text_2::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Angel angel adept for the nuance loads\n"
-	.string "of the arena cocoa and quaalude. Blind\l"
-	.string "blind bodice for the submit oboe of the\l"
-	.string "club snob and abbot. Clique clique\l"
-	.string "coast for the pouch loco of the franc\l"
-	.string "assoc and accede. Dunce dunce docile\l"
-	.string "for the loudness mastodon of the\l"
-	.string "loud statehood and huddle.$"
+	.string "安静的世界充满细语\n"
+	.string "城堡中的精灵追逐梦想。\l"
+	.string "飞鸟飞鸟掠过蓝天白云，\l"
+	.string "风铃响起，带来午后微光。\l"
+	.string "欢乐的旅人走过古道幽径，\l"
+	.string "梦境与现实在交界相融。\l"
+	.string "光辉之地记录回忆点滴，\l"
+	.string "盛开的梨花低语着春意。$"
 
 Debug_EventScript_FontTest_Text_3::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Enact enact eosin for the quench coed\n"
-	.string "of the pique canoe and bleep. Furlong\l"
-	.string "furlong focal for the genuflect\l"
-	.string "profound of the motif aloof and offers.\l"
-	.string "Gnome gnome gondola for the impugn\l"
-	.string "logos of the unplug analog and smuggle.\l"
-	.string "Human human hoist for the buddhist\l"
-	.string "alcohol of the riyadh caliph and\l"
-	.string "bathhouse.$"
+	.string "故事讲述了遥远时光\n"
+	.string "高楼大厦隐藏着诗与远方。\l"
+	.string "古道古道通向静谧森林，\l"
+	.string "记忆如溪水缓缓流淌。\l"
+	.string "狐狸在梦中跳跃云端，\l"
+	.string "火焰温暖了夜晚月光。\l"
+	.string "旅人静听风吹草动，\l"
+	.string "世界因此而悄然流转。$"
 
 Debug_EventScript_FontTest_Text_4::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Inlet inlet iodine for the quince\n"
-	.string "champion of the ennui scampi and shiite.\l"
-	.string "Justin justin jocose for the djibouti\l"
-	.string "sojourn of the oranj raj and hajjis.\l"
-	.string "Knoll knoll koala for the banknote\l"
-	.string "lookout of the dybbuk outlook and\l"
-	.string "trekked. Linden linden loads for the\l"
-	.string "ulna monolog of the consul menthol and\l"
-	.string "shallot.$"
+	.string "角落藏着心灵秘密\n"
+	.string "宁静时光流淌如泉水。\l"
+	.string "欧阳问道山水之间，\l"
+	.string "清风吹过花影婆娑。\l"
+	.string "日出时刻照亮希望，\l"
+	.string "热情燃烧在心房之中。\l"
+	.string "山林深处回荡回音，\l"
+	.string "烟霞朦胧化作梦境。$"
 
 Debug_EventScript_FontTest_Text_5::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Milliner milliner modal for the alumna\n"
-	.string "solomon of the album custom and summon.\l"
-	.string "Number number nodule for the unmade\l"
-	.string "economic of the shotgun bison and\l"
-	.string "tunnel. Onset onset oddball for the\l"
-	.string "abandon podium of the antiquo tempo\l"
-	.string "and moonlit. Pneumo pneumo poncho for\l"
-	.string "the dauphin opossum of the holdup\l"
-	.string "bishop and supplies.$"
+	.string "世界如此多彩缤纷\n"
+	.string "希望藏在点点星光中。\l"
+	.string "小雨滋润干涸心田，\l"
+	.string "羊群悠闲走在绿坡。\l"
+	.string "永恒只在瞬间流转，\l"
+	.string "云端之上藏着诗篇。\l"
+	.string "原野广阔无边无际，\l"
+	.string "早晨曙光带来新生。$"
 
 Debug_EventScript_FontTest_Text_6::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Quanta quanta qophs for the inquest\n"
-	.string "sheqel of the cinq coq and suqqu. Rhone\l"
-	.string "rhone roman for the burnt porous of the\l"
-	.string "lemur clamor and carrot. Snout snout\l"
-	.string "sodium for the ensnare bosom of the\l"
-	.string "genus pathos and missing. Tundra\l"
-	.string "tundra tocsin for the nutmeg isotope\l"
-	.string "of the peasant ingot and ottoman.$"
+	.string "风起时叶随梦飘摇\n"
+	.string "泉水清清流过岁月。\l"
+	.string "山峰巍峨如岁月沉淀，\l"
+	.string "月色温柔照亮心房。\l"
+	.string "星辰之间闪烁故事，\l"
+	.string "长夜不再孤单徘徊。\l"
+	.string "梦境醒来仍有诗意，\l"
+	.string "新的一天缓缓到来。$"
 
 Debug_EventScript_FontTest_Text_7::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Uncle uncle udder for the dunes cloud\n"
-	.string "of the hindu thou and continuum. Vulcan\l"
-	.string "vulcan vocal for the alluvial ovoid of\l"
-	.string "the yugoslav chekhov and revved. Whale\l"
-	.string "whale woman for the meanwhile blowout\l"
-	.string "of the forepaw meadow and glowworm.\l"
-	.string "Xmas xmas xenon for the bauxite\l"
-	.string "doxology of the tableaux equinox and\l"
-	.string "exxon.$"
+	.string "风吹过的麦田泛金光\n"
+	.string "心中的愿望悄然生长。\l"
+	.string "在每个黄昏的边界，\l"
+	.string "都藏着故事的篇章。\l"
+	.string "花开的声音令人动容，\l"
+	.string "回忆如流水一去不返。\l"
+	.string "希望如火把燃烧，\l"
+	.string "点亮你我心灵深处。$"
 
 Debug_EventScript_FontTest_Text_8::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "Yunnan yunnan young for the dynamo\n"
-	.string "coyote of the obloquy employ and\l"
-	.string "sayyid. Zloty zloty zodiac for the gizmo\l"
-	.string "ozone of the franz laissez and buzzing.$"
+	.string "云南古老神秘土地\n"
+	.string "年轻梦想在此启程。\l"
+	.string "风中回荡过往旋律，\l"
+	.string "遥远旅途逐梦不停。$"
 
 
 Debug_EventScript_FontTest_Text_9::                 @ Special thanks to Nintendo for this nice pangram to test other glyphs
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
-	.string "42 × 138 = 5796.\n"
-	.string "Mr Jock, TV quiz PhD: bags 20% fewer\l"
-	.string "lynx at a café; voilà, they're “worth”\l"
-	.string "♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11\l"
-	.string "Nintendo GBA can connect to a Nintendo\l"
-	.string "GameCube console! He claimed-though I don't\l"
-	.string "believe him-to have done so in an eyes-shut\l"
-	.string "state…?$"
+	.string "42 × 138 = 5796。\n"
+	.string "小山博士，电视答题赢\l"
+	.string "得了折扣20%优惠券的\l"
+	.string "山猫说：小丽，\l"
+	.string "他们“出名”了。\l"
+	.string "♂1/♀1 = ¥1。也就是\l"
+	.string "10 + 9 - 8 = 11。\l"
+	.string "任天堂GBA可以连接到\l"
+	.string "NGC主机！虽然我不信\l"
+	.string "他闭着眼睛完成的。\l"
+	.string "你信吗…？$"
 
 Debug_PrintFontTest::
 	msgbox Debug_EventScript_FontTest_Text_1, MSGBOX_DEFAULT

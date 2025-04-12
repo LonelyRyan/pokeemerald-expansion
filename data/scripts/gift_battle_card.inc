@@ -24,17 +24,23 @@ MysteryGiftScript_BattleCardInfo:
 	end
 
 sText_MysteryGiftBattleCountCard:
-    .string "感谢您使用神秘礼物系统。\p"
-    .string "您的对战计数卡会记录\n"
-    .string "您与持有相同卡片的训练师的对战成绩。\p"
-    .string "寻找并与持有与您相同卡片的训练师对战。\p"
-    .string "您可以通过阅读新闻来查看\n"
-    .string "整体排名。\p"
-    .string "请务必尝试！$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.\p"
+	.string "Your BATTLE COUNT CARD keeps\n"
+	.string "track of your battle record against\l"
+	.string "TRAINERS with the same CARD.\p"
+	.string "Look for and battle TRAINERS who\n"
+	.string "have the same CARD as you.\p"
+	.string "You may check the overall rankings\n"
+	.string "by reading the NEWS.\p"
+	.string "Please do give it a try!$"
 
 sText_MysteryGiftBattleCountCard_WonPrize:
-    .string "感谢您使用神秘礼物系统。\p"
-    .string "祝贺您！\p"
-    .string "您赢得了连续赢得三场对战的奖品！\p"
-    .string "我们希望这能激励您\n"
-    .string "继续更多的对战。$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.\p"
+	.string "Congratulations!\p"
+	.string "You have won a prize for winning\n"
+	.string "three battles!\p"
+	.string "We hope you will be inspired to\n"
+	.string "battle some more.$"
+//TODO 汉化

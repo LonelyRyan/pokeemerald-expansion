@@ -156,7 +156,7 @@ SlateportCity_BattleTentCorridor_Movement_AttendantExit:
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
 SlateportCity_ContestHall_Text_AdviceForContests:
-    .string "需要一点点关于华丽大赛\n的建议吗？\p在某些特定种类的行动后\n使用特定技能\l可以给你带来额外的注视度。\p如果你知道该怎么做，\n你可以获得更高的吸引力。\p当然，你的对手会试着\n干扰你宝可梦的表演。$"
+    .string "需要一点点关于华丽大赛\n的建议吗？\p在某些特定种类的行动后\n使用特定招式\l可以给你带来额外的注视度。\p如果你知道该怎么做，\n你可以获得更高的吸引力。\p当然，你的对手会试着\n干扰你宝可梦的表演。$"
 
 @ Unused
 SlateportCity_ContestHall_Text_MyPapaIsContestJudge:
@@ -168,7 +168,7 @@ SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed:
 
 @ Unused
 SlateportCity_ContestHall_Text_ExplainTorment:
-    .string "拿着，TM41，\n嘿，就是假指控，你在听我说吗？\p就像是，它不允许同一场中\n使用两次同样的的行动，了解？\p嘿，现在，听好，就像是\n希望我并没有给你带来麻烦！$"
+    .string "拿着，TM41，\n嘿，就是无理取闹，你在听我说吗？\p就像是，它不允许同一场中\n使用两次同样的的行动，了解？\p嘿，现在，听好，就像是\n希望我并没有给你带来麻烦！$"
 
 @ Unused
 SlateportCity_ContestHall_Text_MCStepUpTakePartInContest:
@@ -176,7 +176,7 @@ SlateportCity_ContestHall_Text_MCStepUpTakePartInContest:
 
 @ Unused
 SlateportCity_ContestHall_Text_JudgeWouldntDoToMissContest:
-    .string "裁判：你好啊！\n看来你是个训练师！\p那么，对你来说\n千万不要错过华丽大赛！\p获得绿荫镇的华丽大赛通行证\n并且随时可以再来！$"
+    .string "裁判：你好啊！\n看来你是个训练家！\p那么，对你来说\n千万不要错过华丽大赛！\p获得绿荫镇的华丽大赛通行证\n并且随时可以再来！$"
 
 @ Unused
 SlateportCity_ContestHall_Text_ItsAppealTime:

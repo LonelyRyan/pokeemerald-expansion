@@ -434,7 +434,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord, MSGBOX_NPC
 	end
 
-BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
+BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize::
     .string "你好，这里是交换服务\n中心。\p我们用可爱的奖品同你收集到的\n对战点数进行交换。\p请在列表上选择一个奖品。$"
 
 @ Unused
@@ -502,7 +502,7 @@ BattleFrontier_ExchangeServiceCorner_Text_ConfirmCarbos::
     .string "你选择了补碳药剂。\n可以吗？$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmHPUp::
-    .string "你选择了HP提升剂。\n可以吗？$"
+    .string "你选择了HP增强剂。\n可以吗？$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmBrightpowder::
     .string "你选择了亮光之粉。\n可以吗？$"
@@ -613,10 +613,10 @@ BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc::
     .string "提升宝可梦的速度\n能力。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
-    .string "提升宝可梦的HP。$"
+    .string "提升宝可梦的体力。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
-    .string "一件能在战斗中逐渐\n回复HP的道具。$"
+    .string "一件能在战斗中逐渐\n回复体力的道具。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
     .string "一件能回复所有能力\n的道具。$"
@@ -631,13 +631,13 @@ BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
     .string "一件能射出眩目的光降低\n准确度的道具。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
-    .string "提升技能的力量，但只针对\n那个技能而言。$"
+    .string "提升招式的力量，但只针对\n那个招式而言。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
     .string "一件在遇到敌人时能使敌人\n退缩的道具。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc::
-    .string "一件能偶尔防止濒死\n的道具。$"
+    .string "一件能偶尔防止昏厥\n的道具。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc::
     .string "一件能提高会心率的\n道具。$"

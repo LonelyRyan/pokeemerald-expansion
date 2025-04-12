@@ -238,4 +238,4 @@ gText_Contest_Hesitancy::
     .string "踌躇$"
 
 gText_Contest_Fear::
-    .string "恐惧$"
+	.string "恐惧$"

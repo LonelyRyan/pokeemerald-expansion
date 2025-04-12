@@ -225,7 +225,7 @@ SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth:
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter:
-    .string "欢迎来到海之博物馆，\p参观费50$。\n您想参观吗？$"
+    .string "欢迎来到海之博物馆，\p参观费50¥。\n您想参观吗？$"
 
 SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself:
     .string "祝您愉快。$"
@@ -252,7 +252,7 @@ SlateportCity_OceanicMuseum_1F_Text_RustboroBungled:
     .string "如果不是那些蠢货在\n卡那兹市搞砸了，我们怎么会到这儿来！$"
 
 SlateportCity_OceanicMuseum_1F_Text_DidntHaveMoney:
-    .string "我没带够50$，从接待员那儿\n混进来花了不少时间。$"
+    .string "我没带够50¥，从接待员那儿\n混进来花了不少时间。$"
 
 SlateportCity_OceanicMuseum_1F_Text_LearnAboutSeaForBattling:
     .string "我想了解大海，\n把那些知识融入我的战斗中。$"
@@ -270,7 +270,7 @@ SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis:
     .string "哎呀！\n你在这儿干什么？\p我？我是之前被你狠狠教训过的\n水舰队队员，记得吗？\l就在卡绿隧道那里？\p这个给你！\n原谅我吧！$"
 
 SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain:
-    .string "比起我来，\n这个技能机器更适合你。\p希望下次不要再见面了！\n啊哈哈哈！$"
+    .string "比起我来，\n这个招式学习器更适合你。\p希望下次不要再见面了！\n啊哈哈哈！$"
 
 SlateportCity_OceanicMuseum_1F_Text_YouHaveToTakeThis:
     .string "啊噢，拜托了！\n拿着这个，放我走吧！$"
@@ -279,7 +279,7 @@ SlateportCity_OceanicMuseum_1F_Text_WhirlpoolExperiment:
     .string "蓝色的液体在\n玻璃容器中盘旋着。\p“利用风力人工制造\n漩涡的实验”。$"
 
 SlateportCity_OceanicMuseum_1F_Text_WaterfallExperiment:
-    .string "一个红色的球\n在玻璃容器里上下跳动。\p“利用球的浮力\n模拟鱼跃龙门的实验”。$"
+    .string "一个红色的球\n在玻璃容器里上下跳动。\p“利用球的浮力\n模拟攀瀑的实验”。$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanSoilDisplay:
     .string "海底土壤的\n样品。\p“生物遗骸沉到\n海洋底部，经过多年\l形成沉积层。\p研究这些地层，\n能够揭示出远古的历史”。$"

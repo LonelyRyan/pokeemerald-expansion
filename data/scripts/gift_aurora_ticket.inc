@@ -35,21 +35,24 @@ AuroraTicket_Obtained:
 	end
 
 sText_AuroraTicketForYou:
-    .string "感谢您使用神秘礼物系统。\p"
-    .string "您一定是{PLAYER}。\n"
-    .string "这里有一张票是给您的。$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.\p"
+	.string "You must be {PLAYER}.\n"
+	.string "There is a ticket here for you.$"
 
 sText_AuroraTicketUseAtPort:
-    .string "它看起来是用于在\n"
-    .string "水静市的港口。\p"
-    .string "为什么不试试看，看看\n"
-    .string "它是关于什么的？$"
+	.string "It appears to be for use at the\n"
+	.string "LILYCOVE CITY port.\p"
+	.string "Why not give it a try and see what\n"
+	.string "it is about?$"
 
 sText_AuroraTicketThankYou:
-    .string "感谢您使用神秘礼物系统。$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.$"
 
 sText_AuroraTicketBagFull:
-    .string "哦，很抱歉，{PLAYER}。\n"
-    .string "您的包的钥匙物品口袋已满。\p"
-    .string "请在电脑上存放一些东西，\n"
-    .string "然后回来拿这个。$"
+	.string "Oh, I'm sorry, {PLAYER}.\n"
+	.string "Your BAG's KEY ITEMS POCKET is full.\p"
+	.string "Please store something on your PC,\n"
+	.string "then come back for this.$"
+//TODO 汉化

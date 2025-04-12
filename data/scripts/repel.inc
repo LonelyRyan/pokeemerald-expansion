@@ -137,16 +137,16 @@ EventScript_UseSpray::
 
 
 Text_SprayWoreOff::
-	.string "{STR_VAR_1}的效果结束了…$"
+	.string "{STR_VAR_1}的效果消失了……$"
 
 Text_SprayWoreOffAskUseAnother::
-	.string "{STR_VAR_1}的效果结束了!\n"
-	.string "使用别的喷雾剂?$"
+	.string "{STR_VAR_1}的效果消失了！\n"
+	.string "要再使用一个吗？$"
 
 Text_SprayWoreOffAskUseX::
-	.string "{STR_VAR_1}的效果结束了…\n"
-	.string "使用一个{STR_VAR_2}?$"
+	.string "{STR_VAR_1}的效果消失了！\n"
+	.string "要使用{STR_VAR_2}吗？$"
 
 Text_SprayWoreOffUseX::
-	.string "{PLAYER} 使用了\n"
+	.string "{PLAYER}使用了\n"
 	.string "{STR_VAR_2}.$"

@@ -1,23 +1,23 @@
 // multichoice lists
 static const struct MenuAction MultichoiceList_BrineyOnDewford[] =
 {
-    {COMPOUND_STRING("PETALBURG")},
-    {COMPOUND_STRING("SLATEPORT")},
+    {COMPOUND_STRING("橙华市")},
+    {COMPOUND_STRING("凯那市")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_EnterInfo[] =
 {
-    {COMPOUND_STRING("进入")},
+    {COMPOUND_STRING("报名")},
     {gText_Info2},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_ContestInfo[] =
 {
-    {COMPOUND_STRING("什么是华丽大赛?")},
-    {COMPOUND_STRING("华丽大赛的分类")},
-    {COMPOUND_STRING("华丽大赛的级别")},
+    {COMPOUND_STRING("华丽大赛是什么?")},
+    {COMPOUND_STRING("华丽大赛的类型")},
+    {COMPOUND_STRING("级别")},
     {gText_Cancel2},
 };
 
@@ -56,8 +56,8 @@ static const struct MenuAction MultichoiceList_RegisterMenu[] =
 
 static const struct MenuAction MultichoiceList_Bike[] =
 {
-    {COMPOUND_STRING("马赫")},
-    {COMPOUND_STRING("技巧")},
+    {COMPOUND_STRING("音速")},
+    {COMPOUND_STRING("越野")},
 };
 
 static const struct MenuAction MultichoiceList_StatusInfo[] =
@@ -65,21 +65,21 @@ static const struct MenuAction MultichoiceList_StatusInfo[] =
     {COMPOUND_STRING("中毒")},
     {COMPOUND_STRING("麻痹")},
     {COMPOUND_STRING("睡眠")},
-    {COMPOUND_STRING("灼烧")},
-    {COMPOUND_STRING("冻结")},
+    {COMPOUND_STRING("灼伤")},
+    {COMPOUND_STRING("冰冻")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_BrineyOffDewford[] =
 {
-    {COMPOUND_STRING("DEWFORD")},
+    {COMPOUND_STRING("武斗镇")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_ViewedPaintings[] =
 {
     {COMPOUND_STRING("看到了")},
-    {COMPOUND_STRING("没看到")},
+    {COMPOUND_STRING("还没有")},
 };
 
 static const struct MenuAction MultichoiceList_YesNoInfo2[] =
@@ -92,7 +92,7 @@ static const struct MenuAction MultichoiceList_YesNoInfo2[] =
 static const struct MenuAction MultichoiceList_ChallengeInfo[] =
 {
     {COMPOUND_STRING("挑战")},
-    {COMPOUND_STRING("信息")},
+    {COMPOUND_STRING("说明")},
     {gText_Exit},
 };
 
@@ -148,36 +148,36 @@ static const struct MenuAction MultichoiceList_Mechadoll2_Q3[] =
 static const struct MenuAction MultichoiceList_Mechadoll3_Q1[] =
 {
     {COMPOUND_STRING("灼伤药")},
-    {COMPOUND_STRING("港湾邮件")},
-    {COMPOUND_STRING("一样多")},
+    {COMPOUND_STRING("港口邮件")},
+    {COMPOUND_STRING("价格相等")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll3_Q2[] =
 {
-    {COMPOUND_STRING("60元")},
-    {COMPOUND_STRING("55元")},
-    {COMPOUND_STRING("没剩钱")},
+    {COMPOUND_STRING("¥60")},
+    {COMPOUND_STRING("¥55")},
+    {COMPOUND_STRING("不会剩下")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll3_Q3[] =
 {
-    {COMPOUND_STRING("它们更昂贵.")},
-    {COMPOUND_STRING("它们更便宜.")},
-    {COMPOUND_STRING("同样的价格")},
+    {COMPOUND_STRING("花得更多")},
+    {COMPOUND_STRING("花得更少")},
+    {COMPOUND_STRING("价格相同")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll4_Q1[] =
 {
     {COMPOUND_STRING("男人")},
     {COMPOUND_STRING("女人")},
-    {COMPOUND_STRING("一样")},
+    {COMPOUND_STRING("都不是")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll4_Q2[] =
 {
-    {COMPOUND_STRING("老男人")},
-    {COMPOUND_STRING("老女人")},
-    {COMPOUND_STRING("一样多")},
+    {COMPOUND_STRING("老爷爷")},
+    {COMPOUND_STRING("老奶奶")},
+    {COMPOUND_STRING("相等")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll4_Q3[] =
@@ -210,38 +210,38 @@ static const struct MenuAction MultichoiceList_Mechadoll5_Q3[] =
 
 static const struct MenuAction MultichoiceList_VendingMachine[] =
 {
-    {COMPOUND_STRING("FRESH WATER{CLEAR_TO 0x48}200元")},
-    {COMPOUND_STRING("SODA POP{CLEAR_TO 0x48}300元")},
-    {COMPOUND_STRING("LEMONADE{CLEAR_TO 0x48}350元")},
+    {COMPOUND_STRING("美味之水{CLEAR_TO 0x48}¥200")},
+    {COMPOUND_STRING("劲爽汽水{CLEAR_TO 0x48}¥300")},
+    {COMPOUND_STRING("果汁牛奶{CLEAR_TO 0x48}¥350")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_MachBikeInfo[] =
 {
-    {COMPOUND_STRING("HOW TO RIDE")},
-    {COMPOUND_STRING("HOW TO TURN")},
-    {COMPOUND_STRING("SANDY SLOPES")},
+    {COMPOUND_STRING("如何骑行")},
+    {COMPOUND_STRING("如何转弯")},
+    {COMPOUND_STRING("流沙坡")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_AcroBikeInfo[] =
 {
-    {COMPOUND_STRING("WHEELIES")},
-    {COMPOUND_STRING("BUNNY-HOPS")},
-    {COMPOUND_STRING("JUMP")},
+    {COMPOUND_STRING("单轮特技")},
+    {COMPOUND_STRING("小跳")},
+    {COMPOUND_STRING("跳")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_Satisfaction[] =
 {
     {COMPOUND_STRING("满意")},
-    {COMPOUND_STRING("不满")},
+    {COMPOUND_STRING("不满意")},
 };
 
 static const struct MenuAction MultichoiceList_SternDeepSea[] =
 {
-    {COMPOUND_STRING("DEEPSEATOOTH")},
-    {COMPOUND_STRING("DEEPSEASCALE")},
+    {COMPOUND_STRING("深海之牙")},
+    {COMPOUND_STRING("深海之鳞")},
     {gText_Exit},
 };
 
@@ -259,33 +259,33 @@ static const struct MenuAction MultichoiceList_UnusedAshVendor[] =
 
 static const struct MenuAction MultichoiceList_GameCornerDolls[] =
 {
-    {COMPOUND_STRING("木守宫的布偶 1000硬币")},
-    {COMPOUND_STRING("火稚鸡的布偶 1000硬币")},
-    {COMPOUND_STRING("水跃鱼的布偶 1000硬币")},
+    {COMPOUND_STRING("木守宫玩偶 1000代币")},
+    {COMPOUND_STRING("火稚鸡玩偶 1000代币")},
+    {COMPOUND_STRING("水跃鱼玩偶 1000代币")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_GameCornerTMs[] =
 {
-    {COMPOUND_STRING("TM32{CLEAR_TO 0x48}1500 硬币")},
-    {COMPOUND_STRING("TM29{CLEAR_TO 0x48}3500 硬币")},
-    {COMPOUND_STRING("TM35{CLEAR_TO 0x48}4000 硬币")},
-    {COMPOUND_STRING("TM24{CLEAR_TO 0x48}4000 硬币")},
-    {COMPOUND_STRING("TM13{CLEAR_TO 0x48}4000 硬币")},
+    {COMPOUND_STRING("TM32{CLEAR_TO 0x48}1,500代币")},
+    {COMPOUND_STRING("TM29{CLEAR_TO 0x48}3,500代币")},
+    {COMPOUND_STRING("TM35{CLEAR_TO 0x48}4,000代币")},
+    {COMPOUND_STRING("TM24{CLEAR_TO 0x48}4,000代币")},
+    {COMPOUND_STRING("TM13{CLEAR_TO 0x48}4,000代币")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_GameCornerCoins[] =
 {
-    {COMPOUND_STRING("  50 硬币    1000元")},
-    {COMPOUND_STRING("500 硬币  10000元")},
+    {COMPOUND_STRING("  50 COINS    ¥1,000")},
+    {COMPOUND_STRING("500 COINS  ¥10,000")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_HowsFishing[] =
 {
     {COMPOUND_STRING("优秀")},
-    {COMPOUND_STRING("一般")},
+    {COMPOUND_STRING("不好")},
 };
 
 static const struct MenuAction MultichoiceList_SSTidalSlateportWithBF[] =
@@ -452,8 +452,8 @@ static const struct MenuAction MultichoiceList_TourneyNoRecord[] =
 
 static const struct MenuAction MultichoiceList_Tent[] =
 {
-    {COMPOUND_STRING("RED TENT")},
-    {COMPOUND_STRING("BLUE TENT")},
+    {COMPOUND_STRING("红帐篷")},
+    {COMPOUND_STRING("蓝帐篷")},
 };
 
 static const struct MenuAction MultichoiceList_LinkServicesNoBerry[] =
@@ -473,9 +473,9 @@ static const struct MenuAction MultichoiceList_YesNoInfo[] =
 
 static const struct MenuAction MultichoiceList_BattleMode[] =
 {
-    {COMPOUND_STRING("SINGLE BATTLE")},
-    {COMPOUND_STRING("DOUBLE BATTLE")},
-    {COMPOUND_STRING("MULTI BATTLE")},
+    {COMPOUND_STRING("单打对战")},
+    {COMPOUND_STRING("双打对战")},
+    {COMPOUND_STRING("多人对战")},
     {gText_Info2},
     {gText_Exit},
 };
@@ -506,46 +506,46 @@ static const struct MenuAction MultichoiceList_LinkServicesNoRecordBerry[] =
 
 static const struct MenuAction MultichoiceList_WirelessMinigame[] =
 {
-    {COMPOUND_STRING("POKéMON JUMP")},
-    {COMPOUND_STRING("DODRIO BERRY-PICKING")},
+    {COMPOUND_STRING("宝可梦跳绳")},
+    {COMPOUND_STRING("嘟嘟利摘树果")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_LinkLeader[] =
 {
-    {COMPOUND_STRING("JOIN GROUP")},
-    {COMPOUND_STRING("BECOME LEADER")},
+    {COMPOUND_STRING("加入队伍")},
+    {COMPOUND_STRING("成为队长")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_ContestRank[] =
 {
-    {COMPOUND_STRING("NORMAL RANK")},
-    {COMPOUND_STRING("SUPER RANK")},
-    {COMPOUND_STRING("HYPER RANK")},
-    {COMPOUND_STRING("MASTER RANK")},
+    {COMPOUND_STRING("普通级")},
+    {COMPOUND_STRING("高手级")},
+    {COMPOUND_STRING("究极级")},
+    {COMPOUND_STRING("大师级")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_FrontierItemChoose[] =
 {
-    {COMPOUND_STRING("BATTLE BAG")},
-    {COMPOUND_STRING("HELD ITEM")},
+    {COMPOUND_STRING("对战包包")},
+    {COMPOUND_STRING("持有物")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_LinkContestInfo[] =
 {
-    {COMPOUND_STRING("LINK CONTEST")},
-    {COMPOUND_STRING("ABOUT E-MODE")},
-    {COMPOUND_STRING("ABOUT G-MODE")},
+    {COMPOUND_STRING("联机华丽大赛")},
+    {COMPOUND_STRING("关于E-模式")},
+    {COMPOUND_STRING("关于G-模式")},
     {gText_Cancel2},
 };
 
 static const struct MenuAction MultichoiceList_LinkContestMode[] =
 {
-    {COMPOUND_STRING("E-MODE")},
-    {COMPOUND_STRING("G-MODE")},
+    {COMPOUND_STRING("E-模式")},
+    {COMPOUND_STRING("G-模式")},
     {gText_Exit},
 };
 
@@ -600,32 +600,32 @@ static const struct MenuAction MultichoiceList_UnusedSSTidal4[] =
 
 static const struct MenuAction MultichoiceList_Fossil[] =
 {
-    {COMPOUND_STRING("CLAW FOSSIL")},
-    {COMPOUND_STRING("ROOT FOSSIL")},
+    {COMPOUND_STRING("爪子化石")},
+    {COMPOUND_STRING("根状化石")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_YesNo[] =
 {
     {gText_Yes},
-    {COMPOUND_STRING("NO")},
+    {COMPOUND_STRING("否")},
 };
 
 static const struct MenuAction MultichoiceList_FrontierRules[] =
 {
-    {COMPOUND_STRING("TWO STYLES")},
-    {COMPOUND_STRING("LV. 50")},
-    {COMPOUND_STRING("OPEN LEVEL")},
-    {COMPOUND_STRING("{PKMN} TYPE & NO.")},
-    {COMPOUND_STRING("HOLD ITEMS")},
+    {COMPOUND_STRING("两种模式")},
+    {COMPOUND_STRING("50级")},
+    {COMPOUND_STRING("自由级")},
+    {COMPOUND_STRING("宝可梦属性&编号")},
+    {COMPOUND_STRING("持有物")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_FrontierPassInfo[] =
 {
-    {COMPOUND_STRING("SYMBOLS")},
-    {COMPOUND_STRING("RECORD")},
-    {COMPOUND_STRING("BATTLE PTS")},
+    {COMPOUND_STRING("象征")},
+    {COMPOUND_STRING("记录")},
+    {COMPOUND_STRING("战斗点数")},
     {gText_Exit},
 };
 
@@ -640,18 +640,18 @@ static const struct MenuAction MultichoiceList_BattleArenaRules[] =
 
 static const struct MenuAction MultichoiceList_BattleTowerRules[] =
 {
-    {COMPOUND_STRING("TOWER INFO")},
-    {COMPOUND_STRING("BATTLE {PKMN}")},
-    {COMPOUND_STRING("BATTLE SALON")},
-    {COMPOUND_STRING("MULTI-LINK")},
+    {COMPOUND_STRING("对战塔信息")},
+    {COMPOUND_STRING("对战宝可梦")},
+    {COMPOUND_STRING("对战沙龙")},
+    {COMPOUND_STRING("多人联机")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_BattleDomeRules[] =
 {
-    {COMPOUND_STRING("MATCHUP")},
-    {COMPOUND_STRING("TOURNEY TREE")},
-    {COMPOUND_STRING("DOUBLE KO")},
+    {COMPOUND_STRING("对手")},
+    {COMPOUND_STRING("对阵树")},
+    {COMPOUND_STRING("双双击倒")},
     {gText_Exit},
 };
 
@@ -661,7 +661,7 @@ static const struct MenuAction MultichoiceList_BattleFactoryRules[] =
     {gText_SwapPartners},
     {gText_SwapNumber},
     {gText_SwapNotes},
-    {COMPOUND_STRING("OPEN LEVEL")},
+    {COMPOUND_STRING("自由级")},
     {gText_Exit},
 };
 
@@ -677,18 +677,18 @@ static const struct MenuAction MultichoiceList_BattlePalaceRules[] =
 
 static const struct MenuAction MultichoiceList_BattlePyramidRules[] =
 {
-    {COMPOUND_STRING("PYRAMID: POKéMON")},
-    {COMPOUND_STRING("PYRAMID: TRAINERS")},
-    {COMPOUND_STRING("PYRAMID: MAZE")},
-    {COMPOUND_STRING("BATTLE BAG")},
+    {COMPOUND_STRING("金字塔：宝可梦")},
+    {COMPOUND_STRING("金字塔：训练家")},
+    {COMPOUND_STRING("金字塔：迷宫")},
+    {COMPOUND_STRING("对战包包")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_BattlePikeRules[] =
 {
-    {COMPOUND_STRING("POKéNAV AND BAG")},
-    {COMPOUND_STRING("HELD ITEMS")},
-    {COMPOUND_STRING("POKéMON ORDER")},
+    {COMPOUND_STRING("导航器和包包")},
+    {COMPOUND_STRING("持有物")},
+    {COMPOUND_STRING("宝可梦顺序")},
     {gText_Exit},
 };
 
@@ -722,24 +722,24 @@ static const struct MenuAction MultichoiceList_GoOnRetire[] =
 
 static const struct MenuAction MultichoiceList_TVLati[] =
 {
-    {COMPOUND_STRING("RED")},
-    {COMPOUND_STRING("BLUE")},
+    {COMPOUND_STRING("红色")},
+    {COMPOUND_STRING("蓝色")},
 };
 
 static const struct MenuAction MultichoiceList_BattleTowerFeelings[] =
 {
-    {COMPOUND_STRING("I'll battle now!")},
-    {COMPOUND_STRING("I won!")},
-    {COMPOUND_STRING("I lost!")},
-    {COMPOUND_STRING("I won't tell.")},
+    {COMPOUND_STRING("我现在要对战了!")},
+    {COMPOUND_STRING("赢了!")},
+    {COMPOUND_STRING("输了!")},
+    {COMPOUND_STRING("我不想说。")},
 };
 
 static const struct MenuAction MultichoiceList_WheresRayquaza[] =
 {
-    {COMPOUND_STRING("CAVE OF ORIGIN")},
-    {COMPOUND_STRING("MT. PYRE")},
-    {COMPOUND_STRING("SKY PILLAR")},
-    {COMPOUND_STRING("Don't remember")},
+    {COMPOUND_STRING("觉醒神殿")},
+    {COMPOUND_STRING("送神山")},
+    {COMPOUND_STRING("天空之柱")},
+    {COMPOUND_STRING("不记得了")},
 };
 
 static const struct MenuAction MultichoiceList_SlateportTentRules[] =
@@ -773,8 +773,8 @@ static const struct MenuAction MultichoiceList_TagMatchType[] =
 
 static const struct MenuAction MultichoiceList_BerryPlot[] =
 {
-    {COMPOUND_STRING("FERTILIZE")},
-    {COMPOUND_STRING("PLANT BERRY")},
+    {COMPOUND_STRING("加肥料")},
+    {COMPOUND_STRING("种树果")},
     {gText_Exit},
 };
 

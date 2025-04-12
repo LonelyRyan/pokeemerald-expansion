@@ -339,7 +339,7 @@ LilycoveCity_ContestHall_Text_TodayWonSmartnessContest:
     .string "这只宝可梦曾在这里\n胜过漂亮华丽大赛，\p然后你猜怎么了？我今天又带它\n赢了聪明华丽大赛！\p我的能力连我自己都吓了一跳…$"
 
 LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
-    .string "我多次参加过华丽大赛，\n所以比较了解这里的规则。\p如果你参加帅气大赛，\n帅气的技能才会吸引人，\p相对地，聪明的技能或可爱的技能等等\n就吸引不了别人。$"
+    .string "我多次参加过华丽大赛，\n所以比较了解这里的规则。\p如果你参加帅气大赛，\n帅气的招式才会吸引人，\p相对地，聪明的招式或可爱的招式等等\n就吸引不了别人。$"
 
 LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
     .string "刚刚赢了的那个年轻人\n拥有一大堆不同的能量方块。\p无论谁有那么多，\n都肯定会赢吧？$"
@@ -348,19 +348,19 @@ LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous:
     .string "哇，这儿好大！\p空气中充满了紧张感…\n一点也不像是华丽大赛大厅。$"
 
 LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal:
-    .string "主持：好了，聪明宝可梦和\n训练师们，准备好了吗？！\p努力吧！\n开始！$"
+    .string "主持：好了，聪明宝可梦和\n训练家们，准备好了吗？！\p努力吧！\n开始！$"
 
 LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest:
     .string "评委：你喜欢这华丽大赛吗？\p和三个朋友一起来，\n大家可以一起参加大赛！$"
 
 LilycoveCity_ContestHall_Text_EnteredWrongContest:
-    .string "啊呀啊呀啊呀…\n我参加错了，\p我让我强大的宝可梦\n参加了聪明大赛…\p好吧，用你聪慧的岩石粉碎\n让他们大吃一惊吧。$"
+    .string "啊呀啊呀啊呀…\n我参加错了，\p我让我强大的宝可梦\n参加了聪明大赛…\p好吧，用你聪慧的碎岩\n让他们大吃一惊吧。$"
 
 LilycoveCity_ContestHall_Text_RaisedMonToBeSmart:
     .string "我花了多年时间，\n用尽心思让我的宝可梦\l看上去聪明些，\p我不会被那些年轻人的宝可梦\n轻易比下去的。\p亲爱的，你看到了吗？$"
 
 LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext:
-    .string "就是现在！\p如果下面我的宝可梦使用聪明的技能，\n观众的兴奋点会达到巅峰！$"
+    .string "就是现在！\p如果下面我的宝可梦使用聪明的招式，\n观众的兴奋点会达到巅峰！$"
 
 LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife:
     .string "哎，宝贝，不！\p我亲爱的超音蝠的吸血太可爱了，\n我就一遍遍不断使用它！\p但这就意味着大家不会\n再欣赏它了！$"
@@ -369,10 +369,10 @@ LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa:
     .string "呀啊啊啊！爷爷，你真棒！$"
 
 LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves:
-    .string "即使训练师使用相同的宝可梦，\n他们用来吸引人的技能\l也会不一样，\p这和大家的战斗方式不同\n是同样的道理。$"
+    .string "即使训练家使用相同的宝可梦，\n他们用来吸引人的招式\l也会不一样，\p这和大家的战斗方式不同\n是同样的道理。$"
 
 LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers:
-    .string "我想宝可梦看上去\n比它们的训练师还要聪明。$"
+    .string "我想宝可梦看上去\n比它们的训练家还要聪明。$"
 
 LilycoveCity_ContestHall_Text_StillLoveSmartnessContests:
     .string "无论人们说什么，\n我都喜欢聪明大赛。\p那智慧的绿色…\n它非常…非常…美妙。$"

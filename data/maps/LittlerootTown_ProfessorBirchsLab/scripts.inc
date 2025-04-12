@@ -679,10 +679,10 @@ LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
     .string "小田卷博士：现在它是你的了，\n给它起个名字吗{STR_VAR_1}？$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
-    .string "小田卷博士：我想，如果你\n能和宝可梦一起成长，你会\l成为一名非常出色的训练师。\p我的孩子{RIVAL}也在帮我的同时\n自己研究宝可梦。\p{PLAYER}{KUN}，\n去看看{RIVAL}怎么样？$"
+    .string "小田卷博士：我想，如果你\n能和宝可梦一起成长，你会\l成为一名非常出色的训练家。\p我的孩子{RIVAL}也在帮我的同时\n自己研究宝可梦。\p{PLAYER}{KUN}，\n去看看{RIVAL}怎么样？$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou:
-    .string "小田卷博士：太好了！\n{RIVAL}也会很开心的。\p让{RIVAL}告诉你\n做一个训练师意味着什么吧。$"
+    .string "小田卷博士：太好了！\n{RIVAL}也会很开心的。\p让{RIVAL}告诉你\n做一个训练家意味着什么吧。$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay:
     .string "小田卷博士：唉，别这样，\n去见见我孩子吧。$"
@@ -691,7 +691,7 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome:
     .string "小田卷博士：{RIVAL}？\n回家里去了吧，\p要不又去草丛里\n找寻什么了…\p你和宝可梦累了的话，\n就回家休息一下吧。$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex:
-    .string "小田卷博士：嗨，{PLAYER}{KUN}！\p听说你跟{RIVAL}的战斗\n初战告捷，真不错！\p{RIVAL}帮我做了\n很久调查了，\p{RIVAL}已经有了不少\n训练师的经验。\p{PLAYER}{KUN}，这个宝可梦图鉴\n本来是我为了研究订购的，\l但现在我决定把它给你。$"
+    .string "小田卷博士：嗨，{PLAYER}{KUN}！\p听说你跟{RIVAL}的战斗\n初战告捷，真不错！\p{RIVAL}帮我做了\n很久调查了，\p{RIVAL}已经有了不少\n训练家的经验。\p{PLAYER}{KUN}，这个宝可梦图鉴\n本来是我为了研究订购的，\l但现在我决定把它给你。$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex:
     .string "{PLAYER}得到了宝可梦图鉴！$"
@@ -709,7 +709,7 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
     .string "小遥：抓很多宝可梦的话\n会感觉到很快乐！\p我要去各种地方\n寻找不同的宝可梦，\p见到可爱的宝可梦我就要\n用精灵球抓住它们！$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull:
-    .string "呀，你的背包满了。$"
+    .string "呀，你的包包满了。$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhereShouldIGoNext:
     .string "小遥：不知道下面该\n去哪儿找宝可梦呢？$"
@@ -721,7 +721,7 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
     .string "佑树：你知道，抓一大堆\n宝可梦的感觉很快乐。\p我要去各种地方\n寻找不同的宝可梦，\p如果见到很出色的宝可梦，\n我就用精灵球抓回来。$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull:
-    .string "喂，你的背包满了。$"
+    .string "喂，你的包包满了。$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanWhereShouldIGoNext:
     .string "佑树：下面我该去哪儿\n找宝可梦…$"

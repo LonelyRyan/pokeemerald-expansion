@@ -452,10 +452,10 @@ RusturfTunnel_Text_ToGetToVerdanturf:
     .string "想要从卡那兹市到绿荫镇，\n你得先到武斗镇，然后穿过\l凯那和紫堇市…$"
 
 RusturfTunnel_Text_YouShatteredBoulderTakeHM:
-    .string "哇喔！你打碎了挡路的\n大石头。\p这个秘传机器送给你，\n就当作是我的谢礼吧。$"
+    .string "哇喔！你打碎了挡路的\n大石头。\p这个秘传学习器送给你，\n就当作是我的谢礼吧。$"
 
 RusturfTunnel_Text_ExplainStrength:
-    .string "那个秘传机器里面是劲力。\p让力量大的宝可梦学会的话，\n就能够移动更大的\l石头了。$"
+    .string "那个秘传学习器里面\n是怪力。\p让力量大的宝可梦学会的话，\n就能够移动更大的\l石头了。$"
 
 RusturfTunnel_Text_WandaReunion:
     .string "小亮！\n现在我可以随时看到你了！\p小亮：这真是…太好了。\p来，到我家好好休息吧。$"

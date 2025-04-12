@@ -1478,7 +1478,7 @@ SootopolisCity_Text_CaveOfOriginPleaseLeave:
     .string "你是什么人？\p这里是醒悟祠堂，\p据说在送神火山沉睡的\n宝可梦会在此重生。\p请你离开吧。$"
 
 SootopolisCity_Text_LeadSuperiorTrainerToCave:
-    .string "米可利告诉我，\n当一个拥有着坚定的意志\p与非凡的天赋的人，\n一个了解多种\p宝可梦的训练师出现时…\n我将带他进祠堂里。$"
+    .string "米可利告诉我，\n当一个拥有着坚定的意志\p与非凡的天赋的人，\n一个了解多种\p宝可梦的训练家出现时…\n我将带他进祠堂里。$"
 
 SootopolisCity_Text_AwakenedPokemonClash:
     .string "哦，偶滴天…\p两只觉醒的宝可梦的争斗\n被第三只觉醒的宝可梦\l平息了…$"
@@ -1547,7 +1547,7 @@ SootopolisCity_Text_ThankYouForHelpAcceptThis:
     .string "米可利：{PLAYER}{KUN}…\n我的眼光果然没错。\p多亏了你的帮助，琉璃市…\n不，整个丰缘地区都脱离了危机。\p我代表所有人感谢你。\p这是我的谢礼，\n请你收下它。$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym:
-    .string "这个密传机器里有\n鱼跃龙门。\p如果你有雨滴徽章的话，\n学会这个秘传机器技能的宝可梦\l就能爬上瀑布。\p至于哪儿能得到雨滴徽章，\n你应该知道吧？\p没错！你要打败\n琉璃市道馆馆主。\p如果你准备好了的话，\n就跨入那扇门中去吧。$"
+    .string "这个密传机器里有\n攀瀑。\p如果你有雨滴徽章的话，\n学会这个秘传学习器招式\n的宝可梦\l就能爬上瀑布。\p至于哪儿能得到雨滴徽章，\n你应该知道吧？\p没错！你要打败\n琉璃市道馆馆主。\p如果你准备好了的话，\n就跨入那扇门中去吧。$"
 
 SootopolisCity_Text_DazzledByMentor:
     .string "米可利：我想你会由衷地赞叹\n老师那令人目眩神驰的\l战斗技巧的。$"

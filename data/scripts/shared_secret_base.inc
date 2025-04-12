@@ -202,14 +202,15 @@ SecretBase_EventScript_SkittyTV::
 	end
 
 SecretBase_Text_SmallIndentInWall::
-    .string "墙上有一个小凹槽。$"
+	.string "There's a small indent in the wall.$"
 
 SecretBase_Text_IndentUseSecretPower::
-    .string "墙上有一个小凹槽。\p"
-    .string "使用秘密力量技能吗？$"
+	.string "There's a small indent in the wall.\p"
+	.string "Use the SECRET POWER?$"
 
 SecretBase_Text_DiscoveredSmallCavern::
-    .string "发现了一个小型洞穴！$"
+	.string "Discovered a small cavern!$"
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
-    .string "想在这里建立你的秘穴基地吗？$"
+	.string "Want to make your SECRET BASE here?$"
+//TODO 汉化

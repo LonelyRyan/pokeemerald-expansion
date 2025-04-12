@@ -36,11 +36,11 @@ Route110_TrickHousePuzzle1_EventScript_Robin::
 	msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened::
+Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened:
     .string "{PLAYER}在门上写下\n密码。\p“戏法大师是传说般的人”\n… … … … … … … …\p锁“咔嗒”一声开了！$"
 
 Route110_TrickHousePuzzle1_Text_SallyIntro:
-    .string "我要用刚刚学会的一字斩\n砍出一条路！$"
+    .string "我要用刚刚学会的居合斩\n砍出一条路！$"
 
 Route110_TrickHousePuzzle1_Text_SallyDefeat:
     .string "你这么认真干什么？$"

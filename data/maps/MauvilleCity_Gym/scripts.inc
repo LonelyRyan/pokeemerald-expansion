@@ -290,13 +290,13 @@ MauvilleCity_Gym_Text_BenPostBattle:
     .string "铁旋说他喜欢\n弄些开关控制的小机关。$"
 
 MauvilleCity_Gym_Text_VivianIntro:
-    .string "我的魅力和宝可梦的技能\n会让你大吃一惊！$"
+    .string "我的魅力和宝可梦的招式\n会让你大吃一惊！$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
     .string "你的力量令我十分吃惊！$"
 
 MauvilleCity_Gym_Text_VivianPostBattle:
-    .string "听说紫堇市是由\n铁旋建立起来的。\p在我们成为训练师之前，\n他已经做了很久的训练师了。\l他一定知道很多很多事情！$"
+    .string "听说紫堇市是由\n铁旋建立起来的。\p在我们成为训练家之前，\n他已经做了很久的训练家了。\l他一定知道很多很多事情！$"
 
 MauvilleCity_Gym_Text_AngeloIntro:
     .string "我喜欢闪光的东西！$"
@@ -317,16 +317,16 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
     .string "{PLAYER}从铁旋处\n得到了电力徽章。$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
-    .string "有了电力徽章，宝可梦\n可以在战斗外使用岩石粉碎，\p而且你的宝可梦的速度\n也会变快一点。\p嗯…\n这个也给你吧！$"
+    .string "有了电力徽章，宝可梦\n可以在战斗外使用碎岩，\p而且你的宝可梦的速度\n也会变快一点。\p嗯…\n这个也给你吧！$"
 
 MauvilleCity_Gym_Text_ExplainShockWave:
-    .string "技能机器34里面是电击波，\p这是绝对不会打空的\n可靠技能！值得你信赖！\p… … … … … …$"
+    .string "招式学习器34里面是电击波，\p这是绝对不会打空的\n可靠招式！值得你信赖！\p… … … … … …$"
 
 MauvilleCity_Gym_Text_RegisteredWattson:
-    .string "把道馆馆主铁旋的信息\n登记进口袋领航员里。$"
+    .string "把道馆馆主铁旋的信息\n登记进宝可梦导航仪里。$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
-    .string "看到你这样前途无量的训练师，\n我心里特别欣慰！$"
+    .string "看到你这样前途无量的训练家，\n我心里特别欣慰！$"
 
 MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
     .string "啊哈哈哈哈！\n努力前进吧，年轻人！$"
@@ -335,7 +335,7 @@ MauvilleCity_Gym_Text_GymStatue:
     .string "紫堇市宝可梦道馆$"
 
 MauvilleCity_Gym_Text_GymStatueCertified:
-    .string "紫堇市宝可梦道馆\p铁旋认可的训练师：\n{PLAYER}$"
+    .string "紫堇市宝可梦道馆\p铁旋认可的训练家：\n{PLAYER}$"
 
 MauvilleCity_Gym_Text_WattsonPreRematch:
     .string "铁旋：啊哈！终于又回来了！\n我知道你想做什么，\l你想和我的宝可梦战斗！\p啊哈哈哈哈！\p我会用我的电火花包围你的！\n别说我没警告过你！$"

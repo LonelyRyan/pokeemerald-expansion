@@ -265,4 +265,4 @@ MeteorFalls_1F_1R_Text_MeetProfCozmo:
     .string "我…我是索蓝斯…\n是一名教授…\p火岩队要我带他们去\n流星瀑布…\p但是他们骗了我。\n甚至拿走了我的陨石…\p然后和他们相似的组织\n水舰队出现了。\p在那之后…\n我什么都不知道。\p但是那个火岩队…\p他们会用\n陨石对烟囱山做什么呢？$"
 
 MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney:
-    .string "索蓝斯教授：但是那个火岩队…\p他们会用\n陨石对烟囱山做什么呢？$"
+    .string "索蓝斯博士：但是那个火岩队…\p他们会用\n陨石对烟囱山做什么呢？$"

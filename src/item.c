@@ -23,6 +23,8 @@
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
+//static const u8 *ItemId_GetPluralName(u16);
+//static bool32 DoesItemHavePluralName(u16);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
@@ -87,9 +89,24 @@ u8 *CopyItemName(u16 itemId, u8 *dst)
     return StringCopy(dst, ItemId_GetName(itemId));
 }
 
+const u8 sText_s[] =_("s");
+
 u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 {
-    return StringCopy(dst, ItemId_GetName(itemId));
+    //修改，删去英文中出现于词汇末尾的「s」
+    //if (quantity == 1)
+    //{
+        return StringCopy(dst, ItemId_GetName(itemId));
+    //}
+    /*else if (DoesItemHavePluralName(itemId))
+    {
+        return StringCopy(dst, ItemId_GetPluralName(itemId));
+    }
+    else
+    {
+        u8 *end = StringCopy(dst, ItemId_GetName(itemId));
+        return StringCopy(end, sText_s);
+    }*/
 }
 
 bool8 IsBagPocketNonEmpty(u8 pocket)
@@ -858,6 +875,16 @@ u32 ItemId_GetPrice(u16 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].price;
 }
+
+/*static bool32 DoesItemHavePluralName(u16 itemId)
+{
+    return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
+}
+
+static const u8 *ItemId_GetPluralName(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].pluralName;
+}*/
 
 const u8 *ItemId_GetEffect(u32 itemId)
 {

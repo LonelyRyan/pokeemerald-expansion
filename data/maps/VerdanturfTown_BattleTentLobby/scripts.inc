@@ -328,22 +328,22 @@ VerdanturfTown_BattleTentLobby_EventScript_ExitRules::
 	end
 
 VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
-    .string "如果宝可梦不喜欢一个技能，\n它就不愿使用这技能，\p无论技能多么强大\n都一样。\p比如说，一只拥有温顺性格的\n宝可梦很可能不想\l伤害对手。\p如果不能因材施教，\n它们使用自己讨厌的技能时\l可能会失败。$"
+    .string "如果宝可梦不喜欢一个招式，\n它就不愿使用这招式，\p无论招式多么强大\n都一样。\p比如说，一只拥有温顺性格的\n宝可梦很可能不想\l伤害对手。\p如果不能因材施教，\n它们使用自己讨厌的招式时\l可能会失败。$"
 
 VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
     .string "我姐姐通常很温柔，\n但如果把她惹怒了，\l她会变得非常非常可怕！\p我敢说温顺性格的宝可梦\n生气的时候也会很可怕！$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
-    .string "我的宝可梦感觉上…\n那么地吸引人…\p啊，你好，你没看见吧？\n啊，算了，没关系，\p你想给你的宝可梦用\n这个技能机器吗？$"
+    .string "我的宝可梦感觉上…\n那么地吸引人…\p啊，你好，你没看见吧？\n啊，算了，没关系，\p你想给你的宝可梦用\n这个招式学习器吗？$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionMutual:
     .string "我的宝可梦感觉上…\n我们的吸引力是相互的！\p它们战斗时完全按照\n我说的做！$"
 
 VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
-    .string "你给你的宝可梦\n教了些什么技能？\p我想如果它们自己\n会疗伤的话，\l你会很轻松的。$"
+    .string "你给你的宝可梦\n教了些什么招式？\p我想如果它们自己\n会疗伤的话，\l你会很轻松的。$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
-    .string "亚希达：嗨，{PLAYER}{KUN}！\n我就知道能在这儿碰上你，\p因为，无论规则如何，\n无论战斗怎样，\p对战帐篷里总能\n碰见强大的训练师。\p{PLAYER}{KUN}，希望你\n能尽最大的努力！$"
+    .string "亚希达：嗨，{PLAYER}{KUN}！\n我就知道能在这儿碰上你，\p因为，无论规则如何，\n无论战斗怎样，\p对战帐篷里总能\n碰见强大的训练家。\p{PLAYER}{KUN}，希望你\n能尽最大的努力！$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
-    .string "亚希达：我经常来这儿，\n希望能看到强大的训练师\l战斗。$"
+    .string "亚希达：我经常来这儿，\n希望能看到强大的训练家\l战斗。$"

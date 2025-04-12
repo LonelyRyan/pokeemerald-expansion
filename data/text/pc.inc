@@ -1,4 +1,4 @@
-Text_BootUpPC:
+Text_BootUpPC::
     .string "{PLAYER}登录了电脑。$"
 
 gText_WhichPCShouldBeAccessed::

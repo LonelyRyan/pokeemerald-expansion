@@ -37,5 +37,5 @@ RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
     .string "就像人类一样，\n宝可梦也有性别，\p但似乎没人知道\n它们的不同点在何处。$"
 
 RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:
-    .string "隔壁的人给了我一个秘传机器！\p我用它教我的宝可梦\n怎样砍倒小树。$"
+    .string "隔壁的人给了我一个\n秘传学习器！\p我用它教我的宝可梦\n怎样砍倒小树。$"
 
