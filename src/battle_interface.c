@@ -2534,6 +2534,7 @@ static void ClearAbilityName(u8 spriteId1, u8 spriteId2)
 static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
 {
     int i;
+    //u8 lastChar;
     u8* textPtr;
     u8 monName[POKEMON_NAME_LENGTH + 3] = {0};
     u8* nick = gBattleMons[battlerId].nickname; // This needs to be updated for Illusion support
@@ -2551,10 +2552,21 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
     if (*(textPtr - 1) == EOS)
         textPtr--;
 
+    //lastChar = *(textPtr - 1);
 
-    textPtr[0] = 0x03; //"的"的前两位
+    // Make the string say "[NAME]'s" instead of "[NAME]"
+    //textPtr[0] = CHAR_SGL_QUOTE_RIGHT; // apostraphe
+    //textPtr++;
+    /*if (lastChar != CHAR_S && lastChar != CHAR_s)
+    {
+        textPtr[0] = CHAR_s;
+        textPtr++;
+    }*/
+    //修改，修改特性显示窗口文字
+    //调整为「○○的」
+    textPtr[0] = 0x03; //手动写入汉字第一部分
     textPtr++;
-    textPtr[0] = 0x0B; //"的"的后两位
+    textPtr[0] = 0x0B; //手动写入汉字第二部分
     textPtr++;
 
     textPtr[0] = EOS;

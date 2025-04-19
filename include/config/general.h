@@ -78,7 +78,7 @@
 #define UNITS_IMPERIAL               0       // 英寸，英尺，磅
 #define UNITS_METRIC                 1       // 米，千克
 
-#define UNITS                        UNITS_IMPERIAL
+#define UNITS                        UNITS_METRIC
 #define CHAR_DEC_SEPARATOR           CHAR_PERIOD // CHAR_PERIOD仅在英国和美国用作小数分隔符。世界其他地方使用CHAR_COMMA。
 
 // 命名屏幕

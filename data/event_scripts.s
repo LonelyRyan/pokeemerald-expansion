@@ -879,129 +879,165 @@ Common_EventScript_PlayerHandedOverTheItem::
 
 @ The below and surf.inc could be split into some text/notices.inc
 gText_PokemartSign::
-    .string "“挑选一些便利的物品吧！”\n宝可梦商业中心$"
+	.string "“挑选一些便利的物品吧！”\n"
+	.string "友好商店$"
 
 gText_PokemonCenterSign::
-    .string "“让你疲劳的伙伴们恢复活力！”\n宝可梦中心$"
+	.string "“让你疲劳的伙伴们恢复活力！”\n"
+	.string "宝可梦中心$"
 
 gText_MomOrDadMightLikeThisProgram::
-    .string "也许是{STR_VAR_1}喜欢的游戏\n… … … … … … … … … … … … … … … …\p该走了！$"
+	.string "也许是{STR_VAR_1}喜欢的游戏\n"
+	.string "… … … … … … … … … … … … … … … …\p"
+	.string "该走了！$"
 
 gText_WhichFloorWouldYouLike::
-    .string "欢迎来到水静市商业大厦，\p要去几层？$"
+	.string "欢迎来到水静百货，\p"
+	.string "要去几层？$"
 
 gText_SandstormIsVicious::
-    .string "沙暴太强了，\n走不过去。$"
+	.string "沙暴太强了，\n"
+	.string "走不过去。$"
 
 gText_SelectWithoutRegisteredItem::
-    .string "背包里的物品可以\n登录到SELECT上，方便使用。$"
+	.string "包包里的物品可以\n"
+	.string "登录到SELECT上，方便使用。$"
 
 gText_PokemonTrainerSchoolEmail::
-    .string "有一封宝可梦训练师\n学校来的电子邮件。\p… … … … … …\p一只宝可梦最多可以学4个技能，\p训练师的专业程度就可以从其\n为宝可梦所选择的技能中看出来。\p… … … … … …$"
+	.string "有一封宝可梦训练家\n"
+	.string "学校来的电子邮件。\p"
+	.string "… … … … … …\p"
+	.string "一只宝可梦最多可以学4个招式，\p"
+	.string "训练家的专业程度就可以从其\n"
+	.string "为宝可梦所选择的招式中看出来。\p"
+	.string "… … … … … …$"
 
 gText_PlayerHouseBootPC::
-    .string "{PLAYER}登录了电脑。$"
+	.string "{PLAYER}登录了电脑。$"
 
 gText_PokeblockLinkCanceled::
-    .string "连接停止了。$"
+	.string "连接停止了。$"
 
 gText_UnusedNicknameReceivedPokemon::
-    .string "要给刚得到的\n{STR_VAR_2}起个昵称吗？$"
+	.string "要给刚收服的\n"
+	.string "{STR_VAR_2}取个昵称吗？$"
 
 gText_PlayerWhitedOut::
-    .string "{PLAYER}没有可以\n使用的宝可梦了！\p{PLAYER}昏迷了！$"
+	.string "{PLAYER}没有可以\n"
+	.string "战斗的宝可梦\p！"
+	.string "{PLAYER}昏迷了！$"
 
-gText_FirstShouldRestoreMonsHealth::
-	.string "First, you should restore your\n"
-	.string "POKéMON to full health.$"
+gText_FirstShouldRestoreMonsHealth:: 
+	.string "先让宝可梦\n"
+	.string "回复一下吧！$"
 
 gText_MonsHealedShouldBuyPotions::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "If your POKéMON's energy, HP,\n"
-	.string "is down, please come see us.\p"
-	.string "If you're planning to go far in the\n"
-	.string "field, you should buy some POTIONS\l"
-	.string "at the POKéMON MART.\p"
-	.string "We hope you excel!$"
+	.string "宝可梦的体力已经\n"
+	.string "回复满了。\p"
+	.string "宝可梦的体力……也就是HP变少了的话，\n"
+	.string "请随时来这里回复吧。\p"
+	.string "如果要去稍微有点远的地方，\n"
+	.string "建议你先去友好商店购买伤药备用。\p"
+	.string "那么，请加油吧！\p"
 
 gText_MonsHealed::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "We hope you excel!$"
+	.string "大家都变得精力充沛了哦！\n"
+	.string "那么，请加油吧！$"
 
 gText_HadQuiteAnExperienceTakeRest::
-	.string "MOM: {PLAYER}!\n"
-	.string "Welcome home.\p"
-	.string "It sounds like you had quite\n"
-	.string "an experience.\p"
-	.string "Maybe you should take a quick\n"
-	.string "rest.$"
+	.string "妈妈：{PLAYER}！\n"
+	.string "欢迎回家。\p"
+	.string "看来你经历了不少事情呢。\p"
+	.string "来，好好休息一下吧。$"
 
 gText_MomExplainHPGetPotions::
-	.string "MOM: Oh, good! You and your\n"
-	.string "POKéMON are looking great.\p"
-	.string "I just heard from PROF. BIRCH.\p"
-	.string "He said that POKéMON's energy is\n"
-	.string "measured in HP.\p"
-	.string "If your POKéMON lose their HP,\n"
-	.string "you can restore them at any\l"
-	.string "POKéMON CENTER.\p"
-	.string "If you're going to travel far away,\n"
-	.string "the smart TRAINER stocks up on\l"
-	.string "POTIONS at the POKéMON MART.\p"
-	.string "Make me proud, honey!\p"
-	.string "Take care!$"
+	.string "妈妈：太好了！你和你的\n"
+	.string "宝可梦状态看起来很好。\p"
+	.string "我刚刚收到小田卷博士\n"
+	.string "发来的消息。\p"
+	.string "他说宝可梦的精力\n"
+	.string "是用体力来衡量的。\p"
+	.string "如果宝可梦没有体力了，\n"
+	.string "可以在宝可梦中心恢复。\p"
+	.string "如果你要出远门，可别忘了\n"
+	.string "在友好商店购买些伤药备用。\p"
+	.string "要加油哦，妈妈永远\n"
+	.string "以你为豪！\p"
+	.string "路上小心！$"
 
 gText_RegisteredTrainerinPokeNav::
-    .string "把{STR_VAR_1} {STR_VAR_2}\n登录进口袋领航员。$"
+	.string "把{STR_VAR_1} {STR_VAR_2}\n"
+	.string "登录进宝可梦导航器。$"
 
 gText_ComeBackWithSecretPower::
-    .string "你知道技能机器神秘力量吗？\p我们这些人都喜欢\n技能机器神秘力量。\p我们的成员之一会把它送给你，\n拿到之后就回来给我看看吧，\p我们会让你成为我们之中的一员，\n还可以秘密卖给你些物品。$"
+	.string "你知道招式学习器秘密之力吗？\p"
+	.string "我们这些人都喜欢\n"
+	.string "招式学习器秘密之力。\p"
+	.string "我们的成员之一会把它送给你，\n"
+	.string "拿到之后就回来给我看看吧，\p"
+	.string "我们会让你成为我们之中的一员，\n"
+	.string "还可以秘密卖给你些物品。$"
 
 gText_PokerusExplanation::
-    .string "你的宝可梦可能受到了\n口袋病毒的影响。\p人们并不了解口袋病毒，\n只知道它们是一种寄生在\l宝可梦身上的微观生物，\p据说被它们影响的宝可梦的\n成长会非常好。$"
+	.string "交给我的宝可梦\n"
+	.string "似乎附上了宝可病毒。\p"
+	.string "详细情况不太清楚，\n"
+	.string "不过据说，所谓宝可病毒是一种\l"
+	.string "附着在宝可梦身上的微小生命体。\p"
+	.string "据说被它们影响的宝可梦的\n"
+	.string "成长会非常好。$"
 
 	.include "data/text/surf.inc"
 
 gText_DoorOpenedFarAway::
-    .string "似乎听到了远处\n某扇门打开了的声音。$"
+	.string "似乎听到了远处\n"
+	.string "某扇门打开了的声音。$"
 
 gText_BigHoleInTheWall::
-    .string "墙上有一个大洞。$"
+	.string "墙上有一个大洞。$"
 
 gText_SorryWirelessClubAdjustments::
-    .string "非常抱歉，\n宝可梦无线俱乐部\l系统正在调整。$"
+	.string "非常抱歉，\n"
+	.string "宝可梦无线俱乐部\l"
+	.string "系统正在调整。$"
 
 gText_UndergoingAdjustments::
-    .string "似乎正在进行\n调整的样子…$"
+	.string "似乎正在进行\n"
+	.string "调整的样子…$"
 
 @ Unused
 gText_SorryTradeCenterInspections::
-    .string "非常抱歉。交换中心\n正在检修中。$"
+	.string "非常抱歉。交换中心\n"
+	.string "正在检修中。$"
 
 @ Unused
 gText_SorryRecordCornerPreparation::
-    .string "非常抱歉。联机中心\n正在筹备中。$"
+	.string "非常抱歉。联机中心\n"
+	.string "正在筹备中。$"
 
 gText_PlayerHandedOverTheItem::
-    .string "{PLAYER}交出了\n{STR_VAR_1}。$"
+	.string "{PLAYER}交出了\n"
+	.string "{STR_VAR_1}。$"
 
 gText_ThankYouForAccessingMysteryGift::
-    .string "感谢连接\n神秘礼物系统。$"
+	.string "感谢连接\n"
+	.string "神秘礼物系统。$"
 
 gText_PlayerFoundOneTMHM::
-    .string "{PLAYER}发现一个{STR_VAR_1}\n{STR_VAR_2}！$"
+	.string "{PLAYER}发现一个{STR_VAR_1}\n"
+	.string "{STR_VAR_2}！$"
 
 gText_PlayerFoundTMHMs::
-	.string "{PLAYER} 发现 {STR_VAR_3} {STR_VAR_1}\n"
-	.string "{STR_VAR_2}!$"
+	.string "{PLAYER}发现了{STR_VAR_3}、{STR_VAR_1}\n"
+	.string "与{STR_VAR_2}!$"
 
 gText_Sudowoodo_Attacked::
-    .string "奇怪的树不喜欢\n吼吼鲸洒水壶！\p奇怪的树攻了上来！$"
+	.string "奇怪的树不喜欢\n"
+	.string "吼吼鲸洒水壶！\p"
+	.string "奇怪的树攻击了过来！$"
 
 gText_LegendaryFlewAway::
-    .string "{STR_VAR_1}飘走了！$"
+	.string "{STR_VAR_1}不知道飞到哪里去了！$"
 
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/questionnaire.inc"

@@ -19,40 +19,40 @@ extern const u8 EventScript_FollowerDance[];
 extern const u8 EventScript_FollowerLookUp[];
 
 // 'Generic', unconditional happy messages
-static const u8 sHappyMsg00[] = _("{STR_VAR_1}开始戳你的肚子.");
-static const u8 sHappyMsg01[] = _("{STR_VAR_1}很高兴但有点害羞.");
-static const u8 sHappyMsg02[] = _("{STR_VAR_1}快乐地跟着你.");
-static const u8 sHappyMsg03[] = _("{STR_VAR_1}看起来很开心.");
-static const u8 sHappyMsg04[] = _("{STR_VAR_1}似乎很高兴和你一起散步!");
-static const u8 sHappyMsg05[] = _("{STR_VAR_1}看起来非常健康.");
-static const u8 sHappyMsg06[] = _("{STR_VAR_1}看起来非常高兴.");
-static const u8 sHappyMsg07[] = _("{STR_VAR_1}付出了额外的努力.");
-static const u8 sHappyMsg08[] = _("{STR_VAR_1}在嗅周围的气味.");
-static const u8 sHappyMsg09[] = _("{STR_VAR_1}高兴得跳了起来!");
-static const u8 sHappyMsg10[] = _("{STR_VAR_1}仍然感觉很棒!");
-static const u8 sHappyMsg11[] = _("你的宝可梦闻到了烟味.");
-static const u8 sHappyMsg12[] = _("{STR_VAR_1}在戳你的肚子.");
-static const u8 sHappyMsg13[] = _("你的宝可梦伸展身体，正在放松.");
-static const u8 sHappyMsg14[] = _("{STR_VAR_1}看起来想当先锋!");
-static const u8 sHappyMsg15[] = _("{STR_VAR_1}正在尽最大努力跟上你.");
-static const u8 sHappyMsg16[] = _("{STR_VAR_1}快乐地依偎着你!");
-static const u8 sHappyMsg17[] = _("{STR_VAR_1}充满活力!");
-static const u8 sHappyMsg18[] = _("{STR_VAR_1}看起来非常高兴!");
-static const u8 sHappyMsg19[] = _("{STR_VAR_1}高兴得无法静止不动!");
-static const u8 sHappyMsg20[] = _("{STR_VAR_1}慢慢地点头.");
-static const u8 sHappyMsg21[] = _("{STR_VAR_1}非常渴望!");
-static const u8 sHappyMsg22[] = _("{STR_VAR_1}在四处游荡，聆听不同的声音.");
-static const u8 sHappyMsg23[] = _("{STR_VAR_1}看起来很感兴趣.");
-static const u8 sHappyMsg24[] = _("{STR_VAR_1}不知怎么地强迫自己继续前进.");
-static const u8 sHappyMsg25[] = _("{STR_VAR_1}给了你一个阳光般的笑容!");
-static const u8 sHappyMsg26[] = _("{STR_VAR_1}给你一个快乐的眼神和微笑.");
-static const u8 sHappyMsg27[] = _("你的宝可梦闻到了花香.");
-static const u8 sHappyMsg28[] = _("{STR_VAR_1}看到你非常高兴!");
-static const u8 sHappyMsg29[] = _("{STR_VAR_1}面朝这边，咧嘴笑了.");
-static const u8 sHappyMsg30[] = _("{STR_VAR_1}快乐地依偎着你!");
+static const u8 sHappyMsg00[] = _("{STR_VAR_1}戳了戳\n你的肚子！");
+static const u8 sHappyMsg01[] = _("{STR_VAR_1}看起来既\n开心又害羞！");
+static const u8 sHappyMsg02[] = _("{STR_VAR_1}高兴地\n跟了上来！");
+static const u8 sHappyMsg03[] = _("{STR_VAR_1}非常平静。");
+static const u8 sHappyMsg04[] = _("{STR_VAR_1}好像很高兴\n能和你一起走路！");
+static const u8 sHappyMsg05[] = _("{STR_VAR_1}正散发着\n健康的光芒。");
+static const u8 sHappyMsg06[] = _("{STR_VAR_1}看起来\n非常开心。");
+static const u8 sHappyMsg07[] = _("{STR_VAR_1}使起了\n劲儿来！");
+static const u8 sHappyMsg08[] = _("{STR_VAR_1}正在闻着\n周围的气味。");
+static const u8 sHappyMsg09[] = _("{STR_VAR_1}在\n开心地跳着！");
+static const u8 sHappyMsg10[] = _("{STR_VAR_1}仍然\n精神十足！");
+static const u8 sHappyMsg11[] = _("它似乎闻到了\n烟的味道。");
+static const u8 sHappyMsg12[] = _("它戳了戳你的肚子！");
+static const u8 sHappyMsg13[] = _("它正在伸展身体\n放松身心。");
+static const u8 sHappyMsg14[] = _("{STR_VAR_1}好像想到\n前面去！");
+static const u8 sHappyMsg15[] = _("{STR_VAR_1}努力地\n在你后面跟着……");
+static const u8 sHappyMsg16[] = _("{STR_VAR_1}开心地靠了过来！");
+static const u8 sHappyMsg17[] = _("{STR_VAR_1}活力十足！");
+static const u8 sHappyMsg18[] = _("{STR_VAR_1}看起来\n很高兴！");
+static const u8 sHappyMsg19[] = _("{STR_VAR_1}开心地\n不能平静！");
+static const u8 sHappyMsg20[] = _("{STR_VAR_1}缓缓地\n点了点头。");
+static const u8 sHappyMsg21[] = _("{STR_VAR_1}干劲十足！");
+static const u8 sHappyMsg22[] = _("{STR_VAR_1}用心地听着\n四周的声音！");
+static const u8 sHappyMsg23[] = _("{STR_VAR_1}看起来好像\n非常感兴趣！");
+static const u8 sHappyMsg24[] = _("{STR_VAR_1}勉强地跟了\n上来。");
+static const u8 sHappyMsg25[] = _("{STR_VAR_1}看着\n你笑了笑。");
+static const u8 sHappyMsg26[] = _("{STR_VAR_1}开心地\n看着你笑。");
+static const u8 sHappyMsg27[] = _("它正在闻着花香。");
+static const u8 sHappyMsg28[] = _("{STR_VAR_1}一脸开心地\n看着你！");
+static const u8 sHappyMsg29[] = _("{STR_VAR_1}转了过来\n并冲着你笑了笑。");
+static const u8 sHappyMsg30[] = _("{STR_VAR_1}开心地\n向你靠了过来！");
 // Conditional messages begin here, index 31
-static const u8 sHappyMsg31[] = _("你的宝可梦似乎对这美好的天气感到高兴.");
-static const u8 sHappyMsg32[] = _("{STR_VAR_1}非常冷静，充满自信!");
+static const u8 sHappyMsg31[] = _("它好像因为好天气\n非常开心。");
+static const u8 sHappyMsg32[] = _("{STR_VAR_1}的心情\n非常平静与自信。");
 
 const struct FollowerMsgInfo gFollowerHappyMessages[] = {
     {sHappyMsg00, EventScript_FollowerPokingPlayer},
@@ -72,20 +72,20 @@ const struct FollowerMsgInfo gFollowerHappyMessages[] = {
 };
 
 // Unconditional neutral messages
-static const u8 sNeutralMsg00[] = _("{STR_VAR_1}正稳定地戳着地面.");
-static const u8 sNeutralMsg01[] = _("{STR_VAR_1}在站岗.");
-static const u8 sNeutralMsg02[] = _("{STR_VAR_1}耐心地盯着什么也没有\n的地方.");
-static const u8 sNeutralMsg03[] = _("{STR_VAR_1}在四处徘徊.");
-static const u8 sNeutralMsg04[] = _("你的宝可梦大声打了个哈欠!");
-static const u8 sNeutralMsg05[] = _("你的宝可梦不安地四处张望.");
-static const u8 sNeutralMsg06[] = _("{STR_VAR_1}朝这边看，微笑着.");
-static const u8 sNeutralMsg07[] = _("{STR_VAR_1}不安地四处张望.");
-static const u8 sNeutralMsg08[] = _("{STR_VAR_1}发出了战斗的呐喊.");
-static const u8 sNeutralMsg09[] = _("{STR_VAR_1}跳了一段精彩的舞蹈!");
-static const u8 sNeutralMsg10[] = _("{STR_VAR_1}非常渴望.");
-static const u8 sNeutralMsg11[] = _("{STR_VAR_1}专注地凝视着远方.");
-static const u8 sNeutralMsg12[] = _("{STR_VAR_1}在保持警惕!");
-static const u8 sNeutralMsg13[] = _("{STR_VAR_1}望向远方并吠叫了一声!");
+static const u8 sNeutralMsg00[] = _("{STR_VAR_1}一个劲地\n戳着地面。");
+static const u8 sNeutralMsg01[] = _("{STR_VAR_1}正保持着\n警惕！");
+static const u8 sNeutralMsg02[] = _("{STR_VAR_1}\n正在看着远方。");
+static const u8 sNeutralMsg03[] = _("{STR_VAR_1}不停地\n环视着周围。");
+static const u8 sNeutralMsg04[] = _("它啊～地\n打了个哈欠。");
+static const u8 sNeutralMsg05[] = _("它正在警惕四周！");
+static const u8 sNeutralMsg06[] = _("{STR_VAR_1}看着\n你笑了笑。");
+static const u8 sNeutralMsg07[] = _("{STR_VAR_1}紧张地\n在四处张望。");
+static const u8 sNeutralMsg08[] = _("{STR_VAR_1}打起了精神！");
+static const u8 sNeutralMsg09[] = _("{STR_VAR_1}跳了一支\n精彩的舞!");
+static const u8 sNeutralMsg10[] = _("{STR_VAR_1}干劲十足！");
+static const u8 sNeutralMsg11[] = _("{STR_VAR_1}一直在眺望\n远方。");
+static const u8 sNeutralMsg12[] = _("{STR_VAR_1}正在警惕四周！");
+static const u8 sNeutralMsg13[] = _("{STR_VAR_1}朝着远处\n吼了出来！");
 
 const struct FollowerMsgInfo gFollowerNeutralMessages[] = {
     {sNeutralMsg00, EventScript_FollowerPokeGround},
@@ -103,15 +103,15 @@ const struct FollowerMsgInfo gFollowerNeutralMessages[] = {
 };
 
 // Unconditional sad messages
-static const u8 sSadMsg00[] = _("{STR_VAR_1}感到头晕.");
-static const u8 sSadMsg01[] = _("{STR_VAR_1}踩到你的脚了!");
-static const u8 sSadMsg02[] = _("{STR_VAR_1}看起来有点疲倦.");
+static const u8 sSadMsg00[] = _("{STR_VAR_1}晕乎乎的。");
+static const u8 sSadMsg01[] = _("{STR_VAR_1}踩了踩\n你的脚。");
+static const u8 sSadMsg02[] = _("{STR_VAR_1} seems a little tired.");
 // Conditional messages begin, index 3
-static const u8 sSadMsg03[] = _("{STR_VAR_1}不高兴了.");
-static const u8 sSadMsg04[] = _("{STR_VAR_1}快要倒下了!\n");
-static const u8 sSadMsg05[] = _("{STR_VAR_1}似乎快要倒下了!");
-static const u8 sSadMsg06[] = _("{STR_VAR_1}正在努力跟上你…");
-static const u8 sSadMsg07[] = _("{STR_VAR_1}感到紧张.");
+static const u8 sSadMsg03[] = _("{STR_VAR_1}不太开心。");
+static const u8 sSadMsg04[] = _("{STR_VAR_1}看起来\n快要倒下了！");
+static const u8 sSadMsg05[] = _("{STR_VAR_1}差点就\n摔倒了！");
+static const u8 sSadMsg06[] = _("{STR_VAR_1}努力地\n在你后面跟着……");
+static const u8 sSadMsg07[] = _("{STR_VAR_1}紧张了。");
 
 const struct FollowerMsgInfo gFollowerSadMessages[] = {
     {sSadMsg00, EventScript_FollowerDizzy},
@@ -120,11 +120,11 @@ const struct FollowerMsgInfo gFollowerSadMessages[] = {
 };
 
 // Unconditional upset messages
-static const u8 sUpsetMsg00[] = _("{STR_VAR_1}不知为何看起来不高兴…");
-static const u8 sUpsetMsg01[] = _("{STR_VAR_1}摆出了一副不高兴的表情.");
-static const u8 sUpsetMsg02[] = _("…你的宝可梦似乎有点冷.");
+static const u8 sUpsetMsg00[] = _("{STR_VAR_1}好像\n有点不开心了。");
+static const u8 sUpsetMsg01[] = _("{STR_VAR_1}看起来\n好像有点不开心……");
+static const u8 sUpsetMsg02[] = _("……\n它看起来有点冷。");
 // Conditional messages, index 3
-static const u8 sUpsetMsg03[] = _("{STR_VAR_1}正在草丛中躲避雨.");
+static const u8 sUpsetMsg03[] = _("{STR_VAR_1}在草丛里躲着雨。");
 
 const struct FollowerMsgInfo gFollowerUpsetMessages[] = {
     {sUpsetMsg00}, {sUpsetMsg01},
@@ -133,11 +133,11 @@ const struct FollowerMsgInfo gFollowerUpsetMessages[] = {
 };
 
 // Unconditional angry messages
-static const u8 sAngryMsg00[] = _("{STR_VAR_1}发出了一声怒吼!");
-static const u8 sAngryMsg01[] = _("{STR_VAR_1}摆出了一副生气的表情!");
-static const u8 sAngryMsg02[] = _("{STR_VAR_1}不知为何显得很生气.");
-static const u8 sAngryMsg03[] = _("你的宝可梦转过身去，\n露出了一副反抗的面孔.");
-static const u8 sAngryMsg04[] = _("{STR_VAR_1}生气地叫了出来.");
+static const u8 sAngryMsg00[] = _("{STR_VAR_1}重重地\n吼了起来！");
+static const u8 sAngryMsg01[] = _("{STR_VAR_1}摆出了\n生气的表情。");
+static const u8 sAngryMsg02[] = _("{STR_VAR_1}看起来\n很生气！");
+static const u8 sAngryMsg03[] = _("它转了过来\n摆出挑衅\n的表情。");
+static const u8 sAngryMsg04[] = _("{STR_VAR_1}突然大叫了\n起来！");
 
 const struct FollowerMsgInfo gFollowerAngryMessages[] = {
     {sAngryMsg00}, {sAngryMsg01}, {sAngryMsg02},
@@ -146,26 +146,26 @@ const struct FollowerMsgInfo gFollowerAngryMessages[] = {
 };
 
 // Unconditional pensive messages
-static const u8 sPensiveMsg00[] = _("{STR_VAR_1}正平静地向下看.");
-static const u8 sPensiveMsg01[] = _("{STR_VAR_1}正在观察周围环境.");
-static const u8 sPensiveMsg02[] = _("{STR_VAR_1}正向下凝视.");
-static const u8 sPensiveMsg03[] = _("{STR_VAR_1}不知怎样抵抗睡意…");
-static const u8 sPensiveMsg04[] = _("{STR_VAR_1}似乎在漫无目的地徘徊.");
-static const u8 sPensiveMsg05[] = _("{STR_VAR_1}心不在焉地四处张望.");
-static const u8 sPensiveMsg06[] = _("{STR_VAR_1}非常大声地打了个哈欠!");
-static const u8 sPensiveMsg07[] = _("{STR_VAR_1}舒适地放松着.");
-static const u8 sPensiveMsg08[] = _("{STR_VAR_1}坚定地凝视着你的脸.");
-static const u8 sPensiveMsg09[] = _("{STR_VAR_1}专注地凝视着你的脸.");
-static const u8 sPensiveMsg10[] = _("{STR_VAR_1}集中注意力在你身上.");
-static const u8 sPensiveMsg11[] = _("{STR_VAR_1}凝视着深处.");
-static const u8 sPensiveMsg12[] = _("{STR_VAR_1}在嗅探地面.");
-static const u8 sPensiveMsg13[] = _("你的宝可梦专注地凝视着\n什么也没有.");
-static const u8 sPensiveMsg14[] = _("{STR_VAR_1}用锐利的目光集中注意力!");
-static const u8 sPensiveMsg15[] = _("{STR_VAR_1}正在集中精神.");
-static const u8 sPensiveMsg16[] = _("{STR_VAR_1}面向这边并点了点头.");
-static const u8 sPensiveMsg17[] = _("{STR_VAR_1}看起来有点紧张…");
-static const u8 sPensiveMsg18[] = _("{STR_VAR_1}在看你的脚印.");
-static const u8 sPensiveMsg19[] = _("{STR_VAR_1}直视着你的眼睛.");
+static const u8 sPensiveMsg00[] = _("{STR_VAR_1}安静的\n盯着下面看。");
+static const u8 sPensiveMsg01[] = _("{STR_VAR_1}在四下张望！");
+static const u8 sPensiveMsg02[] = _("{STR_VAR_1}一直盯着下面看。");
+static const u8 sPensiveMsg03[] = _("{STR_VAR_1}强忍着\n睡意……");
+static const u8 sPensiveMsg04[] = _("{STR_VAR_1}正在环视n着周围。");
+static const u8 sPensiveMsg05[] = _("{STR_VAR_1}正看着\n周围发呆。");
+static const u8 sPensiveMsg06[] = _("{STR_VAR_1}打了个\n大哈欠！");
+static const u8 sPensiveMsg07[] = _("{STR_VAR_1}正在惬意\n地放松着。");
+static const u8 sPensiveMsg08[] = _("{STR_VAR_1}一直在盯着\n你的脸。");
+static const u8 sPensiveMsg09[] = _("{STR_VAR_1}一直在盯着\n你的脸。");
+static const u8 sPensiveMsg10[] = _("{STR_VAR_1}对你非常\n感兴趣！");
+static const u8 sPensiveMsg11[] = _("{STR_VAR_1}一直盯着\n下面看。");
+static const u8 sPensiveMsg12[] = _("{STR_VAR_1}不停地\n闻着地面上的气味。");
+static const u8 sPensiveMsg13[] = _("它一直在盯着什么\n都没有的地方……");
+static const u8 sPensiveMsg14[] = _("{STR_VAR_1}目光锐利，全神贯注！");
+static const u8 sPensiveMsg15[] = _("{STR_VAR_1}正在集中精神。");
+static const u8 sPensiveMsg16[] = _("{STR_VAR_1}看着你\n点了点头。");
+static const u8 sPensiveMsg17[] = _("{STR_VAR_1}看起来好像\n有点紧张。");
+static const u8 sPensiveMsg18[] = _("{STR_VAR_1}看着\n你的脚印。");
+static const u8 sPensiveMsg19[] = _("{STR_VAR_1}一直看着\n你的眼睛……");
 
 const struct FollowerMsgInfo gFollowerPensiveMessages[] = {
     {sPensiveMsg00},
@@ -180,16 +180,16 @@ const struct FollowerMsgInfo gFollowerPensiveMessages[] = {
 };
 
 // All 'love' messages are unconditional
-static const u8 sLoveMsg00[] = _("{STR_VAR_1}突然开始走得更近了!");
-static const u8 sLoveMsg01[] = _("{STR_VAR_1}的脸颊变得红润了!");
-static const u8 sLoveMsg02[] = _("哇! {STR_VAR_1}突然拥抱了你!");
-static const u8 sLoveMsg03[] = _("哇! {STR_VAR_1}突然变得调皮起来!");
-static const u8 sLoveMsg04[] = _("{STR_VAR_1}在蹭你的腿!");
-static const u8 sLoveMsg05[] = _("{STR_VAR_1}脸红了.");
-static const u8 sLoveMsg06[] = _("啊! {STR_VAR_1}依偎着你!");
-static const u8 sLoveMsg07[] = _("{STR_VAR_1}用崇拜的眼神看着你!");
-static const u8 sLoveMsg08[] = _("{STR_VAR_1}向你靠近了.");
-static const u8 sLoveMsg09[] = _("{STR_VAR_1}紧贴在你的脚边.");
+static const u8 sLoveMsg00[] = _("{STR_VAR_1}突然\n靠到了你的身边！");
+static const u8 sLoveMsg01[] = _("{STR_VAR_1}的脸颊\n变得红通通的！");
+static const u8 sLoveMsg02[] = _("哇！{STR_VAR_1}突然抱着\n你了！");
+static const u8 sLoveMsg03[] = _("哇！{STR_VAR_1}\n突然想和你玩！");
+static const u8 sLoveMsg04[] = _("{STR_VAR_1}戳了戳\n你的脚。");
+static const u8 sLoveMsg05[] = _("{STR_VAR_1}\n好像害羞了。");
+static const u8 sLoveMsg06[] = _("啊{STR_VAR_1}啪地一下\n靠在了你身边。");
+static const u8 sLoveMsg07[] = _("{STR_VAR_1}一脸崇拜\n地看着你！");
+static const u8 sLoveMsg08[] = _("{STR_VAR_1}开心地\n靠了过来！");
+static const u8 sLoveMsg09[] = _("{STR_VAR_1}突然\n靠到了你的脚边！");
 
 const struct FollowerMsgInfo gFollowerLoveMessages[] = {
     {sLoveMsg00, EventScript_FollowerGetCloser},
@@ -205,28 +205,28 @@ const struct FollowerMsgInfo gFollowerLoveMessages[] = {
 };
 
 // Unconditional surprised messages
-static const u8 sSurpriseMsg00[] = _("{STR_VAR_1}快要摔倒了!");
-static const u8 sSurpriseMsg01[] = _("{STR_VAR_1}撞到了你!");
-static const u8 sSurpriseMsg02[] = _("{STR_VAR_1}似乎还不太习惯自己的名字.");
-static const u8 sSurpriseMsg03[] = _("{STR_VAR_1}正向下窥视.");
-static const u8 sSurpriseMsg04[] = _("你的宝可梦绊倒了，\n差点摔倒!");
-static const u8 sSurpriseMsg05[] = _("{STR_VAR_1}感觉到了什么，\n正在嚎叫!");
-static const u8 sSurpriseMsg06[] = _("{STR_VAR_1}看起来焕然一新!");
-static const u8 sSurpriseMsg07[] = _("{STR_VAR_1}突然转过身来，\n开始叫了起来!");
-static const u8 sSurpriseMsg08[] = _("{STR_VAR_1}突然转过身来!");
-static const u8 sSurpriseMsg09[] = _("你的宝可梦对你突然跟它说话感到惊讶!");
-static const u8 sSurpriseMsg10[] = _("嗅嗅嗅，有什么东西闻起来真的很香!");
-static const u8 sSurpriseMsg11[] = _("{STR_VAR_1}感觉焕然一新.");
-static const u8 sSurpriseMsg12[] = _("{STR_VAR_1}摇摇晃晃，\n似乎快要摔倒了.");
-static const u8 sSurpriseMsg13[] = _("{STR_VAR_1}快要摔倒了.");
-static const u8 sSurpriseMsg14[] = _("{STR_VAR_1}正小心翼翼地走着.");
-static const u8 sSurpriseMsg15[] = _("{STR_VAR_1}因为紧张而感到恐惧.");
-static const u8 sSurpriseMsg16[] = _("{STR_VAR_1}感觉到了奇怪的东西，感到很惊讶!");
-static const u8 sSurpriseMsg17[] = _("{STR_VAR_1}感到害怕，依偎着你!");
-static const u8 sSurpriseMsg18[] = _("{STR_VAR_1}感觉到了不寻常的存在…");
-static const u8 sSurpriseMsg19[] = _("{STR_VAR_1}因为紧张而感到恐惧.");
+static const u8 sSurpriseMsg00[] = _("{STR_VAR_1}差点就\n摔倒了！");
+static const u8 sSurpriseMsg01[] = _("{STR_VAR_1}向着\n你咬了过来！");
+static const u8 sSurpriseMsg02[] = _("{STR_VAR_1}好像还不习惯\n他的名字。");
+static const u8 sSurpriseMsg03[] = _("{STR_VAR_1}一直盯着下面看。");
+static const u8 sSurpriseMsg04[] = _("它摔了一小跤，\n有点慌慌的！");
+static const u8 sSurpriseMsg05[] = _("{STR_VAR_1}好像是在\n诉说着什么一般地低吼着。");
+static const u8 sSurpriseMsg06[] = _("{STR_VAR_1}挺起了身板！");
+static const u8 sSurpriseMsg07[] = _("{STR_VAR_1}转了过来\n并吼叫了起来！");
+static const u8 sSurpriseMsg08[] = _("{STR_VAR_1}转了过来！");
+static const u8 sSurpriseMsg09[] = _("它好像因为突然被搭话\n所以吓了一跳！");
+static const u8 sSurpriseMsg10[] = _("嗅了嗅，\n闻到了很香的味道！");
+static const u8 sSurpriseMsg11[] = _("{STR_VAR_1}感到很清爽。");
+static const u8 sSurpriseMsg12[] = _("{STR_VAR_1}看起来\n快要倒下了！");
+static const u8 sSurpriseMsg13[] = _("{STR_VAR_1}差点就\n摔倒了！");
+static const u8 sSurpriseMsg14[] = _("{STR_VAR_1}小心地\n跟了上来！");
+static const u8 sSurpriseMsg15[] = _("{STR_VAR_1}因为\n紧张，所以很激动。");
+static const u8 sSurpriseMsg16[] = _("{STR_VAR_1}好像因为\n奇怪的气味，所以\n吓了一跳！");
+static const u8 sSurpriseMsg17[] = _("{STR_VAR_1}因为害怕，\n向你身上靠了过来！");
+static const u8 sSurpriseMsg18[] = _("{STR_VAR_1}感觉到了\n奇怪的气味。");
+static const u8 sSurpriseMsg19[] = _("{STR_VAR_1}因为\n紧张，所以很激动。");
 // Conditional messages, index 20
-static const u8 sSurpriseMsg20[] = _("{STR_VAR_1}似乎对下雨感到非常惊讶!");
+static const u8 sSurpriseMsg20[] = _("{STR_VAR_1} 似乎对下雨感到非常惊讶！");
 
 const struct FollowerMsgInfo gFollowerSurpriseMessages[] = {
     {sSurpriseMsg00},
@@ -244,13 +244,13 @@ const struct FollowerMsgInfo gFollowerSurpriseMessages[] = {
 };
 
 // Unconditional curious messages
-static const u8 sCuriousMsg00[] = _("你的宝可梦\n在不安地四处寻找着什么.");
-static const u8 sCuriousMsg01[] = _("你的宝可梦没注意看路，\n撞到你了!");
-static const u8 sCuriousMsg02[] = _("嗅嗅，嗅嗅！\n附近有什么吗?");
-static const u8 sCuriousMsg03[] = _("{STR_VAR_1}正在玩耍地滚着一颗小石头.");
-static const u8 sCuriousMsg04[] = _("{STR_VAR_1}在四处徘徊，\n寻找着什么.");
-static const u8 sCuriousMsg05[] = _("{STR_VAR_1}在闻你的气味.");
-static const u8 sCuriousMsg06[] = _("{STR_VAR_1}似乎有点犹豫…");
+static const u8 sCuriousMsg00[] = _("它东张西望的，\n好像在找着什么。");
+static const u8 sCuriousMsg01[] = _("它没有在看路，\n不小心撞到了你！");
+static const u8 sCuriousMsg02[] = _("嗅了嗅，\n似乎附近有什么东西！");
+static const u8 sCuriousMsg03[] = _("{STR_VAR_1}正在\n骨碌骨碌地\n滚着石头玩。");
+static const u8 sCuriousMsg04[] = _("{STR_VAR_1}东张西望地\n在找着什么。");
+static const u8 sCuriousMsg05[] = _("{STR_VAR_1}正在\n闻着你的气味。");
+static const u8 sCuriousMsg06[] = _("{STR_VAR_1}好像有点\n犹豫…");
 
 const struct FollowerMsgInfo gFollowerCuriousMessages[] = {
     {sCuriousMsg00, EventScript_FollowerLookAround},
@@ -261,22 +261,22 @@ const struct FollowerMsgInfo gFollowerCuriousMessages[] = {
 };
 
 // Unconditional music messages
-static const u8 sMusicMsg00[] = _("{STR_VAR_1}正在展示它的敏捷!");
-static const u8 sMusicMsg01[] = _("{STR_VAR_1}快乐地移动着!");
-static const u8 sMusicMsg02[] = _("哇! {STR_VAR_1}突然开始快乐地跳舞!");
-static const u8 sMusicMsg03[] = _("{STR_VAR_1}稳定地跟上了你!");
-static const u8 sMusicMsg04[] = _("{STR_VAR_1}似乎想和你一起玩耍.");
-static const u8 sMusicMsg05[] = _("{STR_VAR_1}快乐地跳跃着.");
-static const u8 sMusicMsg06[] = _("{STR_VAR_1}在唱歌和哼曲子.");
-static const u8 sMusicMsg07[] = _("{STR_VAR_1}在轻咬你的脚!");
-static const u8 sMusicMsg08[] = _("{STR_VAR_1}转过身来看着了你.");
-static const u8 sMusicMsg09[] = _("{STR_VAR_1}正在努力展示它的强大力量!");
-static const u8 sMusicMsg10[] = _("哇哦! {STR_VAR_1}突然快乐地跳起舞来!");
-static const u8 sMusicMsg11[] = _("{STR_VAR_1}很愉快!");
-static const u8 sMusicMsg12[] = _("{STR_VAR_1}无忧无虑地四处跳跃!");
-static const u8 sMusicMsg13[] = _("你的宝可梦似乎闻到了\n一种令人怀旧的熟悉气味…");
+static const u8 sMusicMsg00[] = _("{STR_VAR_1}使出全力\n炫耀了一番！");
+static const u8 sMusicMsg01[] = _("{STR_VAR_1}精神十足地\n动了起来！");
+static const u8 sMusicMsg02[] = _("哇！{STR_VAR_1}，好像\n在高兴地跳舞。");
+static const u8 sMusicMsg03[] = _("{STR_VAR_1}开心地\n跟在后面！");
+static const u8 sMusicMsg04[] = _("{STR_VAR_1}好像\n想和你玩！");
+static const u8 sMusicMsg05[] = _("{STR_VAR_1}在开心地\n跳着！");
+static const u8 sMusicMsg06[] = _("{STR_VAR_1}\n竟然在\n哼着歌！");
+static const u8 sMusicMsg07[] = _("{STR_VAR_1}向着\n你的腿咬了过来！");
+static const u8 sMusicMsg08[] = _("{STR_VAR_1}转了过来\n并看着你！");
+static const u8 sMusicMsg09[] = _("{STR_VAR_1}努力地，\n表现自己！");
+static const u8 sMusicMsg10[] = _("哇！{STR_VAR_1}突然\n开心动了起来！");
+static const u8 sMusicMsg11[] = _("{STR_VAR_1}好像非常\n开心！");
+static const u8 sMusicMsg12[] = _("{STR_VAR_1}轻快地\n动了起来！");
+static const u8 sMusicMsg13[] = _("它似乎闻到了一种\n令它怀念的熟悉味道……");
 // Conditional music messages, index 14
-static const u8 sMusicMsg14[] = _("{STR_VAR_1}对下雨感到非常高兴.");
+static const u8 sMusicMsg14[] = _("{STR_VAR_1}因为下雨了\n非常高兴。");
 
 const struct FollowerMsgInfo gFollowerMusicMessages[] = {
     {sMusicMsg00, EventScript_FollowerLookAround},
@@ -294,7 +294,7 @@ const struct FollowerMsgInfo gFollowerMusicMessages[] = {
 };
 
 
-static const u8 sPoisonedMsg00[] = _("{STR_VAR_1}因为中毒的效果而颤抖.");
+static const u8 sPoisonedMsg00[] = _("{STR_VAR_1}中毒了，\n浑身都在发抖……");
 
 const struct FollowerMsgInfo gFollowerPoisonedMessages[] = {
     {sPoisonedMsg00, EventScript_FollowerIsShivering},
