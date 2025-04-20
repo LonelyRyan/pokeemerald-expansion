@@ -1,41 +1,23 @@
 Questionnaire_Text_FillOut::
-	.string "这里有一个问卷调查\n"
-	.string "您想要填写它吗?$"
+	.string "我们有一张问卷调查，\n您愿意填一下吗？$"
 
 Questionnaire_Text_ThankYou::
-	.string "感谢您抽出时间填写我们的问卷\n"
-	.string "您的反馈将用于将来的参考.$"
+	.string "谢谢您抽出时间来\n填写我们的调查表，\p您的反馈将成为\n我们的参考。$"
 
 Questionnaire_Text_YouKnowThoseWordsGift::
-	.string "哦，你好!\n"
-	.string "你知道那些词汇吗?\p"
-	.string "那意味着\n"
-	.string "你一定知道神秘礼物.\p"
-	.string "从现在开始\n"
-	.string "你应该会收到神秘礼物!$"
+	.string "啊，你好！\n你知道这些短语吗？\p那么说你一定知道\n关于神秘礼物的事情了。\p从现在起，你将会\n收到神秘礼物！$"
 
 Questionnaire_Text_YouCanAccessMysteryGift::
-	.string "一旦你保存了游戏\n"
-	.string "你就可以访问神秘礼物.$"
+	.string "你保存游戏后，就可以\n接收神秘礼物了。$"
 
 Questionnaire_Text_YouKnowThoseWordsEvent::
-	.string "哦，你好!\n"
-	.string "你知道那些词汇吗?\p"
-	.string "那意味着\n"
-	.string "你一定知道神秘事件.$"
+	.string "啊，你好！\n你知道这些短语吗？\p那么说你一定知道\n关于神秘事件的事情了。$"
 
 Questionnaire_Text_YouCanAccessMysteryEvent::
-	.string "一旦你保存了游戏\n"
-	.string "你就可以访问神秘事件.$"
+	.string "你保存游戏后，就可以\n接收神秘事件了。$"
 
 MysteryGift_Text_TheresATicketForYou::
-	.string "T感谢您使用\n"
-	.string "神秘事件系统.\p"
-	.string "您一定是{PLAYER}吧.\n"
-	.string "这里有一张票是给您的.$"
+	.string "感谢使用神秘\n事件系统。\p你是{PLAYER}吧，\n这是给你的船票。$"
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
-	.string "它看起来是在\n"
-	.string "水静市港口使用的.\p"
-	.string "为什么不试试看\n"
-	.string "了解它究竟是关于什么的?$"
+	.string "这个看起来能在\n水静市的港口使用。\p不如去试试\n能到什么地方？$"

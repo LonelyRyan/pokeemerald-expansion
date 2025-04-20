@@ -7,6 +7,6 @@ Debug_FlagsAndVarNotSetBattleConfigMessage::
 	end
 
 Debug_FlagsAndVarNotSetBattleConfigMessage_Text:
-	.string "功能不可用！请在\n"
-	.string "include/config/battle.h 中\l"
-	.string "中定义一个可用的flag和一个可用的var！$"
+	.string "该功能不可用，\n"
+	.string "请在以下路径定义可用的flag或var\l"
+	.string "'include/config/battle.h'!$"
