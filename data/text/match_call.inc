@@ -215,7 +215,7 @@ MatchCall_PersonalizedText1::
     .string "是我啊，热爱大山的\n{STR_VAR_1}！\p那个，上次见过以后，你是不是\n也开始喜欢群山了呢？\p我很少在山里看见你呀……\p下一次，让我们在\n{STR_VAR_2}碰头吧。$"
 
 MatchCall_PersonalizedText2::
-    .string "我是{STR_VAR_1}。\n你好。\p我刚刚告诉了一个新人训练家\n有关你的事。\p我告诉她有一个强大的训练家\n用爱心培养他的宝可梦。\p我希望你能成为一个\n人人称赞的训练家。\p希望能再见到你！$"
+    .string "我是{STR_VAR_1}。\n你好。\p我刚刚告诉了一个新人训练家\n有关你的事。\p我告诉她有一个强大的训练家\n用爱心培育他的宝可梦。\p我希望你能成为一个\n人人称赞的训练家。\p希望能再见到你！$"
 
 MatchCall_PersonalizedText3::
     .string "你好！我是{STR_VAR_1}。\p我爱上我在的这个地方了。\n多么怡人的芳香！\p我想有人种下了些树果，\n它们正在开花。\p再见！$"
@@ -326,7 +326,7 @@ MatchCall_PersonalizedText38::
     .string "哦，我是{STR_VAR_1}，你好。\p我已经游了很长很长时间了\n但是看上去我还是到达不了彩悠市。\p难道我正在兜圈子。\p不，不，那绝对不可能。\n哇哈哈哈。\l保重！$"
 
 MatchCall_PersonalizedText39::
-    .string "嘿，我是{STR_VAR_1}……\n哇！\p扑通！\p啪-啪-啪-啪……\p哗啦！\p呼-呼！呼-呼！\p嘿！不好意思啊！\n我在抹防晒油哪。\p所以我的手滑了一下，\n宝可梦导航仪就一下子掉到水里了！\p不过，得文的\n宝可梦导航仪是非常结实的。\p泡到水里都没事！\p总之，我要晒日光浴了，\n改日再聊吧。$"
+    .string "嘿，我是{STR_VAR_1}……\n哇！\p扑通！\p啪——啪——啪——啪……\p哗啦！\p呼——呼！呼——呼！\p嘿！不好意思啊！\n我在抹防晒油哪。\p所以我的手滑了一下，\n宝可导航就一下子掉到水里了！\p不过，得文的\n宝可导航是非常结实的。\p泡到水里都没事！\p总之，我要晒日光浴了，\n改日再聊吧。$"
 
 MatchCall_PersonalizedText40::
     .string "你好，我是{STR_VAR_1}。\p铁人三项赛里面，\n我最喜欢游泳了。\p但是如果我在海水里呆的时间太长，\n我岂不是会被泡的像一棵海参了？\p哦，铁人三项赛真是对\n人类耐力的严酷考验啊！再见！$"
@@ -353,7 +353,7 @@ MatchCall_PersonalizedText47::
     .string "喂，{PLAYER}{KUN}，好啊！\n我是{STR_VAR_1}。\l我正在山里呢。\p但是这地面真是不平。\n我不能在这里搭帐篷……\p哦，我有个天才的想法！\p也许我能用宝可梦来\n平整土地！\p这就去试试看！\n再见！$"
 
 MatchCall_PersonalizedText48::
-    .string "喂，嗨，嗨，我是{STR_VAR_1}！\p我正在用留美培养我的宝可梦！\n我们正在努力尝试中！\p如果我们再努力些，我们会成为\n第一吗？再见！$"
+    .string "喂，嗨，嗨，我是{STR_VAR_1}！\p我正在用留美培育我的宝可梦！\n我们正在努力尝试中！\p如果我们再努力些，我们会成为\n第一吗？再见！$"
 
 MatchCall_PersonalizedText49::
     .string "我是{STR_VAR_1}！\p我是个水手，但是现在我并不在\n船上。\p我很好奇如何来称呼\n一个在陆地上的水手呢？\p这就是我经常在远航时\n所想的问题。\p好了，下次见！$"
@@ -362,7 +362,7 @@ MatchCall_PersonalizedText50::
     .string "我是{STR_VAR_1}。\n啥？获得更多的宝可梦了吗？\p如果你抓到了新的宝可梦，\n你一定要来给我看看。\p我不会嫉妒的，相信我。\n我等着你。会见。$"
 
 MatchCall_PersonalizedText51::
-    .string "这里是{STR_VAR_1}。\p你正在用正确的方法\n来培养你的宝可梦吗？\p我这里的空气很清洁呀。\n对于培养宝可梦来说\l这是最好的环境。\p如果你还在致力于培养\n宝可梦，你应来\l{STR_VAR_2}。来看看吧$"
+    .string "这里是{STR_VAR_1}。\p你正在用正确的方法\n来培育你的宝可梦吗？\p我这里的空气很清洁呀。\n对于培育宝可梦来说\l这是最好的环境。\p如果你还在致力于培育\n宝可梦，你应来\l{STR_VAR_2}。来看看吧$"
 
 MatchCall_PersonalizedText52::
     .string "嗨，我是{STR_VAR_1}。\p我给了我的{STR_VAR_2}一个宝可方块。\n它看上去非常喜欢。\p看上去宝可梦的喜怒哀乐\n都是和宝可方块相关的。\p这真是不可思议啊。\n多保重。$"
@@ -386,7 +386,7 @@ MatchCall_PersonalizedText58::
     .string "哦，嗨！\p我依然和奇拉一起\n寻找财宝！\p也许这里什么财宝\n都没有……\p但是和奇拉一起搜索\n对我来说很重要。\p哦，嘿，奇拉！\n为……为什么那么生气？\p我没有忽略你，宝贝！\n你就是我的唯一！\p……{PLAYER}，我要挂了，再见！$"
 
 MatchCall_PersonalizedText59::
-    .string "我是{STR_VAR_1}！\p我又去了武斗镇的道馆\n去锻炼。\p藤树，道馆馆主，看上去\n更壮了。\p看上去\n巨浪的确能锻炼人……\p但他还是和原来一样酷。\nMM都围着他！\l实话说，我有点嫉妒。\p我很好奇……他的朋友志霸\n是个和藤树差不多的人么？\p你知道，那些优缺点，\n还有总喜欢把叫别人\l“大波”什么的。\p但是，嘿，我嫉妒的\n不是很明显吧？\p你就当我什么都没跟你说吧，\n怎么样？再见！$"
+    .string "我是{STR_VAR_1}！\p我又去了武斗镇的道馆\n去锻炼。\p藤树，道馆馆主，看上去\n更壮了。\p看上去\n巨浪的确能锻炼人……\p但他还是和原来一样酷。\n女的都围着他！\l实话说，我有点嫉妒。\p我很好奇……他的朋友希巴\n是个和藤树差不多的人么？\p你知道，那些优缺点，\n还有总喜欢把叫别人\l“巨浪”什么的。\p但是，嘿，我嫉妒的\n不是很明显吧？\p你就当我什么都没跟你说吧，\n怎么样？再见！$"
 
 MatchCall_PersonalizedText60::
     .string "我非常高兴\n能和你这样的年轻训练家交流。\p我可以想象你不管在任何时间\n都会喜欢宝可梦的。\p为什么你不像我们一样\n来合作呢？\p当然，{PLAYER}{KUN}，你已经\n在享受和宝可梦之间的\l信任和合作关系了。\p你已经建立了\n长久而牢固的关系了！\p哈哈！\n永远不能气馁！$"
@@ -446,7 +446,7 @@ MatchCall_BattleFrontierStreakText14::
     .string "喂，嗨，{PLAYER}{KUN}。\n我是{STR_VAR_1}。\p我听说你了！\n你真的在一个叫{STR_VAR_2}的地方\l连胜了{STR_VAR_3}场？\p你真厉害！\n再见！$"
 
 MatchCall_BattleFrontierRecordStreakText1::
-    .string "嗨！我是{STR_VAR_1}。\n我听说了！\p我听说你在{STR_VAR_2}\n做得非常出色。\p真是恐怖啊--{STR_VAR_3}连胜？\n再见！$"
+    .string "嗨！我是{STR_VAR_1}。\n我听说了！\p我听说你在{STR_VAR_2}\n做得非常出色。\p真是恐怖啊——{STR_VAR_3}连胜？\n再见！$"
 
 MatchCall_BattleFrontierRecordStreakText2::
     .string "你好，我是{STR_VAR_1}！\n我听说你了！\n你真的在一个叫{STR_VAR_2}的地方\l连胜了{STR_VAR_3}场？\p真的不容易啊！我也要\n努力了！再见$"
@@ -593,7 +593,7 @@ MatchCall_BattlePyramidText7::
     .string "{PLAYER}{KUN}？\n{STR_VAR_1}在此。\p你在{STR_VAR_2}里\n到达了第{STR_VAR_3}层？\p厉害。那里有稀有的\n宝可梦么？\p哦，没有么？\n好的，再见。$"
 
 MatchCall_BattlePyramidText8::
-    .string "哦，{PLAYER}{KUN}，你好吗？\n我是{STR_VAR_1}。\l我希望你一切都好。\l嗯，那个，那个啥。\p你在{STR_VAR_2}里\n通过了第{STR_VAR_3}层？\p真是不得了啊！\n我也要像你一样培养我的宝可梦。\l再见。$"
+    .string "哦，{PLAYER}{KUN}，你好吗？\n我是{STR_VAR_1}。\l我希望你一切都好。\l嗯，那个，那个啥。\p你在{STR_VAR_2}里\n通过了第{STR_VAR_3}层？\p真是不得了啊！\n我也要像你一样培育我的宝可梦。\l再见。$"
 
 MatchCall_BattlePyramidText9::
     .string "哦，{PLAYER}{KUN}，你好！\n我是{STR_VAR_1}！\p我听说了！你在{STR_VAR_2}里\n到达了第{STR_VAR_3}层！\p太酷了！\n我也要努力！$"
@@ -695,7 +695,7 @@ MatchCall_Text_TateLiza4::
     .string "小枫：{PLAYER}，我们之间的战斗……\n小南：真是宝贵的经历。\p小枫：真期待能和你……\n小南：再战一场！$"
 
 MatchCall_Text_Juan1::
-    .string "亚当：嗯……\n{PLAYER}{KUN}……是你吗？\p我们的战斗-\n这让我想起了第一次\l遇到米可利的时候。\p也许你真是个天才\n甚至超越了米可利！$"
+    .string "亚当：嗯……\n{PLAYER}{KUN}……是你吗？\p我们的战斗——\n这让我想起了第一次\l遇到米可利的时候。\p也许你真是个天才\n甚至超越了米可利！$"
 
 MatchCall_Text_Juan2::
     .string "亚当：呼呼……{PLAYER}{KUN}……\n你终于达成了你的目标。\p我当初真的没有\n看错人……\p我希望能再见你一次，\n告诉我你是如何\l取得这样的成功的。$"
@@ -716,7 +716,7 @@ MatchCall_Text_Glacia::
     .string "波妮：你好，{PLAYER}。\p我想，你还没有因为\n你的力量而自大吧？\p如果你想让你发热的头脑\n稍微冷静一下，就来\l宝可梦联盟吧……$"
 
 MatchCall_Text_Drake::
-    .string "源治：这个声音……{PLAYER}，是你吗？？\n听上去很健康啊……\p我知道，\n有一个设施叫做\l对战开拓区，是用来测试\l训练家的能力的。\p不过，如果你想进行\n真正的战斗，那么没有地方比\l宝可梦联盟更合适了！\p你觉得呢，{PLAYER}？$"
+    .string "源治：这个声音……{PLAYER}，是你吗？\n听上去很健康啊……\p我知道，\n有一个设施叫做\l对战开拓区，是用来测试\l训练家的能力的。\p不过，如果你想进行\n真正的战斗，那么没有地方比\l宝可梦联盟更合适了！\p你觉得呢，{PLAYER}？$"
 
 MatchCall_Text_Wallace::
     .string "米可利：你好，{PLAYER}{KUN}。\n你见过大吾么？\p他……\n真是神乎奇技阿。\p不过，他的脾气很怪，\n很少战斗。\p他情愿\n寻找珍稀的石头。\p我打保票，他肯定正在\n某个峭壁附近打洞呢。\p不过什么石头才算是珍稀的？\n我能想到的只有陨石了……$"
@@ -728,10 +728,10 @@ MatchCall_Text_BrendanRayquazaCall::
     .string "…… …… ……\n…… …… …… 嘟嘟！\p小悠：嗨，{PLAYER}！\n我刚才在暮水镇附近。\p我看见一个巨型绿色宝可梦\n在高空飞翔。\p我从来没见过类似\n东西。\p要是你也看看就好了，\n{PLAYER}。\p…… …… ……\n…… …… …… 咔嚓！$"
 
 MatchCall_Text_May1::
-    .string "小遥：嗨，{PLAYER}{KUN}！\p哈奇从水手的岗位上退休了，\n但是我常常见到他和宠物\l小皮一起去看海。\p他一定还爱着大海。$"
+    .string "小遥：嗨，{PLAYER}{KUN}！\p哈奇老人从水手的岗位上退休了，\n但是我常常见到他和宠物\l小皮一起去看海。\p他一定还爱着大海。$"
 
 MatchCall_Text_May2::
-    .string "小遥：嗨，{PLAYER}{KUN}！\p你知道有些小镇，比如\n橙华市和武斗镇拥有道馆？\p由于某些原因，凯那\n这样的大港口没有道馆。\p当我们在那里建好道馆之后，\n我会申请做馆主。$"
+    .string "小遥：嗨，{PLAYER}{KUN}！\p你知道有些小镇，比如\n橙华市和武斗镇拥有道馆？\p由于某些原因，凯那市\n这样的大港口没有道馆。\p当我们在那里建好道馆之后，\n我会申请做馆主。$"
 
 MatchCall_Text_May3::
     .string "小遥：嗨，{PLAYER}{KUN}！\p你知道一个叫做\n居合劈手的人吗？在卡那兹市？\l他在这里有一幢房子，记得吗？\p很好，我们发现他的\n弟弟住在紫堇市。\p猜猜他是谁？\p…… …… ……\n…… …… ……\p就是那个碎岩者！$"
@@ -749,7 +749,7 @@ MatchCall_Text_May7::
     .string "小遥：{PLAYER}{KUN}，呀呼！\n我正在119号道路上呢。\p这里有条大河，而且\n经常下雨。\p我湿透了！$"
 
 MatchCall_Text_May8::
-    .string "小遥：{PLAYER}{KUN}，嗨。\p送神山码头是被当作\n纪念死去的宝可梦而存在的。\p结果时，里面有\n很多幽灵属性宝可梦！$"
+    .string "小遥：{PLAYER}{KUN}，嗨。\p送神山是被当作\n纪念死去的宝可梦而存在的。\p结果时，里面有\n很多幽灵属性宝可梦！$"
 
 MatchCall_Text_May9::
     .string "小遥：嗨，{PLAYER}{KUN}！\p我想去釜炎镇\n泡温泉。\p但是，在崎岖山路上，\n我撞上了一群丑八怪。\l真扫兴！$"
@@ -773,10 +773,10 @@ MatchCall_Text_May15::
     .string "小遥：离开丰缘的训练家当中，\n没有一个不知道你的，\l{PLAYER}{KUN}！\p我告诉他们，你是我的朋友，\n{PLAYER}{KUN}，\l他们都吓了一跳！$"
 
 MatchCall_Text_Brendan1::
-    .string "小悠：嘿，{PLAYER}！\p哈奇从水手的岗位上退休了，\n但是我常常见到他和宠物\l小皮一起去看海。\p我猜想\n他一定爱着大海。$"
+    .string "小悠：嘿，{PLAYER}！\p哈奇老人从水手的岗位上退休了，\n但是我常常见到他和宠物\l小皮一起去看海。\p我猜想\n他一定爱着大海。$"
 
 MatchCall_Text_Brendan2::
-    .string "小悠：嘿，{PLAYER}！\p我弄不懂，为什么橙华市和\n武斗镇这样的小镇都有道馆。\p而像凯那这样的\n大港口却没有道馆。\p当他们在这里建好道馆之后，\n我会申请做馆主。$"
+    .string "小悠：嘿，{PLAYER}！\p我弄不懂，为什么橙华市和\n武斗镇这样的小镇都有道馆。\p而像凯那市这样的\n大港口却没有道馆。\p当他们在这里建好道馆之后，\n我会申请做馆主。$"
 
 MatchCall_Text_Brendan3::
     .string "小悠：哟，{PLAYER}！\p你知道哪个住在卡那兹市\n叫居合劈手的家伙么？\l他在这里有幢房子，对吧？\p听好，他的弟弟\n就住在紫堇市。\p知道他是谁么？\p…… …… ……\n…… …… ……\p就是那个碎岩者！$"
@@ -794,7 +794,7 @@ MatchCall_Text_Brendan7::
     .string "小悠：谁啊？哦，{PLAYER}？\n怎么？我正在119号道路呢。\p这里有条大河，而且\n老是下雨。\p我湿透了！$"
 
 MatchCall_Text_Brendan8::
-    .string "小悠：{PLAYER}！\p送神山码头是作为死去的宝可梦\n的纪念场而存在的。\p说不定\n你面有很多幽灵属性宝可梦！$"
+    .string "小悠：{PLAYER}！\p送神山是作为死去的宝可梦\n的纪念场而存在的。\p说不定\n你面有很多幽灵属性宝可梦！$"
 
 MatchCall_Text_Brendan9::
     .string "小悠：你好，{PLAYER}。\p我本来想去釜炎镇\n泡温泉的。\p但是在崎岖山路，我撞上了\n一帮丑陋的家伙。\p真可怕……\n我想他们是熔岩队。$"
@@ -806,10 +806,10 @@ MatchCall_Text_Brendan11::
     .string "小悠：你好，{PLAYER}！\n你不觉得这很棒吗？\p即使没有船，\n你也能利用宝可梦招式\l来越过大海。\p你知道这还不是全部吧？\n有种宝可梦招式能够让你潜入深海呢。\p宝可梦无所不能啊！$"
 
 MatchCall_Text_Brendan12::
-    .string "小悠：嗨，{PLAYER}！\n希望一切都好！\p你出海之后有没有发现通向\n对岸的航路被封住了？？\p试试看潜下深水\n沿着壕沟前进。\p当你到了对岸之后，\n再浮上水面。容易吧！$"
+    .string "小悠：嗨，{PLAYER}！\n希望一切都好！\p你出海之后有没有发现通向\n对岸的航路被封住了？\p试试看潜下深水\n沿着壕沟前进。\p当你到了对岸之后，\n再浮上水面。容易吧！$"
 
 MatchCall_Text_Brendan13::
-    .string "小悠：你好啊，{PLAYER}！\p怎么样了？还在在补完你的？\n宝可梦图鉴？\p我听说某些地方有\n上古宝可梦的存在。。\l一共三只哦！\p我哪怕抓到一只才好……$"
+    .string "小悠：你好啊，{PLAYER}！\p怎么样了？还在在补完你的？\n宝可梦图鉴？\p我听说某些地方有\n上古宝可梦的存在。\l一共三只哦！\p我哪怕抓到一只才好……$"
 
 MatchCall_Text_Brendan14::
     .string "小悠：{PLAYER}！\n我听说了！\p你打倒了琉璃市道馆的\n馆主？真厉害！\p你已经很接近那个了！$"
@@ -833,7 +833,7 @@ MatchCall_Text_Wally5::
     .string "满充：{PLAYER}？太不可思议了！\n还记得我们抓的拉鲁拉丝吗？\l他进化了，{PLAYER}！\p我大概是个天才……\p哦，我觉得我的头还\n不够大！\p不过，值得表扬的应该是宝可梦\n才对！$"
 
 MatchCall_Text_Wally6::
-    .string "…… …… ……\n…… …… ……\p满充好像\n不在宝可梦导航仪的服务区……$"
+    .string "…… …… ……\n…… …… ……\p满充好像\n不在宝可导航的服务区……$"
 
 MatchCall_Text_Wally7::
     .string "满充：哦，{PLAYER}！\p见到你之前，我很少\n离开家……\p但现在，我正在和属于我的\n宝可梦一起冒险呢……\p{PLAYER}……\n谢谢你……$"
@@ -845,7 +845,7 @@ MatchCall_Text_Scott2::
     .string "亚希达：我正在119号道路上呢。\n这里到处都是训练家！\p简直和这里的\n杂草数量有的一拼。\p一句话，\n在这里行动真是麻烦！$"
 
 MatchCall_Text_Scott3::
-    .string "亚希达：嗨，嗨，{PLAYER}{KUN}！\p你有没有登上过\n送神山码头？\p那个地方是作为死去宝可梦\n的纪念场而存在的。\p每一个训练家\n一生至少应该登顶一次。$"
+    .string "亚希达：嗨，嗨，{PLAYER}{KUN}！\p你有没有登上过\n送神山？\p那个地方是作为死去宝可梦\n的纪念场而存在的。\p每一个训练家\n一生至少应该登顶一次。$"
 
 MatchCall_Text_Scott4::
     .string "亚希达：嗨，{PLAYER}{KUN}！\p我听说那些奇怪\n的帮会在为非作歹。\p熔岩队和海洋队，\n不出我的所料。\p我就猜到他们当中\n会有一些老练的训练家。\p……但是他们竟然如此狂暴……$"
@@ -857,7 +857,7 @@ MatchCall_Text_Scott6::
     .string "亚希达：嗨，嗨，{PLAYER}{KUN}！\p你知道吗？\n当你收集到了所有的道馆徽章，\l你就能够挑战宝可梦联盟。\p以你的才能，成为一个\n冠军，并不是天方夜谭。\p但是你要知道。\n这还不是全部。\p现在，\n这就是我想对你说的。\p我要让你有一个\n奋斗的目标。\p那就是，\n在宝可梦联盟中开启一条胜利之路，\l直通荣誉殿堂！$"
 
 MatchCall_Text_Scott7::
-    .string "…… …… ……\n…… …… ……\p亚希达看上去\n不在宝可梦导航仪的服务区……$"
+    .string "…… …… ……\n…… …… ……\p亚希达看上去\n不在宝可导航的服务区……$"
 
 MatchCall_Text_Norman1::
     .string "爸爸：在卡那兹市，有一个\n被称作居合劈手的\l男人。\p如果你在那个地方，你\n应该来看看。$"
@@ -908,19 +908,19 @@ MatchCall_Text_Steven7::
     .string "大吾：{PLAYER}{KUN}…… 祝贺你\n你进入了荣誉殿堂。\p…… …… ……\n…… …… ……\p我希望能在别处 \n再见你！$"
 
 MatchCall_Text_BirchRegisterCall::
-    .string "小田卷博士：哦，{PLAYER}{KUN}！\n我已经听说你了！\p看起来你的宝可梦导航仪已经\n经过了对战寻呼的升级。\p好，我也应该注册一下！\p这样，我可以检查你的\n宝可梦图鉴！在你不参加\l战斗的时候也可以。\p…… …… ……$"
+    .string "小田卷博士：哦，{PLAYER}{KUN}！\n我已经听说你了！\p看起来你的宝可导航已经\n经过了对战寻呼的升级。\p好，我也应该注册一下！\p这样，我可以检查你的\n宝可梦图鉴！在你不参加\l战斗的时候也可以。\p…… …… ……$"
 
 MatchCall_Text_RegisteredBirch::
-    .string "将小田卷博士的信息\n登录进宝可梦导航仪。$"
+    .string "将小田卷博士的信息\n登录进宝可导航。$"
 
 MatchCall_Text_UnusedProfBirch::
-    .string "小田卷博士：当同时拥有宝可梦图鉴\n和宝可梦导航仪时，学着如何让\l宝可梦变得更快乐，怎么样？$"
+    .string "小田卷博士：当同时拥有宝可梦图鉴\n和宝可导航时，学着如何让\l宝可梦变得更快乐，怎么样？$"
 
 MatchCall_Text_MrStone1::
-    .string "兹伏奇：哦？{PLAYER}{KUN}！\p既然你给我打电话，那说明\n宝可梦导航仪工作很正常！\p其他人的信息也可以登录，\n试着联系他们把！\p好！好！\n你看上去很开心呀！\p嗯……\n我是怎么知道的？\p因为我从办公室的窗户里\n正看着你呢！\p哇哈哈！\n回头见！$"
+    .string "兹伏奇：哦？{PLAYER}{KUN}！\p既然你给我打电话，那说明\n宝可导航工作很正常！\p其他人的信息也可以登录，\n试着联系他们吧！\p好！好！\n你看上去很开心呀！\p嗯……\n我是怎么知道的？\p因为我从办公室的窗户里\n正看着你呢！\p哇哈哈！\n回头见！$"
 
 MatchCall_Text_MrStone2::
-    .string "兹伏奇：哦？{PLAYER}{KUN}！\p出了什么事？你忘了\n我托付给你的小差事吗？\p我想请你帮我送信给\n住在武斗镇的大吾。\p然后，把那个包裹送给\n住在凯那的楠木馆长。\p你记住了吗？\p现在，作为一个繁忙的社长，\n我要挂了！再见！$"
+    .string "兹伏奇：哦？{PLAYER}{KUN}！\p出了什么事？你忘了\n我托付给你的小差事吗？\p我想请你帮我送信给\n住在武斗镇的大吾。\p然后，把那个包裹送给\n住在凯那市的楠木馆长。\p你记住了吗？\p现在，作为一个繁忙的社长，\n我要挂了！再见！$"
 
 MatchCall_Text_MrStone3::
     .string "兹伏奇：哦！{PLAYER}{KUN}！\p啊，你已经见过大吾了！\n我得给你报酬！\p等你再见到卡那兹市之后，\n来我的办公室找我。\p我等你！$"

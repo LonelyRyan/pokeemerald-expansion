@@ -189,7 +189,7 @@ JaggedPass_Text_EthanPostBattle:
     .string "如果有越野自行车的话，\n我就能跳过断坡了。$"
 
 JaggedPass_Text_EthanRegister:
-    .string "等我习惯了这崎岖的路面，\n就一定能赢！\p能把我登记进你的宝可梦导航仪吗？$"
+    .string "等我习惯了这崎岖的路面，\n就一定能赢！\p能把我登记进你的宝可导航吗？$"
 
 JaggedPass_Text_EthanRematchIntro:
     .string "我已经习惯这里崎岖的路，\n能一边唱歌一边攀登了。$"
@@ -207,7 +207,7 @@ JaggedPass_Text_GruntDefeat:
     .string "唔咕咕……\p我应该早点躲进\n基地里面的……$"
 
 JaggedPass_Text_GoWhereverYouWant:
-    .string "好吧好吧！\n我承认--你很强！\p别管我在干什么，\n赶紧去你想去的地方吧！$"
+    .string "好吧好吧！\n我承认——你很强！\p别管我在干什么，\n赶紧去你想去的地方吧！$"
 
 JaggedPass_Text_BoulderShakingInResponseToEmblem:
     .string "喔！这块大石头对熔岩标志\n有反应！石头晃动起来了！$"

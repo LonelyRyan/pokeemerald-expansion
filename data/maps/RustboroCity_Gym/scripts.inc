@@ -134,7 +134,7 @@ RustboroCity_Gym_Text_MarcDefeat:
     .string "哦，天哪！\n我们的挑战者这么强大！$"
 
 RustboroCity_Gym_Text_MarcPostBattle:
-    .string "只有交给我们的馆主了。\p这么年轻就培养岩石属性，\n真是辛苦她了。$"
+    .string "只有交给我们的馆主了。\p这么年轻就培育岩石属性，\n真是辛苦她了。$"
 
 RustboroCity_Gym_Text_RoxanneIntro:
     .string "你好，我是卡那兹市\n宝可梦道馆的馆主杜娟。\p因为想要在实战中验证\n在宝可梦训练家学校中所学，\l我才成为了道馆馆主。\p让我看看你用什么宝可梦，\n怎样战斗，好吗？$"
@@ -164,7 +164,7 @@ RustboroCity_Gym_Text_RoxanneRegisterCall:
     .string "…… …… ……\n…… …… ……哔！\p杜娟：喂，你好，{PLAYER}吗？\n我是卡那兹市的杜娟。\p我从藤树那儿听说\n你已经打败了\l很多训练家，\p但是，我认为\n我也不会输给你的。\p我发誓，我会提升我的道馆的实力，\n你可以再来挑战我们。\p我很期待\n那时的到来！\p…… …… ……\n…… ……咔哒！$"
 
 RustboroCity_Gym_Text_RegisteredRoxanne:
-    .string "把道馆馆主杜娟的信息\n登记进宝可梦导航仪里。$"
+    .string "把道馆馆主杜娟的信息\n登记进宝可导航里。$"
 
 RustboroCity_Gym_Text_RoxannePreRematch:
     .string "杜娟：很高兴再见到你。\n我是杜娟，这里的道馆馆主。\p我肯定，自上次战斗以来，\n我们都经历了不少战斗。\p我想试试我们成长得\n如何了。战斗吧！$"
