@@ -332,7 +332,7 @@ BattleFrontier_ReceptionGate_Text_LearnAboutWhich2:
     .string "你想知道什么？$"
 
 BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
-    .string "它是一座巨大的塔，被视作\n对战开拓区的标志。\p塔里面有四种对战房间，\n单人、双人、多人和\l联线多人对战房间。$"
+    .string "它是一座巨大的塔，被视作\n对战开拓区的标志。\p塔里面有四种对战房间，\n单人、双人、多人和\l多人连线对战房间。$"
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
     .string "对战巨蛋是那个好像一只\n巨大的蛋的建筑。\p里面会举行\n被称为对战锦标赛的活动。\p对战锦标赛有两种路线\n——单人和双人\l对战。$"
@@ -350,13 +350,13 @@ BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
     .string "对战管道是位于\n对战开拓区中央偏左的\l像宝可梦一样的建筑。\p里面会举行\n选择式对战。$"
 
 BattleFrontier_ReceptionGate_Text_BattlePyramidInfo:
-    .string "对战金字塔就是那个\n巨大的金字塔。\p里面会举行\n追寻式战斗。$"
+    .string "对战金字塔就是那个\n巨大的金字塔。\p里面会举行\n探索式战斗。$"
 
 BattleFrontier_ReceptionGate_Text_RankingHallInfo:
-    .string "排行榜位于\n对战塔附近。\p你可以在那里看到\n活跃在对战开拓区的\l训练家们所留下的\l非凡的成绩。$"
+    .string "排名大厅位于\n对战塔附近。\p你可以在那里看到\n活跃在对战开拓区的\l训练家们所留下的\l非凡的成绩。$"
 
 BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo:
-    .string "交换服务中心位于\n对战塔附近。\p你可以用在对战开拓区\n得到的对战点数交换一些\l非同寻常的奖品。$"
+    .string "兑换服务区位于\n对战塔附近。\p你可以用在对战开拓区\n得到的对战点数兑换一些\l非同寻常的奖品。$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToRules:
     .string "我负责向你介绍\n对战开拓区各设施里\l通用的一些\l基本规则。$"
@@ -377,7 +377,7 @@ BattleFrontier_ReceptionGate_Text_MonEntryInfo:
     .string "大部分宝可梦都可以参加\n所有设施里面的挑战，\p但蛋和某些特定的宝可梦\n不能参加。\p参加挑战的宝可梦数量\n根据挑战的不同而不同，\p但所有设施都不可以\n选择同样的两只\l或以上宝可梦参加。$"
 
 BattleFrontier_ReceptionGate_Text_HoldItemsInfo:
-    .string "参加对战开拓区的\n挑战时，每只宝可梦\l携带的物品都不能相同。\p参加之前请先确认\n每只参加的宝可梦\l都携带了不同的物品。$"
+    .string "参加对战开拓区的\n挑战时，每只宝可梦\l携带的道具都不能相同。\p参加之前请先确认\n每只参加的宝可梦\l都携带了不同的道具。$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass:
     .string "我负责向你介绍开拓通行证。$"
@@ -392,5 +392,5 @@ BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
     .string "可以在你的开拓通行证上面\n记录下你的某一场战斗。\p你可以记录你与你的\n朋友们的战斗，\p或者记录下在对战开拓区\n进行过的一场战斗，包括\l在对战管道或对战金字塔里\l进行的比赛。\p战斗结束时你可以选择\n是否要记录战斗。$"
 
 BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
-    .string "对战点数是送给\n对战开拓区中战斗非常出色的\l训练家的奖励。\p你可以在交换服务中心\n用你的对战点数\l兑换其他奖品。$"
+    .string "对战点数是送给\n对战开拓区中战斗非常出色的\l训练家的奖励。\p你可以在兑换服务区\n用你的对战点数\l兑换其他奖品。$"
 

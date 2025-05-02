@@ -193,7 +193,7 @@ Debug_SaveBlock3Size::
 	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_PokemonStorageSize::
-	.string "{PKMN}Storage 大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
+	.string "宝可梦盒子 大小: {STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "剩余空间: {STR_VAR_3}b.$"
 
 Debug_CheckROMSpace::
@@ -259,7 +259,7 @@ DebugText_DaycareOnePokemon:
 	.string "你仅有一个在培育屋的宝可梦。$"
 
 DebugText_DaycarePokemonNotCompatible:
-	.string "你在培育屋的宝可梦\n不能生育幼年宝可梦!$"
+	.string "你在培育屋的宝可梦\n不能生育幼年宝可梦！$"
 
 Debug_ShowExpansionVersion::
 	callnative BufferExpansionVersion
@@ -423,7 +423,7 @@ Debug_EventScript_InflictStatus1_Text_PartyWide:
     .string "全队$"
 
 Debug_EventScript_InflictStatus1_Text_Close:
-    .string "近战$"
+    .string "关闭$"
 
 Debug_EventScript_InflictStatus1_Text_Poison:
     .string "中毒$"

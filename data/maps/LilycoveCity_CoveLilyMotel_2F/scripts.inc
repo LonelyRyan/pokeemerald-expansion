@@ -70,7 +70,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:
     .string "我是游戏设计师。\p哦，是吗？\n你在收集宝可梦图鉴？\p完成它并不容易，\n但也别放弃。\p如果你完成了，\n就来给我看看吧。$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
-    .string "哇！太棒了！\n真的太棒了！\p这个宝可梦图鉴完成了！\n你一定很喜欢宝可梦！\p我好感动！\p我给你一件展示出\n你的成绩的物品吧！$"
+    .string "哇！太棒了！\n真的太棒了！\p这个宝可梦图鉴完成了！\n你一定很喜欢宝可梦！\p我好感动！\p我给你一件能彰显出\n你的成绩的东西吧！$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer:
     .string "我？你在跟我说话？\n我是程序员，\p我想知道这儿的老虎机\n是怎么样的。$"
@@ -88,7 +88,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy:
     .string "你永远不知道什么时候\n会碰上挑战的人，\p所以我出门的时候\n从来都带着GBA。$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
-    .string "亚希达： …… …… ……\n…… …… …… Zzz……\p…… …… ……嗯？！\n哎，抱歉，抱歉！我睡着了！\p我是来看这里的\n宝可梦华丽大赛的。\p我承认它看上去\n挺有趣，但是……\p像我这样的纯粹主义者——\n我更喜欢看强大的训练家战斗。\p但这只是我的喜好而已。\p{PLAYER}{KUN}，希望你能喜欢一切，\n包括道馆，华丽大赛，对战帐篷，\l所有的东西！$"
+    .string "亚希达： …… …… ……\n…… …… ……Zzz……\p…… …… ……嗯？！\n哎，抱歉，抱歉！我睡着了！\p我是来看这里的\n宝可梦华丽大赛的。\p我承认它看上去\n挺有趣，但是……\p像我这样的纯粹主义者——\n我更喜欢看强大的训练家战斗。\p但这只是我的喜好而已。\p{PLAYER}{KUN}，希望你能喜欢一切，\n包括道馆，华丽大赛，对战帐篷，\l所有的东西！$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy:
     .string "亚希达：我想，要\n赢得华丽大赛也需要策略。\p要我说，设计华丽大赛策略\n也是成为一个优秀训练家的方式之一。$"

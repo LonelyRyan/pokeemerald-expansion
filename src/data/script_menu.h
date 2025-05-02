@@ -220,15 +220,15 @@ static const struct MenuAction MultichoiceList_MachBikeInfo[] =
 {
     {COMPOUND_STRING("如何骑行")},
     {COMPOUND_STRING("如何转弯")},
-    {COMPOUND_STRING("流沙坡")},
+    {COMPOUND_STRING("沙坡")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_AcroBikeInfo[] =
 {
-    {COMPOUND_STRING("单轮特技")},
-    {COMPOUND_STRING("小跳")},
-    {COMPOUND_STRING("跳")},
+    {COMPOUND_STRING("后轮特技")},
+    {COMPOUND_STRING("弹跳")},
+    {COMPOUND_STRING("侧跳")},
     {gText_Exit},
 };
 
@@ -267,25 +267,25 @@ static const struct MenuAction MultichoiceList_GameCornerDolls[] =
 
 static const struct MenuAction MultichoiceList_GameCornerTMs[] =
 {
-    {COMPOUND_STRING("TM32{CLEAR_TO 0x48}1,500代币")},
-    {COMPOUND_STRING("TM29{CLEAR_TO 0x48}3,500代币")},
-    {COMPOUND_STRING("TM35{CLEAR_TO 0x48}4,000代币")},
-    {COMPOUND_STRING("TM24{CLEAR_TO 0x48}4,000代币")},
-    {COMPOUND_STRING("TM13{CLEAR_TO 0x48}4,000代币")},
+    {COMPOUND_STRING("TM32{CLEAR_TO 0x48}1500代币")},
+    {COMPOUND_STRING("TM29{CLEAR_TO 0x48}3500代币")},
+    {COMPOUND_STRING("TM35{CLEAR_TO 0x48}4000代币")},
+    {COMPOUND_STRING("TM24{CLEAR_TO 0x48}4000代币")},
+    {COMPOUND_STRING("TM13{CLEAR_TO 0x48}4000代币")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_GameCornerCoins[] =
 {
-    {COMPOUND_STRING("  50 COINS    ¥1,000")},
-    {COMPOUND_STRING("500 COINS  ¥10,000")},
+    {COMPOUND_STRING(" 50代币   ¥1000")},
+    {COMPOUND_STRING("500代币  ¥10000")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_HowsFishing[] =
 {
-    {COMPOUND_STRING("优秀")},
-    {COMPOUND_STRING("不好")},
+    {COMPOUND_STRING("好得很")},
+    {COMPOUND_STRING("不太好")},
 };
 
 static const struct MenuAction MultichoiceList_SSTidalSlateportWithBF[] =
@@ -642,16 +642,16 @@ static const struct MenuAction MultichoiceList_BattleTowerRules[] =
 {
     {COMPOUND_STRING("对战塔信息")},
     {COMPOUND_STRING("对战宝可梦")},
-    {COMPOUND_STRING("对战沙龙")},
-    {COMPOUND_STRING("多人联机")},
+    {COMPOUND_STRING("对战塔")},
+    {COMPOUND_STRING("多人连线")},
     {gText_Exit},
 };
 
 static const struct MenuAction MultichoiceList_BattleDomeRules[] =
 {
-    {COMPOUND_STRING("对手")},
-    {COMPOUND_STRING("对阵树")},
-    {COMPOUND_STRING("双双击倒")},
+    {COMPOUND_STRING("匹配对手")},
+    {COMPOUND_STRING("比赛进程表")},
+    {COMPOUND_STRING("同时被击倒")},
     {gText_Exit},
 };
 
@@ -686,7 +686,7 @@ static const struct MenuAction MultichoiceList_BattlePyramidRules[] =
 
 static const struct MenuAction MultichoiceList_BattlePikeRules[] =
 {
-    {COMPOUND_STRING("导航器和包包")},
+    {COMPOUND_STRING("宝可导航和包包")},
     {COMPOUND_STRING("持有物")},
     {COMPOUND_STRING("宝可梦顺序")},
     {gText_Exit},
