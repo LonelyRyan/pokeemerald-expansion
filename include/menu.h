@@ -74,6 +74,8 @@ void ScheduleBgCopyTilemapToVram(u8 bgId);
 void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActions);
 u8 InitMenuInUpperLeftCornerNormal(u8 windowId, u8 itemCount, u8 initialCursorPos);
 u8 Menu_GetCursorPos(void);
+u8 Menu_SetCursorPos(u8 cursorPos);
+void RedrawMenuCursor(u8 oldPos, u8 newPos);
 s8 Menu_ProcessInput(void);
 s8 Menu_ProcessInputNoWrap(void);
 void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y);

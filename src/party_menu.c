@@ -209,6 +209,9 @@ struct PartyMenuBoxInfoRects
     u8 descTextHeight;
 };
 
+#define MAX_ACTIONS      20
+#define MAX_SHOW_ACTIONS 8
+
 struct PartyMenuInternal
 {
     TaskFunc task;
@@ -219,7 +222,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[MAX_ACTIONS];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -257,6 +260,7 @@ EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are th
 static EWRAM_DATA u8 sInitialLevel = 0;
 static EWRAM_DATA u8 sFinalLevel = 0;
 
+static EWRAM_DATA u8 CurrentCursorPos = 0;
 // IWRAM common
 COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
@@ -522,6 +526,8 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
 static void Task_HideFollowerNPCForTeleport(u8);
+static u8 GetRightYPosition(u8 position);
+static void UpdataActionText(void);
 
 // static const data
 #include "data/party_menu.h"
@@ -2767,17 +2773,18 @@ static bool8 ShouldUseChooseMonText(void)
     return FALSE;
 }
 
+//绘制窗口文本
 static u8 DisplaySelectionWindow(u8 windowType)
 {
     struct WindowTemplate window;
-    u8 cursorDimension;
-    u8 letterSpacing;
-    u8 i;
 
     switch (windowType)
     {
     case SELECTWINDOW_ACTIONS:
-        SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+        if (sPartyMenuInternal->numActions < 8)
+            SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+        else
+            SetWindowTemplateFields(&window, 2, 19, 3, 10, 16, 14, 0x2E9);
         break;
     case SELECTWINDOW_ITEM:
         window = sItemGiveTakeWindowTemplate;
@@ -2800,6 +2807,21 @@ static u8 DisplaySelectionWindow(u8 windowType)
     DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
     if (windowType == SELECTWINDOW_MOVES)
         return sPartyMenuInternal->windowId[0];
+
+    UpdataActionText();
+
+    CurrentCursorPos = 0;
+    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, CurrentCursorPos, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+
+    return sPartyMenuInternal->windowId[0];
+}
+
+static void UpdataActionText(void)
+{
+    u8 cursorDimension, letterSpacing;
+    u8 i;
+
     cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
     letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
 
@@ -2812,13 +2834,37 @@ static u8 DisplaySelectionWindow(u8 windowType)
         else
             text = sCursorOptions[sPartyMenuInternal->actions[i]].text;
 
-        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, text);
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (GetRightYPosition(i) * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, text);
     }
+}
 
-    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
-    ScheduleBgCopyTilemapToVram(2);
+static u8 GetRightYPosition(u8 position)
+{
+    u8 TotalAction = sPartyMenuInternal->numActions;
+    u8 MaxVisibleActions = MAX_SHOW_ACTIONS; // 窗口最多显示8个选项
+    u8 ScrollStartPosition = 5; // 第六个位置
+    u8 CurrentCursorPos = Menu_GetCursorPos();
+    u8 RestNum = TotalAction - MaxVisibleActions;
+    u8 RealRestNum = TotalAction - CurrentCursorPos - 1;
 
-    return sPartyMenuInternal->windowId[0];
+    if (TotalAction <= 8)
+    {
+        return position;
+    }
+    else if (CurrentCursorPos <= ScrollStartPosition)
+    {
+        return position;
+    }
+    else if (CurrentCursorPos >= ScrollStartPosition && RealRestNum >= 2)
+    {
+        return position - (CurrentCursorPos - ScrollStartPosition);
+    }
+    else if (RealRestNum < 2)
+    {
+        return position - RestNum;
+    }
+    else
+        return position;
 }
 
 static void PrintMessage(const u8 *text)
@@ -2995,8 +3041,44 @@ static void Task_TryCreateSelectionWindow(u8 taskId)
     }
 }
 
+static bool8 PanShouldRedrawActionMenuCursor(u8 CurrentCursor, u8 CursorMoveState)
+{
+    u8 TotalAction = sPartyMenuInternal->numActions;
+    u8 ScrollStartPosition = 5; // 第六个位置
+    u8 RealRestNum = TotalAction - CurrentCursor - 1;
+    u8 nextCursorPos = CurrentCursor;
+    if (CursorMoveState == 255) // 向下移动
+    {
+        if (CurrentCursor < sPartyMenuInternal->numActions - 1)
+            nextCursorPos++;
+        else
+            nextCursorPos = 0; // 如果光标已经在最后一个选项上，循环回到第一个选项
+    }
+    else if (CursorMoveState != 255 && CursorMoveState) // 向上移动
+    {
+        if (CurrentCursor > 0)
+            nextCursorPos--;
+        else
+            nextCursorPos = sPartyMenuInternal->numActions - 1; // 如果光标已经在第一个选项上，循环到最后一个选项
+    }
+
+    if (TotalAction <= 8)
+        return FALSE;
+    else if (nextCursorPos <= ScrollStartPosition && nextCursorPos != sPartyMenuInternal->numActions - 1)
+        return TRUE;
+    else if (nextCursorPos >= ScrollStartPosition && RealRestNum >= 2)
+        return FALSE;
+    else if (RealRestNum < 2)
+        return FALSE;
+    else
+        return FALSE;
+}
+
+//操作菜单处理输入函数
 static void Task_HandleSelectionMenuInput(u8 taskId)
 {
+    u8 CursorMoveState; //光标移动状态
+
     if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s8 input;
@@ -3007,6 +3089,33 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
         else
             input = ProcessMenuInput_other();
 
+        CursorMoveState = CurrentCursorPos - Menu_GetCursorPos();//255为向下,不是255和0的都是向上,0为不动
+        if (CursorMoveState)
+        {
+            u8 NextCursorPos = Menu_GetCursorPos();
+            u8 RestNum = sPartyMenuInternal->numActions - NextCursorPos;
+
+            if (sPartyMenuInternal->numActions > 8)
+            {
+                FillWindowPixelBuffer(sPartyMenuInternal->windowId[0], PIXEL_FILL(1));
+                ScheduleBgCopyTilemapToVram(2);
+                if(PanShouldRedrawActionMenuCursor(CurrentCursorPos, CursorMoveState))
+                    Menu_MoveCursor(0);
+                else if (NextCursorPos > 5 && NextCursorPos < sPartyMenuInternal->numActions - 2)
+                    RedrawMenuCursor(4,5);
+                else
+                {
+                    if (RestNum == 2)
+                        RedrawMenuCursor(5, 6);
+                    else if (RestNum == 1)
+                        RedrawMenuCursor(6, 7);
+                    else
+                        RedrawMenuCursor(7, 0);
+                }
+                UpdataActionText();
+            }
+        }
+        CurrentCursorPos = Menu_GetCursorPos();
         data[0] = Menu_GetCursorPos();
         switch (input)
         {
@@ -3014,6 +3123,7 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
             break;
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
+            Menu_SetCursorPos(0);
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
             if (sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1] >= MENU_FIELD_MOVES)
                 CursorCb_FieldMove(taskId);
@@ -3021,6 +3131,8 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
                 sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
             break;
         default:
+            if(sPartyMenuInternal->actions[input] == MENU_CANCEL1 || sPartyMenuInternal->actions[input] == MENU_CANCEL2)
+                Menu_SetCursorPos(0);
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
             if (sPartyMenuInternal->actions[input] >= MENU_FIELD_MOVES)
                 CursorCb_FieldMove(taskId);
@@ -3043,11 +3155,11 @@ static void CB2_ShowPokemonSummaryScreen(void)
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
     {
         UpdatePartyToBattleOrder();
-        ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
+            ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
     }
     else
     {
-        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
+            ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
     }
 }
 
@@ -5540,7 +5652,7 @@ static void Task_ShowSummaryScreenToForgetMove(u8 taskId)
 
 static void CB2_ShowSummaryScreenToForgetMove(void)
 {
-    ShowSelectMovePokemonSummaryScreen(gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuWhileLearningMove, gPartyMenu.data1);
+        ShowSelectMovePokemonSummaryScreen(gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuWhileLearningMove, gPartyMenu.data1);
 }
 
 static void CB2_ReturnToPartyMenuWhileLearningMove(void)
@@ -7830,7 +7942,7 @@ static void Task_BattlePyramidChooseMonHeldItems(u8 taskId)
 
 void MoveDeleterChooseMoveToForget(void)
 {
-    ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
     gFieldCallback = FieldCB_ContinueScriptHandleMusic;
 }
 

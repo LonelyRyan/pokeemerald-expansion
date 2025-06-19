@@ -1105,6 +1105,18 @@ u8 Menu_GetCursorPos(void)
     return sMenu.cursorPos;
 }
 
+u8 Menu_SetCursorPos(u8 newPos)
+{
+    u8 oldPos = sMenu.cursorPos;
+
+    if (newPos < sMenu.minCursorPos || newPos > sMenu.maxCursorPos)
+        return oldPos;
+
+    sMenu.cursorPos = newPos;
+    RedrawMenuCursor(oldPos, sMenu.cursorPos);
+    return sMenu.cursorPos;
+}
+
 s8 Menu_ProcessInput(void)
 {
     if (JOY_NEW(A_BUTTON))
