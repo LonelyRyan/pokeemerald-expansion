@@ -209,6 +209,10 @@ struct PartyMenuBoxInfoRects
     u8 descTextHeight;
 };
 
+#define MAX_ACTIONS      20
+#define MAX_SHOW_ACTIONS 8
+#define SCROLL_START_POS 6
+
 struct PartyMenuInternal
 {
     TaskFunc task;
@@ -219,7 +223,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[MAX_ACTIONS];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -522,6 +526,8 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
 static void Task_HideFollowerNPCForTeleport(u8);
+
+static void UpdateActionText(void);
 
 // static const data
 #include "data/party_menu.h"
@@ -2777,7 +2783,10 @@ static u8 DisplaySelectionWindow(u8 windowType)
     switch (windowType)
     {
     case SELECTWINDOW_ACTIONS:
-        SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+        if (sPartyMenuInternal->numActions < MAX_SHOW_ACTIONS)
+            SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+        else
+            SetWindowTemplateFields(&window, 2, 19, 3, 10, 16, 14, 0x2E9);
         break;
     case SELECTWINDOW_ITEM:
         window = sItemGiveTakeWindowTemplate;
@@ -2815,10 +2824,39 @@ static u8 DisplaySelectionWindow(u8 windowType)
         AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, text);
     }
 
-    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
+    InitScrollMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, MAX_SHOW_ACTIONS, SCROLL_START_POS, UpdateActionText, TRUE);
     ScheduleBgCopyTilemapToVram(2);
 
     return sPartyMenuInternal->windowId[0];
+}
+
+static void UpdateActionText(void)
+{
+    u8 cursorDimension, letterSpacing,showdrawnums;
+    u8 i;
+
+    if (sPartyMenuInternal->numActions >= MAX_SHOW_ACTIONS)
+        showdrawnums = MAX_SHOW_ACTIONS + ScrollMenu_GetScrollOffest();
+    else
+        showdrawnums = sPartyMenuInternal->numActions;
+    
+    cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
+    letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
+
+    FillWindowPixelBuffer(sPartyMenuInternal->windowId[0], PIXEL_FILL(1));
+
+    for (i = 0 + ScrollMenu_GetScrollOffest(); i < showdrawnums; i++)
+    {
+        const u8 *text;
+        u8 fontColorsId = (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
+        if (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES)
+            text = GetMoveName(sFieldMoves[sPartyMenuInternal->actions[i] - MENU_FIELD_MOVES]);
+        else
+            text = sCursorOptions[sPartyMenuInternal->actions[i]].text;
+
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, ((i - ScrollMenu_GetScrollOffest()) * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], TEXT_SKIP_DRAW, text);
+    }
+    CopyWindowToVram(sPartyMenuInternal->windowId[0], COPYWIN_FULL);
 }
 
 static void PrintMessage(const u8 *text)
@@ -3005,7 +3043,7 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
         if (sPartyMenuInternal->numActions <= 3)
             input = Menu_ProcessInputNoWrapAround_other();
         else
-            input = ProcessMenuInput_other();
+            input = ProcessScrollMenuInput();
 
         data[0] = Menu_GetCursorPos();
         switch (input)

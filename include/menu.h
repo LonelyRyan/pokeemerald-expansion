@@ -74,6 +74,8 @@ void ScheduleBgCopyTilemapToVram(u8 bgId);
 void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActions);
 u8 InitMenuInUpperLeftCornerNormal(u8 windowId, u8 itemCount, u8 initialCursorPos);
 u8 Menu_GetCursorPos(void);
+u8 Menu_SetCursorPos(u8 cursorPos);
+void RedrawMenuCursor(u8 oldPos, u8 newPos);
 s8 Menu_ProcessInput(void);
 s8 Menu_ProcessInputNoWrap(void);
 void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y);
@@ -101,6 +103,7 @@ u8 ChangeMenuGridCursorPosition(s8 deltaX, s8 deltaY);
 u8 GetStartMenuWindowId(void);
 void ListMenuLoadStdPalAt(u8 palOffset, u8 palId);
 u8 Menu_MoveCursor(s8 cursorDelta);
+void RemoveMenuCursor(void);
 u8 Menu_MoveCursorNoWrapAround(s8 cursorDelta);
 void DrawStdWindowFrame(u8 windowId, bool8 copyToVram);
 u8 AddStartMenuWindow(u8 numActions);
@@ -135,5 +138,11 @@ u8 AddSecondaryPopUpWindow(void);
 u8 GetSecondaryPopUpWindowId(void);
 void RemoveSecondaryPopUpWindow(void);
 void HBlankCB_DoublePopupWindow(void);
+
+u8 InitScrollMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, u8 maxshow, u8 startscrollpos, void (*UpdateTextFunction)(void),bool8 APressMuted);
+u8 ScrollMenu_MoveCursor(s8 cursorDelta);
+void RedrawScrollMenuCursor(u8 oldPos, u8 newPos);
+s8 ProcessScrollMenuInput(void);
+u8 ScrollMenu_GetScrollOffest(void);
 
 #endif // GUARD_MENU_H

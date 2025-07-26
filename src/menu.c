@@ -38,6 +38,10 @@ struct Menu
     s8 cursorPos;
     s8 minCursorPos;
     s8 maxCursorPos;
+    u8 maxshow;//记录总显示上限
+    u8 startscrollpos;//记录开始滚动位置
+    u8 scrolloffest;//记录偏移量
+    void (*UpdateFunction)(void);
     u8 windowId;
     u8 fontId;
     u8 optionWidth;
@@ -1084,6 +1088,15 @@ u8 Menu_MoveCursor(s8 cursorDelta)
     return sMenu.cursorPos;
 }
 
+void RemoveMenuCursor(void)
+{
+    u8 width, height;
+
+    width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
+    height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
+    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * sMenu.cursorPos + sMenu.top, width, height);
+}
+
 u8 Menu_MoveCursorNoWrapAround(s8 cursorDelta)
 {
     u8 oldPos = sMenu.cursorPos;
@@ -1102,6 +1115,18 @@ u8 Menu_MoveCursorNoWrapAround(s8 cursorDelta)
 
 u8 Menu_GetCursorPos(void)
 {
+    return sMenu.cursorPos;
+}
+
+u8 Menu_SetCursorPos(u8 newPos)
+{
+    u8 oldPos = sMenu.cursorPos;
+
+    if (newPos < sMenu.minCursorPos || newPos > sMenu.maxCursorPos)
+        return oldPos;
+
+    sMenu.cursorPos = newPos;
+    RedrawMenuCursor(oldPos, sMenu.cursorPos);
     return sMenu.cursorPos;
 }
 
@@ -2311,4 +2336,122 @@ void HBlankCB_DoublePopupWindow(void)
     {
         REG_BG0VOFS = 512 - offset;
     }
+}
+
+u8 InitScrollMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, u8 maxshow, u8 startscrollpos, void (*UpdateTextFunction)(void),bool8 APressMuted)
+{
+    s32 pos;
+
+    sMenu.left = 0;
+    sMenu.top = 1;
+    sMenu.minCursorPos = 0;
+    sMenu.maxCursorPos = itemCount - 1;
+    sMenu.maxshow = maxshow - 1;
+    sMenu.startscrollpos = startscrollpos - 1;
+    sMenu.scrolloffest = 0;
+    sMenu.windowId = windowId;
+    sMenu.fontId = FONT_NORMAL;
+    sMenu.optionHeight = 16;
+    sMenu.UpdateFunction = UpdateTextFunction;
+    sMenu.APressMuted = APressMuted;
+
+    pos = initialCursorPos;
+
+    if (pos < 0 || pos > sMenu.maxCursorPos)
+        sMenu.cursorPos = 0;
+    else
+        sMenu.cursorPos = pos;
+
+    return Menu_SetCursorPos(0);
+}
+
+u8 ScrollMenu_MoveCursor(s8 cursorDelta)
+{
+    const s32 maxCursor   = sMenu.maxCursorPos;
+    const s32 minCursor   = sMenu.minCursorPos;
+    const s32 maxShow     = sMenu.maxshow;
+    const s32 startScroll = sMenu.startscrollpos;
+
+    s32 newCursor = sMenu.cursorPos + cursorDelta;
+
+    if (newCursor < minCursor)
+        newCursor = maxCursor;
+    else if (newCursor > maxCursor)
+        newCursor = minCursor;
+
+    s32 newScroll = 0;
+
+    if (maxCursor > maxShow)
+    {
+        if (newCursor > startScroll)
+        {
+            newScroll = newCursor - startScroll;
+            if (newScroll > maxCursor - maxShow)
+                newScroll = maxCursor - maxShow;
+        }
+    }
+
+    const bool8 cursorMoved   = (newCursor != sMenu.cursorPos);
+    const bool8 scrollChanged = (newScroll != sMenu.scrolloffest);
+
+    if (!cursorMoved && !scrollChanged)
+        return sMenu.cursorPos;
+
+    const u8 oldCursor = sMenu.cursorPos;
+    const u8 oldScroll = sMenu.scrolloffest;
+
+    sMenu.cursorPos   = (u8)newCursor;
+    sMenu.scrolloffest = (u8)newScroll;
+
+    if (scrollChanged && sMenu.UpdateFunction)
+        sMenu.UpdateFunction();
+
+    RedrawScrollMenuCursor(oldCursor - oldScroll, newCursor - newScroll);
+
+    return sMenu.cursorPos;
+}
+
+void RedrawScrollMenuCursor(u8 oldPos, u8 newPos)
+{
+    u8 width, height;
+
+    width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
+    height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
+    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
+    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
+}
+
+s8 ProcessScrollMenuInput(void)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        if (!sMenu.APressMuted)
+            PlaySE(SE_SELECT);
+        sMenu.scrolloffest = 0;
+        return sMenu.cursorPos;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        sMenu.scrolloffest = 0;
+        return MENU_B_PRESSED;
+    }
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        ScrollMenu_MoveCursor(-1);
+        return MENU_NOTHING_CHOSEN;
+    }
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        ScrollMenu_MoveCursor(1);
+        return MENU_NOTHING_CHOSEN;
+    }
+
+    return MENU_NOTHING_CHOSEN;
+}
+
+u8 ScrollMenu_GetScrollOffest(void)
+{
+    return sMenu.scrolloffest;
 }
