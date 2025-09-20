@@ -30,8 +30,8 @@
 
 static bool32 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool32 CheckPyramidBagHasSpace(u16 itemId, u16 count);
-static const u8 *GetItemPluralName(u16);
-static bool32 DoesItemHavePluralName(u16);
+// static const u8 *GetItemPluralName(u16);
+// static bool32 DoesItemHavePluralName(u16);
 static void NONNULL BagPocket_CompactItems(struct BagPocket *pocket);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
@@ -171,19 +171,21 @@ const u8 sText_s[] =_("s");
 
 u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 {
-    if (quantity == 1)
-    {
-        return StringCopy(dst, GetItemName(itemId));
-    }
-    else if (DoesItemHavePluralName(itemId))
-    {
-        return StringCopy(dst, GetItemPluralName(itemId));
-    }
-    else
-    {
-        u8 *end = StringCopy(dst, GetItemName(itemId));
-        return StringCopy(end, sText_s);
-    }
+    return StringCopy(dst, GetItemName(itemId));
+    //修改，删去英文中出现于词汇末尾的「s」
+    // if (quantity == 1)
+    // {
+    //     return StringCopy(dst, GetItemName(itemId));
+    // }
+    // else if (DoesItemHavePluralName(itemId))
+    // {
+    //     return StringCopy(dst, GetItemPluralName(itemId));
+    // }
+    // else
+    // {
+    //     u8 *end = StringCopy(dst, GetItemName(itemId));
+    //     return StringCopy(end, sText_s);
+    // }
 }
 
 bool32 IsBagPocketNonEmpty(enum Pocket pocketId)
@@ -790,15 +792,15 @@ u32 GetItemPrice(u16 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].price;
 }
 
-static bool32 DoesItemHavePluralName(u16 itemId)
-{
-    return gItemsInfo[SanitizeItemId(itemId)].pluralName != NULL;
-}
+// static bool32 DoesItemHavePluralName(u16 itemId)
+// {
+//     return gItemsInfo[SanitizeItemId(itemId)].pluralName != NULL;
+// }
 
-static const u8 *GetItemPluralName(u16 itemId)
-{
-    return gItemsInfo[SanitizeItemId(itemId)].pluralName;
-}
+//static const u8 *GetItemPluralName(u16 itemId)
+//{
+//    return gItemsInfo[SanitizeItemId(itemId)].pluralName;
+//}
 
 const u8 *GetItemEffect(u32 itemId)
 {

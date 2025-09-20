@@ -55,4 +55,5 @@ tools/compresSmol/compresSmolTilemap
 *.smol
 *.fastSmol
 *.smolTM
+python_tools/src/~$文本.xlsx
 __pycache__

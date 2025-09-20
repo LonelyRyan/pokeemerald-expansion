@@ -1,38 +1,20 @@
 gText_PkmnTransferredSomeonesPC::
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "SOMEONE'S PC.\p"
-	.string "It was placed in \n"
-	.string "BOX “{STR_VAR_1}.”$"
+    .string "已将{STR_VAR_2}传送到\n某人的电脑上，\p位于盒子\n“{STR_VAR_1}”里。$"
 
 gText_PkmnTransferredLanettesPC::
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "LANETTE'S PC.\p"
-	.string "It was placed in \n"
-	.string "BOX “{STR_VAR_1}.”$"
+    .string "已将{STR_VAR_2}传送到\n真由美的电脑上，\p位于盒子\n“{STR_VAR_1}”里。$"
 
 gText_PkmnTransferredSomeonesPCBoxFull::
-	.string "BOX “{STR_VAR_3}” on\n"
-	.string "SOMEONE'S PC was full.\p"
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BOX “{STR_VAR_1}.”$"
+	.string "某人的电脑上的盒子\n“{STR_VAR_3}”已满，\p{STR_VAR_2}传送到\n盒子“{STR_VAR_1}”里。$"
 
 gText_PkmnTransferredLanettesPCBoxFull::
-	.string "BOX “{STR_VAR_3}” on\n"
-	.string "LANETTE'S PC was full.\p"
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BOX “{STR_VAR_1}.”$"
-
-gText_PkmnSentToPCAfterCatch::
-	.string "{STR_VAR_2} was sent to\n"
-	.string "{B_PC_CREATOR_NAME} PC.\p"
-	.string "It was placed in \n"
-	.string "BOX “{STR_VAR_1}”.$"
+	.string "真由美的电脑上的盒子\n“{STR_VAR_3}”已满，\p{STR_VAR_2}传送到\n盒子“{STR_VAR_1}”里。$"
 
 gText_NoMoreRoomForPokemon::
-	.string "There's no more room for POKéMON!\p"
-	.string "The POKéMON BOXES are full and\n"
-	.string "can't accept any more!$"
+    .string "没有寄存宝可梦的空间了！\p所有宝可梦盒子都已放满，\n无法容纳新的宝可梦！$"
 
 gText_NicknameThisPokemon::
-	.string "Do you want to give a nickname to\n"
-	.string "this {STR_VAR_1}?$"
+    .string "要给{STR_VAR_1}\n起昵称吗？$"
+
+gText_PkmnSentToPCAfterCatch::
+	.string "已将{STR_VAR_2}传送到\n{B_PC_CREATOR_NAME}的电脑上。\p位于盒子\n“{STR_VAR_1}”里。$"

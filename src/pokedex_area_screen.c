@@ -636,10 +636,10 @@ static void DoAreaGlow(void)
 
 static const u8 *GetTimeOfDayTextWithButton(enum TimeOfDay timeOfDay)
 {
-    static const u8 gText_Morning[] = _("{DPAD_UPDOWN} MORNING");
-    static const u8 gText_Day[] = _("{DPAD_UPDOWN} DAY");
-    static const u8 gText_Evening[] = _("{DPAD_UPDOWN} EVENING");
-    static const u8 gText_Night[] = _("{DPAD_UPDOWN} NIGHT");
+    static const u8 gText_Morning[] = _("{DPAD_UPDOWN} 清晨");
+    static const u8 gText_Day[] = _("{DPAD_UPDOWN} 白天");
+    static const u8 gText_Evening[] = _("{DPAD_UPDOWN} 黄昏");
+    static const u8 gText_Night[] = _("{DPAD_UPDOWN} 夜晚");
 
     switch (gAreaTimeOfDay)
     {
@@ -679,7 +679,7 @@ static void ShowEncounterInfoLabel(void)
 
 static void ShowAreaUnknownLabel(void)
 {
-    static const u8 gText_AreaUnknown[] = _("AREA UNKNOWN");
+    static const u8 gText_AreaUnknown[] = _("栖息地不明");
     int stringXPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_AreaUnknown, 80);
 
     PrintAreaLabelText(gText_AreaUnknown, DEX_AREA_LABEL_AREA_UNKNOWN, stringXPos);

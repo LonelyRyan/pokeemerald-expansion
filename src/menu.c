@@ -2245,7 +2245,9 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
                 string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 4);
             else
                 string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
-            *string = EOS;
+            //修改，增加图鉴单位显示
+            StringAppend(string, COMPOUND_STRING("只"));
+            //*string = EOS; //修正错误
             break;
         case SAVE_MENU_PLAY_TIME:
             string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -2256,12 +2258,18 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
             GetMapNameGeneric(string, gMapHeader.regionMapSectionId);
             break;
         case SAVE_MENU_BADGES:
-            for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag < FLAG_BADGE01_GET + NUM_BADGES; curFlag++)
+            //for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag < FLAG_BADGE01_GET + NUM_BADGES; curFlag++)
+            for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 3; curFlag < FLAG_BADGE01_GET + NUM_BADGES; curFlag++)
             {
                 if (FlagGet(curFlag))
                     flagCount++;
             }
-            *string = flagCount + CHAR_0;
+            //修改，增加徽章单位显示
+            //*string = flagCount + CHAR_0;
+            //*string++ = EOS; //修正错误
+            //*endOfString = EOS;
+            ConvertIntToDecimalStringN(string, flagCount, STR_CONV_MODE_LEADING_ZEROS, 1);
+            StringAppend(string, COMPOUND_STRING("个"));
             *endOfString = EOS;
             break;
     }
